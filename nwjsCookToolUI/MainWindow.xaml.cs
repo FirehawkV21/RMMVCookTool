@@ -57,7 +57,7 @@ namespace nwjsCookToolUI
                 MessageBox.Show("The nwjs Compiler is missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
             }
-            else if (Directory.Exists(ProjectLocation.Text))
+            else if (!Directory.Exists(ProjectLocation.Text))
             {
                 MessageBox.Show("Can't operate on an non-existant folder.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCannot operate in a non-existant folder.\n-----";
