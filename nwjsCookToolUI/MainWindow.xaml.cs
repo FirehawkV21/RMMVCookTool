@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -16,6 +17,7 @@ namespace nwjsCookToolUI
     {
         private static readonly Process CompilerProcess = new Process();
         private static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
+        private string[] _filemap;
         public MainWindow()
         {
             InitializeComponent();
@@ -64,63 +66,13 @@ namespace nwjsCookToolUI
             }
             else
             {
-                MessageBox.Show(
-                    "The compiler tool will be hidden until the compiler finishes.\n You will be notified when it's done.");
-                //cookToolUi.Visibility = Visibility.Collapsed;
-                cookToolUi.Hide();
-                Thread.Sleep(1000);
-                try
-                {
-                    string[] foldermap = {"libs", "plugins"};
-                    string[] filemap = Directory.GetFiles(ProjectLocation.Text + "\\www\\js\\", "*.js");
-                    CompilerInfo.FileName = NwjsLocation.Text;
-                    OutputArea.Text = "\n" + OutputArea.Text + DateTime.Now + "Compiling scripts in the js folder...\n-----";
-                    StatusLabel.Content = "Compiling scripts in the js folder...";
-
-                    Compileset(filemap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true);
-                    Array.Clear(filemap, 0, filemap.Length);
-                    foreach (var foldername in foldermap)
-                    {
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "Compiling scripts in the" +
-                                          foldername +
-                                          " folder...\n";
-                        StatusLabel.Content = "Compiling scripts in the " + foldername + " folder...";
-                        filemap = Directory.GetFiles(ProjectLocation.Text + "\\www\\js\\" + foldername + "\\", "*.js");
-                        Compileset(filemap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true);
-                        Array.Clear(filemap, 0, filemap.Length);
-
-                    }
-
-                    if (PackageNwCheckbox.IsChecked == true)
-                    {
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
-                                          "\n Copying files to a temporary area...\n";
-                        StatusLabel.Content = "Packaging...";
-                        //Directory.CreateDirectory(ProjectLocation.Text + "\\Package\\");
-                        DirectoryCopy(ProjectLocation.Text + "\\www\\",
-                            Path.Combine(Path.GetTempPath(), "nwjspackage") + "\\www\\", true);
-                        File.Copy(ProjectLocation.Text + "\\package.json",
-                            Path.Combine(Path.GetTempPath(), "nwjspackage") + "\\package.json", true);
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Creating package...\n";
-                        ZipFile.CreateFromDirectory(Path.Combine(Path.GetTempPath(), "nwjspackage"),
-                            ProjectLocation.Text + "\\package.nw");
-                        Directory.Delete(Path.Combine(Path.GetTempPath(), "nwjspackage"), true);
-
-                    }
-
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n";
-                    MessageBox.Show("Compilation complete!", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    StatusLabel.Content = "Done!";
-                }
-
-                catch (Exception exceptionOutput)
-                {
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
-                    MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
-                cookToolUi.Show();
+                MainProgress.Value = 0;
+                MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
+                BackgroundWorker compilerWorker = new BackgroundWorker();
+                compilerWorker.WorkerReportsProgress = true;
+                compilerWorker.DoWork += StartCompiler;
+                compilerWorker.ProgressChanged += CompilerReport;
+                compilerWorker.RunWorkerAsync();
             }
 
             //cookToolUi.Visibility = Visibility.Visible;
@@ -132,6 +84,7 @@ namespace nwjsCookToolUI
             {
                 string filebuffer = file.Replace(".js", "");
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCompiling " + file + "...";
+                Thread.Sleep(200);
                 CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + filebuffer + "." + extension + "\"";
                 CompilerInfo.CreateNoWindow = true;
                 CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -140,6 +93,7 @@ namespace nwjsCookToolUI
                 CompilerProcess.WaitForExit();
                 if (removejs) File.Delete(file);
                 OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
+                Thread.Sleep(200);
 
             }
         }
@@ -180,6 +134,76 @@ namespace nwjsCookToolUI
                     DirectoryCopy(subdir.FullName, temppath, true);
                 }
             }
+        }
+
+        private void StartCompiler(object sender, DoWorkEventArgs e)
+        {
+            Dispatcher.Invoke(() => StatusLabel.Content = "Compiling scripts in the js folder...");
+            Thread.Sleep(400);
+            try
+            {
+                string compilerInput = Dispatcher.Invoke(() => ProjectLocation.Text);
+                _filemap = Directory.GetFiles(compilerInput + "\\www\\js\\", "*.js");
+                string[] foldermap = { "libs", "plugins" };
+                CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
+                Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text = "\n" + OutputArea.Text + DateTime.Now + "Compiling scripts in the js folder...\n-----");
+                Thread.Sleep(200);
+
+
+                Dispatcher.Invoke(() => Compileset(_filemap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
+                Array.Clear(_filemap, 0, _filemap.Length);
+                Dispatcher.Invoke(() => MainProgress.Value += 1);
+                foreach (var foldername in foldermap)
+                {
+                    Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "Compiling scripts in the " + foldername + " folder...\n");
+                    Thread.Sleep(200);
+                    Dispatcher.Invoke(() => StatusLabel.Content = StatusLabel.Content = "Compiling scripts in the " + foldername + " folder...");
+                    Thread.Sleep(200);
+                    _filemap = Directory.GetFiles(compilerInput + "\\www\\js\\" + foldername + "\\", "*.js");
+                    Dispatcher.Invoke(() => Compileset(_filemap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
+                    Array.Clear(_filemap, 0, _filemap.Length);
+                    Dispatcher.Invoke(() => MainProgress.Value += 1);
+                }
+
+                
+                if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
+                {
+                    Dispatcher.Invoke(() => StatusLabel.Content = "Packaging...");
+                    Thread.Sleep(200);
+                    Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
+                                      "\n Copying files to a temporary area...\n");
+                    Thread.Sleep(200);
+                    //Directory.CreateDirectory(ProjectLocation.Text + "\\Package\\");
+                    Dispatcher.Invoke(() => DirectoryCopy(compilerInput + "\\www\\",
+                        Path.Combine(Path.GetTempPath(), "nwjspackage") + "\\www\\", true));
+                    File.Copy(compilerInput + "\\package.json",
+                        Path.Combine(Path.GetTempPath(), "nwjspackage") + "\\package.json", true);
+                    Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Creating package...\n");
+                    ZipFile.CreateFromDirectory(Path.Combine(Path.GetTempPath(), "nwjspackage"),
+                        compilerInput + "\\package.nw");
+                    Directory.Delete(Path.Combine(Path.GetTempPath(), "nwjspackage"), true);
+                    Dispatcher.Invoke(() => MainProgress.Value += 1);
+                }
+
+                Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
+                MessageBox.Show("Compilation complete!", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
+                Dispatcher.Invoke(() => StatusLabel.Content = "Done!");
+                
+            }
+
+            catch (Exception exceptionOutput)
+            {
+                Dispatcher.Invoke(() => MainProgress.Value = 0);
+                Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
+                Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
+                MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CompilerReport(object sender, ProgressChangedEventArgs e)
+        {
+            MainProgress.Value += 1;
         }
     }
     }

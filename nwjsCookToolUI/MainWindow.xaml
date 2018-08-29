@@ -32,7 +32,8 @@
                     <GroupBox Header="Compile Status" Margin="0,241,0,0">
                         <Grid>
                             <Label x:Name="StatusLabel" Content="Waiting here..." HorizontalAlignment="Left" Margin="0,11,0,0" VerticalAlignment="Top"/>
-                            <Button x:Name="CompileButton" Content="Compile" HorizontalAlignment="Left" Margin="439,13,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="CompileButton_Click"/>
+                            <Button x:Name="CompileButton" Content="Compile" HorizontalAlignment="Left" Margin="439,37,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="CompileButton_Click"/>
+                            <ProgressBar x:Name="MainProgress" Height="23" VerticalAlignment="Top" Margin="0,37,90,0"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -47,7 +48,7 @@
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Output" Margin="0,107,0,0">
-                        <TextBox x:Name="OutputArea" TextWrapping="Wrap" IsEnabled="False" ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto"/>
+                        <TextBox x:Name="OutputArea" TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto"/>
                     </GroupBox>
                 </Grid>
             </TabItem>
