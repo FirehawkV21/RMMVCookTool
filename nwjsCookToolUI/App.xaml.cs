@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using System.Runtime;
 using System.Windows;
 
 namespace nwjsCookToolUI
@@ -13,5 +9,10 @@ namespace nwjsCookToolUI
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+          ProfileOptimization.SetProfileRoot(System.AppDomain.CurrentDomain.BaseDirectory);
+          ProfileOptimization.SetProfileRoot("RMMVCompiler.Profile");
+        }
     }
 }

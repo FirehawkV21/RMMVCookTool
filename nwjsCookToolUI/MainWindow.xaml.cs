@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using nwjsCookToolUI.Properties;
 
@@ -17,7 +18,8 @@ namespace nwjsCookToolUI
     {
         private static readonly Process CompilerProcess = new Process();
         private static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
-        private string[] _filemap;
+        private string[] _fileMap;
+        private readonly string _tempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
         public MainWindow()
         {
             InitializeComponent();
@@ -61,8 +63,8 @@ namespace nwjsCookToolUI
             }
             else if (!Directory.Exists(ProjectLocation.Text))
             {
-                MessageBox.Show("Can't operate on an non-existant folder.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCannot operate in a non-existant folder.\n-----";
+                MessageBox.Show("Can't operate on an non-existent folder.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCannot operate in a non-existent folder.\n-----";
             }
             else
             {
@@ -78,24 +80,25 @@ namespace nwjsCookToolUI
             //cookToolUi.Visibility = Visibility.Visible;
         }
 
-        private void Compileset(IEnumerable<string> filemap, string extension, bool removejs)
+        private void CompilerWorkerTask(IEnumerable<string> fileMap, string extension, bool removeJs)
         {
-            foreach (var file in filemap)
+            Parallel.ForEach(fileMap, file =>
             {
-                string filebuffer = file.Replace(".js", "");
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCompiling " + file + "...";
-                Thread.Sleep(200);
-                CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + filebuffer + "." + extension + "\"";
+                string fileBuffer = file.Replace(".js", "");
+                //OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCompiling " + file + "...";
+                //Thread.Sleep(200);
+                CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
                 CompilerInfo.CreateNoWindow = true;
                 CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 CompilerProcess.StartInfo = CompilerInfo;
                 CompilerProcess.Start();
                 CompilerProcess.WaitForExit();
-                if (removejs) File.Delete(file);
-                OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
+                if (removeJs) File.Delete(file);
+                //Thread.Sleep(3000);
+                //OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
                 Thread.Sleep(200);
 
-            }
+            });
         }
 
         private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
@@ -119,49 +122,50 @@ namespace nwjsCookToolUI
 
             // Get the files in the directory and copy them to the new location.
             FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
+            Parallel.ForEach(files, file =>
             {
                 string temppath = Path.Combine(destDirName, file.Name);
                 file.CopyTo(temppath, false);
-            }
+            });
 
             // If copying subdirectories, copy them and their contents to new location.
             if (copySubDirs)
             {
-                foreach (DirectoryInfo subdir in dirs)
+                Parallel.ForEach(dirs, subDir =>
                 {
-                    string temppath = Path.Combine(destDirName, subdir.Name);
-                    DirectoryCopy(subdir.FullName, temppath, true);
-                }
+                    string tempPath = Path.Combine(destDirName, subDir.Name);
+                    DirectoryCopy(subDir.FullName, tempPath, true);
+                });
             }
         }
 
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
+            string compilerInput = Dispatcher.Invoke(() => ProjectLocation.Text);
+            var packageOutput = compilerInput + "\\package.nw";
             Dispatcher.Invoke(() => StatusLabel.Content = "Compiling scripts in the js folder...");
             Thread.Sleep(400);
             try
             {
-                string compilerInput = Dispatcher.Invoke(() => ProjectLocation.Text);
-                _filemap = Directory.GetFiles(compilerInput + "\\www\\js\\", "*.js");
-                string[] foldermap = { "libs", "plugins" };
+                _fileMap = Directory.GetFiles(compilerInput + "\\www\\js\\", "*.js");
+                string[] folderMap = { "libs", "plugins" };
                 CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text = "\n" + OutputArea.Text + DateTime.Now + "Compiling scripts in the js folder...\n-----");
                 Thread.Sleep(200);
 
 
-                Dispatcher.Invoke(() => Compileset(_filemap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
-                Array.Clear(_filemap, 0, _filemap.Length);
+                Dispatcher.Invoke(() => CompilerWorkerTask(_fileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
+                Array.Clear(_fileMap, 0, _fileMap.Length);
                 Dispatcher.Invoke(() => MainProgress.Value += 1);
-                foreach (var foldername in foldermap)
+                foreach (var folderName in folderMap)
                 {
-                    Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "Compiling scripts in the " + foldername + " folder...\n");
+                    Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "Compiling scripts in the " + folderName + " folder...\n");
                     Thread.Sleep(200);
-                    Dispatcher.Invoke(() => StatusLabel.Content = StatusLabel.Content = "Compiling scripts in the " + foldername + " folder...");
+                    Dispatcher.Invoke(() => StatusLabel.Content = StatusLabel.Content = "Compiling scripts in the " + folderName + " folder...");
                     Thread.Sleep(200);
-                    _filemap = Directory.GetFiles(compilerInput + "\\www\\js\\" + foldername + "\\", "*.js");
-                    Dispatcher.Invoke(() => Compileset(_filemap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
-                    Array.Clear(_filemap, 0, _filemap.Length);
+                    _fileMap = Directory.GetFiles(compilerInput + "\\www\\js\\" + folderName + "\\", "*.js");
+                    Dispatcher.Invoke(() => CompilerWorkerTask(_fileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
+                    Array.Clear(_fileMap, 0, _fileMap.Length);
                     Dispatcher.Invoke(() => MainProgress.Value += 1);
                 }
 
@@ -174,14 +178,16 @@ namespace nwjsCookToolUI
                                       "\n Copying files to a temporary area...\n");
                     Thread.Sleep(200);
                     //Directory.CreateDirectory(ProjectLocation.Text + "\\Package\\");
+                    if (Directory.Exists(_tempFolderLocation)) Directory.Delete(_tempFolderLocation, true);
                     Dispatcher.Invoke(() => DirectoryCopy(compilerInput + "\\www\\",
-                        Path.Combine(Path.GetTempPath(), "nwjspackage") + "\\www\\", true));
+                        _tempFolderLocation + "\\www\\", true));
                     File.Copy(compilerInput + "\\package.json",
-                        Path.Combine(Path.GetTempPath(), "nwjspackage") + "\\package.json", true);
+                        _tempFolderLocation + "\\package.json", true);
                     Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Creating package...\n");
-                    ZipFile.CreateFromDirectory(Path.Combine(Path.GetTempPath(), "nwjspackage"),
-                        compilerInput + "\\package.nw");
-                    Directory.Delete(Path.Combine(Path.GetTempPath(), "nwjspackage"), true);
+                    if (File.Exists(packageOutput)) File.Delete(packageOutput);
+                    ZipFile.CreateFromDirectory(_tempFolderLocation,
+                        packageOutput);
+                    Directory.Delete(_tempFolderLocation, true);
                     Dispatcher.Invoke(() => MainProgress.Value += 1);
                 }
 
