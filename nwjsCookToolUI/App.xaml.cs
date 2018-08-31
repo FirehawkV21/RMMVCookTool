@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Runtime;
+﻿using System.Runtime;
 using System.Windows;
 
 namespace nwjsCookToolUI

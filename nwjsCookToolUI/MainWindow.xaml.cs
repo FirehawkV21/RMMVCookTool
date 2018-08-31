@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -210,6 +211,14 @@ namespace nwjsCookToolUI
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
         {
             MainProgress.Value += 1;
+        }
+
+        private void CookToolUi_Loaded(object sender, RoutedEventArgs e)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            var version = fvi.FileVersion;
+            ProgramVersionLabel.Content = ProgramVersionLabel.Content + @" (" + version + @")";
         }
     }
     }
