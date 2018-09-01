@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using nwjsCookToolUI.Properties;
 
 namespace nwjsCookToolUI
@@ -57,6 +58,8 @@ namespace nwjsCookToolUI
 
         private void CompileButton_Click(object sender, RoutedEventArgs e)
         {
+            CompileButton.IsEnabled = false;
+            MainProgress.Foreground = Brushes.ForestGreen;
             if (!File.Exists(NwjsLocation.Text))
             {
                 MessageBox.Show("The nwjs Compiler is missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -77,6 +80,8 @@ namespace nwjsCookToolUI
                 compilerWorker.ProgressChanged += CompilerReport;
                 compilerWorker.RunWorkerAsync();
             }
+
+            CompileButton.IsEnabled = true;
 
             //cookToolUi.Visibility = Visibility.Visible;
         }
@@ -200,6 +205,7 @@ namespace nwjsCookToolUI
 
             catch (Exception exceptionOutput)
             {
+                Dispatcher.Invoke(() => MainProgress.Foreground = Brushes.DarkRed);
                 Dispatcher.Invoke(() => MainProgress.Value = 0);
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
                 Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
