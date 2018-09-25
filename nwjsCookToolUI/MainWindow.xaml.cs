@@ -93,8 +93,8 @@ namespace nwjsCookToolUI
             foreach(var file in fileMap)
             {
                 string fileBuffer = file.Replace(".js", "");
-                //OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCompiling " + file + "...";
-                //Thread.Sleep(200);
+                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCompiling " + file + "...";
+                Thread.Sleep(200);
                 CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
                 CompilerInfo.CreateNoWindow = true;
                 CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -102,8 +102,8 @@ namespace nwjsCookToolUI
                 CompilerProcess.Start();
                 CompilerProcess.WaitForExit();
                 if (removeJs) File.Delete(file);
-                //Thread.Sleep(3000);
-                //OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
+                Thread.Sleep(3000);
+                OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
                 Thread.Sleep(200);
 
             }
@@ -219,8 +219,8 @@ namespace nwjsCookToolUI
         private void StartMapCompiler(object sender, DoWorkEventArgs e)
         {
 
-            //try
-            //{
+            try
+            {
                 for (int i=0; i < FolderList.Items.Count; i++)
                 {
                     var i1 = i;
@@ -242,18 +242,18 @@ namespace nwjsCookToolUI
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
                 MessageBox.Show("Compilation complete!", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
                 Dispatcher.Invoke(() => StatusLabel.Content = "Done!");
-            //}
-            //catch (Exception exceptionOutput)
-            //{
-            //    Dispatcher.Invoke(() => MainProgress.Foreground = Brushes.DarkRed);
-            //    Dispatcher.Invoke(() => MainProgress.Value = 0);
-            //    Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
-            //    Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
-            //    MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
-            //        MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-
         }
+            catch (Exception exceptionOutput)
+            {
+                Dispatcher.Invoke(() => MainProgress.Foreground = Brushes.DarkRed);
+                Dispatcher.Invoke(() => MainProgress.Value = 0);
+                Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
+                Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
+                MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+}
 
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
         {
