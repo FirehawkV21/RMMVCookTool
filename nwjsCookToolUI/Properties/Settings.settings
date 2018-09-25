@@ -5,5 +5,14 @@
     <Setting Name="SDKLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="FileExtension" Type="System.String" Scope="User">
+      <Value Profile="(Default)">bin</Value>
+    </Setting>
+    <Setting Name="PackageCode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DeleteSourceCode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
