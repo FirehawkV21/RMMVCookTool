@@ -12,3 +12,7 @@ This tool is a GUI wrapper for NW.js' Compiler tool (included in the SDK of the 
 ## Compiling
 
 You will need Visual Studio 2017, along with the Microsoft .NET Framework 4.7.2 SDK. Once you do have both, open the solution file.
+
+## Libraries Used
+- [Xceed WPF Toolkit](https://github.com/xceedsoftware/wpftoolkit)
+- [Ookii.Dialogs](https://github.com/acemod13/RMMVCookTool/releases/tag/1.2.0-20180925)
