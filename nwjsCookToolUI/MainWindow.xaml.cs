@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -7,7 +6,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using CompilerCore;
 using System.Windows;
 using System.Windows.Controls;
@@ -91,7 +89,6 @@ namespace nwjsCookToolUI
             string compilerInput = Dispatcher.Invoke(() => ProjectLocation.Text);
             var packageOutput = compilerInput + "\\package.nw";
             Dispatcher.Invoke(() => StatusLabel.Content = "Compiling scripts in the js folder...");
-            Thread.Sleep(400);
             try
             {
                 string folderMap = "js";
@@ -164,12 +161,10 @@ namespace nwjsCookToolUI
                     Dispatcher.Invoke(() =>
                         OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "Compiling scripts in the " +
                                           FolderList.Items[i1] + " folder...\n");
-                    Thread.Sleep(200);
                     
                     Dispatcher.Invoke(() =>
                         MapStatusLabel.Content =
                             StatusLabel.Content = "Compiling scripts in the " + FolderList.Items[i1] + " folder...");
-                    Thread.Sleep(200);
                     CoreCode.FileFinder(FolderList.Items[i1].ToString(), "*.js");
                     foreach(var file in CoreCode.FileMap) {
                         Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(file, FileExtensionTextbox.Text,

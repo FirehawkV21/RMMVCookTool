@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using CompilerCore;
 
 namespace nwjsCompilerCLI
@@ -11,9 +12,8 @@ namespace nwjsCompilerCLI
         {
             string SdkLocation;
             string ProjectLocation;
-            string fileExtension = "bin";
-            int modeSelected;
-            bool removeJsFiles = false;
+            string fileExtension;
+            bool removeJsFiles;
             do
             {
                 Console.WriteLine("Where's the SDK location? ");
@@ -23,42 +23,45 @@ namespace nwjsCompilerCLI
                     Console.Write("The directory isn't there. Please select an existing folder.\n");
             } while (SdkLocation == null || !Directory.Exists(SdkLocation));
 
-        Console.WriteLine("\nWhere's the project where you want to compile? ");
-            ProjectLocation = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("\nWhere's the project where you want to compile? ");
+                ProjectLocation = Console.ReadLine();
+                if (ProjectLocation == null) Console.WriteLine("Please specify the location of the folder.\n");
+                else if(!Directory.Exists(ProjectLocation)) Console.WriteLine("The folder you've selected isn't present.\n");
+                else if(!Directory.Exists(ProjectLocation + "\\www\\js")) Console.WriteLine("There is no js folder.\n");
+            }
+             while (ProjectLocation == null || !Directory.Exists(ProjectLocation) ||
+                     !Directory.Exists(ProjectLocation + "\\www\\js"));
 
-            //do
+            //do 
             //{
             //    Console.WriteLine(
-            //        "Would you like:\n1. Compile JavaScript?\n2. Compile and package to package.nw?\n3. Test the game?\n");
-            //    modeSelected = Console.Read();
-            //    if (modeSelected < 1 && modeSelected > 2)Console.Write("You didn't pick any of the answers. Try again.");
+            //        "\nWould you like to:\n1. Compile JavaScript?\n2. Compile and package to package.nw?\n");
+            //    modeSelected = Convert.ToInt32(Console.Read());
+            //    if (modeSelected < 1 && modeSelected > 2) Console.Write("You didn't pick any of the answers. Try again.\n");
             //}
-            // while (modeSelected < 1 && modeSelected > 2);
+            //while (modeSelected < 1 && modeSelected > 2);
 
             //if (modeSelected != 3)
             //{
                 Console.Write("\nWhat Extension will your game use (leave empty for .bin)? ");
                 fileExtension = Console.ReadLine() ?? "bin";
-            Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?");
-                int checkDeletion = Console.Read();
-                 removeJsFiles = (checkDeletion == 2);
+                Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1)\n");
+                int checkDeletion = Convert.ToInt32(Console.ReadLine());
+                removeJsFiles = (checkDeletion == 2);
             //}
-            //switch (modeSelected)
-            //{
-            //    case 1:
-            //    case 2:
+
                     string folderMap = "js";
                     CoreCode.FileFinder(ProjectLocation + "\\www\\" + folderMap + "\\", "*.js");
                     CoreCode.CompilerInfo.FileName = SdkLocation + "\\nwjc.exe";
                     try
                     {
-                        foreach (var fileName in CoreCode.FileMap)
+                        Parallel.ForEach (CoreCode.FileMap, fileName =>
                         {
-                            Console.WriteLine("\n" + DateTime.Now + "\nCompiling " + fileName + "...\n");
-                            Thread.Sleep(200);
+                            Console.WriteLine("\n" + DateTime.Now + "\nThread #"+ Thread.CurrentThread.ManagedThreadId + " is compiling " + fileName + "...\n");
                             CoreCode.CompilerWorkerTask(fileName, fileExtension, removeJsFiles);
-                            Thread.Sleep(200);
-                        }
+                        });
 
                     }
                     catch (Exception e)
@@ -67,8 +70,6 @@ namespace nwjsCompilerCLI
                         throw;
 
                     }
-                    //break;
-            //}
             Console.WriteLine("Push Enter/Return to exit.");
             Console.ReadLine();
         }

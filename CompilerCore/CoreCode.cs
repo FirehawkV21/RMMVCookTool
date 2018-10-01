@@ -58,17 +58,11 @@ namespace CompilerCore
         {
 
                 string fileBuffer = fileMap.Replace(".js", "");
-               // OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCompiling " + file + "...";
-                Thread.Sleep(200);
                 CompilerInfo.Arguments = "\"" + fileMap + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
                 CompilerInfo.CreateNoWindow = true;
                 CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                //CompilerProcess.StartInfo = CompilerInfo;
                 Process.Start(CompilerInfo)?.WaitForExit();
-                //CompilerProcess.WaitForExit();
                 if (removeJs) File.Delete(fileMap);
-                //OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
-                Thread.Sleep(200);
         }
     }
 }
