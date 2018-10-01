@@ -96,16 +96,12 @@ namespace nwjsCookToolUI
             Thread.Sleep(400);
             try
             {
-                //CoreCode.FileMap = Directory.GetFiles(compilerInput + "\\www\\js\\", "*.js");
                 string folderMap = "js";
                 CoreCode.FileFinder(compilerInput + "\\www\\" + folderMap + "\\", "*.js");
                 CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
-                //Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text = "\n" + OutputArea.Text + DateTime.Now + "Compiling scripts in the js folder...\n-----");
-                //Thread.Sleep(200);
-                //Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(CoreCode.FileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
-                //Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
-                //Dispatcher.Invoke(() => MainProgress.Value += 1);
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
+                if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
+                    Dispatcher.Invoke(() => MainProgress.Maximum += 1);
                 foreach (var fileName in CoreCode.FileMap)
                 {
                     Dispatcher.Invoke(() => OutputArea.Text += "\n" + DateTime.Now + "\nCompiling " + fileName + "...\n");
