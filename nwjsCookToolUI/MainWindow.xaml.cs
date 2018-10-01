@@ -81,8 +81,6 @@ namespace nwjsCookToolUI
                 compilerWorker.RunWorkerAsync();
             }
 
-            CompileButton.IsEnabled = true;
-
             //cookToolUi.Visibility = Visibility.Visible;
         }
 
@@ -151,6 +149,8 @@ namespace nwjsCookToolUI
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
             }
+
+            Dispatcher.Invoke(() => CompileButton.IsEnabled = true);
         }
 
         private void StartMapCompiler(object sender, DoWorkEventArgs e)
@@ -192,8 +192,9 @@ namespace nwjsCookToolUI
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
             }
+            Dispatcher.Invoke(() => MapCompileButton.IsEnabled = true);
 
-}
+        }
 
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
         {
@@ -230,7 +231,7 @@ namespace nwjsCookToolUI
         private void MapCompileButton_Click(object sender, RoutedEventArgs e)
         {
             
-            CompileButton.IsEnabled = false;
+            MapCompileButton.IsEnabled = false;
                 MainProgress.Foreground = Brushes.ForestGreen;
                 if (!File.Exists(NwjsLocation.Text))
                 {
@@ -253,8 +254,6 @@ namespace nwjsCookToolUI
                     compilerWorker.ProgressChanged += CompilerReport;
                     compilerWorker.RunWorkerAsync();
                 }
-
-                CompileButton.IsEnabled = true;
 
         }
 
