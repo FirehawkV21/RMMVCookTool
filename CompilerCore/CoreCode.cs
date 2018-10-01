@@ -8,10 +8,12 @@ namespace CompilerCore
 {
     public static class CoreCode
     {
+        //Some variables needed for the compiler task.
         private static readonly Process CompilerProcess = new Process();
         public static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
         public static string[] FileMap;
 
+        //This bit of code handles copying a directory to a different location.
         public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.
@@ -50,19 +52,27 @@ namespace CompilerCore
             }
         }
 
+        //This the code to search for files. Pretty simple, actually.
         public static void FileFinder(string path, string extension)
         {
             FileMap = Directory.GetFiles(path, extension, SearchOption.AllDirectories);
         }
-        public static void CompilerWorkerTask(string fileMap, string extension, bool removeJs)
+        //The code that handles the nwjc.
+        public static void CompilerWorkerTask(string file, string extension, bool removeJs)
         {
-
-                string fileBuffer = fileMap.Replace(".js", "");
-                CompilerInfo.Arguments = "\"" + fileMap + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
+                //Removing the JavaScript extension. Needed to place our own File Extension.
+                string fileBuffer = file.Replace(".js", "");
+                //Setting up the compiler by throwing in two arguemnts.
+                //The first bit (the one with the file variable) is the source.
+                //The second bit (the one with the fileBuffer variable) makes the final file.
+                CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
+                //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.   
                 CompilerInfo.CreateNoWindow = true;
                 CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                //Run the compiler.
                 Process.Start(CompilerInfo)?.WaitForExit();
-                if (removeJs) File.Delete(fileMap);
+                //If the user asked to remove the JS files, delete them.
+                if (removeJs) File.Delete(file);
         }
     }
 }

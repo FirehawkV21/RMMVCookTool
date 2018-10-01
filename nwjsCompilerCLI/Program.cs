@@ -10,12 +10,20 @@ namespace nwjsCompilerCLI
     {
         static void Main(string[] args)
         {
+
             string SdkLocation;
             string ProjectLocation;
             string fileExtension;
             bool removeJsFiles;
+            Console.WriteLine("================================================");
+            Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
+            Console.WriteLine("= Version D1.00");
+            Console.WriteLine("= Developed by AceOfAces.");
+            Console.WriteLine("= Licensed under GNU General Public License v3.");
+            Console.WriteLine("================================================");
+
             do
-            {
+            {   //Ask the user where is the SDK. Check if the folder's there.
                 Console.WriteLine("Where's the SDK location? ");
                 SdkLocation = Console.ReadLine();
                 if (SdkLocation == null) Console.WriteLine("Please insert the path for the SDK please.\n");
@@ -24,7 +32,7 @@ namespace nwjsCompilerCLI
             } while (SdkLocation == null || !Directory.Exists(SdkLocation));
 
             do
-            {
+            {  //Ask the user what project to compile. Check if the folder is there and there's a js folder.
                 Console.WriteLine("\nWhere's the project where you want to compile? ");
                 ProjectLocation = Console.ReadLine();
                 if (ProjectLocation == null) Console.WriteLine("Please specify the location of the folder.\n");
@@ -33,7 +41,8 @@ namespace nwjsCompilerCLI
             }
              while (ProjectLocation == null || !Directory.Exists(ProjectLocation) ||
                      !Directory.Exists(ProjectLocation + "\\www\\js"));
-
+            
+            //Leave the commented code as is for now.
             //do 
             //{
             //    Console.WriteLine(
@@ -45,31 +54,43 @@ namespace nwjsCompilerCLI
 
             //if (modeSelected != 3)
             //{
+            
+            //Ask the user for the file extension.
                 Console.Write("\nWhat Extension will your game use (leave empty for .bin)? ");
                 fileExtension = Console.ReadLine() ?? "bin";
-                Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1)\n");
+            //This is the check if the tool should delete the JS files.
+                Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1) ");
                 int checkDeletion = Convert.ToInt32(Console.ReadLine());
                 removeJsFiles = (checkDeletion == 2);
             //}
 
+                   //The folder that the tool looks for.
                     string folderMap = "js";
+                   //Finding all the JS files.
                     CoreCode.FileFinder(ProjectLocation + "\\www\\" + folderMap + "\\", "*.js");
+                   //Preparing the compiler task.
                     CoreCode.CompilerInfo.FileName = SdkLocation + "\\nwjc.exe";
                     try
                     {
+                        //Read from the FileMap (which is located in the CompilerCore library.
+                        //Compilation is done in parallel. Handy for multi-core systems.
                         Parallel.ForEach (CoreCode.FileMap, fileName =>
                         {
+                            //Print the status of the compiler. Show which thread is compiling what as well.
                             Console.WriteLine("\n" + DateTime.Now + "\nThread #"+ Thread.CurrentThread.ManagedThreadId + " is compiling " + fileName + "...\n");
+                            //Call the compiler task.
                             CoreCode.CompilerWorkerTask(fileName, fileExtension, removeJsFiles);
                         });
 
                     }
                     catch (Exception e)
                     {
+                        //TODO Improve the handling of the errors.
                         Console.WriteLine(e);
                         throw;
 
                     }
+            //Ask the user to press Enter (or Return).
             Console.WriteLine("Push Enter/Return to exit.");
             Console.ReadLine();
         }
