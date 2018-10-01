@@ -96,29 +96,29 @@ namespace nwjsCookToolUI
             Thread.Sleep(400);
             try
             {
-                CoreCode.FileMap = Directory.GetFiles(compilerInput + "\\www\\js\\", "*.js");
-                string[] folderMap = { "libs", "plugins" };
+                //CoreCode.FileMap = Directory.GetFiles(compilerInput + "\\www\\js\\", "*.js");
+                string folderMap = "js";
+                CoreCode.FileFinder(compilerInput + "\\www\\" + folderMap + "\\", "*.js");
                 CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
-                Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text = "\n" + OutputArea.Text + DateTime.Now + "Compiling scripts in the js folder...\n-----");
-                Thread.Sleep(200);
-
-
-                Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(CoreCode.FileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
-                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
-                Dispatcher.Invoke(() => MainProgress.Value += 1);
-                foreach (var folderName in folderMap)
+                //Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text = "\n" + OutputArea.Text + DateTime.Now + "Compiling scripts in the js folder...\n-----");
+                //Thread.Sleep(200);
+                //Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(CoreCode.FileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
+                //Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+                //Dispatcher.Invoke(() => MainProgress.Value += 1);
+                Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
+                foreach (var fileName in CoreCode.FileMap)
                 {
-                    Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "Compiling scripts in the " + folderName + " folder...\n");
+                    Dispatcher.Invoke(() => OutputArea.Text += "\n" + DateTime.Now + "\nCompiling " + fileName + "...\n");
                     Thread.Sleep(200);
-                    Dispatcher.Invoke(() => StatusLabel.Content = StatusLabel.Content = "Compiling scripts in the " + folderName + " folder...");
+                    Dispatcher.Invoke(() => StatusLabel.Content = StatusLabel.Content = "Compiling " + fileName + "...");
                     Thread.Sleep(200);
-                    CoreCode.FileMap = Directory.GetFiles(compilerInput + "\\www\\js\\" + folderName + "\\", "*.js");
-                    Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(CoreCode.FileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
-                    Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+                    Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(fileName, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
+                    Dispatcher.Invoke(() => OutputArea.Text += "\nCompiled on " + DateTime.Now + "\n");
                     Dispatcher.Invoke(() => MainProgress.Value += 1);
                 }
+                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
 
-                
+
                 if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
                 {
                     Dispatcher.Invoke(() => StatusLabel.Content = "Packaging...");
@@ -126,7 +126,6 @@ namespace nwjsCookToolUI
                     Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                       "\n Copying files to a temporary area...\n");
                     Thread.Sleep(200);
-                    //Directory.CreateDirectory(ProjectLocation.Text + "\\Package\\");
                     if (Directory.Exists(_tempFolderLocation)) Directory.Delete(_tempFolderLocation, true);
                     Dispatcher.Invoke(() => CoreCode.DirectoryCopy(compilerInput + "\\www\\",
                         _tempFolderLocation + "\\www\\", true));
@@ -154,6 +153,7 @@ namespace nwjsCookToolUI
                 Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
                 MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
             }
         }
 
@@ -174,9 +174,11 @@ namespace nwjsCookToolUI
                         MapStatusLabel.Content =
                             StatusLabel.Content = "Compiling scripts in the " + FolderList.Items[i1] + " folder...");
                     Thread.Sleep(200);
-                    CoreCode.FileMap = Directory.GetFiles(FolderList.Items[i1].ToString(), "*.js");
-                    Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(CoreCode.FileMap, FileExtensionTextbox.Text,
-                        RemoveCompiledJsCheckbox.IsChecked == true));
+                    CoreCode.FileFinder(FolderList.Items[i1].ToString(), "*.js");
+                    foreach(var file in CoreCode.FileMap) {
+                        Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(file, FileExtensionTextbox.Text,
+                            RemoveCompiledJsCheckbox.IsChecked == true));
+                    }
                     Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
                     Dispatcher.Invoke(() => MapProgress.Value += 1);
                 }
@@ -186,12 +188,13 @@ namespace nwjsCookToolUI
         }
             catch (Exception exceptionOutput)
             {
-                Dispatcher.Invoke(() => MainProgress.Foreground = Brushes.DarkRed);
-                Dispatcher.Invoke(() => MainProgress.Value = 0);
+                Dispatcher.Invoke(() => MapProgress.Foreground = Brushes.DarkRed);
+                Dispatcher.Invoke(() => MapProgress.Value = 0);
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
                 Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
                 MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
             }
 
 }

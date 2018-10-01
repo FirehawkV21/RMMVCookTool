@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompilerCore
 {
-    public class CoreCode
+    public static class CoreCode
     {
         private static readonly Process CompilerProcess = new Process();
         public static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
@@ -51,25 +50,26 @@ namespace CompilerCore
             }
         }
 
-        public static void CompilerWorkerTask(IEnumerable<string> fileMap, string extension, bool removeJs)
+        public static void FileFinder(string path, string extension)
         {
-            foreach (var file in fileMap)
-            {
-                string fileBuffer = file.Replace(".js", "");
+            FileMap = Directory.GetFiles(path, extension, SearchOption.AllDirectories);
+        }
+        public static void CompilerWorkerTask(string fileMap, string extension, bool removeJs)
+        {
+
+                string fileBuffer = fileMap.Replace(".js", "");
                // OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCompiling " + file + "...";
                 Thread.Sleep(200);
-                CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
+                CompilerInfo.Arguments = "\"" + fileMap + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
                 CompilerInfo.CreateNoWindow = true;
                 CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 CompilerProcess.StartInfo = CompilerInfo;
                 CompilerProcess.Start();
                 CompilerProcess.WaitForExit();
-                if (removeJs) File.Delete(file);
+                if (removeJs) File.Delete(fileMap);
                 Thread.Sleep(3000);
                 //OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
                 Thread.Sleep(200);
-
-            }
         }
     }
 }
