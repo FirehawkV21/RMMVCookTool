@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using CompilerCore;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -20,9 +21,6 @@ namespace nwjsCookToolUI
     /// </summary>
     public partial class MainWindow
     {
-        private static readonly Process CompilerProcess = new Process();
-        private static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
-        private string[] _fileMap;
         private readonly string _tempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
         public MainWindow()
         {
@@ -88,64 +86,7 @@ namespace nwjsCookToolUI
             //cookToolUi.Visibility = Visibility.Visible;
         }
 
-        private void CompilerWorkerTask(IEnumerable<string> fileMap, string extension, bool removeJs)
-        {
-            foreach(var file in fileMap)
-            {
-                string fileBuffer = file.Replace(".js", "");
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nCompiling " + file + "...";
-                Thread.Sleep(200);
-                CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
-                CompilerInfo.CreateNoWindow = true;
-                CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                CompilerProcess.StartInfo = CompilerInfo;
-                CompilerProcess.Start();
-                CompilerProcess.WaitForExit();
-                if (removeJs) File.Delete(file);
-                Thread.Sleep(3000);
-                OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
-                Thread.Sleep(200);
 
-            }
-        }
-
-        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
-        {
-            // Get the subdirectories for the specified directory.
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-
-            if (!dir.Exists)
-            {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
-            }
-
-            DirectoryInfo[] dirs = dir.GetDirectories();
-            // If the destination directory doesn't exist, create it.
-            if (!Directory.Exists(destDirName))
-            {
-                Directory.CreateDirectory(destDirName);
-            }
-
-            // Get the files in the directory and copy them to the new location.
-            FileInfo[] files = dir.GetFiles();
-            Parallel.ForEach(files, file =>
-            {
-                string temppath = Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, false);
-            });
-
-            // If copying subdirectories, copy them and their contents to new location.
-            if (copySubDirs)
-            {
-                Parallel.ForEach(dirs, subDir =>
-                {
-                    string tempPath = Path.Combine(destDirName, subDir.Name);
-                    DirectoryCopy(subDir.FullName, tempPath, true);
-                });
-            }
-        }
 
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
@@ -155,15 +96,15 @@ namespace nwjsCookToolUI
             Thread.Sleep(400);
             try
             {
-                _fileMap = Directory.GetFiles(compilerInput + "\\www\\js\\", "*.js");
+                CoreCode.FileMap = Directory.GetFiles(compilerInput + "\\www\\js\\", "*.js");
                 string[] folderMap = { "libs", "plugins" };
-                CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
+                CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text = "\n" + OutputArea.Text + DateTime.Now + "Compiling scripts in the js folder...\n-----");
                 Thread.Sleep(200);
 
 
-                Dispatcher.Invoke(() => CompilerWorkerTask(_fileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
-                Array.Clear(_fileMap, 0, _fileMap.Length);
+                Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(CoreCode.FileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
+                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
                 Dispatcher.Invoke(() => MainProgress.Value += 1);
                 foreach (var folderName in folderMap)
                 {
@@ -171,9 +112,9 @@ namespace nwjsCookToolUI
                     Thread.Sleep(200);
                     Dispatcher.Invoke(() => StatusLabel.Content = StatusLabel.Content = "Compiling scripts in the " + folderName + " folder...");
                     Thread.Sleep(200);
-                    _fileMap = Directory.GetFiles(compilerInput + "\\www\\js\\" + folderName + "\\", "*.js");
-                    Dispatcher.Invoke(() => CompilerWorkerTask(_fileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
-                    Array.Clear(_fileMap, 0, _fileMap.Length);
+                    CoreCode.FileMap = Directory.GetFiles(compilerInput + "\\www\\js\\" + folderName + "\\", "*.js");
+                    Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(CoreCode.FileMap, FileExtensionTextbox.Text, RemoveCompiledJsCheckbox.IsChecked == true));
+                    Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
                     Dispatcher.Invoke(() => MainProgress.Value += 1);
                 }
 
@@ -187,7 +128,7 @@ namespace nwjsCookToolUI
                     Thread.Sleep(200);
                     //Directory.CreateDirectory(ProjectLocation.Text + "\\Package\\");
                     if (Directory.Exists(_tempFolderLocation)) Directory.Delete(_tempFolderLocation, true);
-                    Dispatcher.Invoke(() => DirectoryCopy(compilerInput + "\\www\\",
+                    Dispatcher.Invoke(() => CoreCode.DirectoryCopy(compilerInput + "\\www\\",
                         _tempFolderLocation + "\\www\\", true));
                     File.Copy(compilerInput + "\\package.json",
                         _tempFolderLocation + "\\package.json", true);
@@ -233,10 +174,10 @@ namespace nwjsCookToolUI
                         MapStatusLabel.Content =
                             StatusLabel.Content = "Compiling scripts in the " + FolderList.Items[i1] + " folder...");
                     Thread.Sleep(200);
-                    _fileMap = Directory.GetFiles(FolderList.Items[i1].ToString(), "*.js");
-                    Dispatcher.Invoke(() => CompilerWorkerTask(_fileMap, FileExtensionTextbox.Text,
+                    CoreCode.FileMap = Directory.GetFiles(FolderList.Items[i1].ToString(), "*.js");
+                    Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(CoreCode.FileMap, FileExtensionTextbox.Text,
                         RemoveCompiledJsCheckbox.IsChecked == true));
-                    Array.Clear(_fileMap, 0, _fileMap.Length);
+                    Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
                     Dispatcher.Invoke(() => MapProgress.Value += 1);
                 }
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
@@ -304,7 +245,7 @@ namespace nwjsCookToolUI
                 }
                 else
                 {
-                    CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
+                    CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
                 MapProgress.Value = 0;
                     MapProgress.Maximum = FolderList.Items.Count;
                     BackgroundWorker compilerWorker = new BackgroundWorker();

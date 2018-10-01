@@ -170,5 +170,11 @@
   <ItemGroup>
     <Resource Include="Brick-02-WF.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CompilerCore\CompilerCore.csproj">
+      <Project>{8b4f59c0-5a67-4f06-935f-3a4b78fe0898}</Project>
+      <Name>CompilerCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
