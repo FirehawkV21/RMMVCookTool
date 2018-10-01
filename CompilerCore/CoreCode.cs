@@ -63,11 +63,10 @@ namespace CompilerCore
                 CompilerInfo.Arguments = "\"" + fileMap + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
                 CompilerInfo.CreateNoWindow = true;
                 CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                CompilerProcess.StartInfo = CompilerInfo;
-                CompilerProcess.Start();
-                CompilerProcess.WaitForExit();
+                //CompilerProcess.StartInfo = CompilerInfo;
+                Process.Start(CompilerInfo)?.WaitForExit();
+                //CompilerProcess.WaitForExit();
                 if (removeJs) File.Delete(fileMap);
-                Thread.Sleep(3000);
                 //OutputArea.Text = OutputArea.Text + "\n Compiled on " + DateTime.Now + ".\n";
                 Thread.Sleep(200);
         }

@@ -23,7 +23,7 @@ namespace nwjsCompilerCLI
                     Console.Write("The directory isn't there. Please select an existing folder.\n");
             } while (SdkLocation == null || !Directory.Exists(SdkLocation));
 
-        Console.WriteLine("Where's the project where you want to compile? ");
+        Console.WriteLine("\nWhere's the project where you want to compile? ");
             ProjectLocation = Console.ReadLine();
 
             //do
@@ -37,9 +37,9 @@ namespace nwjsCompilerCLI
 
             //if (modeSelected != 3)
             //{
-                Console.Write("What Extension will your game use (leave empty for .bin)? ");
+                Console.Write("\nWhat Extension will your game use (leave empty for .bin)? ");
                 fileExtension = Console.ReadLine() ?? "bin";
-            Console.WriteLine("Do you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?");
+            Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?");
                 int checkDeletion = Console.Read();
                  removeJsFiles = (checkDeletion == 2);
             //}
@@ -65,6 +65,7 @@ namespace nwjsCompilerCLI
                     {
                         Console.WriteLine(e);
                         throw;
+
                     }
                     //break;
             //}
