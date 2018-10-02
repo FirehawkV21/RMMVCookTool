@@ -57,7 +57,7 @@ namespace CompilerCore
             FileMap = Directory.GetFiles(path, extension, SearchOption.AllDirectories);
         }
 
-        public static void CleanupBin(string path)
+        public static void CleanupBin()
         {
             //Do a normal loop for each entry on the FileMap array.
             foreach (string file in FileMap)

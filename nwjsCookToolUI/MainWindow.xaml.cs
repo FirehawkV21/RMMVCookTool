@@ -95,7 +95,7 @@ namespace nwjsCookToolUI
                 CoreCode.FileFinder(compilerInput + "\\www\\" + folderMap + "\\", "*.js");
                 Dispatcher.Invoke(() => OutputArea.Text += "\n" + DateTime.Now + "\nRemoving binary files from the project (if there are)...\n");
                 Dispatcher.Invoke(() => StatusLabel.Content = "Removing binary files (if present)...");
-                CoreCode.CleanupBin(compilerInput + "\\www\\" + folderMap + "\\");
+                CoreCode.CleanupBin();
                 CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
                 if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
@@ -170,7 +170,7 @@ namespace nwjsCookToolUI
                     CoreCode.FileFinder(FolderList.Items[i1].ToString(), "*.js");
                     Dispatcher.Invoke(() => OutputArea.Text += "\n" + DateTime.Now + "\nRemoving binary files from the project (if there are)...\n");
                     Dispatcher.Invoke(() => MapStatusLabel.Content = "Removing binary files from" + FolderList.Items[i1] + "...");
-                    CoreCode.CleanupBin(FolderList.Items[i1].ToString());
+                    CoreCode.CleanupBin();
                     foreach (var file in CoreCode.FileMap) {
                         Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(file, FileExtensionTextbox.Text,
                             RemoveCompiledJsCheckbox.IsChecked == true));
