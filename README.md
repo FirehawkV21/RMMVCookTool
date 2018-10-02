@@ -26,4 +26,4 @@ You will need Visual Studio 2017, along with the Microsoft .NET Framework 4.7.2 
 
 ## Libraries Used
 - [Xceed WPF Toolkit](https://github.com/xceedsoftware/wpftoolkit)
-- [Ookii.Dialogs](https://github.com/acemod13/RMMVCookTool/releases/tag/1.2.0-20180925)
+- [Ookii.Dialogs](http://http://www.ookii.org/Software/Dialogs/)
