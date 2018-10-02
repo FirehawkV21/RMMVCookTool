@@ -57,10 +57,13 @@ namespace nwjsCompilerCLI
             
             //Ask the user for the file extension.
                 Console.Write("\nWhat Extension will your game use (leave empty for .bin)? ");
-                fileExtension = Console.ReadLine() ?? "bin";
+                fileExtension = Console.ReadLine();
+             if (string.IsNullOrEmpty(fileExtension)) fileExtension = "bin";
             //This is the check if the tool should delete the JS files.
+            int checkDeletion;
                 Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1) ");
-                int checkDeletion = Convert.ToInt32(Console.ReadLine());
+                var checkBuffer = Console.ReadLine();
+                int.TryParse(checkBuffer, out checkDeletion);
                 removeJsFiles = (checkDeletion == 2);
             //}
 
