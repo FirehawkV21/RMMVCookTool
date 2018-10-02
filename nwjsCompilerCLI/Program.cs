@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using CompilerCore;
@@ -74,7 +75,8 @@ namespace nwjsCompilerCLI
                           Console.WriteLine("\n"+ DateTime.Now +"\nRemoving binary files (if present)...\n");
                    CoreCode.CleanupBin();
                    //Preparing the compiler task.
-            CoreCode.CompilerInfo.FileName = SdkLocation + "\\nwjc.exe";
+            string nwjcName = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? "\\nwjc.exe" : "\\nwjc";
+            CoreCode.CompilerInfo.FileName = SdkLocation + nwjcName;
                     try
                     {
                         //Read from the FileMap (which is located in the CompilerCore library.
