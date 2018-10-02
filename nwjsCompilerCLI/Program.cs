@@ -61,10 +61,9 @@ namespace nwjsCompilerCLI
                 fileExtension = Console.ReadLine();
              if (string.IsNullOrEmpty(fileExtension)) fileExtension = "bin";
             //This is the check if the tool should delete the JS files.
-            int checkDeletion;
-                Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1) ");
-                var checkBuffer = Console.ReadLine();
-                int.TryParse(checkBuffer, out checkDeletion);
+            Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1) ");
+            var checkBuffer = Console.ReadLine();
+                int.TryParse(checkBuffer, out int checkDeletion);
                 removeJsFiles = (checkDeletion == 2);
             //}
 
