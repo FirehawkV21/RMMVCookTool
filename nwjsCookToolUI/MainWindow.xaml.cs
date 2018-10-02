@@ -72,7 +72,7 @@ namespace nwjsCookToolUI
             {
                 MainProgress.Value = 0;
                 MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
-                BackgroundWorker compilerWorker = new BackgroundWorker();
+                var compilerWorker = new BackgroundWorker();
                 compilerWorker.WorkerReportsProgress = true;
                 compilerWorker.DoWork += StartCompiler;
                 compilerWorker.ProgressChanged += CompilerReport;
@@ -85,12 +85,12 @@ namespace nwjsCookToolUI
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
             string compilerInput = Dispatcher.Invoke(() => ProjectLocation.Text);
-            var packageOutput = compilerInput + "\\package.nw";
+            var packageOutput = Path.Combine(compilerInput, "package.nw");
             Dispatcher.Invoke(() => StatusLabel.Content = "Compiling scripts in the js folder...");
             try
             {
                 string folderMap = "js";
-                CoreCode.FileFinder(compilerInput + "\\www\\" + folderMap + "\\", "*.js");
+                CoreCode.FileFinder(Path.Combine(compilerInput, "www", folderMap), "*.js");
                 Dispatcher.Invoke(() => OutputArea.Text += "\n" + DateTime.Now + "\nRemoving binary files from the project (if there are)...\n");
                 Dispatcher.Invoke(() => StatusLabel.Content = "Removing binary files (if present)...");
                 CoreCode.CleanupBin();
@@ -119,10 +119,10 @@ namespace nwjsCookToolUI
                                       "\n Copying files to a temporary area...\n");
                     Thread.Sleep(200);
                     if (Directory.Exists(_tempFolderLocation)) Directory.Delete(_tempFolderLocation, true);
-                    Dispatcher.Invoke(() => CoreCode.DirectoryCopy(compilerInput + "\\www\\",
-                        _tempFolderLocation + "\\www\\", true));
-                    File.Copy(compilerInput + "\\package.json",
-                        _tempFolderLocation + "\\package.json", true);
+                    Dispatcher.Invoke(() => CoreCode.DirectoryCopy(Path.Combine(compilerInput,"www"),
+                        Path.Combine(_tempFolderLocation, "www"), true));
+                    File.Copy(Path.Combine(compilerInput, "package.json"),
+                        Path.Combine(_tempFolderLocation, "package.json"), true);
                     Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Creating package...\n");
                     if (File.Exists(packageOutput)) File.Delete(packageOutput);
                     ZipFile.CreateFromDirectory(_tempFolderLocation,
