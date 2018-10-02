@@ -141,12 +141,13 @@ namespace nwjsCookToolUI
 
             catch (Exception exceptionOutput)
             {
-                Dispatcher.Invoke(() => MainProgress.Foreground = Brushes.DarkRed);
-                Dispatcher.Invoke(() => MainProgress.Value = 0);
+
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
                 Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
                 MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+                Dispatcher.Invoke(() => MainProgress.Value = 0);
+                Dispatcher.Invoke(() => MainProgress.Foreground = Brushes.ForestGreen);
                 Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
             }
 
@@ -169,27 +170,42 @@ namespace nwjsCookToolUI
                         MapStatusLabel.Content = "Compiling scripts in the " + FolderList.Items[i1] + " folder...");
                     CoreCode.FileFinder(FolderList.Items[i1].ToString(), "*.js");
                     Dispatcher.Invoke(() => OutputArea.Text += "\n" + DateTime.Now + "\nRemoving binary files from the project (if there are)...\n");
-                    Dispatcher.Invoke(() => MapStatusLabel.Content = "Removing binary files from" + FolderList.Items[i1] + "...");
+                    Dispatcher.Invoke(() => CurrentWorkloadBar.Maximum = CoreCode.FileMap.Length);
+                    
+                    Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = "Removing binary files from " + FolderList.Items[i1] + "...");
                     CoreCode.CleanupBin();
                     foreach (var file in CoreCode.FileMap) {
+                        Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = "Compiling" + file + "...");
+                        Thread.Sleep(200);
                         Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(file, FileExtensionTextbox.Text,
                             RemoveCompiledJsCheckbox.IsChecked == true));
+                        Thread.Sleep(200);
+                        Dispatcher.Invoke(() => CurrentWorkloadBar.Value += 1);
                     }
                     Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+                    Dispatcher.Invoke(() => CurrentWorkloadBar.Value = 0);
                     Dispatcher.Invoke(() => MapProgress.Value += 1);
                 }
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
                 MessageBox.Show("Compilation complete!", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
                 Dispatcher.Invoke(() => MapStatusLabel.Content = "Done!");
-        }
+                Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = "Done!");
+            }
             catch (Exception exceptionOutput)
             {
                 Dispatcher.Invoke(() => MapProgress.Foreground = Brushes.DarkRed);
-                Dispatcher.Invoke(() => MapProgress.Value = 0);
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
                 Dispatcher.Invoke(() => MapStatusLabel.Content = "Failed!");
+                Dispatcher.Invoke(() => CurrentWorkloadBar.Foreground = Brushes.DarkRed);
+                Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = "Failed!");
+
+                Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
                 MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+                Dispatcher.Invoke(() => CurrentWorkloadBar.Value = 0);
+                Dispatcher.Invoke(() => MapProgress.Value = 0);
+                Dispatcher.Invoke(() => MapProgress.Foreground = Brushes.ForestGreen);
+                Dispatcher.Invoke(() => CurrentWorkloadBar.Foreground = Brushes.ForestGreen);
                 Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
             }
             Dispatcher.Invoke(() => MapCompileButton.IsEnabled = true);
@@ -246,7 +262,7 @@ namespace nwjsCookToolUI
                 else
                 {
                     CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
-                MapProgress.Value = 0;
+                    MapProgress.Value = 0;
                     MapProgress.Maximum = FolderList.Items.Count;
                     BackgroundWorker compilerWorker = new BackgroundWorker();
                     compilerWorker.WorkerReportsProgress = true;

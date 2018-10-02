@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:nwjsCookToolUI"
         xmlns:properties="clr-namespace:nwjsCookToolUI.Properties"
         mc:Ignorable="d"
-        Title="RPG Maker MV Cook Tool" Height="362.195" Width="548" ResizeMode="NoResize" Loaded="CookToolUi_Loaded">
+        Title="RPG Maker MV Cook Tool" Height="390.815" Width="548" ResizeMode="NoResize" Loaded="CookToolUi_Loaded">
     <Grid>
         <TabControl Margin="0,0,0,0">
             <TabItem Header="Settings">
@@ -27,7 +27,7 @@
                 <Grid Background="#FFFFFDFD">
                     <GroupBox Header="Setup" Margin="0,0,0,0" Height="86" VerticalAlignment="Top">
                         <Grid>
-                            
+
                             <Label Content="Project Location" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 
@@ -55,11 +55,13 @@
 
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Compile Staus" Margin="0,199,0,0" Height="103" VerticalAlignment="Top">
+                    <GroupBox Header="Compile Staus" Margin="0,199,0,-0.4">
                         <Grid>
                             <Label x:Name="MapStatusLabel" Content="Waiting here..." HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <Button x:Name="MapCompileButton" Content="Compile" HorizontalAlignment="Left" Margin="439,26,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="MapCompileButton_Click"/>
                             <ProgressBar x:Name="MapProgress" Height="23" VerticalAlignment="Top" Margin="0,26,90,0"/>
+                            <ProgressBar x:Name="CurrentWorkloadBar" Height="23" VerticalAlignment="Top" Margin="0,81,90,0"/>
+                            <Label x:Name="CurrentWorkloadLabel" Content="Waiting here as well..." HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top"/>
                         </Grid>
                     </GroupBox>
 
