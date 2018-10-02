@@ -85,7 +85,7 @@ namespace CompilerCore
         {
                 //Removing the JavaScript extension. Needed to place our own File Extension.
                 string fileBuffer = file.Replace(".js", "");
-                //Setting up the compiler by throwing in two arguemnts.
+                //Setting up the compiler by throwing in two arguments.
                 //The first bit (the one with the file variable) is the source.
                 //The second bit (the one with the fileBuffer variable) makes the final file.
                 CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";

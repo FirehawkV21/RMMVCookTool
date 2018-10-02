@@ -78,8 +78,6 @@ namespace nwjsCookToolUI
                 compilerWorker.ProgressChanged += CompilerReport;
                 compilerWorker.RunWorkerAsync();
             }
-
-            //cookToolUi.Visibility = Visibility.Visible;
         }
 
 
