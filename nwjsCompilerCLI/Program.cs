@@ -68,8 +68,10 @@ namespace nwjsCompilerCLI
                     string folderMap = "js";
                    //Finding all the JS files.
                     CoreCode.FileFinder(ProjectLocation + "\\www\\" + folderMap + "\\", "*.js");
+                          Console.WriteLine("\n"+ DateTime.Now +"\nRemoving binary files (if present)...\n");
+                   CoreCode.CleanupBin(ProjectLocation + "\\www\\" + folderMap + "\\");
                    //Preparing the compiler task.
-                    CoreCode.CompilerInfo.FileName = SdkLocation + "\\nwjc.exe";
+            CoreCode.CompilerInfo.FileName = SdkLocation + "\\nwjc.exe";
                     try
                     {
                         //Read from the FileMap (which is located in the CompilerCore library.

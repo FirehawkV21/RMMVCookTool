@@ -93,6 +93,9 @@ namespace nwjsCookToolUI
             {
                 string folderMap = "js";
                 CoreCode.FileFinder(compilerInput + "\\www\\" + folderMap + "\\", "*.js");
+                Dispatcher.Invoke(() => OutputArea.Text += "\n" + DateTime.Now + "\nRemoving binary files from the project (if there are)...\n");
+                Dispatcher.Invoke(() => StatusLabel.Content = "Removing binary files (if present)...");
+                CoreCode.CleanupBin(compilerInput + "\\www\\" + folderMap + "\\");
                 CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
                 if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
@@ -163,10 +166,12 @@ namespace nwjsCookToolUI
                                           FolderList.Items[i1] + " folder...\n");
                     
                     Dispatcher.Invoke(() =>
-                        MapStatusLabel.Content =
-                            StatusLabel.Content = "Compiling scripts in the " + FolderList.Items[i1] + " folder...");
+                        MapStatusLabel.Content = "Compiling scripts in the " + FolderList.Items[i1] + " folder...");
                     CoreCode.FileFinder(FolderList.Items[i1].ToString(), "*.js");
-                    foreach(var file in CoreCode.FileMap) {
+                    Dispatcher.Invoke(() => OutputArea.Text += "\n" + DateTime.Now + "\nRemoving binary files from the project (if there are)...\n");
+                    Dispatcher.Invoke(() => MapStatusLabel.Content = "Removing binary files from" + FolderList.Items[i1] + "...");
+                    CoreCode.CleanupBin(FolderList.Items[i1].ToString());
+                    foreach (var file in CoreCode.FileMap) {
                         Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(file, FileExtensionTextbox.Text,
                             RemoveCompiledJsCheckbox.IsChecked == true));
                     }
@@ -175,14 +180,14 @@ namespace nwjsCookToolUI
                 }
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
                 MessageBox.Show("Compilation complete!", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
-                Dispatcher.Invoke(() => StatusLabel.Content = "Done!");
+                Dispatcher.Invoke(() => MapStatusLabel.Content = "Done!");
         }
             catch (Exception exceptionOutput)
             {
                 Dispatcher.Invoke(() => MapProgress.Foreground = Brushes.DarkRed);
                 Dispatcher.Invoke(() => MapProgress.Value = 0);
                 Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
-                Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
+                Dispatcher.Invoke(() => MapStatusLabel.Content = "Failed!");
                 MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace CompilerCore
@@ -56,6 +55,30 @@ namespace CompilerCore
         public static void FileFinder(string path, string extension)
         {
             FileMap = Directory.GetFiles(path, extension, SearchOption.AllDirectories);
+        }
+
+        public static void CleanupBin(string path)
+        {
+            //Do a normal loop for each entry on the FileMap array.
+            foreach (string file in FileMap)
+            {
+                //This buffer makes the necessary query to do a search for the binaries.
+                //We want to keep the file name to do the search.
+                string fileBuffer = Path.GetFileNameWithoutExtension(file);
+                //This does a small search in the path specified in the FileMap.
+                //Adding the .* will allow us to search all the files that have an extension.
+                string[] deletionMap = Directory.GetFiles(file.Replace(fileBuffer + ".js", ""), fileBuffer + ".*");
+                //Doing a parallel loop here to speed up the cleanup process.
+                Parallel.ForEach(deletionMap, fileToDelete =>
+                {
+                    //Run a check if the file in the array is actually a JavaScript file.
+                    //If not, delete it.
+                    if (fileToDelete != file) File.Delete(fileToDelete);
+                });
+                //Cleaning up the deletionMap array before refilling it.
+                Array.Clear(deletionMap,0, deletionMap.Length);
+            }
+
         }
         //The code that handles the nwjc.
         public static void CompilerWorkerTask(string file, string extension, bool removeJs)
