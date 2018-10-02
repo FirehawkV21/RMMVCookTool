@@ -33,7 +33,7 @@ namespace nwjsCompilerCLI
 
             do
             {  //Ask the user what project to compile. Check if the folder is there and there's a js folder.
-                Console.WriteLine("\nWhere's the project where you want to compile? ");
+                Console.WriteLine("\nWhere's the project you want to compile? ");
                 ProjectLocation = Console.ReadLine();
                 if (ProjectLocation == null) Console.WriteLine("Please specify the location of the folder.\n");
                 else if(!Directory.Exists(ProjectLocation)) Console.WriteLine("The folder you've selected isn't present.\n");
@@ -80,7 +80,9 @@ namespace nwjsCompilerCLI
                             Console.WriteLine("\n" + DateTime.Now + "\nThread #"+ Thread.CurrentThread.ManagedThreadId + " is compiling " + fileName + "...\n");
                             //Call the compiler task.
                             CoreCode.CompilerWorkerTask(fileName, fileExtension, removeJsFiles);
+                            Console.WriteLine("\n" + DateTime.Now + "\nThread #" + Thread.CurrentThread.ManagedThreadId + " finished compiling " + fileName + ".\n");
                         });
+                        Console.WriteLine("\nFinished compiling.");
 
                     }
                     catch (Exception e)
