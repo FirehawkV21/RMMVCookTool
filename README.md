@@ -8,8 +8,11 @@ This tool is a GUI wrapper for NW.js' Compiler tool (included in the SDK of the 
 ### CompilerCore
 This houses the common code between the GUI and the Console App.
 
-### nwjsCoookToolUI
+### nwjsCookToolUI
 The GUI part of the compiler tool.
+
+### nwjsCompilerCLI
+The cross-platform console app. Used for compiling a project quickly.
 
 ## System Requirements
 
