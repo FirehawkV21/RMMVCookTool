@@ -6,7 +6,7 @@
     <AssemblyVersion>1.0.0.18276</AssemblyVersion>
     <FileVersion>1.0.0.18276</FileVersion>
     <ApplicationIcon />
-    <StartupObject />
+    <StartupObject>nwjsCompilerCLI.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
