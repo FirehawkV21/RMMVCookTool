@@ -6,7 +6,7 @@ using System.Windows;
 namespace nwjsCookToolUI
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
@@ -16,7 +16,7 @@ namespace nwjsCookToolUI
                 Environment.SpecialFolder.ApplicationData), "RMMVCompiler");
             if (!Directory.Exists(profileLocation)) Directory.CreateDirectory(profileLocation);
             ProfileOptimization.SetProfileRoot(profileLocation);
-          ProfileOptimization.SetProfileRoot("RMMVCompiler.Profile");
+            ProfileOptimization.SetProfileRoot("RMMVCompiler.Profile");
         }
     }
 }
