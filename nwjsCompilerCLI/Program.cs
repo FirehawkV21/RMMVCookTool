@@ -41,7 +41,7 @@ namespace nwjsCompilerCLI
                 else if (!Directory.Exists(Path.Combine(projectLocation, "www", "js"))) Console.WriteLine("There is no js folder.\n");
             }
             while (projectLocation == null || !Directory.Exists(projectLocation) ||
-                     !Directory.Exists(Path.Combine(projectLocation + "www", "js")));
+                     !Directory.Exists(Path.Combine(projectLocation, "www", "js")));
 
             //Leave the commented code as is for now.
             //do 
