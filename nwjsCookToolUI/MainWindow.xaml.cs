@@ -64,6 +64,7 @@ namespace nwjsCookToolUI
             {
                 MessageBox.Show("The nwjs Compiler is missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
+                MapCompileButton.IsEnabled = true;
             }
             else if (!Directory.Exists(ProjectLocation.Text))
             {
@@ -71,6 +72,7 @@ namespace nwjsCookToolUI
                     MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\nCannot operate in a non-existent folder.\n-----";
+                MapCompileButton.IsEnabled = true;
             }
             else
             {
@@ -268,6 +270,7 @@ namespace nwjsCookToolUI
             {
                 MessageBox.Show("The nwjs Compiler is missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
+                MapCompileButton.IsEnabled = true;
             }
             else if (FolderList.Items.Count == 0)
             {
@@ -275,6 +278,7 @@ namespace nwjsCookToolUI
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\nCannot operate in a non-existent folder.\n-----";
+                MapCompileButton.IsEnabled = true;
             }
             else
             {
