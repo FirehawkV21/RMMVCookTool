@@ -36,6 +36,7 @@ namespace nwjsCompilerCLI
             {  //Ask the user what project to compile. Check if the folder is there and there's a js folder.
                 Console.WriteLine("\nWhere's the project you want to compile? ");
                 projectLocation = Console.ReadLine();
+
                 if (projectLocation == null) Console.WriteLine("Please specify the location of the folder.\n");
                 else if (!Directory.Exists(projectLocation)) Console.WriteLine("The folder you've selected isn't present.\n");
                 else if (!Directory.Exists(Path.Combine(projectLocation, "www", "js"))) Console.WriteLine("There is no js folder.\n");

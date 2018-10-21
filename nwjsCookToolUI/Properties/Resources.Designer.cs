@@ -61,6 +61,96 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removing binary files (if present)....
+        /// </summary>
+        internal static string BinRemovalProgressText {
+            get {
+                return ResourceManager.GetString("BinRemovalProgressText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compilation complete!.
+        /// </summary>
+        internal static string CompilationCompleteText {
+            get {
+                return ResourceManager.GetString("CompilationCompleteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compiling scripts in the js folder....
+        /// </summary>
+        internal static string CompileJsFolderProgressText {
+            get {
+                return ResourceManager.GetString("CompileJsFolderProgressText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The nwjs Compiler is missing..
+        /// </summary>
+        internal static string CompilerMissingText {
+            get {
+                return ResourceManager.GetString("CompilerMissingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compiling .
+        /// </summary>
+        internal static string CompileText {
+            get {
+                return ResourceManager.GetString("CompileText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done!.
+        /// </summary>
+        internal static string DoneText {
+            get {
+                return ResourceManager.GetString("DoneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ack! An error occured! See the output in the About tab..
+        /// </summary>
+        internal static string ErrorOccuredText {
+            get {
+                return ResourceManager.GetString("ErrorOccuredText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string ErrorText {
+            get {
+                return ResourceManager.GetString("ErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed!.
+        /// </summary>
+        internal static string FailedText {
+            get {
+                return ResourceManager.GetString("FailedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t operate on an non-existent folder..
+        /// </summary>
+        internal static string NonExistantFolderText {
+            get {
+                return ResourceManager.GetString("NonExistantFolderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the location of the project..
         /// </summary>
         internal static string ProjectPickerText {

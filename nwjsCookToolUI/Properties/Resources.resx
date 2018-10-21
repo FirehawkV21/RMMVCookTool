@@ -120,4 +120,34 @@
   <data name="ProjectPickerText" xml:space="preserve">
     <value>Please select the location of the project.</value>
   </data>
+  <data name="CompileText" xml:space="preserve">
+    <value>Compiling </value>
+  </data>
+  <data name="CompilerMissingText" xml:space="preserve">
+    <value>The nwjs Compiler is missing.</value>
+  </data>
+  <data name="ErrorText" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="NonExistantFolderText" xml:space="preserve">
+    <value>Can't operate on an non-existent folder.</value>
+  </data>
+  <data name="BinRemovalProgressText" xml:space="preserve">
+    <value>Removing binary files (if present)...</value>
+  </data>
+  <data name="CompileJsFolderProgressText" xml:space="preserve">
+    <value>Compiling scripts in the js folder...</value>
+  </data>
+  <data name="DoneText" xml:space="preserve">
+    <value>Done!</value>
+  </data>
+  <data name="ErrorOccuredText" xml:space="preserve">
+    <value>Ack! An error occured! See the output in the About tab.</value>
+  </data>
+  <data name="CompilationCompleteText" xml:space="preserve">
+    <value>Compilation complete!</value>
+  </data>
+  <data name="FailedText" xml:space="preserve">
+    <value>Failed!</value>
+  </data>
 </root>

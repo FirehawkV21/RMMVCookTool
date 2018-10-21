@@ -62,13 +62,13 @@ namespace nwjsCookToolUI
             MainProgress.Foreground = Brushes.ForestGreen;
             if (!File.Exists(NwjsLocation.Text))
             {
-                MessageBox.Show("The nwjs Compiler is missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
                 MapCompileButton.IsEnabled = true;
             }
             else if (!Directory.Exists(ProjectLocation.Text))
             {
-                MessageBox.Show("Can't operate on an non-existent folder.", "Error", MessageBoxButton.OK,
+                MessageBox.Show(Properties.Resources.NonExistantFolderText, Properties.Resources.ErrorText, MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\nCannot operate in a non-existent folder.\n-----";
@@ -91,7 +91,7 @@ namespace nwjsCookToolUI
         {
             var compilerInput = Dispatcher.Invoke(() => ProjectLocation.Text);
             var packageOutput = Path.Combine(compilerInput, "package.nw");
-            Dispatcher.Invoke(() => StatusLabel.Content = "Compiling scripts in the js folder...");
+            Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.CompileJsFolderProgressText);
             try
             {
                 var folderMap = "js";
@@ -99,7 +99,7 @@ namespace nwjsCookToolUI
                 Dispatcher.Invoke(() =>
                     OutputArea.Text += "\n" + DateTime.Now +
                                        "\nRemoving binary files from the project (if there are)...\n");
-                Dispatcher.Invoke(() => StatusLabel.Content = "Removing binary files (if present)...");
+                Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.BinRemovalProgressText);
                 CoreCode.CleanupBin();
                 CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
@@ -111,7 +111,7 @@ namespace nwjsCookToolUI
                         () => OutputArea.Text += "\n" + DateTime.Now + "\nCompiling " + fileName + "...\n");
                     Thread.Sleep(200);
                     Dispatcher.Invoke(() =>
-                        StatusLabel.Content = StatusLabel.Content = "Compiling " + fileName + "...");
+                        StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + fileName + "...");
                     Thread.Sleep(200);
                     Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(fileName, FileExtensionTextbox.Text,
                         RemoveCompiledJsCheckbox.IsChecked == true));
@@ -145,16 +145,16 @@ namespace nwjsCookToolUI
 
                 Dispatcher.Invoke(() =>
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
-                MessageBox.Show("Compilation complete!", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
-                Dispatcher.Invoke(() => StatusLabel.Content = "Done!");
+                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
+                Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.DoneText);
             }
 
             catch (Exception exceptionOutput)
             {
                 Dispatcher.Invoke(() =>
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
-                Dispatcher.Invoke(() => StatusLabel.Content = "Failed!");
-                MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
+                Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.FailedText);
+                MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Dispatcher.Invoke(() => MainProgress.Value = 0);
                 Dispatcher.Invoke(() => MainProgress.Foreground = Brushes.ForestGreen);
@@ -188,7 +188,7 @@ namespace nwjsCookToolUI
                     CoreCode.CleanupBin();
                     foreach (var file in CoreCode.FileMap)
                     {
-                        Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = "Compiling" + file + "...");
+                        Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = Properties.Resources.CompileText + file + "...");
                         Thread.Sleep(200);
                         Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(file, FileExtensionTextbox.Text,
                             RemoveCompiledJsCheckbox.IsChecked == true));
@@ -203,22 +203,22 @@ namespace nwjsCookToolUI
 
                 Dispatcher.Invoke(() =>
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
-                MessageBox.Show("Compilation complete!", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
-                Dispatcher.Invoke(() => MapStatusLabel.Content = "Done!");
-                Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = "Done!");
+                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
+                Dispatcher.Invoke(() => MapStatusLabel.Content = Properties.Resources.DoneText);
+                Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = Properties.Resources.DoneText);
             }
             catch (Exception exceptionOutput)
             {
                 Dispatcher.Invoke(() => MapProgress.Foreground = Brushes.DarkRed);
                 Dispatcher.Invoke(() =>
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
-                Dispatcher.Invoke(() => MapStatusLabel.Content = "Failed!");
+                Dispatcher.Invoke(() => MapStatusLabel.Content = Properties.Resources.FailedText);
                 Dispatcher.Invoke(() => CurrentWorkloadBar.Foreground = Brushes.DarkRed);
-                Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = "Failed!");
+                Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = Properties.Resources.FailedText);
 
                 Dispatcher.Invoke(() =>
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n");
-                MessageBox.Show("Ack! An error occured! See the output in the About tab.", "Failure!",
+                MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Dispatcher.Invoke(() => CurrentWorkloadBar.Value = 0);
                 Dispatcher.Invoke(() => MapProgress.Value = 0);
@@ -268,13 +268,13 @@ namespace nwjsCookToolUI
             MainProgress.Foreground = Brushes.ForestGreen;
             if (!File.Exists(NwjsLocation.Text))
             {
-                MessageBox.Show("The nwjs Compiler is missing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
                 MapCompileButton.IsEnabled = true;
             }
             else if (FolderList.Items.Count == 0)
             {
-                MessageBox.Show("Please add the folders you want the JavaScript files to be compiled.", "Error",
+                MessageBox.Show("Please add the folders you want the JavaScript files to be compiled.", Properties.Resources.ErrorText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\nCannot operate in a non-existent folder.\n-----";
