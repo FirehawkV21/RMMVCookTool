@@ -54,7 +54,7 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="Compile Status" Margin="0,86,0,0" Height="90" VerticalAlignment="Top">
+                    <GroupBox Header="Compile Status" Margin="0,86,0,0" Height="120" VerticalAlignment="Top">
                         <Grid>
                             <Label x:Name="StatusLabel" Content="Waiting here..." HorizontalAlignment="Left"
                                    Margin="0,11,0,0" VerticalAlignment="Top" />
@@ -62,6 +62,7 @@
                                     Margin="439,37,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                     Click="CompileButton_Click" />
                             <ProgressBar x:Name="MainProgress" Height="23" VerticalAlignment="Top" Margin="0,37,90,0" />
+                            <Button x:Name="TestProjectButton" Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="439,60,0,0" Height="23" Click="TestProjectButton_Click"/>
                         </Grid>
                     </GroupBox>
                 </Grid>

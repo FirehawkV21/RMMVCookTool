@@ -30,16 +30,15 @@ namespace nwjsCookToolUI
 
         private void BrowseSDKButton_Click(object sender, RoutedEventArgs e)
         {
-            var pickSdkFolder = new OpenFileDialog
+            var pickSdkFolder = new VistaFolderBrowserDialog
             {
-                DefaultExt = "nwjc.exe",
-                Filter = "nwjs Compiler|nwjc.exe",
-                Title = "Select the nwjs Compiler."
+                Description = "Select the nwjs SDK location.",
+                UseDescriptionForTitle = true
             };
             var pickerResult = pickSdkFolder.ShowDialog();
             if (pickerResult != true) return;
-            Settings.Default.SDKLocation = pickSdkFolder.FileName;
-            NwjsLocation.Text = pickSdkFolder.FileName;
+            Settings.Default.SDKLocation = pickSdkFolder.SelectedPath;
+            NwjsLocation.Text = pickSdkFolder.SelectedPath;
             Settings.Default.Save();
         }
 
@@ -301,6 +300,16 @@ namespace nwjsCookToolUI
         private void Checkbox_CheckChanged(object sender, RoutedEventArgs e)
         {
             Settings.Default.Save();
+        }
+
+        private void TestProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(Path.Combine(Settings.Default.SDKLocation, "nwjs.exe")))
+            Process.Start(Path.Combine(Settings.Default.SDKLocation, "nwjs.exe"), "--nwapp=\"file://" + ProjectLocation.Text + "\"");
+            else if (File.Exists(Path.Combine(Settings.Default.SDKLocation, "Game.exe")))
+                Process.Start(Path.Combine(Settings.Default.SDKLocation, "Game.exe"),
+                    "--nwapp=\"" + ProjectLocation.Text + "\"");
+            else MessageBox.Show("No nwjs binaries found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
