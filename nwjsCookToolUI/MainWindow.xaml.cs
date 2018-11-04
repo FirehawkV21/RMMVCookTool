@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using CompilerCore;
-using Microsoft.Win32;
 using nwjsCookToolUI.Properties;
 using Ookii.Dialogs.Wpf;
 
@@ -59,7 +58,7 @@ namespace nwjsCookToolUI
         {
             CompileButton.IsEnabled = false;
             MainProgress.Foreground = Brushes.ForestGreen;
-            if (!File.Exists(NwjsLocation.Text))
+            if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
@@ -265,7 +264,7 @@ namespace nwjsCookToolUI
         {
             MapCompileButton.IsEnabled = false;
             MainProgress.Foreground = Brushes.ForestGreen;
-            if (!File.Exists(NwjsLocation.Text))
+            if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
