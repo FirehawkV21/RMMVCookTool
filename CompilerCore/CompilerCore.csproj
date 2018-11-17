@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.0.18308</AssemblyVersion>
-    <FileVersion>1.0.0.18308</FileVersion>
+    <AssemblyVersion>1.0.0.18321</AssemblyVersion>
+    <FileVersion>1.0.0.18321</FileVersion>
   </PropertyGroup>
 
 </Project>

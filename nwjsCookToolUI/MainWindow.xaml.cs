@@ -99,7 +99,7 @@ namespace nwjsCookToolUI
                                        "\nRemoving binary files from the project (if there are)...\n");
                 Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.BinRemovalProgressText);
                 CoreCode.CleanupBin();
-                CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
+                CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => Path.Combine(NwjsLocation.Text, "nwjc.exe"));
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
                 if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
                     Dispatcher.Invoke(() => MainProgress.Maximum += 1);
@@ -280,7 +280,7 @@ namespace nwjsCookToolUI
             }
             else
             {
-                CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => NwjsLocation.Text);
+                CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => Path.Combine(NwjsLocation.Text, "nwjc.exe"));
                 MapProgress.Value = 0;
                 MapProgress.Maximum = FolderList.Items.Count;
                 var compilerWorker = new BackgroundWorker();
