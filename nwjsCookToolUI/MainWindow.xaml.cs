@@ -21,7 +21,7 @@ namespace nwjsCookToolUI
     /// </summary>
     public partial class MainWindow
     {
-        private readonly string _tempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
+
 
         public MainWindow()
         {
@@ -89,7 +89,6 @@ namespace nwjsCookToolUI
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
             var compilerInput = Dispatcher.Invoke(() => ProjectLocation.Text);
-            var packageOutput = Path.Combine(compilerInput, "package.nw");
             Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.CompileJsFolderProgressText);
             try
             {
@@ -127,18 +126,11 @@ namespace nwjsCookToolUI
                     Thread.Sleep(200);
                     Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                                               Properties.Resources.FileCopyText);
+                    Dispatcher.Invoke(() => CoreCode.PreparePack(compilerInput));
                     Thread.Sleep(200);
-                    if (Directory.Exists(_tempFolderLocation)) Directory.Delete(_tempFolderLocation, true);
-                    Dispatcher.Invoke(() => CoreCode.DirectoryCopy(Path.Combine(compilerInput, "www"),
-                        Path.Combine(_tempFolderLocation, "www"), true));
-                    File.Copy(Path.Combine(compilerInput, "package.json"),
-                        Path.Combine(_tempFolderLocation, "package.json"), true);
-                    Dispatcher.Invoke(() =>
+                    Dispatcher.Invoke(() => 
                         OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.PackageCreationText);
-                    if (File.Exists(packageOutput)) File.Delete(packageOutput);
-                    ZipFile.CreateFromDirectory(_tempFolderLocation,
-                        packageOutput);
-                    Directory.Delete(_tempFolderLocation, true);
+                    CoreCode.CompressFiles(compilerInput);                   
                     Dispatcher.Invoke(() => MainProgress.Value += 1);
                 }
 

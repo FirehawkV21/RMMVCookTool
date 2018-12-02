@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace CompilerCore
         private static readonly Process CompilerProcess = new Process();
         public static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
         public static string[] FileMap;
+        public static readonly string tempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
 
         //This bit of code handles copying a directory to a different location.
         public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
@@ -99,6 +101,24 @@ namespace CompilerCore
             else if (File.Exists(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game")))
                 Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe": "Game"),
                     "--nwapp=\"" + projectLocation + "\"");
+        }
+
+        public static void PreparePack(string InputFolder)
+        {
+            if (Directory.Exists(tempFolderLocation)) Directory.Delete(tempFolderLocation, true);
+             CoreCode.DirectoryCopy(Path.Combine(InputFolder, "www"),
+                Path.Combine(tempFolderLocation, "www"), true);
+            File.Copy(Path.Combine(InputFolder, "package.json"),
+                Path.Combine(tempFolderLocation, "package.json"), true);
+        }
+
+        public static void CompressFiles(string DeployArea)
+        {
+            var packageOutput = Path.Combine(DeployArea, "package.nw");
+            if (File.Exists(packageOutput)) File.Delete(packageOutput);
+            ZipFile.CreateFromDirectory(tempFolderLocation,
+                packageOutput);
+            Directory.Delete(tempFolderLocation, true);
         }
 
     }
