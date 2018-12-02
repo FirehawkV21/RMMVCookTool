@@ -92,13 +92,13 @@ namespace CompilerCore
             if (removeJs) File.Delete(file);
         }
 
-        public static void RunTest(string SDKLocation, string ProjectLocation)
+        public static void RunTest(string sdkLocation, string projectLocation)
         {
-            if (File.Exists(Path.Combine(SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs")))
-                Process.Start(Path.Combine(SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe": "nwjs"), "--nwapp=\"file://" + ProjectLocation + "\"");
-            else if (File.Exists(Path.Combine(SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game")))
-                Process.Start(Path.Combine(SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe": "Game"),
-                    "--nwapp=\"file://" + ProjectLocation + "\"");
+            if (File.Exists(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs")))
+                Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe": "nwjs"), "--nwapp=\"file://" + projectLocation + "\"");
+            else if (File.Exists(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game")))
+                Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe": "Game"),
+                    "--nwapp=\"" + projectLocation + "\"");
         }
 
     }

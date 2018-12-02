@@ -74,9 +74,12 @@ namespace nwjsCompilerCLI
             char charBuffer = Console.ReadKey().KeyChar;
             if (char.IsLetterOrDigit(charBuffer))
             {
-                switch (checkBuffer)
+                switch (charBuffer)
                 {
-                    case "Y":
+                    case 'Y':
+                    case 'y':
+                    case 'Ν':
+                    case 'ν':
                         testProject = true;
                         break;
                     default:
@@ -108,7 +111,8 @@ namespace nwjsCompilerCLI
                     Console.WriteLine("\n" + DateTime.Now + "\nThread #" + Thread.CurrentThread.ManagedThreadId + " finished compiling " + fileName + ".\n");
                 });
                 Console.WriteLine("\nFinished compiling.");
-                if (testProject == true) CoreCode.RunTest(sdkLocation, projectLocation);
+                if (testProject == true)
+                    CoreCode.RunTest(sdkLocation, projectLocation);
 
             }
             catch (Exception e)

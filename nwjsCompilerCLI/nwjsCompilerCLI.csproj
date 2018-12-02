@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyVersion>1.0.0.18276</AssemblyVersion>
-    <FileVersion>1.0.0.18276</FileVersion>
+    <AssemblyVersion>1.0.0.18336</AssemblyVersion>
+    <FileVersion>1.0.0.18336</FileVersion>
     <ApplicationIcon />
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
   </PropertyGroup>
