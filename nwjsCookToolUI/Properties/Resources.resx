@@ -150,4 +150,42 @@
   <data name="FailedText" xml:space="preserve">
     <value>Failed!</value>
   </data>
+  <data name="CompileText1" xml:space="preserve">
+    <value>Compiling scripts in the </value>
+  </data>
+  <data name="BinRemovalText" xml:space="preserve">
+    <value>
+Removing binary files from the project (if there are)...
+</value>
+  </data>
+  <data name="FolderText" xml:space="preserve">
+    <value> folder...</value>
+  </data>
+  <data name="BinRemovalStatusText" xml:space="preserve">
+    <value>Removing binary files from </value>
+  </data>
+  <data name="PackaginStatusText" xml:space="preserve">
+    <value>Packaging...</value>
+  </data>
+  <data name="CompilingText" xml:space="preserve">
+    <value>
+Compiling </value>
+  </data>
+  <data name="CompiledOutputText" xml:space="preserve">
+    <value>
+Compiled on </value>
+  </data>
+  <data name="NoJSFilesPresent" xml:space="preserve">
+    <value>Please add the folders you want the JavaScript files to be compiled.</value>
+  </data>
+  <data name="PackageCreationText" xml:space="preserve">
+    <value>
+ Creating package...
+</value>
+  </data>
+  <data name="FileCopyText" xml:space="preserve">
+    <value>
+ Copying files to a temporary area...
+</value>
+  </data>
 </root>

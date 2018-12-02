@@ -31,7 +31,7 @@ namespace nwjsCookToolUI
         {
             var pickSdkFolder = new VistaFolderBrowserDialog
             {
-                Description = "Select the nwjs SDK location.",
+                Description = Properties.Resources.SDKPickerText,
                 UseDescriptionForTitle = true
             };
             var pickerResult = pickSdkFolder.ShowDialog();
@@ -61,7 +61,7 @@ namespace nwjsCookToolUI
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
+                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n"+ Properties.Resources.CompilerMissingText + "\n-----";
                 MapCompileButton.IsEnabled = true;
             }
             else if (!Directory.Exists(ProjectLocation.Text))
@@ -69,7 +69,7 @@ namespace nwjsCookToolUI
                 MessageBox.Show(Properties.Resources.NonExistantFolderText, Properties.Resources.ErrorText, MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
-                                  "\nCannot operate in a non-existent folder.\n-----";
+                                  "\n"+ Properties.Resources.NonExistantFolderText +"\n-----";
                 MapCompileButton.IsEnabled = true;
             }
             else
@@ -96,7 +96,7 @@ namespace nwjsCookToolUI
                 CoreCode.FileFinder(Path.Combine(compilerInput, "www", folderMap), "*.js");
                 Dispatcher.Invoke(() =>
                     OutputArea.Text += "\n" + DateTime.Now +
-                                       "\nRemoving binary files from the project (if there are)...\n");
+                                       Properties.Resources.BinRemovalText);
                 Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.BinRemovalProgressText);
                 CoreCode.CleanupBin();
                 CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => Path.Combine(NwjsLocation.Text, "nwjc.exe"));
@@ -106,14 +106,14 @@ namespace nwjsCookToolUI
                 foreach (var fileName in CoreCode.FileMap)
                 {
                     Dispatcher.Invoke(
-                        () => OutputArea.Text += "\n" + DateTime.Now + "\nCompiling " + fileName + "...\n");
+                        () => OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.CompilingText + fileName + "...\n");
                     Thread.Sleep(200);
                     Dispatcher.Invoke(() =>
                         StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + fileName + "...");
                     Thread.Sleep(200);
                     Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(fileName, FileExtensionTextbox.Text,
                         RemoveCompiledJsCheckbox.IsChecked == true));
-                    Dispatcher.Invoke(() => OutputArea.Text += "\nCompiled on " + DateTime.Now + "\n");
+                    Dispatcher.Invoke(() => OutputArea.Text += Properties.Resources.CompiledOutputText + DateTime.Now + "\n");
                     Dispatcher.Invoke(() => MainProgress.Value += 1);
                 }
 
@@ -122,10 +122,10 @@ namespace nwjsCookToolUI
 
                 if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
                 {
-                    Dispatcher.Invoke(() => StatusLabel.Content = "Packaging...");
+                    Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.PackaginStatusText);
                     Thread.Sleep(200);
                     Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
-                                                              "\n Copying files to a temporary area...\n");
+                                                              Properties.Resources.FileCopyText);
                     Thread.Sleep(200);
                     if (Directory.Exists(_tempFolderLocation)) Directory.Delete(_tempFolderLocation, true);
                     Dispatcher.Invoke(() => CoreCode.DirectoryCopy(Path.Combine(compilerInput, "www"),
@@ -133,7 +133,7 @@ namespace nwjsCookToolUI
                     File.Copy(Path.Combine(compilerInput, "package.json"),
                         Path.Combine(_tempFolderLocation, "package.json"), true);
                     Dispatcher.Invoke(() =>
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Creating package...\n");
+                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.PackageCreationText);
                     if (File.Exists(packageOutput)) File.Delete(packageOutput);
                     ZipFile.CreateFromDirectory(_tempFolderLocation,
                         packageOutput);
@@ -142,7 +142,7 @@ namespace nwjsCookToolUI
                 }
 
                 Dispatcher.Invoke(() =>
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n "+ Properties.Resources.CompilationCompleteText + "\n");
                 MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
                 Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.DoneText);
             }
@@ -170,19 +170,19 @@ namespace nwjsCookToolUI
                 {
                     var i1 = i;
                     Dispatcher.Invoke(() =>
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "Compiling scripts in the " +
-                                          FolderList.Items[i1] + " folder...\n");
+                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.CompileText1 +
+                                          FolderList.Items[i1] + Properties.Resources.FolderText + "\n");
 
                     Dispatcher.Invoke(() =>
-                        MapStatusLabel.Content = "Compiling scripts in the " + FolderList.Items[i1] + " folder...");
+                        MapStatusLabel.Content = Properties.Resources.CompileText1 + FolderList.Items[i1] + Properties.Resources.FolderText);
                     CoreCode.FileFinder(FolderList.Items[i1].ToString(), "*.js");
                     Dispatcher.Invoke(() =>
                         OutputArea.Text += "\n" + DateTime.Now +
-                                           "\nRemoving binary files from the project (if there are)...\n");
+                                           Properties.Resources.BinRemovalText);
                     Dispatcher.Invoke(() => CurrentWorkloadBar.Maximum = CoreCode.FileMap.Length);
 
                     Dispatcher.Invoke(() =>
-                        CurrentWorkloadLabel.Content = "Removing binary files from " + FolderList.Items[i1] + "...");
+                        CurrentWorkloadLabel.Content = Properties.Resources.BinRemovalStatusText + FolderList.Items[i1] + "...");
                     CoreCode.CleanupBin();
                     foreach (var file in CoreCode.FileMap)
                     {
@@ -200,7 +200,7 @@ namespace nwjsCookToolUI
                 }
 
                 Dispatcher.Invoke(() =>
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n Compilation complete!\n");
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + Properties.Resources.CompilationCompleteText + "\n");
                 MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
                 Dispatcher.Invoke(() => MapStatusLabel.Content = Properties.Resources.DoneText);
                 Dispatcher.Invoke(() => CurrentWorkloadLabel.Content = Properties.Resources.DoneText);
@@ -267,15 +267,15 @@ namespace nwjsCookToolUI
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nMissing nwjs Compiler executable.\n-----";
+                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n"+ Properties.Resources.CompilerMissingText +  "\n-----";
                 MapCompileButton.IsEnabled = true;
             }
             else if (FolderList.Items.Count == 0)
             {
-                MessageBox.Show("Please add the folders you want the JavaScript files to be compiled.", Properties.Resources.ErrorText,
+                MessageBox.Show(Properties.Resources.NoJSFilesPresent, Properties.Resources.ErrorText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
-                                  "\nCannot operate in a non-existent folder.\n-----";
+                                  "\n"+ Properties.Resources.NonExistantFolderText + "\n-----";
                 MapCompileButton.IsEnabled = true;
             }
             else

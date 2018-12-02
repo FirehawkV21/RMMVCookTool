@@ -22,7 +22,7 @@ namespace nwjsCookToolUI.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace nwjsCookToolUI.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("nwjsCookToolUI.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace nwjsCookToolUI.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,25 +63,55 @@ namespace nwjsCookToolUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Removing binary files (if present)....
         /// </summary>
-        internal static string BinRemovalProgressText {
+        public static string BinRemovalProgressText {
             get {
                 return ResourceManager.GetString("BinRemovalProgressText", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removing binary files from .
+        /// </summary>
+        public static string BinRemovalStatusText {
+            get {
+                return ResourceManager.GetString("BinRemovalStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///Removing binary files from the project (if there are)...
+        ///.
+        /// </summary>
+        public static string BinRemovalText {
+            get {
+                return ResourceManager.GetString("BinRemovalText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compilation complete!.
         /// </summary>
-        internal static string CompilationCompleteText {
+        public static string CompilationCompleteText {
             get {
                 return ResourceManager.GetString("CompilationCompleteText", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        ///Compiled on .
+        /// </summary>
+        public static string CompiledOutputText {
+            get {
+                return ResourceManager.GetString("CompiledOutputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compiling scripts in the js folder....
         /// </summary>
-        internal static string CompileJsFolderProgressText {
+        public static string CompileJsFolderProgressText {
             get {
                 return ResourceManager.GetString("CompileJsFolderProgressText", resourceCulture);
             }
@@ -90,7 +120,7 @@ namespace nwjsCookToolUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The nwjs Compiler is missing..
         /// </summary>
-        internal static string CompilerMissingText {
+        public static string CompilerMissingText {
             get {
                 return ResourceManager.GetString("CompilerMissingText", resourceCulture);
             }
@@ -99,16 +129,35 @@ namespace nwjsCookToolUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Compiling .
         /// </summary>
-        internal static string CompileText {
+        public static string CompileText {
             get {
                 return ResourceManager.GetString("CompileText", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compiling scripts in the .
+        /// </summary>
+        public static string CompileText1 {
+            get {
+                return ResourceManager.GetString("CompileText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///Compiling .
+        /// </summary>
+        public static string CompilingText {
+            get {
+                return ResourceManager.GetString("CompilingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Done!.
         /// </summary>
-        internal static string DoneText {
+        public static string DoneText {
             get {
                 return ResourceManager.GetString("DoneText", resourceCulture);
             }
@@ -117,7 +166,7 @@ namespace nwjsCookToolUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ack! An error occured! See the output in the About tab..
         /// </summary>
-        internal static string ErrorOccuredText {
+        public static string ErrorOccuredText {
             get {
                 return ResourceManager.GetString("ErrorOccuredText", resourceCulture);
             }
@@ -126,7 +175,7 @@ namespace nwjsCookToolUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
-        internal static string ErrorText {
+        public static string ErrorText {
             get {
                 return ResourceManager.GetString("ErrorText", resourceCulture);
             }
@@ -135,25 +184,74 @@ namespace nwjsCookToolUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Failed!.
         /// </summary>
-        internal static string FailedText {
+        public static string FailedText {
             get {
                 return ResourceManager.GetString("FailedText", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        /// Copying files to a temporary area...
+        ///.
+        /// </summary>
+        public static string FileCopyText {
+            get {
+                return ResourceManager.GetString("FileCopyText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  folder....
+        /// </summary>
+        public static string FolderText {
+            get {
+                return ResourceManager.GetString("FolderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please add the folders you want the JavaScript files to be compiled..
+        /// </summary>
+        public static string NoJSFilesPresent {
+            get {
+                return ResourceManager.GetString("NoJSFilesPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t operate on an non-existent folder..
         /// </summary>
-        internal static string NonExistantFolderText {
+        public static string NonExistantFolderText {
             get {
                 return ResourceManager.GetString("NonExistantFolderText", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 
+        /// Creating package...
+        ///.
+        /// </summary>
+        public static string PackageCreationText {
+            get {
+                return ResourceManager.GetString("PackageCreationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Packaging....
+        /// </summary>
+        public static string PackaginStatusText {
+            get {
+                return ResourceManager.GetString("PackaginStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the location of the project..
         /// </summary>
-        internal static string ProjectPickerText {
+        public static string ProjectPickerText {
             get {
                 return ResourceManager.GetString("ProjectPickerText", resourceCulture);
             }
@@ -162,7 +260,7 @@ namespace nwjsCookToolUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Please select the location of the SDK folder..
         /// </summary>
-        internal static string SDKPickerText {
+        public static string SDKPickerText {
             get {
                 return ResourceManager.GetString("SDKPickerText", resourceCulture);
             }
