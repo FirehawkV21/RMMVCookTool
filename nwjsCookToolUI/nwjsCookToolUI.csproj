@@ -194,5 +194,11 @@
       <Name>CompilerCore</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="en\ReplacementCode.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="el\ReplacementCode.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

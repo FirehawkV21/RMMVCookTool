@@ -1,0 +1,30 @@
+﻿Κώδικας για το index.html:
+
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/pixi.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/pixi-tilemap.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/pixi-picture.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/fpsmeter.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/lz-string.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/iphone-inline-video.browser.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_core.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_managers.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_objects.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_scenes.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_sprites.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_windows.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/plugins.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/main.bin");</script>
+
+Κώδικας JS(βάλτε αυτά στο αρχείο rpg_managers.js πρίν την μετάφραση).
+
+Στην γραμμή 2805:
+
+this.loadScript(plugin.name + '.bin');
+
+Απο την γραμμή 2826 μέχρι το την αγκύλη τέλους:
+
+PluginManager.loadScript = function(name) {
+    nw.Window.get().evalNWBin(null, "www/js/plugins/" + name);
+};
+
+Ρυθμίστε όπου χρειάζεται.

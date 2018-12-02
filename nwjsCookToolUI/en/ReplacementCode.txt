@@ -1,0 +1,30 @@
+﻿HTML Code:
+
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/pixi.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/pixi-tilemap.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/pixi-picture.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/fpsmeter.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/lz-string.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/libs/iphone-inline-video.browser.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_core.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_managers.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_objects.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_scenes.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_sprites.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/rpg_windows.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/plugins.bin");</script>
+            <script>nw.Window.get().evalNWBin(null, "www/js/main.bin");</script>
+
+JS code (put these in rpg_managers.js before compiling.
+
+In line 2805:
+
+this.loadScript(plugin.name + '.bin');
+
+From line 2826 until the ending bracket:
+
+PluginManager.loadScript = function(name) {
+    nw.Window.get().evalNWBin(null, "www/js/plugins/" + name);
+};
+
+Obviously, adjust as needed.
