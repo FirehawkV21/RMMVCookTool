@@ -115,147 +115,147 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SDKPickerText" xml:space="preserve">
-    <value>Please select the location of the SDK folder.</value>
+    <value>Παρακακλώ επιλέξτε τον φάκελο του SDK .</value>
   </data>
   <data name="ProjectPickerText" xml:space="preserve">
-    <value>Please select the location of the project.</value>
+    <value>Παρακαλώ επιλέξτε τον φάκελο του project.</value>
   </data>
   <data name="CompileText" xml:space="preserve">
-    <value>Compiling </value>
+    <value>Μετάφραση του αρχείου </value>
   </data>
   <data name="CompilerMissingText" xml:space="preserve">
-    <value>The nwjs Compiler is missing.</value>
+    <value>Ο μεταφραστής του nwjs λείπει.</value>
   </data>
   <data name="ErrorText" xml:space="preserve">
-    <value>Error</value>
+    <value>Σφάλμα</value>
   </data>
   <data name="NonExistantFolderText" xml:space="preserve">
-    <value>Can't operate on an non-existent folder.</value>
+    <value>Δεν μπορεί να δουλέψει σε άγνωστο φάκελο.</value>
   </data>
   <data name="BinRemovalProgressText" xml:space="preserve">
-    <value>Removing binary files (if present)...</value>
+    <value>Διαγραφή δυαδικών αρχείων (αν υπάρχουν)...</value>
   </data>
   <data name="CompileJsFolderProgressText" xml:space="preserve">
-    <value>Compiling scripts in the js folder...</value>
+    <value>Μετάφραση των scripts μέσα στον φάκελο js...</value>
   </data>
   <data name="DoneText" xml:space="preserve">
-    <value>Done!</value>
+    <value>Έτοιμο!</value>
   </data>
   <data name="ErrorOccuredText" xml:space="preserve">
-    <value>Ack! An error occured! See the output in the About tab.</value>
+    <value>Αμάν! Προέκειψε ένα σφάλμα! Δείτε την έξοδο στην καρτέλα πληροφοριών.</value>
   </data>
   <data name="CompilationCompleteText" xml:space="preserve">
-    <value>Compilation complete!</value>
+    <value>Η μετάφραση ολοκληρώθηκε!</value>
   </data>
   <data name="FailedText" xml:space="preserve">
-    <value>Failed!</value>
+    <value>Αποτυχία!</value>
   </data>
   <data name="CompileText1" xml:space="preserve">
-    <value>Compiling scripts in the </value>
+    <value>Μετάφραση των scripts μέσα στο φάκελο</value>
   </data>
   <data name="BinRemovalText" xml:space="preserve">
     <value>
-Removing binary files from the project (if there are)...
+Διαγραφή δυαδικών αρχείων από το project(αν υπάρχουν)...
 </value>
   </data>
   <data name="FolderText" xml:space="preserve">
-    <value> folder...</value>
+    <value>...</value>
   </data>
   <data name="BinRemovalStatusText" xml:space="preserve">
-    <value>Removing binary files from </value>
+    <value>Διαγραφή δυαδικών αρχείων απο τον φάκελο </value>
   </data>
   <data name="PackaginStatusText" xml:space="preserve">
-    <value>Packaging...</value>
+    <value>Πακετάρισμα...</value>
   </data>
   <data name="CompilingText" xml:space="preserve">
     <value>
-Compiling </value>
+Μετάφραση του </value>
   </data>
   <data name="CompiledOutputText" xml:space="preserve">
     <value>
-Compiled on </value>
+Μεταφράστηκε σε δυαδικό αρχείο στις </value>
   </data>
   <data name="NoJSFilesPresent" xml:space="preserve">
-    <value>Please add the folders you want the JavaScript files to be compiled.</value>
+    <value>Παρακαλώ προσθεστε τους φακέλους που περιέχουν τα αρχεία JavaScript για μετάφραση σε δυαδικά αρχεία.</value>
   </data>
   <data name="PackageCreationText" xml:space="preserve">
     <value>
- Creating package...
+ Δημιουργία πακέτου...
 </value>
   </data>
   <data name="FileCopyText" xml:space="preserve">
     <value>
- Copying files to a temporary area...
+ Αντιγραφή αρχείων σε ένα προσωρινό σημείο...
 </value>
   </data>
   <data name="PackageProgramUiText" xml:space="preserve">
-    <value>Package the game into package.nw</value>
+    <value>Πακετάρισμα του παιχνιδιού σε αρχείο package.nw</value>
   </data>
   <data name="SettingsUiText" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ρυθμίσεις</value>
   </data>
   <data name="RemoveJSFilesUiText" xml:space="preserve">
-    <value>Remove Javascript files after compiling.</value>
+    <value>Διαγραφή αρχείων Javascript μετά την μετάφραση.</value>
   </data>
   <data name="FileExtensionUiText" xml:space="preserve">
-    <value>File extension for compiled files:</value>
+    <value>Επέκταση αρχείου:</value>
   </data>
   <data name="SdkLocationUiText" xml:space="preserve">
-    <value>NW.js SDK Location</value>
+    <value>Θέση του NW.js SDK</value>
   </data>
   <data name="BrowseUiText" xml:space="preserve">
-    <value>Browse...</value>
+    <value>Εύρεση...</value>
   </data>
   <data name="QuickCompileUiText" xml:space="preserve">
-    <value>Quick Compile</value>
+    <value>Γρήγορη Μετάφραση</value>
   </data>
   <data name="ProjectLocationUiText" xml:space="preserve">
-    <value>Project Location</value>
+    <value>Θέση του Project</value>
   </data>
   <data name="SetupUiText" xml:space="preserve">
-    <value>Setup</value>
+    <value>Προετοιμασία</value>
   </data>
   <data name="WaitingUiText" xml:space="preserve">
-    <value>Waiting here...</value>
+    <value>Περιμένω...</value>
   </data>
   <data name="CompileUiText" xml:space="preserve">
-    <value>Compile</value>
+    <value>Μετάφραση</value>
   </data>
   <data name="RemoveUiText" xml:space="preserve">
-    <value>Remove</value>
+    <value>Αφαίρεση</value>
   </data>
   <data name="AddUiText" xml:space="preserve">
-    <value>Add</value>
+    <value>Προσθήκη</value>
   </data>
   <data name="TestUiText" xml:space="preserve">
-    <value>Test</value>
+    <value>Δοκιμή</value>
   </data>
   <data name="ProjectFoldersUiText" xml:space="preserve">
-    <value>Project Folders</value>
+    <value>Φάκελοι των Projects</value>
   </data>
   <data name="BatchCompileUiText" xml:space="preserve">
-    <value>Batch Compile</value>
+    <value>Μετάφραση παρτίδας</value>
   </data>
   <data name="CompilerStatusUiText" xml:space="preserve">
-    <value>Compiler Status</value>
+    <value>Κατάσταση μεταφραστή</value>
   </data>
   <data name="WaitingUiText2" xml:space="preserve">
-    <value>Waiting here as well...</value>
+    <value>Περιμένω και εγώ...</value>
   </data>
   <data name="AboutUiText" xml:space="preserve">
-    <value>About</value>
+    <value>Πληροφορίες</value>
   </data>
   <data name="ProgramInfoUiText" xml:space="preserve">
-    <value>Program Information</value>
+    <value>Πληροφορίες Προγράμματος</value>
   </data>
   <data name="VersionText" xml:space="preserve">
-    <value>Version D1.03</value>
+    <value>Έκδοση D1.03</value>
   </data>
   <data name="DevInfoUiText" xml:space="preserve">
-    <value>Developed by AceOfAces. Licensed under GNU General Public License v3.</value>
+    <value>Αναπτύχθηκε από τον AceOfAces. Αδειοδοτείται κάτω από το GNU General Public License v3.</value>
   </data>
   <data name="OutputUiText" xml:space="preserve">
-    <value>Output</value>
+    <value>Έξοδος</value>
   </data>
   <data name="ProgramTitle" xml:space="preserve">
     <value>RPG Maker MV Cook Tool</value>

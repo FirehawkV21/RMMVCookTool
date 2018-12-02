@@ -61,6 +61,33 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string AboutUiText {
+            get {
+                return ResourceManager.GetString("AboutUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string AddUiText {
+            get {
+                return ResourceManager.GetString("AddUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Batch Compile.
+        /// </summary>
+        public static string BatchCompileUiText {
+            get {
+                return ResourceManager.GetString("BatchCompileUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Removing binary files (if present)....
         /// </summary>
         public static string BinRemovalProgressText {
@@ -86,6 +113,15 @@ namespace nwjsCookToolUI.Properties {
         public static string BinRemovalText {
             get {
                 return ResourceManager.GetString("BinRemovalText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        public static string BrowseUiText {
+            get {
+                return ResourceManager.GetString("BrowseUiText", resourceCulture);
             }
         }
         
@@ -127,6 +163,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compiler Status.
+        /// </summary>
+        public static string CompilerStatusUiText {
+            get {
+                return ResourceManager.GetString("CompilerStatusUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compiling .
         /// </summary>
         public static string CompileText {
@@ -145,12 +190,30 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compile.
+        /// </summary>
+        public static string CompileUiText {
+            get {
+                return ResourceManager.GetString("CompileUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///Compiling .
         /// </summary>
         public static string CompilingText {
             get {
                 return ResourceManager.GetString("CompilingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Developed by AceOfAces. Licensed under GNU General Public License v3..
+        /// </summary>
+        public static string DevInfoUiText {
+            get {
+                return ResourceManager.GetString("DevInfoUiText", resourceCulture);
             }
         }
         
@@ -202,6 +265,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File extension for compiled files:.
+        /// </summary>
+        public static string FileExtensionUiText {
+            get {
+                return ResourceManager.GetString("FileExtensionUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  folder....
         /// </summary>
         public static string FolderText {
@@ -229,6 +301,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Output.
+        /// </summary>
+        public static string OutputUiText {
+            get {
+                return ResourceManager.GetString("OutputUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         /// Creating package...
         ///.
@@ -236,6 +317,15 @@ namespace nwjsCookToolUI.Properties {
         public static string PackageCreationText {
             get {
                 return ResourceManager.GetString("PackageCreationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Package the game into package.nw.
+        /// </summary>
+        public static string PackageProgramUiText {
+            get {
+                return ResourceManager.GetString("PackageProgramUiText", resourceCulture);
             }
         }
         
@@ -249,6 +339,42 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Program Information.
+        /// </summary>
+        public static string ProgramInfoUiText {
+            get {
+                return ResourceManager.GetString("ProgramInfoUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RPG Maker MV Cook Tool.
+        /// </summary>
+        public static string ProgramTitle {
+            get {
+                return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Folders.
+        /// </summary>
+        public static string ProjectFoldersUiText {
+            get {
+                return ResourceManager.GetString("ProjectFoldersUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Location.
+        /// </summary>
+        public static string ProjectLocationUiText {
+            get {
+                return ResourceManager.GetString("ProjectLocationUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the location of the project..
         /// </summary>
         public static string ProjectPickerText {
@@ -258,11 +384,101 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quick Compile.
+        /// </summary>
+        public static string QuickCompileUiText {
+            get {
+                return ResourceManager.GetString("QuickCompileUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Javascript files after compiling..
+        /// </summary>
+        public static string RemoveJSFilesUiText {
+            get {
+                return ResourceManager.GetString("RemoveJSFilesUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string RemoveUiText {
+            get {
+                return ResourceManager.GetString("RemoveUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NW.js SDK Location.
+        /// </summary>
+        public static string SdkLocationUiText {
+            get {
+                return ResourceManager.GetString("SdkLocationUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the location of the SDK folder..
         /// </summary>
         public static string SDKPickerText {
             get {
                 return ResourceManager.GetString("SDKPickerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsUiText {
+            get {
+                return ResourceManager.GetString("SettingsUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setup.
+        /// </summary>
+        public static string SetupUiText {
+            get {
+                return ResourceManager.GetString("SetupUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test.
+        /// </summary>
+        public static string TestUiText {
+            get {
+                return ResourceManager.GetString("TestUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version D1.03.
+        /// </summary>
+        public static string VersionText {
+            get {
+                return ResourceManager.GetString("VersionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting here....
+        /// </summary>
+        public static string WaitingUiText {
+            get {
+                return ResourceManager.GetString("WaitingUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting here as well....
+        /// </summary>
+        public static string WaitingUiText2 {
+            get {
+                return ResourceManager.GetString("WaitingUiText2", resourceCulture);
             }
         }
     }

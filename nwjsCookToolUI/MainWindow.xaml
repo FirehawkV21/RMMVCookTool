@@ -7,91 +7,91 @@
         xmlns:local="clr-namespace:nwjsCookToolUI"
         xmlns:properties="clr-namespace:nwjsCookToolUI.Properties"
         mc:Ignorable="d"
-        Title="RPG Maker MV Cook Tool" Height="390.815" Width="548" ResizeMode="NoResize" Loaded="CookToolUi_Loaded">
+        Title="{x:Static properties:Resources.ProgramTitle}" Height="390.815" Width="548" ResizeMode="NoResize" Loaded="CookToolUi_Loaded">
     <Grid>
         <TabControl Margin="0,0,0,0">
-            <TabItem Header="Settings">
-                <GroupBox Header="Setup" Margin="0,0,0,0" Height="159" VerticalAlignment="Top">
+            <TabItem Header="{x:Static properties:Resources.SettingsUiText}">
+                <GroupBox Header="{x:Static properties:Resources.SetupUiText}" Margin="0,0,0,0" Height="159" VerticalAlignment="Top">
                     <Grid>
-                        <CheckBox x:Name="PackageNwCheckbox" Content="Package the game into package.nw"
+                        <CheckBox x:Name="PackageNwCheckbox" Content="{x:Static properties:Resources.PackageProgramUiText}"
                                   HorizontalAlignment="Left" VerticalAlignment="Top"
                                   IsChecked="{Binding PackageCode, Source={x:Static properties:Settings.Default}}"
                                   Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged" />
-                        <CheckBox x:Name="RemoveCompiledJsCheckbox" Content="Remove Javascript files after compiling."
+                        <CheckBox x:Name="RemoveCompiledJsCheckbox" Content="{x:Static properties:Resources.RemoveJSFilesUiText}"
                                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0"
                                   IsChecked="{Binding DeleteSourceCode, Source={x:Static properties:Settings.Default}}"
                                   Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged" />
-                        <Label Content="File extension for compiled files:" HorizontalAlignment="Left"
+                        <Label Content="{x:Static properties:Resources.FileExtensionUiText}" HorizontalAlignment="Left"
                                Margin="0,30,0,0" VerticalAlignment="Top" />
                         <TextBox x:Name="FileExtensionTextbox" TextWrapping="Wrap" Margin="184,30,10,0"
                                  Text="{Binding FileExtension, Source={x:Static properties:Settings.Default}}"
                                  Height="26" VerticalAlignment="Top" TextChanged="FileExtensionTextbox_TextChanged" />
-                        <Label Content="NW.js SDK Location" HorizontalAlignment="Left" VerticalAlignment="Top"
+                        <Label Content="{x:Static properties:Resources.SdkLocationUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"
                                Margin="0,61,0,0" />
                         <TextBox x:Name="NwjsLocation" HorizontalAlignment="Left" Height="23" Margin="0,86,0,0"
                                  TextWrapping="Wrap" VerticalAlignment="Top" Width="434"
                                  Text="{Binding SDKLocation, Source={x:Static properties:Settings.Default}}"
                                  IsEnabled="False" />
-                        <Button x:Name="BrowseSdkButton" Content="Browse..." HorizontalAlignment="Left"
+                        <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Left"
                                 Margin="439,86,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                 Click="BrowseSDKButton_Click" />
                     </Grid>
                 </GroupBox>
             </TabItem>
-            <TabItem Header="Quick Compile">
+            <TabItem Header="{x:Static properties:Resources.QuickCompileUiText}">
                 <Grid Background="#FFFFFDFD">
                     <GroupBox Header="Setup" Margin="0,0,0,0" Height="86" VerticalAlignment="Top">
                         <Grid>
 
-                            <Label Content="Project Location" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <Label Content="{x:Static properties:Resources.ProjectLocationUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
 
                             <TextBox x:Name="ProjectLocation" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0"
                                      TextWrapping="Wrap" VerticalAlignment="Top" Width="434" IsEnabled="False" />
-                            <Button x:Name="FindProjectButton" Content="Browse..." HorizontalAlignment="Left"
+                            <Button x:Name="FindProjectButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Left"
                                     Margin="439,26,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                     Click="FindProjectButton_Click" />
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="Compile Status" Margin="0,86,0,0" Height="120" VerticalAlignment="Top">
+                    <GroupBox Header="{x:Static properties:Resources.CompilerStatusUiText}" Margin="0,86,0,0" Height="120" VerticalAlignment="Top">
                         <Grid>
-                            <Label x:Name="StatusLabel" Content="Waiting here..." HorizontalAlignment="Left"
+                            <Label x:Name="StatusLabel" Content="{x:Static properties:Resources.WaitingUiText}" HorizontalAlignment="Left"
                                    Margin="0,11,0,0" VerticalAlignment="Top" />
-                            <Button x:Name="CompileButton" Content="Compile" HorizontalAlignment="Left"
+                            <Button x:Name="CompileButton" Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Left"
                                     Margin="439,37,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                     Click="CompileButton_Click" />
                             <ProgressBar x:Name="MainProgress" Height="23" VerticalAlignment="Top" Margin="0,37,90,0" />
-                            <Button x:Name="TestProjectButton" Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="439,60,0,0" Height="23" Click="TestProjectButton_Click"/>
+                            <Button x:Name="TestProjectButton" Content="{x:Static properties:Resources.TestUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="439,60,0,0" Height="23" Click="TestProjectButton_Click"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Batch Compile">
+            <TabItem Header="{x:Static properties:Resources.BatchCompileUiText}">
                 <Grid>
-                    <GroupBox Header="JavaScript Folders" Height="199" VerticalAlignment="Top" Margin="0,0,0,0">
+                    <GroupBox Header="{x:Static properties:Resources.ProjectFoldersUiText}" Height="199" VerticalAlignment="Top" Margin="0,0,0,0">
                         <Grid>
                             <xctk:CheckListBox x:Name="FolderList" Margin="0,2,0,47.8" />
-                            <Button x:Name="AddToMapButton" Content="Add" Margin="0,134,0,0" Height="25"
+                            <Button x:Name="AddToMapButton" Content="{x:Static properties:Resources.AddUiText}" Margin="0,134,0,0" Height="25"
                                     VerticalAlignment="Top" HorizontalAlignment="Left" Width="91"
                                     Click="AddToMapButton_Click" />
-                            <Button x:Name="RemoveFromMapButton" Content="Remove" Margin="96,134,0,0"
+                            <Button x:Name="RemoveFromMapButton" Content="{x:Static properties:Resources.RemoveUiText}" Margin="96,134,0,0"
                                     HorizontalAlignment="Left" Width="91" Height="25" VerticalAlignment="Top"
                                     Click="RemoveFromMapButton_Click" />
 
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Compile Staus" Margin="0,199,0,-0.4">
+                    <GroupBox Header="{x:Static properties:Resources.CompilerStatusUiText}" Margin="0,199,0,-0.4">
                         <Grid>
-                            <Label x:Name="MapStatusLabel" Content="Waiting here..." HorizontalAlignment="Left"
+                            <Label x:Name="MapStatusLabel" Content="{x:Static properties:Resources.WaitingUiText}" HorizontalAlignment="Left"
                                    VerticalAlignment="Top" />
-                            <Button x:Name="MapCompileButton" Content="Compile" HorizontalAlignment="Left"
+                            <Button x:Name="MapCompileButton" Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Left"
                                     Margin="439,26,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                     Click="MapCompileButton_Click" />
                             <ProgressBar x:Name="MapProgress" Height="23" VerticalAlignment="Top" Margin="0,26,90,0" />
                             <ProgressBar x:Name="CurrentWorkloadBar" Height="23" VerticalAlignment="Top"
                                          Margin="0,81,90,0" />
-                            <Label x:Name="CurrentWorkloadLabel" Content="Waiting here as well..."
+                            <Label x:Name="CurrentWorkloadLabel" Content="{x:Static properties:Resources.WaitingUiText2}"
                                    HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" />
                         </Grid>
                     </GroupBox>
@@ -99,19 +99,19 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="About">
+            <TabItem Header="{x:Static properties:Resources.AboutUiText}">
                 <Grid Background="White">
-                    <GroupBox Header="Program Information" Margin="0,0,0,0" Height="107" VerticalAlignment="Top">
+                    <GroupBox Header="{x:Static properties:Resources.ProgramInfoUiText}" Margin="0,0,0,0" Height="107" VerticalAlignment="Top">
                         <Grid>
-                            <Label Content="RPG Maker MV Cook Tool" HorizontalAlignment="Left" VerticalAlignment="Top"
+                            <Label Content="{x:Static properties:Resources.ProgramTitle}" HorizontalAlignment="Left" VerticalAlignment="Top"
                                    FontSize="20" FontWeight="Bold" />
-                            <Label x:Name="ProgramVersionLabel" Content="Version D1.03" HorizontalAlignment="Left"
+                            <Label x:Name="ProgramVersionLabel" Content="{x:Static properties:Resources.VersionText}" HorizontalAlignment="Left"
                                    Margin="251,11,0,0" VerticalAlignment="Top" />
-                            <Label Content="Developed by AceOfAces. Licensed under GNU General Public License v3."
-                                   Margin="0,37,179,0" Height="23" VerticalAlignment="Top" FontSize="10" />
+                            <Label Content="{x:Static properties:Resources.DevInfoUiText}"
+                                   Margin="0,37,30.4,0" Height="23" VerticalAlignment="Top" FontSize="10" />
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Output" Margin="0,107,0,0">
+                    <GroupBox Header="{x:Static properties:Resources.OutputUiText}" Margin="0,107,0,0">
                         <TextBox x:Name="OutputArea" TextWrapping="Wrap" ScrollViewer.CanContentScroll="True"
                                  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto" />
                     </GroupBox>
