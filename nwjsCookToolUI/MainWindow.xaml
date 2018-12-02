@@ -11,7 +11,7 @@
     <Grid>
         <TabControl Margin="0,0,0,0">
             <TabItem Header="{x:Static properties:Resources.SettingsUiText}">
-                <GroupBox Header="{x:Static properties:Resources.SetupUiText}" Margin="0,0,0,0" Height="159" VerticalAlignment="Top">
+                <GroupBox Header="{x:Static properties:Resources.SetupUiText}" Margin="0,0,0.2,0" Height="193" VerticalAlignment="Top">
                     <Grid>
                         <CheckBox x:Name="PackageNwCheckbox" Content="{x:Static properties:Resources.PackageProgramUiText}"
                                   HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -35,6 +35,7 @@
                         <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Left"
                                 Margin="439,86,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                 Click="BrowseSDKButton_Click" />
+                        <Button x:Name="ReplacementCodeButton" Content="{x:Static properties:Resources.ReplacementCodeUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="0,114,0,0" Height="23" Click="ReplacementCodeButton_Click"/>
                     </Grid>
                 </GroupBox>
             </TabItem>

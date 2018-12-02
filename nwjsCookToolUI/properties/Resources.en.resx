@@ -260,4 +260,13 @@ Compiled on </value>
   <data name="ProgramTitle" xml:space="preserve">
     <value>RPG Maker MV Cook Tool</value>
   </data>
+  <data name="ReplacementCodeUiText" xml:space="preserve">
+    <value>Replacement Code</value>
+  </data>
+  <data name="FileUnavailableText" xml:space="preserve">
+    <value>The file isn't available at the moment.</value>
+  </data>
+  <data name="InfoText" xml:space="preserve">
+    <value>Information</value>
+  </data>
 </root>

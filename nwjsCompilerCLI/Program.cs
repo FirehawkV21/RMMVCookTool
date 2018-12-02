@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using CompilerCore;
@@ -16,6 +18,7 @@ namespace nwjsCompilerCLI
             string projectLocation;
             string fileExtension;
             bool removeJsFiles;
+            bool testProject;
             Console.WriteLine("================================================");
             Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
             Console.WriteLine("= Version D1.00");
@@ -68,6 +71,24 @@ namespace nwjsCompilerCLI
             removeJsFiles = (checkDeletion == 2);
             //}
 
+            //Ask if the user would like to test with nwjs.
+            Console.WriteLine("\nWould you like to test the project after compiling? (Y/N, Default is N)\n");
+            char charBuffer = Console.ReadKey().KeyChar;
+            if (char.IsLetterOrDigit(charBuffer))
+            {
+                switch (checkBuffer)
+                {
+                    case "Y":
+                        testProject = true;
+                        break;
+                    default:
+                        testProject = false;
+                        break;
+                }
+            }
+            else testProject = false;
+
+
             //The folder that the tool looks for.
             const string folderMap = "js";
             //Finding all the JS files.
@@ -89,6 +110,7 @@ namespace nwjsCompilerCLI
                     Console.WriteLine("\n" + DateTime.Now + "\nThread #" + Thread.CurrentThread.ManagedThreadId + " finished compiling " + fileName + ".\n");
                 });
                 Console.WriteLine("\nFinished compiling.");
+                if (testProject == true) CoreCode.RunTest(sdkLocation, projectLocation);
 
             }
             catch (Exception e)

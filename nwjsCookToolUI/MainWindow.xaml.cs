@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -303,12 +304,27 @@ namespace nwjsCookToolUI
 
         private void TestProjectButton_Click(object sender, RoutedEventArgs e)
         {
-            if (File.Exists(Path.Combine(Settings.Default.SDKLocation, "nwjs.exe")))
-            Process.Start(Path.Combine(Settings.Default.SDKLocation, "nwjs.exe"), "--nwapp=\"file://" + ProjectLocation.Text + "\"");
-            else if (File.Exists(Path.Combine(Settings.Default.SDKLocation, "Game.exe")))
-                Process.Start(Path.Combine(Settings.Default.SDKLocation, "Game.exe"),
-                    "--nwapp=\"" + ProjectLocation.Text + "\"");
-            else MessageBox.Show("No nwjs binaries found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            try
+            {
+
+                CoreCode.RunTest(Settings.Default.SDKLocation, ProjectLocation.Text);
+            }
+            catch (Exception nwjsException)
+            {
+                MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + nwjsException;
+            }
+
+        }
+
+        private void ReplacementCodeButton_Click(object sender, RoutedEventArgs e)
+        {
+            string ci = CultureInfo.InstalledUICulture.ToString() == "el-GR" || CultureInfo.InstalledUICulture.ToString() == "el-CY" ? "el" : "en";
+            string FileLocation = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), ci, "ReplacementCode.txt");
+            if (File.Exists(FileLocation)) Process.Start(FileLocation);
+            else
+                MessageBox.Show(Properties.Resources.FileUnavailableText, Properties.Resources.InfoText, MessageBoxButton.OK,
+                    MessageBoxImage.Information);
         }
     }
 }

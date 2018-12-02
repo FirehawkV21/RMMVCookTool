@@ -260,4 +260,13 @@
   <data name="ProgramTitle" xml:space="preserve">
     <value>RPG Maker MV Cook Tool</value>
   </data>
+  <data name="InfoText" xml:space="preserve">
+    <value>Πληροφορίες</value>
+  </data>
+  <data name="ReplacementCodeUiText" xml:space="preserve">
+    <value>Κώδικας για αντικατάσταση</value>
+  </data>
+  <data name="FileUnavailableText" xml:space="preserve">
+    <value>Το αρχείο δεν είναι διαθέσιμο αυτή την στιγμή.</value>
+  </data>
 </root>

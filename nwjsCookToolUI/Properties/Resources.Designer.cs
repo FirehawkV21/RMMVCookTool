@@ -274,11 +274,29 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file isn&apos;t available at the moment..
+        /// </summary>
+        public static string FileUnavailableText {
+            get {
+                return ResourceManager.GetString("FileUnavailableText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  folder....
         /// </summary>
         public static string FolderText {
             get {
                 return ResourceManager.GetString("FolderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string InfoText {
+            get {
+                return ResourceManager.GetString("InfoText", resourceCulture);
             }
         }
         
@@ -407,6 +425,15 @@ namespace nwjsCookToolUI.Properties {
         public static string RemoveUiText {
             get {
                 return ResourceManager.GetString("RemoveUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replacement Code.
+        /// </summary>
+        public static string ReplacementCodeUiText {
+            get {
+                return ResourceManager.GetString("ReplacementCodeUiText", resourceCulture);
             }
         }
         

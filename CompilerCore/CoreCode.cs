@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace CompilerCore
@@ -90,5 +91,15 @@ namespace CompilerCore
             //If the user asked to remove the JS files, delete them.
             if (removeJs) File.Delete(file);
         }
+
+        public static void RunTest(string SDKLocation, string ProjectLocation)
+        {
+            if (File.Exists(Path.Combine(SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs")))
+                Process.Start(Path.Combine(SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe": "nwjs"), "--nwapp=\"file://" + ProjectLocation + "\"");
+            else if (File.Exists(Path.Combine(SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game")))
+                Process.Start(Path.Combine(SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe": "Game"),
+                    "--nwapp=\"file://" + ProjectLocation + "\"");
+        }
+
     }
 }
