@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -42,6 +41,15 @@ namespace nwjsCookToolUI
             Settings.Default.Save();
         }
 
+        public void LockSettings(bool lockSetting)
+        {
+            RemoveCompiledJsCheckbox.IsEnabled = lockSetting;
+            PackageNwCheckbox.IsEnabled = lockSetting;
+            FileExtensionTextbox.IsEnabled = lockSetting;
+            BrowseSdkButton.IsEnabled = lockSetting;
+            RemoveFilesCheckBox.IsEnabled = lockSetting && PackageNwCheckbox.IsChecked == true;
+        }
+
         private void FindProjectButton_Click(object sender, RoutedEventArgs e)
         {
             var pickProjectFolder =
@@ -61,6 +69,7 @@ namespace nwjsCookToolUI
             TestProjectButton.IsEnabled = false;
             ProjectLocation.IsEnabled = false;
             FindProjectButton.IsEnabled = false;
+            LockSettings(false);
             MainProgress.Foreground = Brushes.ForestGreen;
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
@@ -81,6 +90,7 @@ namespace nwjsCookToolUI
                 TestProjectButton.IsEnabled = true;
                 ProjectLocation.IsEnabled = true;
                 FindProjectButton.IsEnabled = true;
+                LockSettings(true);
             }
             else
             {
@@ -169,6 +179,10 @@ namespace nwjsCookToolUI
             }
 
             Dispatcher.Invoke(() => CompileButton.IsEnabled = true);
+            Dispatcher.Invoke(() => TestProjectButton.IsEnabled = true);
+            Dispatcher.Invoke(() => ProjectLocation.IsEnabled = true);
+            Dispatcher.Invoke(() => FindProjectButton.IsEnabled = true);
+            Dispatcher.Invoke(() => LockSettings(true));
         }
 
         private void StartMapCompiler(object sender, DoWorkEventArgs e)
@@ -235,6 +249,8 @@ namespace nwjsCookToolUI
             }
 
             Dispatcher.Invoke(() => MapCompileButton.IsEnabled = true);
+            Dispatcher.Invoke(() => AddToMapButton.IsEnabled = true);
+            Dispatcher.Invoke(() => RemoveFromMapButton.IsEnabled = true);
         }
 
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
@@ -272,12 +288,16 @@ namespace nwjsCookToolUI
         private void MapCompileButton_Click(object sender, RoutedEventArgs e)
         {
             MapCompileButton.IsEnabled = false;
+            AddToMapButton.IsEnabled = false;
+            RemoveFromMapButton.IsEnabled = false;
             MainProgress.Foreground = Brushes.ForestGreen;
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n"+ Properties.Resources.CompilerMissingText +  "\n-----";
                 MapCompileButton.IsEnabled = true;
+                AddToMapButton.IsEnabled = true;
+                RemoveFromMapButton.IsEnabled = true;
             }
             else if (FolderList.Items.Count == 0)
             {
@@ -286,6 +306,8 @@ namespace nwjsCookToolUI
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\n"+ Properties.Resources.NonExistantFolderText + "\n-----";
                 MapCompileButton.IsEnabled = true;
+                AddToMapButton.IsEnabled = true;
+                RemoveFromMapButton.IsEnabled = true;
             }
             else
             {
