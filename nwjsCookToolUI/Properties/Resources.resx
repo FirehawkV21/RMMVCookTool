@@ -269,4 +269,7 @@ Compiled on </value>
   <data name="InfoText" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="RemoveSourceFilesUIText" xml:space="preserve">
+    <value>Remove source files after packaging.</value>
+  </data>
 </root>

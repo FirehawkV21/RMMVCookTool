@@ -3,10 +3,19 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyVersion>1.0.0.18336</AssemblyVersion>
-    <FileVersion>1.0.0.18336</FileVersion>
+    <AssemblyVersion>1.0.1.18337</AssemblyVersion>
+    <FileVersion>1.0.1.18337</FileVersion>
     <ApplicationIcon />
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
+    <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
+    <Version>1.0.1-20181203</Version>
+    <Authors>AceOfAces</Authors>
+    <Company>Studio ACE</Company>
+    <Product>RPG Maker MV Cook Tool</Product>
+    <Description>Command-line version of the RPG Maker MV Cook Tool.</Description>
+    <PackageLicenseUrl>https://github.com/acemod13/RMMVCookTool/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

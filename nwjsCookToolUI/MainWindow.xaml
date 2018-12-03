@@ -16,9 +16,9 @@
                         <CheckBox x:Name="PackageNwCheckbox" Content="{x:Static properties:Resources.PackageProgramUiText}"
                                   HorizontalAlignment="Left" VerticalAlignment="Top"
                                   IsChecked="{Binding PackageCode, Source={x:Static properties:Settings.Default}}"
-                                  Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged" />
+                                  Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged" Margin="0,15,0,0" />
                         <CheckBox x:Name="RemoveCompiledJsCheckbox" Content="{x:Static properties:Resources.RemoveJSFilesUiText}"
-                                  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0"
+                                  HorizontalAlignment="Left" VerticalAlignment="Top"
                                   IsChecked="{Binding DeleteSourceCode, Source={x:Static properties:Settings.Default}}"
                                   Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged" />
                         <Label Content="{x:Static properties:Resources.FileExtensionUiText}" HorizontalAlignment="Left"
@@ -36,7 +36,7 @@
                                 Margin="439,106,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                 Click="BrowseSDKButton_Click" />
                         <Button x:Name="ReplacementCodeButton" Content="{x:Static properties:Resources.ReplacementCodeUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="0,134,0,0" Height="23" Click="ReplacementCodeButton_Click"/>
-                        <CheckBox x:Name="RemoveFilesCheckBox" Content="Remove source files after packaging." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0" IsEnabled="{Binding IsChecked, ElementName=PackageNwCheckbox}" IsChecked="{Binding RemoveFilesAfterPackaging, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Checked="RemoveFilesCheckBox_Checked"/>
+                        <CheckBox x:Name="RemoveFilesCheckBox" Content="{x:Static properties:Resources.RemoveSourceFilesUIText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0" IsEnabled="{Binding IsChecked, ElementName=PackageNwCheckbox}" IsChecked="{Binding RemoveFilesAfterPackaging, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Checked="RemoveFilesCheckBox_Checked"/>
                     </Grid>
                 </GroupBox>
             </TabItem>

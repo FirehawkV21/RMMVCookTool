@@ -420,6 +420,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove source files after packaging..
+        /// </summary>
+        public static string RemoveSourceFilesUIText {
+            get {
+                return ResourceManager.GetString("RemoveSourceFilesUIText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string RemoveUiText {

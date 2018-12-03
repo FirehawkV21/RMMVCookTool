@@ -249,7 +249,7 @@
     <value>Πληροφορίες Προγράμματος</value>
   </data>
   <data name="VersionText" xml:space="preserve">
-    <value>Έκδοση D1.03</value>
+    <value>Έκδοση D1.04</value>
   </data>
   <data name="DevInfoUiText" xml:space="preserve">
     <value>Αναπτύχθηκε από τον AceOfAces. Αδειοδοτείται κάτω από το GNU General Public License v3.</value>
@@ -268,5 +268,8 @@
   </data>
   <data name="FileUnavailableText" xml:space="preserve">
     <value>Το αρχείο δεν είναι διαθέσιμο αυτή την στιγμή.</value>
+  </data>
+  <data name="RemoveSourceFilesUIText" xml:space="preserve">
+    <value>Αφαίρεση αρχείων κώδικα μετά το πακετάρισμα.</value>
   </data>
 </root>
