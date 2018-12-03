@@ -121,5 +121,12 @@ namespace CompilerCore
             Directory.Delete(tempFolderLocation, true);
         }
 
+        public static void DeleteFiles(string projectLocation)
+        {
+            if (Directory.Exists(Path.Combine(projectLocation, "www"))) Directory.Delete(Path.Combine(projectLocation, "www"), true);
+            if (File.Exists(Path.Combine(projectLocation, "package.json"))) File.Delete(Path.Combine(projectLocation, "package.json"));
+
+        }
+
     }
 }

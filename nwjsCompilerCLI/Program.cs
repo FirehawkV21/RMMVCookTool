@@ -9,14 +9,16 @@ namespace nwjsCompilerCLI
 {
     class Program
     {
-        static void Main(string[] args)
+        private static bool _testProject;
+        private static int _compressProject;
+
+        private static void Main(string[] args)
         {
 
             string sdkLocation;
             string projectLocation;
-            string fileExtension;
-            bool removeJsFiles;
-            bool testProject;
+
+            char charBuffer;
             Console.WriteLine("================================================");
             Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
             Console.WriteLine("= Version D1.00");
@@ -60,34 +62,48 @@ namespace nwjsCompilerCLI
 
             //Ask the user for the file extension.
             Console.Write("\nWhat Extension will your game use (leave empty for .bin)? ");
-            fileExtension = Console.ReadLine();
+            var fileExtension = Console.ReadLine();
             if (string.IsNullOrEmpty(fileExtension)) fileExtension = "bin";
             //This is the check if the tool should delete the JS files.
             Console.WriteLine("\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1) ");
             var checkBuffer = Console.ReadLine();
             int.TryParse(checkBuffer, out var checkDeletion);
-            removeJsFiles = (checkDeletion == 2);
+            var removeJsFiles = (checkDeletion == 2);
             //}
 
-            //Ask if the user would like to test with nwjs.
-            Console.WriteLine("\nWould you like to test the project after compiling? (Y/N, Default is N)\n");
-            char charBuffer = Console.ReadKey().KeyChar;
-            if (char.IsLetterOrDigit(charBuffer))
+            if (checkDeletion == 2)
             {
-                switch (charBuffer)
+                Console.WriteLine(
+                    "\nWould you like to compress the game's files to an archive?\n1.Yes (delete the files as well).\n2.Yes (but leave the files intact).\n3. No.\n(Default is 3)");
+                charBuffer = Console.ReadKey().KeyChar;
+                if (!char.IsLetterOrDigit(charBuffer))
                 {
-                    case 'Y':
-                    case 'y':
-                    case 'Ν':
-                    case 'ν':
-                        testProject = true;
-                        break;
-                    default:
-                        testProject = false;
-                        break;
+                    _compressProject = Convert.ToInt32(charBuffer);
                 }
+                else _compressProject = 3;
             }
-            else testProject = false;
+            else
+            {
+                //Ask if the user would like to test with nwjs.
+                Console.WriteLine("\nWould you like to test the project after compiling? (Y/N, Default is N)\n");
+                charBuffer = Console.ReadKey().KeyChar;
+                if (char.IsLetterOrDigit(charBuffer))
+                {
+                    switch (charBuffer)
+                    {
+                        case 'Y':
+                        case 'y':
+                        case 'Ν':
+                        case 'ν':
+                            _testProject = true;
+                            break;
+                        default:
+                            _testProject = false;
+                            break;
+                    }
+                }
+                else _testProject = false;
+            }
 
 
             //The folder that the tool looks for.
@@ -111,8 +127,22 @@ namespace nwjsCompilerCLI
                     Console.WriteLine("\n" + DateTime.Now + "\nThread #" + Thread.CurrentThread.ManagedThreadId + " finished compiling " + fileName + ".\n");
                 });
                 Console.WriteLine("\nFinished compiling.");
-                if (testProject == true)
+                if (_testProject)
                     CoreCode.RunTest(sdkLocation, projectLocation);
+                else if (_compressProject < 3)
+                {
+                    Console.WriteLine("Copying the game files to a temporary location...");
+                    CoreCode.PreparePack(projectLocation);
+                    Console.WriteLine("Compressing files...");
+                    CoreCode.CompressFiles(projectLocation);
+                    if (_compressProject == 2)
+                    {
+                        Console.WriteLine("Deleting source files...");
+                        CoreCode.DeleteFiles(projectLocation);
+                    }
+                }
+
+                Console.WriteLine("\nThe task was completed.");
 
             }
             catch (Exception e)

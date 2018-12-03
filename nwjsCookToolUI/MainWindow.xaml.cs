@@ -58,12 +58,18 @@ namespace nwjsCookToolUI
         private void CompileButton_Click(object sender, RoutedEventArgs e)
         {
             CompileButton.IsEnabled = false;
+            TestProjectButton.IsEnabled = false;
+            ProjectLocation.IsEnabled = false;
+            FindProjectButton.IsEnabled = false;
             MainProgress.Foreground = Brushes.ForestGreen;
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n"+ Properties.Resources.CompilerMissingText + "\n-----";
-                MapCompileButton.IsEnabled = true;
+                CompileButton.IsEnabled = true;
+                TestProjectButton.IsEnabled = true;
+                ProjectLocation.IsEnabled = true;
+                FindProjectButton.IsEnabled = true;
             }
             else if (!Directory.Exists(ProjectLocation.Text))
             {
@@ -71,7 +77,10 @@ namespace nwjsCookToolUI
                     MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\n"+ Properties.Resources.NonExistantFolderText +"\n-----";
-                MapCompileButton.IsEnabled = true;
+                CompileButton.IsEnabled = true;
+                TestProjectButton.IsEnabled = true;
+                ProjectLocation.IsEnabled = true;
+                FindProjectButton.IsEnabled = true;
             }
             else
             {
@@ -103,6 +112,7 @@ namespace nwjsCookToolUI
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
                 if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
                     Dispatcher.Invoke(() => MainProgress.Maximum += 1);
+                if(Dispatcher.Invoke(() => RemoveFilesCheckBox.IsChecked == true)) Dispatcher.Invoke(() => MainProgress.Maximum += 1);
                 foreach (var fileName in CoreCode.FileMap)
                 {
                     Dispatcher.Invoke(
@@ -132,6 +142,12 @@ namespace nwjsCookToolUI
                         OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.PackageCreationText);
                     CoreCode.CompressFiles(compilerInput);                   
                     Dispatcher.Invoke(() => MainProgress.Value += 1);
+                    if (Dispatcher.Invoke(() => RemoveFilesCheckBox.IsChecked == true))
+                    {
+                        Dispatcher.Invoke(() => MainProgress.Value += 1);
+                        Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nRemoving files...\n");
+                        CoreCode.DeleteFiles(compilerInput);
+                    }
                 }
 
                 Dispatcher.Invoke(() =>
@@ -312,11 +328,16 @@ namespace nwjsCookToolUI
         private void ReplacementCodeButton_Click(object sender, RoutedEventArgs e)
         {
             string ci = CultureInfo.InstalledUICulture.ToString() == "el-GR" || CultureInfo.InstalledUICulture.ToString() == "el-CY" ? "el" : "en";
-            string FileLocation = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), ci, "ReplacementCode.txt");
-            if (File.Exists(FileLocation)) Process.Start(FileLocation);
+            string fileLocation = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), ci, "ReplacementCode.txt");
+            if (File.Exists(fileLocation)) Process.Start(fileLocation);
             else
                 MessageBox.Show(Properties.Resources.FileUnavailableText, Properties.Resources.InfoText, MessageBoxButton.OK,
                     MessageBoxImage.Information);
+        }
+
+        private void RemoveFilesCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.Save();
         }
     }
 }
