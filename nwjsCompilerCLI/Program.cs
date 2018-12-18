@@ -129,7 +129,7 @@ namespace nwjsCompilerCLI
                 Console.WriteLine("\nFinished compiling.");
                 if (_testProject)
                     CoreCode.RunTest(sdkLocation, projectLocation);
-                else if (_compressProject < 3)
+                else if (_compressProject < 3 && checkDeletion == 2)
                 {
                     Console.WriteLine("Copying the game files to a temporary location...");
                     CoreCode.PreparePack(projectLocation);
