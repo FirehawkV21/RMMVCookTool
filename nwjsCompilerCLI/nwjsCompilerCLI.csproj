@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyVersion>1.0.1.18356</AssemblyVersion>
-    <FileVersion>1.0.1.18356</FileVersion>
-    <ApplicationIcon />
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyVersion>1.1.0.18356</AssemblyVersion>
+    <FileVersion>1.1.0.18356</FileVersion>
+    <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
     <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-    <Version>1.0.1-20181203</Version>
+    <Version>1.1.0-20181222</Version>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>

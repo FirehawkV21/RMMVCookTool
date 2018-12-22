@@ -27,7 +27,7 @@ namespace nwjsCompilerCLI
             Console.WriteLine("= Version D1.01");
             Console.WriteLine("= Developed by AceOfAces.");
             Console.WriteLine("= Licensed under GNU General Public License v3.");
-            Console.WriteLine("================================================");
+            Console.WriteLine("================================================\n");
 
             if (args.Length >= 1)
             {   
@@ -42,7 +42,7 @@ namespace nwjsCompilerCLI
                     {
                         _sdkLocation = args[argnum + 1];
                         _sdkLocation.Replace("\"", "");
-                        if (Directory.Exists(_sdkLocation)) Console.WriteLine("SDK Location OK.");
+                        if (argnum <= args.Length - 1 && Directory.Exists(_sdkLocation)) Console.WriteLine("SDK Location OK.");
                         else
                         {
                             Console.WriteLine("The location of the SDK doesn't exist.");
@@ -55,7 +55,7 @@ namespace nwjsCompilerCLI
                     {
                         _projectLocation = args[argnum + 1];
                         _projectLocation.Replace("\"", "");
-                        if (Directory.Exists(_projectLocation)) Console.WriteLine("Project Location OK.");
+                        if (argnum <= args.Length - 1 && Directory.Exists(_projectLocation)) Console.WriteLine("Project Location OK.");
                         else
                         {
                             Console.WriteLine("The location of the project doesn't exist.");
@@ -66,7 +66,7 @@ namespace nwjsCompilerCLI
                     }
                     else if (args[argnum] == "--FileExtension")
                     {
-                        if (_fileExtension.Contains("--")) continue;
+                        if (argnum <= args.Length - 1 && args[argnum].Contains("--")) continue;
                         _fileExtension = args[argnum + 1];
                         Console.WriteLine("The file extension is set to " + _fileExtension);
                     }
@@ -79,10 +79,18 @@ namespace nwjsCompilerCLI
                             Console.ReadLine();
                             Environment.Exit(1);
                         }
-                        else _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
+                        else
+                        {
+                            if (argnum + 1 <= args.Length - 1)
+                                _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
+                            else _compressProject = 2;
+                        }
                     }
                     else if (args[argnum] == "--ReleaseMode")
+                    {
                         _checkDeletion = 2;
+                        _removeJsFiles = true;
+                    }
                     else if (args[argnum] == "--TestMode")
                     {
                         if (_compressProject <= 2)
@@ -238,7 +246,7 @@ namespace nwjsCompilerCLI
                     CoreCode.PreparePack(_projectLocation);
                     Console.WriteLine("\n"+ DateTime.Now +"\nCompressing files...");
                     CoreCode.CompressFiles(_projectLocation);
-                    if (_compressProject == 2)
+                    if (_compressProject == 1)
                     {
                         Console.WriteLine("\n" + DateTime.Now + "\nDeleting source files...");
                         CoreCode.DeleteFiles(_projectLocation);
