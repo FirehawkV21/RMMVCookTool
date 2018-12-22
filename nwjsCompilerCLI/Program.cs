@@ -10,7 +10,7 @@ namespace nwjsCompilerCLI
     class Program
     {
         private static bool _testProject;
-        private static int _compressProject;
+        private static int _compressProject = 3;
         private static string _sdkLocation;
         private static string _projectLocation;
         private static string _fileExtension = "bin";
@@ -72,7 +72,7 @@ namespace nwjsCompilerCLI
                     }
                     else if (args[argnum] == "--PackageApp")
                     {
-                        _compressProject = args[argnum + 1] == "Final" ? 3 : 2;
+                        _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
                     }
                     else if (args[argnum] == "--ReleaseMode")
                         _checkDeletion = 2;
