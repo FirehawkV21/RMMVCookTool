@@ -33,74 +33,84 @@ namespace nwjsCompilerCLI
             {   
                 for (int argnum = 0; argnum < args.Length; argnum++)
                 {
-                    if (args[argnum] == "--Parallel")
+                    switch (args[argnum])
                     {
-                        _parallelMode = true;
-                        Console.WriteLine("Compiler is now running in parallel mode.");
-                    }
-                    else if (args[argnum] == "--SDKLocation")
-                    {
-                        _sdkLocation = args[argnum + 1];
-                        _sdkLocation.Replace("\"", "");
-                        if (argnum <= args.Length - 1 && Directory.Exists(_sdkLocation)) Console.WriteLine("SDK Location OK.");
-                        else
-                        {
-                            Console.WriteLine("The location of the SDK doesn't exist.");
-                            Console.WriteLine("Push Enter/Return to exit.");
-                            Console.ReadLine();
-                            Environment.Exit(1);
-                        }
-                    }
-                    else if (args[argnum] == "--ProjectLocation")
-                    {
-                        _projectLocation = args[argnum + 1];
-                        _projectLocation.Replace("\"", "");
-                        if (argnum <= args.Length - 1 && Directory.Exists(_projectLocation)) Console.WriteLine("Project Location OK.");
-                        else
-                        {
-                            Console.WriteLine("The location of the project doesn't exist.");
-                            Console.WriteLine("Push Enter/Return to exit.");
-                            Console.ReadLine();
-                            Environment.Exit(1);
-                        }
-                    }
-                    else if (args[argnum] == "--FileExtension")
-                    {
-                        if (argnum <= args.Length - 1 && args[argnum].Contains("--")) continue;
-                        _fileExtension = args[argnum + 1];
-                        Console.WriteLine("The file extension is set to " + _fileExtension);
-                    }
-                    else if (args[argnum] == "--PackageApp")
-                    {
-                        if (_testProject)
-                        {
-                            Console.WriteLine("You can't compress and test the project at the moment.");
-                            Console.WriteLine("Push Enter/Return to exit.");
-                            Console.ReadLine();
-                            Environment.Exit(1);
-                        }
-                        else
-                        {
-                            if (argnum + 1 <= args.Length - 1)
-                                _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
-                            else _compressProject = 2;
-                        }
-                    }
-                    else if (args[argnum] == "--ReleaseMode")
-                    {
-                        _checkDeletion = 2;
-                        _removeJsFiles = true;
-                    }
-                    else if (args[argnum] == "--TestMode")
-                    {
-                        if (_compressProject <= 2)
-                        {
-                            Console.WriteLine("You can't compress and test the project at the moment.");
-                            Console.WriteLine("Push Enter/Return to exit.");
-                            Console.ReadLine();
-                            Environment.Exit(1);
-                        }
-                        else _testProject = true;
+                        case "--Parallel":
+                            _parallelMode = true;
+                            Console.WriteLine("Compiler is now running in parallel mode.");
+                            break;
+
+                        case "--SDKLocation":
+                            _sdkLocation = args[argnum + 1];
+                            _sdkLocation.Replace("\"", "");
+                            if (argnum <= args.Length - 1 && Directory.Exists(_sdkLocation) &&
+                                File.Exists(Path.Combine(_sdkLocation,
+                                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc")))
+                                Console.WriteLine("SDK Location OK.");
+                            else
+                            {
+                                Console.WriteLine(
+                                    !Directory.Exists(_sdkLocation)
+                                        ? "The location of the SDK doesn't exist."
+                                        : "The compiler isn;t there. Please pick the folder that has the nwjc file");
+                                Console.WriteLine("Push Enter/Return to exit.");
+                                Console.ReadLine();
+                                Environment.Exit(1);
+                            }
+                            break;
+                        case "--ProjectLocation":
+                            _projectLocation = args[argnum + 1];
+                            _projectLocation.Replace("\"", "");
+                            if (argnum <= args.Length - 1 && Directory.Exists(_projectLocation) &&
+                                Directory.Exists(Path.Combine(_projectLocation, "js")))
+                                Console.WriteLine("Project Location OK.");
+                            else
+                            {
+                                Console.WriteLine(!Directory.Exists(Path.Combine(_projectLocation, "js"))
+                                    ? "The location of the project doesn't exist."
+                                    : "Push Enter/Return to exit.");
+                                Console.ReadLine();
+                                Environment.Exit(1);
+                            }
+                            break;
+
+                        case "--FileExtension":
+                            if (argnum <= args.Length - 1 && args[argnum].Contains("--")) continue;
+                            _fileExtension = args[argnum + 1];
+                            Console.WriteLine("The file extension is set to " + _fileExtension);
+                            break;
+
+                        case "--PackageApp":
+                            if (_testProject)
+                            {
+                                Console.WriteLine("You can't compress and test the project at the moment.");
+                                Console.WriteLine("Push Enter/Return to exit.");
+                                Console.ReadLine();
+                                Environment.Exit(1);
+                            }
+                            else
+                            {
+                                if (argnum + 1 <= args.Length - 1)
+                                    _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
+                                else _compressProject = 2;
+                            }
+                            break;
+
+                        case "--ReleaseMode":
+                            _checkDeletion = 2;
+                            _removeJsFiles = true;
+                            break;
+
+                        case "--TestMode":
+                            if (_compressProject <= 2)
+                            {
+                                Console.WriteLine("You can't compress and test the project at the moment.");
+                                Console.WriteLine("Push Enter/Return to exit.");
+                                Console.ReadLine();
+                                Environment.Exit(1);
+                            }
+                            else _testProject = true;
+                            break;
                     }
                 }
 
