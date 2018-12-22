@@ -35,11 +35,13 @@ namespace nwjsCompilerCLI
                 {
                     switch (args[argnum])
                     {
+                        //Turn on Parallel mode.
                         case "--Parallel":
                             _parallelMode = true;
                             Console.WriteLine("Compiler is now running in parallel mode.");
                             break;
 
+                        //Set the SDK Location
                         case "--SDKLocation":
                             _sdkLocation = args[argnum + 1];
                             _sdkLocation.Replace("\"", "");
@@ -58,29 +60,36 @@ namespace nwjsCompilerCLI
                                 Environment.Exit(1);
                             }
                             break;
+
+                        //Set the Project Location.
                         case "--ProjectLocation":
                             _projectLocation = args[argnum + 1];
                             _projectLocation.Replace("\"", "");
                             if (argnum <= args.Length - 1 && Directory.Exists(_projectLocation) &&
-                                Directory.Exists(Path.Combine(_projectLocation, "js")))
+                                Directory.Exists(Path.Combine(_projectLocation, "www", "js")))
                                 Console.WriteLine("Project Location OK.");
                             else
                             {
-                                Console.WriteLine(!Directory.Exists(Path.Combine(_projectLocation, "js"))
+                                Console.WriteLine(!Directory.Exists(Path.Combine(_projectLocation, "www", "js"))
                                     ? "The location of the project doesn't exist."
-                                    : "Push Enter/Return to exit.");
+                                    : "The js folder doesn't exist.");
+                                Console.WriteLine("Push Enter/Return to exit.");
                                 Console.ReadLine();
                                 Environment.Exit(1);
                             }
                             break;
 
+                        //Set the File Extension.
                         case "--FileExtension":
+                            //Check if the next variable in the args array is a command line argument or it's the end of the array.
                             if (argnum <= args.Length - 1 && args[argnum].Contains("--")) continue;
                             _fileExtension = args[argnum + 1];
                             Console.WriteLine("The file extension is set to " + _fileExtension);
                             break;
 
+                        //This command line argument is for packaging the app after compressing (if the --ReleaseMode flag is active.
                         case "--PackageApp":
+                            // Check that test mode is active. Since this ain't working, it will show this message and close.
                             if (_testProject)
                             {
                                 Console.WriteLine("You can't compress and test the project at the moment.");
@@ -88,19 +97,28 @@ namespace nwjsCompilerCLI
                                 Console.ReadLine();
                                 Environment.Exit(1);
                             }
+                            //Else, either just compress or compress and delete the files.
                             else
                             {
                                 if (argnum + 1 <= args.Length - 1)
+                                {
                                     _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
+                                    Console.WriteLine((argnum + 1 <= args.Length - 1) && args[argnum + 1] == "Final"
+                                        ? "The project's files will be compressed (the files will be deleted after compressing)."
+                                        : "The Project's files will be compressed");
+                                }
                                 else _compressProject = 2;
                             }
                             break;
 
+                        //This command line argument deletes the JavaScript files after compiling.
                         case "--ReleaseMode":
                             _checkDeletion = 2;
                             _removeJsFiles = true;
+                            Console.WriteLine("The JavaScript files will be deleted after compilation.");
                             break;
 
+                        //This command line argument starts the nwjs app to test the project.
                         case "--TestMode":
                             if (_compressProject <= 2)
                             {
@@ -109,11 +127,16 @@ namespace nwjsCompilerCLI
                                 Console.ReadLine();
                                 Environment.Exit(1);
                             }
-                            else _testProject = true;
+                            else
+                            {
+                                _testProject = true;
+                                Console.WriteLine("NW.js will start after compiling.");
+                            }
                             break;
                     }
                 }
 
+                //Check if both the _projectLocation and _sdkLocation variables are not null.
                 if (_projectLocation != null && _sdkLocation != null) _settingsSet = true;
                 else if (_projectLocation == null && _sdkLocation != null)
                 {
