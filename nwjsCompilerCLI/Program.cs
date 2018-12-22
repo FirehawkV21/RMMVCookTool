@@ -24,7 +24,7 @@ namespace nwjsCompilerCLI
             char charBuffer;
             Console.WriteLine("================================================");
             Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
-            Console.WriteLine("= Version D1.00 Update 1");
+            Console.WriteLine("= Version D1.01");
             Console.WriteLine("= Developed by AceOfAces.");
             Console.WriteLine("= Licensed under GNU General Public License v3.");
             Console.WriteLine("================================================");
@@ -72,13 +72,20 @@ namespace nwjsCompilerCLI
                     }
                     else if (args[argnum] == "--PackageApp")
                     {
-                        _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
+                        if (_testProject)
+                        {
+                            Console.WriteLine("You can't compress and test the project at the moment.");
+                            Console.WriteLine("Push Enter/Return to exit.");
+                            Console.ReadLine();
+                            Environment.Exit(1);
+                        }
+                        else _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
                     }
                     else if (args[argnum] == "--ReleaseMode")
                         _checkDeletion = 2;
                     else if (args[argnum] == "--TestMode")
                     {
-                        if (_compressProject >= 2)
+                        if (_compressProject <= 2)
                         {
                             Console.WriteLine("You can't compress and test the project at the moment.");
                             Console.WriteLine("Push Enter/Return to exit.");
@@ -133,18 +140,6 @@ namespace nwjsCompilerCLI
                 } while (_projectLocation == null || !Directory.Exists(_projectLocation) ||
                          !Directory.Exists(Path.Combine(_projectLocation, "www", "js")));
 
-                //Leave the commented code as is for now.
-                //do 
-                //{
-                //    Console.WriteLine(
-                //        "\nWould you like to:\n1. Compile JavaScript?\n2. Compile and package to package.nw?\n");
-                //    modeSelected = Convert.ToInt32(Console.Read());
-                //    if (modeSelected < 1 && modeSelected > 2) Console.Write("You didn't pick any of the answers. Try again.\n");
-                //}
-                //while (modeSelected < 1 && modeSelected > 2);
-
-                //if (modeSelected != 3)
-                //{
 
                 //Ask the user for the file extension.
                 Console.Write("\nWhat Extension will your game use (leave empty for .bin)? ");
@@ -231,22 +226,24 @@ namespace nwjsCompilerCLI
                     }
                 }
 
-                Console.WriteLine("\nFinished compiling.");
+                Console.WriteLine("\nFinished compiling in " + DateTime.Now);
                 if (_testProject)
+                {
+                    Console.WriteLine("\nNW.js will now start. Give it a few seconds to start.");
                     CoreCode.RunTest(_sdkLocation, _projectLocation);
+                }
                 else if (_compressProject < 3 && _checkDeletion == 2)
                 {
-                    Console.WriteLine("Copying the game files to a temporary location...");
+                    Console.WriteLine("\n"+ DateTime.Now +"\nCopying the game files to a temporary location...");
                     CoreCode.PreparePack(_projectLocation);
-                    Console.WriteLine("Compressing files...");
+                    Console.WriteLine("\n"+ DateTime.Now +"\nCompressing files...");
                     CoreCode.CompressFiles(_projectLocation);
                     if (_compressProject == 2)
                     {
-                        Console.WriteLine("Deleting source files...");
+                        Console.WriteLine("\n" + DateTime.Now + "\nDeleting source files...");
                         CoreCode.DeleteFiles(_projectLocation);
                     }
                 }
-
                 Console.WriteLine("\nThe task was completed.");
 
             }
