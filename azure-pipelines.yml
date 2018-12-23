@@ -3,6 +3,9 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
+trigger:
+- master
+
 pool:
   vmImage: 'VS2017-Win2016'
 
@@ -12,15 +15,22 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: DotNetCoreInstaller@0
+  inputs:
+    version: '2.2.101' # replace this value with the version that you need for your project
+
 - task: NuGetToolInstaller@0
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
 
+- script: dotnet restore
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
+    project: 'nwjsCookToolUI'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
