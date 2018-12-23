@@ -17,11 +17,11 @@ namespace nwjsCompilerCLI
         private static bool _parallelMode;
         private static bool _settingsSet;
         private static bool _removeJsFiles;
-        private static int _checkDeletion;
+        private static int _checkDeletion = 1;
 
         private static void Main(string[] args)
         {
-            char charBuffer;
+            string stringBuffer;
             Console.WriteLine("================================================");
             Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
             Console.WriteLine("= Version D1.01");
@@ -43,8 +43,8 @@ namespace nwjsCompilerCLI
 
                         //Set the SDK Location
                         case "--SDKLocation":
-                            _sdkLocation = args[argnum + 1];
-                            _sdkLocation.Replace("\"", "");
+                            stringBuffer = args[argnum + 1];
+                            _sdkLocation = stringBuffer.Replace("\"", "");
                             if (argnum <= args.Length - 1 && Directory.Exists(_sdkLocation) &&
                                 File.Exists(Path.Combine(_sdkLocation,
                                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc")))
@@ -63,8 +63,8 @@ namespace nwjsCompilerCLI
 
                         //Set the Project Location.
                         case "--ProjectLocation":
-                            _projectLocation = args[argnum + 1];
-                            _projectLocation.Replace("\"", "");
+                            stringBuffer = args[argnum + 1];
+                            _projectLocation = stringBuffer.Replace("\"", "");
                             if (argnum <= args.Length - 1 && Directory.Exists(_projectLocation) &&
                                 Directory.Exists(Path.Combine(_projectLocation, "www", "js")))
                                 Console.WriteLine("Project Location OK.");
@@ -189,21 +189,18 @@ namespace nwjsCompilerCLI
                 //This is the check if the tool should delete the JS files.
                 Console.WriteLine(
                     "\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1) ");
-                var checkBuffer = Console.ReadLine();
-                int.TryParse(checkBuffer, out _checkDeletion);
+                stringBuffer = Console.ReadLine();
+                int.TryParse(stringBuffer, out _checkDeletion);
                 _removeJsFiles = (_checkDeletion == 2);
                 //}
 
+                char charBuffer;
                 if (_checkDeletion == 2)
                 {
                     Console.WriteLine(
                         "\nWould you like to compress the game's files to an archive?\n1.Yes (delete the files as well).\n2.Yes (but leave the files intact).\n3. No.\n(Default is 3)");
                     charBuffer = Console.ReadKey().KeyChar;
-                    if (!char.IsLetterOrDigit(charBuffer))
-                    {
-                        _compressProject = Convert.ToInt32(charBuffer);
-                    }
-                    else _compressProject = 3;
+                    _compressProject = !char.IsLetterOrDigit(charBuffer) ? Convert.ToInt32(charBuffer) : 3;
                 }
                 else
                 {
