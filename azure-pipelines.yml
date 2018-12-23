@@ -24,6 +24,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
+    project: 'nwjsCookToolUI'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
