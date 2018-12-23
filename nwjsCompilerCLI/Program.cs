@@ -82,7 +82,7 @@ namespace nwjsCompilerCLI
                         //Set the File Extension.
                         case "--FileExtension":
                             //Check if the next variable in the args array is a command line argument or it's the end of the array.
-                            if (argnum <= args.Length - 1 && args[argnum].Contains("--")) continue;
+                            if (argnum >= args.Length - 1 && args[argnum].Contains("--")) continue;
                             _fileExtension = args[argnum + 1];
                             Console.WriteLine("The file extension is set to " + _fileExtension);
                             break;
