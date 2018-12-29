@@ -293,6 +293,7 @@ namespace nwjsCompilerCLI
 
             }
             //Ask the user to press Enter (or Return).
+            if (_settingsSet) return;
             Console.WriteLine("Push Enter/Return to exit.");
             Console.ReadLine();
         }
