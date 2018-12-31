@@ -125,6 +125,7 @@ namespace nwjsCookToolUI
             {
                 var folderMap = "js";
                 CoreCode.FileFinder(Path.Combine(compilerInput, "www", folderMap), "*.js");
+
                 Dispatcher.Invoke(() =>
                     OutputArea.Text += "\n" + DateTime.Now +
                                        Properties.Resources.BinRemovalText);

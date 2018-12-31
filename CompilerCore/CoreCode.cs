@@ -16,6 +16,12 @@ namespace CompilerCore
         private static readonly string TempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
 
         //This bit of code handles copying a directory to a different location.
+        /// <summary>
+        /// Copy a folder (with it's contents) to a specified location.
+        /// </summary>
+        /// <param name="sourceDirName">The path of the folder to copy from.</param>
+        /// <param name="destDirName">The path where the folder will be copied to.</param>
+        /// <param name="copySubDirs">Copy the subdirectories as well.</param>
         private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.
@@ -48,11 +54,20 @@ namespace CompilerCore
         }
 
         //This the code to search for files. Pretty simple, actually.
+
+        /// <summary>
+        /// Runs a search for files and adds them to the array.
+        /// </summary>
+        /// <param name="path">Path for Search.</param>
+        /// <param name="extension">File Extension.</param>
         public static void FileFinder(string path, string extension)
         {
             FileMap = Directory.GetFiles(path, extension, SearchOption.AllDirectories);
         }
-
+        //This bit of code removes binary files when requested. Must run after FileFinder.
+        /// <summary>
+        /// Removes binary files found in the FileMap array.
+        /// </summary>
         public static void CleanupBin()
         {
             //Do a normal loop for each entry on the FileMap array.
@@ -77,6 +92,12 @@ namespace CompilerCore
         }
 
         //The code that handles the nwjc.
+        /// <summary>
+        /// The code that handles the compilation process.
+        /// </summary>
+        /// <param name="file">The file to compile.</param>
+        /// <param name="extension">The desired file extension.</param>
+        /// <param name="removeJs">Remove the JS file after compiling.</param>
         public static void CompilerWorkerTask(string file, string extension, bool removeJs)
         {
             //Removing the JavaScript extension. Needed to place our own File Extension.
@@ -93,7 +114,12 @@ namespace CompilerCore
             //If the user asked to remove the JS files, delete them.
             if (removeJs) File.Delete(file);
         }
-
+        //This method starts the nw.exe file.
+        /// <summary>
+        /// Starts the NW.js binary.
+        /// </summary>
+        /// <param name="sdkLocation">The location of the NW.js SDK folder.</param>
+        /// <param name="projectLocation">The location of the project.</param>
         public static void RunTest(string sdkLocation, string projectLocation)
         {
             if (File.Exists(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs")))
@@ -102,7 +128,11 @@ namespace CompilerCore
                 Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe": "Game"),
                     "--nwapp=\"" + projectLocation + "\"");
         }
-
+        //This method is used to build an archive.
+        /// <summary>
+        /// Copies the files to a temporary location (for use with CompressFiles).
+        /// </summary>
+        /// <param name="inputFolder">The location of the project to compress.</param>
         public static void PreparePack(string inputFolder)
         {
             if (Directory.Exists(TempFolderLocation)) Directory.Delete(TempFolderLocation, true);
@@ -111,7 +141,11 @@ namespace CompilerCore
             File.Copy(Path.Combine(inputFolder, "package.json"),
                 Path.Combine(TempFolderLocation, "package.json"), true);
         }
-
+        //This method compresses the files found on the temporary location.
+        /// <summary>
+        /// Compresses the game's files (after copying them in a temporary location) to a zip file named package.nw (app.nw on Mac).
+        /// </summary>
+        /// <param name="deployArea">The destination path for the archive.</param>
         public static void CompressFiles(string deployArea)
         {
             var packageOutput = Path.Combine(deployArea, ArchiveName);
@@ -120,7 +154,11 @@ namespace CompilerCore
                 packageOutput);
             Directory.Delete(TempFolderLocation, true);
         }
-
+        //This method deletes the projects files.
+        /// <summary>
+        /// Deletes the project's files. Best used after compressing the project.
+        /// </summary>
+        /// <param name="projectLocation">The location of the project.</param>
         public static void DeleteFiles(string projectLocation)
         {
             if (Directory.Exists(Path.Combine(projectLocation, "www"))) Directory.Delete(Path.Combine(projectLocation, "www"), true);
