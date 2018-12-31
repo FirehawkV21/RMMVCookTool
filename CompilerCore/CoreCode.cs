@@ -10,14 +10,13 @@ namespace CompilerCore
     public static class CoreCode
     {
         //Some variables needed for the compiler task.
-        private static readonly Process CompilerProcess = new Process();
         public static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
         public static string[] FileMap;
-        public static string ArchiveName = (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) ? "app.nw" : "package.nw";
-        public static readonly string TempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
+        private static readonly string ArchiveName = (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) ? "app.nw" : "package.nw";
+        private static readonly string TempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
 
         //This bit of code handles copying a directory to a different location.
-        public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.
             var dir = new DirectoryInfo(sourceDirName);
@@ -104,18 +103,18 @@ namespace CompilerCore
                     "--nwapp=\"" + projectLocation + "\"");
         }
 
-        public static void PreparePack(string InputFolder)
+        public static void PreparePack(string inputFolder)
         {
             if (Directory.Exists(TempFolderLocation)) Directory.Delete(TempFolderLocation, true);
-             CoreCode.DirectoryCopy(Path.Combine(InputFolder, "www"),
+            DirectoryCopy(Path.Combine(inputFolder, "www"),
                 Path.Combine(TempFolderLocation, "www"), true);
-            File.Copy(Path.Combine(InputFolder, "package.json"),
+            File.Copy(Path.Combine(inputFolder, "package.json"),
                 Path.Combine(TempFolderLocation, "package.json"), true);
         }
 
-        public static void CompressFiles(string DeployArea)
+        public static void CompressFiles(string deployArea)
         {
-            var packageOutput = Path.Combine(DeployArea, ArchiveName);
+            var packageOutput = Path.Combine(deployArea, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
             ZipFile.CreateFromDirectory(TempFolderLocation,
                 packageOutput);
