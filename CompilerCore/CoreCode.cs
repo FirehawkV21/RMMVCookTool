@@ -13,7 +13,8 @@ namespace CompilerCore
         private static readonly Process CompilerProcess = new Process();
         public static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
         public static string[] FileMap;
-        public static readonly string tempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
+        public static string ArchiveName = (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) ? "app.nw" : "package.nw";
+        public static readonly string TempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
 
         //This bit of code handles copying a directory to a different location.
         public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
@@ -105,20 +106,20 @@ namespace CompilerCore
 
         public static void PreparePack(string InputFolder)
         {
-            if (Directory.Exists(tempFolderLocation)) Directory.Delete(tempFolderLocation, true);
+            if (Directory.Exists(TempFolderLocation)) Directory.Delete(TempFolderLocation, true);
              CoreCode.DirectoryCopy(Path.Combine(InputFolder, "www"),
-                Path.Combine(tempFolderLocation, "www"), true);
+                Path.Combine(TempFolderLocation, "www"), true);
             File.Copy(Path.Combine(InputFolder, "package.json"),
-                Path.Combine(tempFolderLocation, "package.json"), true);
+                Path.Combine(TempFolderLocation, "package.json"), true);
         }
 
         public static void CompressFiles(string DeployArea)
         {
-            var packageOutput = Path.Combine(DeployArea, "package.nw");
+            var packageOutput = Path.Combine(DeployArea, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
-            ZipFile.CreateFromDirectory(tempFolderLocation,
+            ZipFile.CreateFromDirectory(TempFolderLocation,
                 packageOutput);
-            Directory.Delete(tempFolderLocation, true);
+            Directory.Delete(TempFolderLocation, true);
         }
 
         public static void DeleteFiles(string projectLocation)

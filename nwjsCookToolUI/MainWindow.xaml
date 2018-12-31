@@ -65,6 +65,7 @@
                                     Click="CompileButton_Click" />
                             <ProgressBar x:Name="MainProgress" Height="23" VerticalAlignment="Top" Margin="0,37,90,0" />
                             <Button x:Name="TestProjectButton" Content="{x:Static properties:Resources.TestUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="439,60,0,0" Height="23" Click="TestProjectButton_Click"/>
+                            <Button x:Name="CancelTaskButton" Content="Cancel" HorizontalAlignment="Left" Margin="439,37,0,0" VerticalAlignment="Top" Width="73" Height="23" Visibility="Hidden" Click="CancelTaskButton_Click"/>
                         </Grid>
                     </GroupBox>
                 </Grid>

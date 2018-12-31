@@ -20,11 +20,26 @@ namespace nwjsCookToolUI
     /// </summary>
     public partial class MainWindow
     {
-
+        private static BackgroundWorker CompilerWorker;
+        private static BackgroundWorker MapCompilerWorker;
 
         public MainWindow()
         {
             InitializeComponent();
+            PrepareWorkers();
+        }
+
+        private void PrepareWorkers()
+        {
+            CompilerWorker.WorkerReportsProgress = true;
+            CompilerWorker.WorkerSupportsCancellation = true;
+            CompilerWorker.DoWork += StartCompiler;
+            CompilerWorker.ProgressChanged += CompilerReport;
+
+            MapCompilerWorker.WorkerReportsProgress = true;
+            MapCompilerWorker.WorkerSupportsCancellation = true;
+            MapCompilerWorker.DoWork += StartMapCompiler;
+            MapCompilerWorker.ProgressChanged += CompilerReport;
         }
 
         private void BrowseSDKButton_Click(object sender, RoutedEventArgs e)
@@ -97,9 +112,6 @@ namespace nwjsCookToolUI
                 MainProgress.Value = 0;
                 MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
                 var compilerWorker = new BackgroundWorker();
-                compilerWorker.WorkerReportsProgress = true;
-                compilerWorker.DoWork += StartCompiler;
-                compilerWorker.ProgressChanged += CompilerReport;
                 compilerWorker.RunWorkerAsync();
             }
         }
@@ -127,10 +139,8 @@ namespace nwjsCookToolUI
                 {
                     Dispatcher.Invoke(
                         () => OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.CompilingText + fileName + "...\n");
-                    Thread.Sleep(200);
                     Dispatcher.Invoke(() =>
                         StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + fileName + "...");
-                    Thread.Sleep(200);
                     Dispatcher.Invoke(() => CoreCode.CompilerWorkerTask(fileName, FileExtensionTextbox.Text,
                         RemoveCompiledJsCheckbox.IsChecked == true));
                     Dispatcher.Invoke(() => OutputArea.Text += Properties.Resources.CompiledOutputText + DateTime.Now + "\n");
@@ -143,11 +153,9 @@ namespace nwjsCookToolUI
                 if (Dispatcher.Invoke(() => PackageNwCheckbox.IsChecked == true))
                 {
                     Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.PackaginStatusText);
-                    Thread.Sleep(200);
                     Dispatcher.Invoke(() => OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                                               Properties.Resources.FileCopyText);
                     Dispatcher.Invoke(() => CoreCode.PreparePack(compilerInput));
-                    Thread.Sleep(200);
                     Dispatcher.Invoke(() => 
                         OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.PackageCreationText);
                     CoreCode.CompressFiles(compilerInput);                   
@@ -314,11 +322,7 @@ namespace nwjsCookToolUI
                 CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => Path.Combine(NwjsLocation.Text, "nwjc.exe"));
                 MapProgress.Value = 0;
                 MapProgress.Maximum = FolderList.Items.Count;
-                var compilerWorker = new BackgroundWorker();
-                compilerWorker.WorkerReportsProgress = true;
-                compilerWorker.DoWork += StartMapCompiler;
-                compilerWorker.ProgressChanged += CompilerReport;
-                compilerWorker.RunWorkerAsync();
+                MapCompilerWorker.RunWorkerAsync();
             }
         }
 
@@ -360,6 +364,11 @@ namespace nwjsCookToolUI
         private void RemoveFilesCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             Settings.Default.Save();
+        }
+
+        private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
