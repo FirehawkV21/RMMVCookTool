@@ -20,26 +20,10 @@ namespace nwjsCookToolUI
     /// </summary>
     public partial class MainWindow
     {
-        private static BackgroundWorker CompilerWorker;
-        private static BackgroundWorker MapCompilerWorker;
 
         public MainWindow()
         {
             InitializeComponent();
-            PrepareWorkers();
-        }
-
-        private void PrepareWorkers()
-        {
-            CompilerWorker.WorkerReportsProgress = true;
-            CompilerWorker.WorkerSupportsCancellation = true;
-            CompilerWorker.DoWork += StartCompiler;
-            CompilerWorker.ProgressChanged += CompilerReport;
-
-            MapCompilerWorker.WorkerReportsProgress = true;
-            MapCompilerWorker.WorkerSupportsCancellation = true;
-            MapCompilerWorker.DoWork += StartMapCompiler;
-            MapCompilerWorker.ProgressChanged += CompilerReport;
         }
 
         private void BrowseSDKButton_Click(object sender, RoutedEventArgs e)
@@ -111,8 +95,12 @@ namespace nwjsCookToolUI
             {
                 MainProgress.Value = 0;
                 MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
-                var compilerWorker = new BackgroundWorker();
-                compilerWorker.RunWorkerAsync();
+                var CompilerWorker = new BackgroundWorker();
+                CompilerWorker.WorkerReportsProgress = true;
+                CompilerWorker.WorkerSupportsCancellation = true;
+                CompilerWorker.DoWork += StartCompiler;
+                CompilerWorker.ProgressChanged += CompilerReport;
+                CompilerWorker.RunWorkerAsync();
             }
         }
 
@@ -323,6 +311,11 @@ namespace nwjsCookToolUI
                 CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => Path.Combine(NwjsLocation.Text, "nwjc.exe"));
                 MapProgress.Value = 0;
                 MapProgress.Maximum = FolderList.Items.Count;
+                var MapCompilerWorker = new BackgroundWorker();
+                MapCompilerWorker.WorkerReportsProgress = true;
+                MapCompilerWorker.WorkerSupportsCancellation = true;
+                MapCompilerWorker.DoWork += StartMapCompiler;
+                MapCompilerWorker.ProgressChanged += CompilerReport;
                 MapCompilerWorker.RunWorkerAsync();
             }
         }
