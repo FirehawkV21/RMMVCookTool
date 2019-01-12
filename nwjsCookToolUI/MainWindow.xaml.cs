@@ -130,22 +130,24 @@ namespace nwjsCookToolUI
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
                 if (Settings.Default.PackageCode)
                     Dispatcher.Invoke(() => MainProgress.Maximum += 1);
-                if(Settings.Default.DeleteSourceCode) Dispatcher.Invoke(() => MainProgress.Maximum += 1);
+                if (Settings.Default.DeleteSourceCode) Dispatcher.Invoke(() => MainProgress.Maximum += 1);
                 foreach (var fileName in CoreCode.FileMap)
                 {
                     Dispatcher.Invoke(() =>
                     {
-                       OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.CompilingText + fileName + "...\n";
-                       StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + fileName + "...";
+                        OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.CompilingText + fileName +
+                                           "...\n";
+                        StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + fileName + "...";
                     });
-                    CoreCode.CompilerWorkerTask(fileName, Settings.Default.FileExtension, Settings.Default.DeleteSourceCode);
+                    CoreCode.CompilerWorkerTask(fileName, Settings.Default.FileExtension,
+                        Settings.Default.DeleteSourceCode);
                     Dispatcher.Invoke(() =>
                     {
                         OutputArea.Text += Properties.Resources.CompiledOutputText + DateTime.Now + "\n";
                         MainProgress.Value += 1;
                     });
                 }
-                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+
                 if (Settings.Default.PackageCode)
                 {
                     Dispatcher.Invoke(() =>
@@ -154,9 +156,10 @@ namespace nwjsCookToolUI
                         OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.FileCopyText;
                     });
                     CoreCode.PreparePack(compilerInput);
-                    Dispatcher.Invoke(() => 
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.PackageCreationText);
-                    CoreCode.CompressFiles(compilerInput);                   
+                    Dispatcher.Invoke(() =>
+                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
+                                          Properties.Resources.PackageCreationText);
+                    CoreCode.CompressFiles(compilerInput);
                     Dispatcher.Invoke(() => MainProgress.Value += 1);
                     if (Settings.Default.DeleteSourceCode)
                     {
@@ -168,13 +171,43 @@ namespace nwjsCookToolUI
                         CoreCode.DeleteFiles(compilerInput);
                     }
                 }
-                
+
                 Dispatcher.Invoke(() =>
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n "+ Properties.Resources.CompilationCompleteText + "\n");
-                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n " +
+                                      Properties.Resources.CompilationCompleteText + "\n");
+                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText,
+                    MessageBoxButton.OK, MessageBoxImage.Information);
                 Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.DoneText);
             }
-
+            catch (ArgumentException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    StatusLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show("An argument exception occured. Possibly a bug in the code.\nCheck the output in the About tab for more info.", Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (FileNotFoundException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    StatusLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show("A file was not found. Did a file got moved when the work was in progress?\nCheck the Output in the About tab for more info.", Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (DirectoryNotFoundException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    StatusLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show(
+                    "A folder was not found. Did it got moved when the work was in progress?\nCheck the Output in the About tab for more info.",
+                    Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             catch (Exception exceptionOutput)
             {
                 Dispatcher.Invoke(() =>
@@ -184,6 +217,10 @@ namespace nwjsCookToolUI
                 });
                 MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            finally
+            {
                 Dispatcher.Invoke(() =>
                 {
                     MainProgress.Value = 0;
