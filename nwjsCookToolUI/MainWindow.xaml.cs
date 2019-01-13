@@ -376,7 +376,8 @@ namespace nwjsCookToolUI
 
         private void MapCompileButton_Click(object sender, RoutedEventArgs e)
         {
-            MapCompileButton.IsEnabled = false;
+            MapCompileButton.Visibility = Visibility.Hidden;
+            CancelMapCompileButton.Visibility = Visibility.Visible;
             AddToMapButton.IsEnabled = false;
             RemoveFromMapButton.IsEnabled = false;
             MapProgress.Foreground = Brushes.ForestGreen;
@@ -387,7 +388,8 @@ namespace nwjsCookToolUI
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n"+ Properties.Resources.CompilerMissingText +  "\n-----";
-                MapCompileButton.IsEnabled = true;
+                MapCompileButton.Visibility = Visibility.Visible;
+                CancelMapCompileButton.Visibility = Visibility.Hidden;
                 AddToMapButton.IsEnabled = true;
                 RemoveFromMapButton.IsEnabled = true;
             }
@@ -397,7 +399,8 @@ namespace nwjsCookToolUI
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\n"+ Properties.Resources.NonExistantFolderText + "\n-----";
-                MapCompileButton.IsEnabled = true;
+                MapCompileButton.Visibility = Visibility.Visible;
+                CancelMapCompileButton.Visibility = Visibility.Hidden;
                 AddToMapButton.IsEnabled = true;
                 RemoveFromMapButton.IsEnabled = true;
             }
@@ -433,7 +436,11 @@ namespace nwjsCookToolUI
                     _processorMode = 2;
                     for (_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
                     {
-                        if (_mapCompilerWorker.CancellationPending) break;
+                        if (_mapCompilerWorker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            break;
+                        }
                         _mapCompilerWorker.ReportProgress(_currentProject + 1);
                         CoreCode.CompilerWorkerTask(CoreCode.FileMap[_currentFile], Settings.Default.FileExtension,
                             Settings.Default.DeleteSourceCode);
@@ -466,13 +473,13 @@ namespace nwjsCookToolUI
                 Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
                 Array.Clear(_projectList, 0, _projectList.Length);
             }
-            Dispatcher.Invoke(() =>
-            {
-                MapCompileButton.IsEnabled = true;
-                AddToMapButton.IsEnabled = true;
-                RemoveFromMapButton.IsEnabled = true;
-                UnlockSettings(true);
-            });
+            //Dispatcher.Invoke(() =>
+            //{
+            //    MapCompileButton.IsEnabled = true;
+            //    AddToMapButton.IsEnabled = true;
+            //    RemoveFromMapButton.IsEnabled = true;
+            //    UnlockSettings(true);
+            //});
         }
 
         private void MapCompilerReport(object sender, ProgressChangedEventArgs e)
@@ -517,16 +524,26 @@ namespace nwjsCookToolUI
                 OutputArea.Text += "\n" + DateTime.Now + "\n" + nwjsCookToolUI.Properties.Resources.TaskCancelledOutputText + "\n";
                 MessageBox.Show(nwjsCookToolUI.Properties.Resources.TaskCancelledMessage, nwjsCookToolUI.Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + Properties.Resources.CompilationCompleteText + "\n";
-            MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
-            MapStatusLabel.Content = Properties.Resources.DoneText;
-            CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
+            else
+            {
+                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" +
+                                  Properties.Resources.CompilationCompleteText + "\n";
+                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText,
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                MapStatusLabel.Content = Properties.Resources.DoneText;
+                CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
+            }
+            MapCompileButton.Visibility = Visibility.Visible;
+            CancelMapCompileButton.Visibility = Visibility.Hidden;
+            AddToMapButton.IsEnabled = true;
+            RemoveFromMapButton.IsEnabled = true;
+            UnlockSettings(true);
         }
-        #endregion Batch Compile Code Set
 
         private void CancelMapCompileButton_Click(object sender, RoutedEventArgs e)
         {
             _mapCompilerWorker.CancelAsync();
         }
+        #endregion Batch Compile Code Set
     }
 }
