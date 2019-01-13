@@ -20,11 +20,32 @@ namespace nwjsCookToolUI
     /// </summary>
     public partial class MainWindow
     {
-        public static string[] ProjectList;
+        private static int _currentFile = 0;
+        private static int _processorMode = 0;
+        private static string[] _projectList;
+        private static string _errorOutput;
+        private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
+        private readonly BackgroundWorker _mapCompilerWorker = new BackgroundWorker();
 
         public MainWindow()
         {
             InitializeComponent();
+            SetupWorkers();
+        }
+
+
+        private void SetupWorkers()
+        {
+            _compilerWorker.WorkerReportsProgress = true;
+            _compilerWorker.WorkerSupportsCancellation = true;
+            _compilerWorker.DoWork += StartCompiler;
+            _compilerWorker.ProgressChanged += CompilerReport;
+            _compilerWorker.RunWorkerCompleted += CompilerFinisher;
+            _mapCompilerWorker.WorkerReportsProgress = true;
+            _mapCompilerWorker.WorkerSupportsCancellation = true;
+            _mapCompilerWorker.DoWork += StartMapCompiler;
+            _mapCompilerWorker.ProgressChanged += CompilerReport;
+
         }
 
         private void BrowseSDKButton_Click(object sender, RoutedEventArgs e)
@@ -98,86 +119,61 @@ namespace nwjsCookToolUI
             }
             else
             {
-                Array.Resize(ref ProjectList, 1);
-                ProjectList[0] = ProjectLocation.Text;
+                Array.Resize(ref _projectList, 1);
+                _projectList[0] = ProjectLocation.Text;
                 MainProgress.Value = 0;
                 MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
-                var compilerWorker = new BackgroundWorker();
-                compilerWorker.WorkerReportsProgress = true;
-                compilerWorker.WorkerSupportsCancellation = true;
-                compilerWorker.DoWork += StartCompiler;
-                compilerWorker.ProgressChanged += CompilerReport;
-                compilerWorker.RunWorkerAsync();
+                _compilerWorker.RunWorkerAsync();
             }
         }
 
-
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
-            var compilerInput = ProjectList[0];
-            Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.CompileJsFolderProgressText);
+            var compilerInput = _projectList[0];
             try
             {
                 var folderMap = "js";
                 CoreCode.FileFinder(Path.Combine(compilerInput, "www", folderMap), "*.js");
-
-                Dispatcher.Invoke(() =>
-                    OutputArea.Text += "\n" + DateTime.Now +
-                                       Properties.Resources.BinRemovalText);
-                Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.BinRemovalProgressText);
+                _compilerWorker.ReportProgress(_currentFile + 1);
                 CoreCode.CleanupBin();
-                CoreCode.CompilerInfo.FileName = Dispatcher.Invoke(() => Path.Combine(NwjsLocation.Text, "nwjc.exe"));
+                CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
                 if (Settings.Default.PackageCode)
-                    Dispatcher.Invoke(() => MainProgress.Maximum += 1);
-                if (Settings.Default.DeleteSourceCode) Dispatcher.Invoke(() => MainProgress.Maximum += 1);
-                foreach (var fileName in CoreCode.FileMap)
+                    Dispatcher.Invoke(() =>  (Settings.Default.DeleteSourceCode) ? MainProgress.Maximum += 2 : 1);
+                _processorMode = 1;
+                for(_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
                 {
-                    Dispatcher.Invoke(() =>
-                    {
-                        OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.CompilingText + fileName +
-                                           "...\n";
-                        StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + fileName + "...";
-                    });
-                    CoreCode.CompilerWorkerTask(fileName, Settings.Default.FileExtension,
-                        Settings.Default.DeleteSourceCode);
-                    Dispatcher.Invoke(() =>
-                    {
-                        OutputArea.Text += Properties.Resources.CompiledOutputText + DateTime.Now + "\n";
-                        MainProgress.Value += 1;
-                    });
+                    if (_compilerWorker.CancellationPending) break;
+                    CoreCode.CompilerWorkerTask(CoreCode.FileMap[_currentFile], Settings.Default.FileExtension, Settings.Default.DeleteSourceCode);
+                    _compilerWorker.ReportProgress(_currentFile + 1);
+                    _processorMode = 2;
+                    Thread.Sleep(200);
                 }
 
-                if (Settings.Default.PackageCode)
+                if (!_compilerWorker.CancellationPending)
                 {
-                    Dispatcher.Invoke(() =>
+                    if (Settings.Default.PackageCode)
                     {
-                        StatusLabel.Content = Properties.Resources.PackaginStatusText;
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.FileCopyText;
-                    });
-                    CoreCode.PreparePack(compilerInput);
-                    Dispatcher.Invoke(() =>
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
-                                          Properties.Resources.PackageCreationText);
-                    CoreCode.CompressFiles(compilerInput);
-                    Dispatcher.Invoke(() => MainProgress.Value += 1);
-                    if (Settings.Default.DeleteSourceCode)
-                    {
-                        Dispatcher.Invoke(() =>
+                        _processorMode = 3;
+                        _compilerWorker.ReportProgress(_currentFile + 1);
+                        CoreCode.PreparePack(compilerInput);
+                        _processorMode = 4;
+                        _compilerWorker.ReportProgress(_currentFile + 2);
+                        CoreCode.CompressFiles(compilerInput);
+                        if (Settings.Default.DeleteSourceCode)
                         {
-                            MainProgress.Value += 1;
-                            OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nRemoving files...\n";
-                        });
-                        CoreCode.DeleteFiles(compilerInput);
+                            _processorMode = 5;
+                            _compilerWorker.ReportProgress(_currentFile + 3);
+                            CoreCode.DeleteFiles(compilerInput);
+                        }
                     }
                 }
 
-                Dispatcher.Invoke(() =>
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n " +
-                                      Properties.Resources.CompilationCompleteText + "\n");
-                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText,
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-                Dispatcher.Invoke(() => StatusLabel.Content = Properties.Resources.DoneText);
+                if (!_compilerWorker.CancellationPending)
+                {
+                    _processorMode = 6;
+                    _compilerWorker.ReportProgress(_currentFile + 1);
+                }
             }
             catch (ArgumentException exceptionOutput)
             {
@@ -215,18 +211,10 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
+               //errorOutput = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                 MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
 
-            }
-            finally
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    MainProgress.Value = 0;
-                    MainProgress.Foreground = Brushes.ForestGreen;
-                });
-                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
             }
 
             Dispatcher.Invoke(() =>
@@ -239,89 +227,73 @@ namespace nwjsCookToolUI
             });
         }
 
-        private void StartMapCompiler(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                for (var i = 0; i < ProjectList.Length; i++)
-                {
-                    var i1 = i;
-                    Dispatcher.Invoke(() =>
-                    {
-                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.CompileText1 +
-                                          FolderList.Items[i1] + Properties.Resources.FolderText + "\n";
-                        MapStatusLabel.Content = Properties.Resources.CompileText1 + FolderList.Items[i1] +
-                                                 Properties.Resources.FolderText;
-                    });
-                    CoreCode.FileFinder(FolderList.Items[i1].ToString(), "*.js");
-                    Dispatcher.Invoke(() =>
-                    {
-                        OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.BinRemovalText;
-                        CurrentWorkloadLabel.Content =
-                            Properties.Resources.BinRemovalStatusText + FolderList.Items[i1] + "...";
-                    });
-                    CoreCode.CleanupBin();
-                    foreach (var file in CoreCode.FileMap)
-                    {
-                        Dispatcher.Invoke(() =>        
-                            CurrentWorkloadLabel.Content = Properties.Resources.CompileText + file + "..."
-                        );
-                        CoreCode.CompilerWorkerTask(file, Settings.Default.FileExtension,
-                            Settings.Default.DeleteSourceCode);
-                        Dispatcher.Invoke(() => CurrentWorkloadBar.Value += 1);
-
-                    }
-                    Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
-                    Dispatcher.Invoke(() =>
-                    {
-                        CurrentWorkloadBar.Value = 0;
-                        MapProgress.Value += 1;
-                    });
-                }
-
-                Dispatcher.Invoke(() =>
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + Properties.Resources.CompilationCompleteText + "\n");
-                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
-                Dispatcher.Invoke(() =>
-                {
-                    MapStatusLabel.Content = Properties.Resources.DoneText;
-                    CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
-                });
-            }
-            catch (Exception exceptionOutput)
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    MapProgress.Foreground = Brushes.DarkRed;
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
-                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
-                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
-                });
-                MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                Dispatcher.Invoke(() =>
-                {
-                    CurrentWorkloadBar.Value = 0;
-                    MapProgress.Value = 0;
-                    MapProgress.Foreground = Brushes.ForestGreen;
-                    CurrentWorkloadBar.Foreground = Brushes.ForestGreen;
-                });
-                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
-                Array.Clear(ProjectList, 0, ProjectList.Length);
-            }
-            Dispatcher.Invoke(() =>
-            {
-                MapCompileButton.IsEnabled = true;
-                AddToMapButton.IsEnabled = true;
-                RemoveFromMapButton.IsEnabled = true;
-                UnlockSettings(true);
-            });
-        }
-
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
         {
-            MainProgress.Value += 1;
+            switch (_processorMode)
+            {
+                case 6:
+                    MainProgress.Value += 1;
+                    break;
+                case 5:
+                    MainProgress.Value += 1;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nRemoving files...\n";
+                    break;
+                case 4:
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.PackageCreationText;
+                    break;
+                case 3:
+                    StatusLabel.Content = Properties.Resources.PackaginStatusText;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.FileCopyText;
+                    break;
+                case 2:
+                    if (_currentFile < CoreCode.FileMap.Length)
+                    {
+                        MainProgress.Value = _currentFile;
+                        OutputArea.Text += Properties.Resources.CompiledOutputText + DateTime.Now + "\n";
+                        OutputArea.Text +=
+                            "\n" + DateTime.Now + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
+                            "...\n";
+                        StatusLabel.Content = StatusLabel.Content =
+                            Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
+                    }
+                    break;
+                case 1:
+                    OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
+                                       "...\n";
+                    StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
+                    break;
+                case 0:
+                    StatusLabel.Content = Properties.Resources.BinRemovalProgressText;
+                    OutputArea.Text += "\n" + DateTime.Now +
+                                       Properties.Resources.BinRemovalText;
+                    break;
+            }
         }
+
+        private void CompilerFinisher(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + _errorOutput + "\n";
+                StatusLabel.Content = Properties.Resources.FailedText;
+            }
+            else if (e.Cancelled)
+            {
+                OutputArea.Text += "\n" + DateTime.Now + "\n" + "The task was cancelled by the user." + "\n";
+                MessageBox.Show("The task was cancelled.", "Aborted", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText,
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                StatusLabel.Content = Properties.Resources.DoneText;
+                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n " + Properties.Resources.CompilationCompleteText + "\n";
+            }
+            MainProgress.Value = 0;
+            MainProgress.Foreground = Brushes.ForestGreen;
+            Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+
+    }
 
         private void CookToolUi_Loaded(object sender, RoutedEventArgs e)
         {
@@ -381,14 +353,88 @@ namespace nwjsCookToolUI
                 CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
                 MapProgress.Value = 0;
                 MapProgress.Maximum = FolderList.Items.Count;
-                Array.Resize(ref ProjectList, FolderList.Items.Count);
-                var mapCompilerWorker = new BackgroundWorker();
-                mapCompilerWorker.WorkerReportsProgress = true;
-                mapCompilerWorker.WorkerSupportsCancellation = true;
-                mapCompilerWorker.DoWork += StartMapCompiler;
-                mapCompilerWorker.ProgressChanged += CompilerReport;
-                mapCompilerWorker.RunWorkerAsync();
+                Array.Resize(ref _projectList, FolderList.Items.Count);
+                _mapCompilerWorker.RunWorkerAsync();
             }
+        }
+
+        private void StartMapCompiler(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                for (var i = 0; i < _projectList.Length; i++)
+                {
+                    var i1 = i;
+                    Dispatcher.Invoke(() =>
+                    {
+                        OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.CompileText1 +
+                                          FolderList.Items[i1] + Properties.Resources.FolderText + "\n";
+                        MapStatusLabel.Content = Properties.Resources.CompileText1 + FolderList.Items[i1] +
+                                                 Properties.Resources.FolderText;
+                    });
+                    CoreCode.FileFinder(FolderList.Items[i1].ToString(), "*.js");
+                    Dispatcher.Invoke(() =>
+                    {
+                        OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.BinRemovalText;
+                        CurrentWorkloadLabel.Content =
+                            Properties.Resources.BinRemovalStatusText + FolderList.Items[i1] + "...";
+                    });
+                    CoreCode.CleanupBin();
+                    foreach (var file in CoreCode.FileMap)
+                    {
+                        Dispatcher.Invoke(() =>
+                            CurrentWorkloadLabel.Content = Properties.Resources.CompileText + file + "..."
+                        );
+                        CoreCode.CompilerWorkerTask(file, Settings.Default.FileExtension,
+                            Settings.Default.DeleteSourceCode);
+                        Dispatcher.Invoke(() => CurrentWorkloadBar.Value += 1);
+
+                    }
+                    Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+                    Dispatcher.Invoke(() =>
+                    {
+                        CurrentWorkloadBar.Value = 0;
+                        MapProgress.Value += 1;
+                    });
+                }
+
+                Dispatcher.Invoke(() =>
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + Properties.Resources.CompilationCompleteText + "\n");
+                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
+                Dispatcher.Invoke(() =>
+                {
+                    MapStatusLabel.Content = Properties.Resources.DoneText;
+                    CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
+                });
+            }
+            catch (Exception exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    MapProgress.Foreground = Brushes.DarkRed;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                Dispatcher.Invoke(() =>
+                {
+                    CurrentWorkloadBar.Value = 0;
+                    MapProgress.Value = 0;
+                    MapProgress.Foreground = Brushes.ForestGreen;
+                    CurrentWorkloadBar.Foreground = Brushes.ForestGreen;
+                });
+                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+                Array.Clear(_projectList, 0, _projectList.Length);
+            }
+            Dispatcher.Invoke(() =>
+            {
+                MapCompileButton.IsEnabled = true;
+                AddToMapButton.IsEnabled = true;
+                RemoveFromMapButton.IsEnabled = true;
+                UnlockSettings(true);
+            });
         }
 
         private void FileExtensionTextbox_TextChanged(object sender, TextChangedEventArgs e)
@@ -433,7 +479,7 @@ namespace nwjsCookToolUI
 
         private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _compilerWorker.CancelAsync();
         }
     }
 }
