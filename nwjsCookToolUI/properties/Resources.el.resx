@@ -272,4 +272,16 @@
   <data name="RemoveSourceFilesUIText" xml:space="preserve">
     <value>Αφαίρεση αρχείων κώδικα μετά το πακετάρισμα.</value>
   </data>
+  <data name="CancelTaskButtonText" xml:space="preserve">
+    <value>Ακύρωση</value>
+  </data>
+  <data name="AbortedText" xml:space="preserve">
+    <value>Ακυρώθηκε</value>
+  </data>
+  <data name="TaskCancelledMessage" xml:space="preserve">
+    <value>Η εργασία ακυρώθηκε.</value>
+  </data>
+  <data name="TaskCancelledOutputText" xml:space="preserve">
+    <value>Η εργασία ακυρώθηκε από τον χρήστη.</value>
+  </data>
 </root>

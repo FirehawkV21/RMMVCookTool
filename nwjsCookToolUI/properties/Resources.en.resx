@@ -272,4 +272,16 @@ Compiled on </value>
   <data name="RemoveSourceFilesUIText" xml:space="preserve">
     <value>Remove source files after packaging.</value>
   </data>
+  <data name="CancelTaskButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AbortedText" xml:space="preserve">
+    <value>Aborted</value>
+  </data>
+  <data name="TaskCancelledMessage" xml:space="preserve">
+    <value>The task was cancelled.</value>
+  </data>
+  <data name="TaskCancelledOutputText" xml:space="preserve">
+    <value>The task was cancelled by the user.</value>
+  </data>
 </root>

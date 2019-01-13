@@ -24,7 +24,7 @@ namespace nwjsCookToolUI
         private static int _currentFile = 0;
         private static int _processorMode = 0;
         private static string[] _projectList;
-        private static string _errorOutput;
+        //private static string _errorOutput;
         private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
         private readonly BackgroundWorker _mapCompilerWorker = new BackgroundWorker();
         private int _currentProject;
@@ -127,7 +127,8 @@ namespace nwjsCookToolUI
 
         private void CompileButton_Click(object sender, RoutedEventArgs e)
         {
-            CompileButton.IsEnabled = false;
+            CompileButton.Visibility = Visibility.Hidden;
+            CancelTaskButton.Visibility = Visibility.Visible;
             TestProjectButton.IsEnabled = false;
             ProjectLocation.IsEnabled = false;
             FindProjectButton.IsEnabled = false;
@@ -137,7 +138,8 @@ namespace nwjsCookToolUI
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n"+ Properties.Resources.CompilerMissingText + "\n-----";
-                CompileButton.IsEnabled = true;
+                CompileButton.Visibility = Visibility.Visible;
+                CancelTaskButton.Visibility = Visibility.Hidden;
                 TestProjectButton.IsEnabled = true;
                 ProjectLocation.IsEnabled = true;
                 FindProjectButton.IsEnabled = true;
@@ -148,7 +150,8 @@ namespace nwjsCookToolUI
                     MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\n"+ Properties.Resources.NonExistantFolderText +"\n-----";
-                CompileButton.IsEnabled = true;
+                CompileButton.Visibility = Visibility.Visible;
+                CancelTaskButton.Visibility = Visibility.Hidden;
                 TestProjectButton.IsEnabled = true;
                 ProjectLocation.IsEnabled = true;
                 FindProjectButton.IsEnabled = true;
@@ -184,7 +187,7 @@ namespace nwjsCookToolUI
             var compilerInput = _projectList[0];
             try
             {
-                var folderMap = "js";
+                const string folderMap = "js";
                 CoreCode.FileFinder(Path.Combine(compilerInput, "www", folderMap), "*.js");
                 _compilerWorker.ReportProgress(_currentFile + 1);
                 CoreCode.CleanupBin();
@@ -195,7 +198,11 @@ namespace nwjsCookToolUI
                 _processorMode = 1;
                 for(_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
                 {
-                    if (_compilerWorker.CancellationPending) break;
+                    if (_compilerWorker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
                     CoreCode.CompilerWorkerTask(CoreCode.FileMap[_currentFile], Settings.Default.FileExtension, Settings.Default.DeleteSourceCode);
                     _compilerWorker.ReportProgress(_currentFile + 1);
                     _processorMode = 2;
@@ -221,11 +228,9 @@ namespace nwjsCookToolUI
                     }
                 }
 
-                if (!_compilerWorker.CancellationPending)
-                {
-                    _processorMode = 6;
-                    _compilerWorker.ReportProgress(_currentFile + 1);
-                }
+                if (_compilerWorker.CancellationPending) return;
+                _processorMode = 6;
+                _compilerWorker.ReportProgress(_currentFile + 1);
             }
             catch (ArgumentException exceptionOutput)
             {
@@ -263,20 +268,10 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
-               //errorOutput = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                 MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-
-            Dispatcher.Invoke(() =>
-            {
-                CompileButton.IsEnabled = true;
-                TestProjectButton.IsEnabled = true;
-                ProjectLocation.IsEnabled = true;
-                FindProjectButton.IsEnabled = true;
-                UnlockSettings(true);
-            });
         }
 
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
@@ -324,15 +319,15 @@ namespace nwjsCookToolUI
 
         private void CompilerFinisher(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Error != null)
+            //if (e.Error != null)
+            //{
+            //    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + _errorOutput + "\n";
+            //    StatusLabel.Content = Properties.Resources.FailedText;
+            //}
+            if (e.Cancelled)
             {
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + _errorOutput + "\n";
-                StatusLabel.Content = Properties.Resources.FailedText;
-            }
-            else if (e.Cancelled)
-            {
-                OutputArea.Text += "\n" + DateTime.Now + "\n" + "The task was cancelled by the user." + "\n";
-                MessageBox.Show("The task was cancelled.", "Aborted", MessageBoxButton.OK, MessageBoxImage.Information);
+                OutputArea.Text += "\n" + DateTime.Now + "\n" + nwjsCookToolUI.Properties.Resources.TaskCancelledOutputText + "\n";
+                MessageBox.Show(nwjsCookToolUI.Properties.Resources.TaskCancelledMessage, nwjsCookToolUI.Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
@@ -344,8 +339,14 @@ namespace nwjsCookToolUI
             MainProgress.Value = 0;
             MainProgress.Foreground = Brushes.ForestGreen;
             Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+            CompileButton.IsEnabled = true;
+            TestProjectButton.IsEnabled = true;
+            FindProjectButton.IsEnabled = true;
+            UnlockSettings(true);
+            CompileButton.Visibility = Visibility.Visible;
+            CancelTaskButton.Visibility = Visibility.Hidden;
 
-    }
+        }
 
         private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
         {
@@ -417,7 +418,11 @@ namespace nwjsCookToolUI
                 for (_currentProject = 0; _currentProject < _projectList.Length; _currentProject++)
                 {
                     _processorMode = 0;
-                    if (_mapCompilerWorker.CancellationPending) break;                    
+                    if (_mapCompilerWorker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }                    
                     CoreCode.FileFinder(FolderList.Items[_currentProject].ToString(), "*.js");
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
                     Thread.Sleep(200);
@@ -428,6 +433,7 @@ namespace nwjsCookToolUI
                     _processorMode = 2;
                     for (_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
                     {
+                        if (_mapCompilerWorker.CancellationPending) break;
                         _mapCompilerWorker.ReportProgress(_currentProject + 1);
                         CoreCode.CompilerWorkerTask(CoreCode.FileMap[_currentFile], Settings.Default.FileExtension,
                             Settings.Default.DeleteSourceCode);
@@ -500,8 +506,17 @@ namespace nwjsCookToolUI
             }
         }
 
-        private void MapCompilerFinisher(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
+        private void MapCompilerFinisher(object sender, RunWorkerCompletedEventArgs e)
         {
+            //if (e.Error != null)
+            //{
+
+            //}
+            if (e.Cancelled)
+            {
+                OutputArea.Text += "\n" + DateTime.Now + "\n" + nwjsCookToolUI.Properties.Resources.TaskCancelledOutputText + "\n";
+                MessageBox.Show(nwjsCookToolUI.Properties.Resources.TaskCancelledMessage, nwjsCookToolUI.Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
             OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + Properties.Resources.CompilationCompleteText + "\n";
             MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText, MessageBoxButton.OK, MessageBoxImage.Information);
             MapStatusLabel.Content = Properties.Resources.DoneText;
@@ -509,5 +524,9 @@ namespace nwjsCookToolUI
         }
         #endregion Batch Compile Code Set
 
+        private void CancelMapCompileButton_Click(object sender, RoutedEventArgs e)
+        {
+            _mapCompilerWorker.CancelAsync();
+        }
     }
 }

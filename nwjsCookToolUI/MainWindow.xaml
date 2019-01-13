@@ -65,7 +65,7 @@
                                     Click="CompileButton_Click" />
                             <ProgressBar x:Name="MainProgress" Height="23" VerticalAlignment="Top" Margin="0,37,90,0" />
                             <Button x:Name="TestProjectButton" Content="{x:Static properties:Resources.TestUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="439,60,0,0" Height="23" Click="TestProjectButton_Click"/>
-                            <Button x:Name="CancelTaskButton" Content="Cancel" HorizontalAlignment="Left" Margin="439,37,0,0" VerticalAlignment="Top" Width="73" Height="23" Visibility="Hidden" Click="CancelTaskButton_Click"/>
+                            <Button x:Name="CancelTaskButton" Content="{x:Static properties:Resources.CancelTaskButtonText}" HorizontalAlignment="Left" Margin="439,37,0,0" VerticalAlignment="Top" Width="75" Height="23" Visibility="Hidden" Click="CancelTaskButton_Click"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -96,6 +96,8 @@
                                          Margin="0,81,90,0" />
                             <Label x:Name="CurrentWorkloadLabel" Content="{x:Static properties:Resources.WaitingUiText2}"
                                    HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" />
+                            <Button x:Name="CancelMapCompileButton" Content="{x:Static properties:Resources.CancelTaskButtonText}" HorizontalAlignment="Left"
+                                Margin="439,26,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="CancelMapCompileButton_Click" Visibility="Hidden" />
                         </Grid>
                     </GroupBox>
 

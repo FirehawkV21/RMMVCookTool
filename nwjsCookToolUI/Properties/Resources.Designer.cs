@@ -61,6 +61,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aborted.
+        /// </summary>
+        public static string AbortedText {
+            get {
+                return ResourceManager.GetString("AbortedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string AboutUiText {
@@ -122,6 +131,15 @@ namespace nwjsCookToolUI.Properties {
         public static string BrowseUiText {
             get {
                 return ResourceManager.GetString("BrowseUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelTaskButtonText {
+            get {
+                return ResourceManager.GetString("CancelTaskButtonText", resourceCulture);
             }
         }
         
@@ -483,6 +501,24 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The task was cancelled..
+        /// </summary>
+        public static string TaskCancelledMessage {
+            get {
+                return ResourceManager.GetString("TaskCancelledMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The task was cancelled by the user..
+        /// </summary>
+        public static string TaskCancelledOutputText {
+            get {
+                return ResourceManager.GetString("TaskCancelledOutputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test.
         /// </summary>
         public static string TestUiText {
@@ -492,7 +528,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version D1.03.
+        ///   Looks up a localized string similar to Version D1.04.
         /// </summary>
         public static string VersionText {
             get {
