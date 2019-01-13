@@ -20,12 +20,14 @@ namespace nwjsCookToolUI
     /// </summary>
     public partial class MainWindow
     {
+        #region Variables
         private static int _currentFile = 0;
         private static int _processorMode = 0;
         private static string[] _projectList;
         private static string _errorOutput;
         private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
         private readonly BackgroundWorker _mapCompilerWorker = new BackgroundWorker();
+        #endregion Variables
 
         public MainWindow()
         {
@@ -33,7 +35,7 @@ namespace nwjsCookToolUI
             SetupWorkers();
         }
 
-
+        #region Methods
         private void SetupWorkers()
         {
             _compilerWorker.WorkerReportsProgress = true;
@@ -46,6 +48,29 @@ namespace nwjsCookToolUI
             _mapCompilerWorker.DoWork += StartMapCompiler;
             _mapCompilerWorker.ProgressChanged += CompilerReport;
 
+        }
+
+        /// <summary>
+        /// Locks or unlocks the settings.
+        /// </summary>
+        /// <param name="unlockSetting">Lock (false) or unlock (true).</param>
+        private void UnlockSettings(bool unlockSetting)
+        {
+            RemoveCompiledJsCheckbox.IsEnabled = unlockSetting;
+            PackageNwCheckbox.IsEnabled = unlockSetting;
+            FileExtensionTextbox.IsEnabled = unlockSetting;
+            BrowseSdkButton.IsEnabled = unlockSetting;
+            RemoveFilesCheckBox.IsEnabled = unlockSetting && PackageNwCheckbox.IsChecked == true;
+        }
+        #endregion Methods
+
+        #region Settings Code Set
+        private void CookToolUi_Loaded(object sender, RoutedEventArgs e)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            var version = fvi.FileVersion;
+            ProgramVersionLabel.Content = ProgramVersionLabel.Content + @" (" + version + @")";
         }
 
         private void BrowseSDKButton_Click(object sender, RoutedEventArgs e)
@@ -62,19 +87,28 @@ namespace nwjsCookToolUI
             Settings.Default.Save();
         }
 
-        /// <summary>
-        /// Locks or unlocks the settings.
-        /// </summary>
-        /// <param name="unlockSetting">Lock (false) or unlock (true).</param>
-        private void UnlockSettings(bool unlockSetting)
+        private void ReplacementCodeButton_Click(object sender, RoutedEventArgs e)
         {
-            RemoveCompiledJsCheckbox.IsEnabled = unlockSetting;
-            PackageNwCheckbox.IsEnabled = unlockSetting;
-            FileExtensionTextbox.IsEnabled = unlockSetting;
-            BrowseSdkButton.IsEnabled = unlockSetting;
-            RemoveFilesCheckBox.IsEnabled = unlockSetting && PackageNwCheckbox.IsChecked == true;
+            var ci = CultureInfo.InstalledUICulture.ToString() == "el-GR" || CultureInfo.InstalledUICulture.ToString() == "el-CY" ? "el" : "en";
+            var fileLocation = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), ci, "ReplacementCode.txt");
+            if (File.Exists(fileLocation)) Process.Start(fileLocation);
+            else
+                MessageBox.Show(Properties.Resources.FileUnavailableText, Properties.Resources.InfoText, MessageBoxButton.OK,
+                    MessageBoxImage.Information);
         }
 
+        private void RemoveFilesCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.Save();
+        }
+
+        private void FileExtensionTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Settings.Default.Save();
+        }
+        #endregion Settings Code Set
+
+        #region Quick Compile Code Set
         private void FindProjectButton_Click(object sender, RoutedEventArgs e)
         {
             var pickProjectFolder =
@@ -295,14 +329,13 @@ namespace nwjsCookToolUI
 
     }
 
-        private void CookToolUi_Loaded(object sender, RoutedEventArgs e)
+        private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            var version = fvi.FileVersion;
-            ProgramVersionLabel.Content = ProgramVersionLabel.Content + @" (" + version + @")";
+            _compilerWorker.CancelAsync();
         }
+        #endregion Quick Compile Code Set
 
+        #region Batch Compile Code Set
         private void AddToMapButton_Click(object sender, RoutedEventArgs e)
         {
             var pickJsFolder =
@@ -437,11 +470,6 @@ namespace nwjsCookToolUI
             });
         }
 
-        private void FileExtensionTextbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Settings.Default.Save();
-        }
-
         private void Checkbox_CheckChanged(object sender, RoutedEventArgs e)
         {
             Settings.Default.Save();
@@ -461,25 +489,7 @@ namespace nwjsCookToolUI
             }
 
         }
+        #endregion Batch Compile Code Set
 
-        private void ReplacementCodeButton_Click(object sender, RoutedEventArgs e)
-        {
-            var ci = CultureInfo.InstalledUICulture.ToString() == "el-GR" || CultureInfo.InstalledUICulture.ToString() == "el-CY" ? "el" : "en";
-            var fileLocation = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName), ci, "ReplacementCode.txt");
-            if (File.Exists(fileLocation)) Process.Start(fileLocation);
-            else
-                MessageBox.Show(Properties.Resources.FileUnavailableText, Properties.Resources.InfoText, MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-        }
-
-        private void RemoveFilesCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            Settings.Default.Save();
-        }
-
-        private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
-        {
-            _compilerWorker.CancelAsync();
-        }
     }
 }
