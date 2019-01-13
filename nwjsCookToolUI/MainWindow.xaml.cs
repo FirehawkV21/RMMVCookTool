@@ -21,8 +21,8 @@ namespace nwjsCookToolUI
     public partial class MainWindow
     {
         #region Variables
-        private static int _currentFile = 0;
-        private static int _processorMode = 0;
+        private static int _currentFile;
+        private static int _compilerStatusReport;
         private static string[] _projectList;
         //private static string _errorOutput;
         private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
@@ -127,6 +127,7 @@ namespace nwjsCookToolUI
 
         private void CompileButton_Click(object sender, RoutedEventArgs e)
         {
+            _compilerStatusReport = 0;
             CompileButton.Visibility = Visibility.Hidden;
             CancelTaskButton.Visibility = Visibility.Visible;
             TestProjectButton.IsEnabled = false;
@@ -195,7 +196,7 @@ namespace nwjsCookToolUI
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
                 if (Settings.Default.PackageCode)
                     Dispatcher.Invoke(() =>  (Settings.Default.DeleteSourceCode) ? MainProgress.Maximum += 2 : 1);
-                _processorMode = 1;
+                _compilerStatusReport = 1;
                 for(_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
                 {
                     if (_compilerWorker.CancellationPending)
@@ -205,7 +206,7 @@ namespace nwjsCookToolUI
                     }
                     CoreCode.CompilerWorkerTask(CoreCode.FileMap[_currentFile], Settings.Default.FileExtension, Settings.Default.DeleteSourceCode);
                     _compilerWorker.ReportProgress(_currentFile + 1);
-                    _processorMode = 2;
+                    _compilerStatusReport = 2;
                     Thread.Sleep(200);
                 }
 
@@ -213,15 +214,15 @@ namespace nwjsCookToolUI
                 {
                     if (Settings.Default.PackageCode)
                     {
-                        _processorMode = 3;
+                        _compilerStatusReport = 3;
                         _compilerWorker.ReportProgress(_currentFile + 1);
                         CoreCode.PreparePack(compilerInput);
-                        _processorMode = 4;
+                        _compilerStatusReport = 4;
                         _compilerWorker.ReportProgress(_currentFile + 2);
                         CoreCode.CompressFiles(compilerInput);
                         if (Settings.Default.DeleteSourceCode)
                         {
-                            _processorMode = 5;
+                            _compilerStatusReport = 5;
                             _compilerWorker.ReportProgress(_currentFile + 3);
                             CoreCode.DeleteFiles(compilerInput);
                         }
@@ -229,7 +230,7 @@ namespace nwjsCookToolUI
                 }
 
                 if (_compilerWorker.CancellationPending) return;
-                _processorMode = 6;
+                _compilerStatusReport = 6;
                 _compilerWorker.ReportProgress(_currentFile + 1);
             }
             catch (ArgumentException exceptionOutput)
@@ -276,7 +277,7 @@ namespace nwjsCookToolUI
 
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
         {
-            switch (_processorMode)
+            switch (_compilerStatusReport)
             {
                 case 6:
                     MainProgress.Value += 1;
@@ -420,7 +421,7 @@ namespace nwjsCookToolUI
             {
                 for (_currentProject = 0; _currentProject < _projectList.Length; _currentProject++)
                 {
-                    _processorMode = 0;
+                    _compilerStatusReport = 0;
                     if (_mapCompilerWorker.CancellationPending)
                     {
                         e.Cancel = true;
@@ -429,11 +430,11 @@ namespace nwjsCookToolUI
                     CoreCode.FileFinder(FolderList.Items[_currentProject].ToString(), "*.js");
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
                     Thread.Sleep(200);
-                    _processorMode = 1;
+                    _compilerStatusReport = 1;
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
                     Thread.Sleep(200);
                     CoreCode.CleanupBin();
-                    _processorMode = 2;
+                    _compilerStatusReport = 2;
                     for (_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
                     {
                         if (_mapCompilerWorker.CancellationPending)
@@ -447,7 +448,7 @@ namespace nwjsCookToolUI
 
                     }
                     Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
-                    _processorMode = 3;
+                    _compilerStatusReport = 3;
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
                     Thread.Sleep(200);
                 }
@@ -484,7 +485,7 @@ namespace nwjsCookToolUI
 
         private void MapCompilerReport(object sender, ProgressChangedEventArgs e)
         {
-            switch (_processorMode)
+            switch (_compilerStatusReport)
             {
                 case 3:
                     CurrentWorkloadBar.Value = 0;
