@@ -10,8 +10,8 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Studio ACE")]
 [assembly: AssemblyProduct("RPG Maker Toolkit")]
-[assembly: AssemblyCopyright("Copyright ©  2018 Studio ACE")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2019 Studio ACE.")]
+[assembly: AssemblyTrademark("RPG Maker MV: KADOKAWA/YOJI OJIMA")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -49,5 +49,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.4.0.19013")]
-[assembly: AssemblyFileVersion("1.4.0.19013")]
+[assembly: AssemblyVersion("1.4.1.19029")]
+[assembly: AssemblyFileVersion("1.4.1.19029")]

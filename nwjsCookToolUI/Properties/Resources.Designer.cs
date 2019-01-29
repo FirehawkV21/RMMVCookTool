@@ -528,7 +528,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version D1.04.
+        ///   Looks up a localized string similar to Version D1.04 Update 1.
         /// </summary>
         public static string VersionText {
             get {
