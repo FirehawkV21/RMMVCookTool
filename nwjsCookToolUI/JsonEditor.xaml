@@ -1,0 +1,87 @@
+﻿<Window x:Class="nwjsCookToolUI.JsonEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:nwjsCookToolUI"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Game Metadata Editor" Height="410.92" Width="449.318">
+    <Grid>
+        <TabControl Height="351" VerticalAlignment="Top" Margin="0,0,-0.8,0">
+            <TabItem Header="Game Info">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Header="Essentials" Height="153" VerticalAlignment="Top" Margin="0,0,-0.4,0">
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Game ID" VerticalAlignment="Top"/>
+                            <TextBox x:Name="GameIdTextBox" Height="23" Margin="0,16,9.6,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="HTML file location" VerticalAlignment="Top" Margin="0,39,0,0"/>
+                            <TextBox x:Name="FileLocationTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,55,9.6,0"/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,78,0,0"><Run Text="Version"/></TextBlock>
+                            <TextBox x:Name="VersionTextBox" TextWrapping="Wrap" Text="TextBox" Margin="-1,94,9.6,13.4"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="NW.js features" Height="169" Margin="0,158,-0.4,-3.8" VerticalAlignment="Top">
+                        <Grid>
+                            <CheckBox x:Name="EnableNodeJSTextBox" Content="Enable NodeJS?" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,15,0,0"><Run Text="Chromium Flags"/></TextBlock>
+                            <TextBox x:Name="ChromeFlagsTextBox" TextWrapping="Wrap" Margin="-2,29,9.6,0" Height="23" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,57,0,0"><Run Text="JavaScript Flags"/></TextBlock>
+                            <TextBox x:Name="JsFlagsTextBox" TextWrapping="Wrap" Margin="0,73,9.6,0" Height="23" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,96,0,0"><Run Text="Game Name"/></TextBlock>
+                            <TextBox x:Name="GameNameTextBox" TextWrapping="Wrap" Margin="0,112,9.6,0" Height="23" VerticalAlignment="Top"/>
+
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Window Settings">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Header="Window" Height="114" VerticalAlignment="Top" Margin="0,0,-0.4,0">
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Icon Location"/></TextBlock>
+                            <TextBox x:Name="IconLocationTextBox" TextWrapping="Wrap" Margin="0,16,9.6,0" Height="23" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,39,0,0"><Run Text="Window Title"/></TextBlock>
+                            <TextBox x:Name="WindowTitleTextBox" TextWrapping="Wrap" Margin="0,55,9.6,0" Height="23" VerticalAlignment="Top"/>
+
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Resolution" Margin="0,114,-0.4,0.4">
+                        <Grid>
+                            <GroupBox Header="Settings" Margin="0,0,224.6,-0.4">
+                                <Grid>
+                                    <CheckBox x:Name="ResizableWindowCheckBox" Content="Resizable Window?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,0,0,0"/>
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="8,15,0,0"><Run Text="Start:"/></TextBlock>
+                                    <ComboBox x:Name="WindowModeList" Margin="-1,35,10,0" Height="23" VerticalAlignment="Top" SelectedIndex="0">
+                                        <ComboBoxItem Content="Windowed"/>
+                                        <ComboBoxItem Content="Centered"/>
+                                        <ComboBoxItem Content="In Full Screen"/>
+                                        <ComboBoxItem Content="In Kiosk Mode"/>
+                                    </ComboBox>
+
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="Window Size" Margin="206,0,-0.4,-0.4">
+                                <Grid>
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Height" VerticalAlignment="Top"/>
+                                    <xctk:IntegerUpDown x:Name="HeightNumber" Value="1564" Margin="0,16,121.2,125.2" />
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Minimum Height" VerticalAlignment="Top" Margin="107,0,0,0"/>
+                                    <xctk:IntegerUpDown x:Name="MinimumHeightNumber" Value="1564" Margin="111,16,10.2,125.2" />
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Width" VerticalAlignment="Top" Margin="0,43,0,0"/>
+                                    <xctk:IntegerUpDown x:Name="WidthNumber" Value="1564" Margin="0,59,121.2,82.2" />
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Minimum Width" VerticalAlignment="Top" Margin="111,43,0,0"/>
+                                    <xctk:IntegerUpDown x:Name="MinimumWidthNumber" Value="1564" Margin="111,59,10.2,82.2" />
+                                </Grid>
+                            </GroupBox>
+                            
+
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Content="Cancel" Margin="0,356,9.6,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75"/>
+        <Button Content="Save" Margin="0,356,95.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75"/>
+
+    </Grid>
+</Window>
