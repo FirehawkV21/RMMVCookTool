@@ -37,6 +37,7 @@
                                 Click="BrowseSDKButton_Click" />
                         <Button x:Name="ReplacementCodeButton" Content="{x:Static properties:Resources.ReplacementCodeUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="0,134,0,0" Height="23" Click="ReplacementCodeButton_Click"/>
                         <CheckBox x:Name="RemoveFilesCheckBox" Content="{x:Static properties:Resources.RemoveSourceFilesUIText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0" IsEnabled="{Binding IsChecked, ElementName=PackageNwCheckbox}" IsChecked="{Binding RemoveFilesAfterPackaging, Mode=TwoWay, UpdateSourceTrigger=Explicit}"  Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged"/>
+                        <Button x:Name="TestJsonButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="0,198,0,-45.8" Click="TestJsonButton_Click"/>
                     </Grid>
                 </GroupBox>
             </TabItem>

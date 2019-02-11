@@ -546,5 +546,12 @@ namespace nwjsCookToolUI
             _mapCompilerWorker.CancelAsync();
         }
         #endregion Batch Compile Code Set
+
+        private void TestJsonButton_Click(object sender, RoutedEventArgs e)
+        {
+            string printme = JsonProcessor.BuildJson("TestName", "test-game", "www/index.html", true,
+                "--disable-hardware-aceleration", "--expose-gc", "www/icon/icon.png", 1280, 720, 1280, 720);
+            MessageBox.Show(printme);
+        }
     }
 }
