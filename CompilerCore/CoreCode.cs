@@ -146,12 +146,26 @@ namespace CompilerCore
         /// Compresses the game's files (after copying them in a temporary location) to a zip file named package.nw (app.nw on Mac).
         /// </summary>
         /// <param name="deployArea">The destination path for the archive.</param>
-        public static void CompressFiles(string deployArea)
+        public static void CompressFiles(string deployArea, int CompressionSelector)
         {
             var packageOutput = Path.Combine(deployArea, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
-            ZipFile.CreateFromDirectory(TempFolderLocation,
-                packageOutput);
+            switch (CompressionSelector)
+            {
+                case 2:
+                    ZipFile.CreateFromDirectory(TempFolderLocation,
+                        packageOutput, CompressionLevel.NoCompression, false);
+                    break;
+                case 1:
+                    ZipFile.CreateFromDirectory(TempFolderLocation,
+                        packageOutput, CompressionLevel.Fastest, false);
+                    break;
+                case 0:
+                    ZipFile.CreateFromDirectory(TempFolderLocation,
+                        packageOutput, CompressionLevel.Optimal, false);
+                    break;
+            }
+
             Directory.Delete(TempFolderLocation, true);
         }
         //This method deletes the projects files.

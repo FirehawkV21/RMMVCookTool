@@ -219,7 +219,7 @@ namespace nwjsCookToolUI
                         CoreCode.PreparePack(compilerInput);
                         _compilerStatusReport = 4;
                         _compilerWorker.ReportProgress(_currentFile + 2);
-                        CoreCode.CompressFiles(compilerInput);
+                        CoreCode.CompressFiles(compilerInput, Settings.Default.CompressionMode);
                         if (Settings.Default.DeleteSourceCode)
                         {
                             _compilerStatusReport = 5;

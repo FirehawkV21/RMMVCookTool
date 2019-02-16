@@ -18,6 +18,7 @@ namespace nwjsCompilerCLI
         private static bool _settingsSet;
         private static bool _removeJsFiles;
         private static int _checkDeletion = 1;
+        private static int _compressionLevel = 0;
 
         private static void Main(string[] args)
         {
@@ -131,6 +132,23 @@ namespace nwjsCompilerCLI
                             {
                                 _testProject = true;
                                 Console.WriteLine("NW.js will start after compiling.");
+                            }
+                            break;
+                        case "--SetCompressionLevel":
+                            if (argnum + 1 <= args.Length - 1 && !args[argnum].Contains("--"))
+                            {
+                                switch (argnum + 1)
+                                {
+                                    case 2:
+                                        _compressionLevel = 2;
+                                        break;
+                                    case 1:
+                                        _compressionLevel = 1;
+                                        break;
+                                    default:
+                                        _compressionLevel = 0;
+                                        break;
+                                }
                             }
                             break;
                     }
@@ -275,7 +293,7 @@ namespace nwjsCompilerCLI
                     Console.WriteLine("\n"+ DateTime.Now +"\nCopying the game files to a temporary location...");
                     CoreCode.PreparePack(_projectLocation);
                     Console.WriteLine("\n"+ DateTime.Now +"\nCompressing files...");
-                    CoreCode.CompressFiles(_projectLocation);
+                    CoreCode.CompressFiles(_projectLocation, _compressionLevel);
                     if (_compressProject == 1)
                     {
                         Console.WriteLine("\n" + DateTime.Now + "\nDeleting source files...");

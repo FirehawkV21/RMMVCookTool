@@ -82,5 +82,17 @@ namespace nwjsCookToolUI.Properties {
                 this["RemoveFilesAfterPackaging"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CompressionMode {
+            get {
+                return ((int)(this["CompressionMode"]));
+            }
+            set {
+                this["CompressionMode"] = value;
+            }
+        }
     }
 }
