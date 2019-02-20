@@ -560,5 +560,17 @@ namespace nwjsCookToolUI
             +"\nGame ID: " + (string) JsonFile["name"] + "\nHTML File Location: " + (string) JsonFile["main"] + "\n";
             MessageBox.Show("Interpreted some of the variables as such:\n" + printme);
         }
+
+        private void EditJsonButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProjectLocation.Text == null || !Directory.Exists(ProjectLocation.Text))
+                MessageBox.Show("The project location isn't valid.", Properties.Resources.ErrorText,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                var JsonEditorGui = new JsonEditor(ProjectLocation.Text);
+                JsonEditorGui.Show();
+            }
+        }
     }
 }

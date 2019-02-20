@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:nwjsCookToolUI"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Game Metadata Editor" Height="410.92" Width="449.318">
+        Title="Game Metadata Editor" Height="410.92" Width="449.318" Loaded="Window_Loaded">
     <Grid>
         <TabControl Height="351" VerticalAlignment="Top" Margin="0,0,-0.8,0">
             <TabItem Header="Game Info">
@@ -23,7 +23,7 @@
                     </GroupBox>
                     <GroupBox Header="NW.js features" Height="169" Margin="0,158,-0.4,-3.8" VerticalAlignment="Top">
                         <Grid>
-                            <CheckBox x:Name="EnableNodeJSTextBox" Content="Enable NodeJS?" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <CheckBox x:Name="EnableNodeJSCheckBox" Content="Enable NodeJS?" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,15,0,0"><Run Text="Chromium Flags"/></TextBlock>
                             <TextBox x:Name="ChromeFlagsTextBox" TextWrapping="Wrap" Margin="-2,29,9.6,0" Height="23" VerticalAlignment="Top"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,57,0,0"><Run Text="JavaScript Flags"/></TextBlock>
@@ -54,11 +54,15 @@
                                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="8,15,0,0"><Run Text="Start:"/></TextBlock>
                                     <ComboBox x:Name="WindowModeList" Margin="-1,35,10,0" Height="23" VerticalAlignment="Top" SelectedIndex="0">
                                         <ComboBoxItem Content="Windowed"/>
-                                        <ComboBoxItem Content="Centered"/>
                                         <ComboBoxItem Content="In Full Screen"/>
                                         <ComboBoxItem Content="In Kiosk Mode"/>
                                     </ComboBox>
-
+                                    <ComboBox x:Name="WindowLocationList" Margin="-1,108,10,0" Height="23" VerticalAlignment="Top" SelectedIndex="0">
+                                        <ComboBoxItem Content="None"/>
+                                        <ComboBoxItem Content="Screen Center"/>
+                                        <ComboBoxItem Content="Mouse Cursor"/>
+                                    </ComboBox>
+                                    <Label Content="Window Position" HorizontalAlignment="Left" Margin="8,82,0,0" VerticalAlignment="Top"/>
                                 </Grid>
                             </GroupBox>
                             <GroupBox Header="Window Size" Margin="206,0,-0.4,-0.4">

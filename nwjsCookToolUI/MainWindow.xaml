@@ -49,7 +49,7 @@
             </TabItem>
             <TabItem Header="{x:Static properties:Resources.QuickCompileUiText}">
                 <Grid Background="#FFFFFDFD">
-                    <GroupBox Header="Setup" Margin="0,0,0,0" Height="86" VerticalAlignment="Top">
+                    <GroupBox Header="Setup" Margin="0,0,0.2,0" Height="104" VerticalAlignment="Top">
                         <Grid>
 
                             <Label Content="{x:Static properties:Resources.ProjectLocationUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" />
@@ -60,10 +60,11 @@
                             <Button x:Name="FindProjectButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Left"
                                     Margin="439,26,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                     Click="FindProjectButton_Click" />
+                            <Button x:Name="editJsonButton" Content="Edit Package Metadata" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="364,49,0,0" Height="23" Click="EditJsonButton_Click"/>
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="{x:Static properties:Resources.CompilerStatusUiText}" Margin="0,86,0,0" Height="120" VerticalAlignment="Top">
+                    <GroupBox Header="{x:Static properties:Resources.CompilerStatusUiText}" Margin="0,104,0,0" Height="120" VerticalAlignment="Top">
                         <Grid>
                             <Label x:Name="StatusLabel" Content="{x:Static properties:Resources.WaitingUiText}" HorizontalAlignment="Left"
                                    Margin="0,11,0,0" VerticalAlignment="Top" />
