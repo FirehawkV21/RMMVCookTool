@@ -6,8 +6,9 @@ namespace CompilerCore
 {
     public class JsonProcessor
     {
+        public static string JsonString;
         public string JsonData;
-        public static string BuildJson(string appName, string gameId, string fileLocation, bool nodeJsEnabled, string chromiumFlags, string jsFlags, string iconLocation, int windowWidth, int windowHeight, int windowMinWidth, int windowMinHeight)
+        public static string BuildJson(string appName, string gameId, string fileLocation, bool nodeJsEnabled, string chromiumFlags, string jsFlags, string iconLocation, int windowWidth, int windowHeight, int windowMinWidth, int windowMinHeight, string FileLocation)
         {
             JObject gameMetadata = new JObject(
                 new JProperty("app_name", appName),
@@ -23,22 +24,23 @@ namespace CompilerCore
                         new JProperty("height", windowHeight),
                         new JProperty("min_width", windowMinWidth),
                         new JProperty("min_height", windowMinHeight))));
-            using (StreamWriter settingsFile = new StreamWriter("C:\\Users\\acemo\\package.json"))
+            using (StreamWriter settingsFile = new StreamWriter(Path.Combine(FileLocation, "package.json")))
             settingsFile.Write(gameMetadata);
             return gameMetadata.ToString();
         }
 
-        //public static async string ReadJson(string FileLocation)
-        //{
-        //    char[] JsonIn;
-        //    using (StreamReader settingsLoader = new StreamReader("C:\\Users\\acemo\\packge.json"))
-        //    {
-        //        JsonIn = new Char[(int)settingsLoader.BaseStream.Length];
-        //        await settingsLoader.ReadAsync(JsonIn, 0, (int) settingsLoader.BaseStream.Length);
-        //    }
 
-        //    string JsonOut = new string(JsonIn);
-        //    return JsonOut;
-        //}
+        public static string ReadJson(string FileLocation)
+        {
+            char[] JsonIn;
+            using (StreamReader settingsLoader = new StreamReader(FileLocation))
+            {
+                JsonIn = new Char[(int)settingsLoader.BaseStream.Length];
+                settingsLoader.Read(JsonIn, 0, (int)settingsLoader.BaseStream.Length);
+            }
+
+            JsonString = new string(JsonIn);
+            return JsonString;
+        }
     }
 }

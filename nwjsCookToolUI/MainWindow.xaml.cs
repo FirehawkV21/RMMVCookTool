@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using CompilerCore;
 using nwjsCookToolUI.Properties;
+using Newtonsoft.Json.Linq;
 using Ookii.Dialogs.Wpf;
 
 namespace nwjsCookToolUI
@@ -550,8 +551,14 @@ namespace nwjsCookToolUI
         private void TestJsonButton_Click(object sender, RoutedEventArgs e)
         {
             string printme = JsonProcessor.BuildJson("TestName", "test-game", "www/index.html", true,
-                "--disable-hardware-aceleration", "--expose-gc", "www/icon/icon.png", 1280, 720, 1280, 720);
+                "--disable-hardware-aceleration", "--expose-gc", "www/icon/icon.png", 1280, 720, 1280, 720, "C:\\Users\\Public\\package.json");
             MessageBox.Show(printme);
+            printme = "This is from the file:" + JsonProcessor.ReadJson("C:\\Users\\Public\\package.json");
+            MessageBox.Show(printme);
+            JObject JsonFile = JObject.Parse(JsonProcessor.JsonString);
+            printme = "App Name: " + (string)JsonFile["app_name"]
+            +"\nGame ID: " + (string) JsonFile["name"] + "\nHTML File Location: " + (string) JsonFile["main"] + "\n";
+            MessageBox.Show("Interpreted some of the variables as such:\n" + printme);
         }
     }
 }

@@ -18,7 +18,7 @@
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="HTML file location" VerticalAlignment="Top" Margin="0,39,0,0"/>
                             <TextBox x:Name="FileLocationTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,55,9.6,0"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,78,0,0"><Run Text="Version"/></TextBlock>
-                            <TextBox x:Name="VersionTextBox" TextWrapping="Wrap" Text="TextBox" Margin="-1,94,9.6,13.4"/>
+                            <TextBox x:Name="VersionTextBox" TextWrapping="Wrap" Margin="-1,94,9.6,13.4"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="NW.js features" Height="169" Margin="0,158,-0.4,-3.8" VerticalAlignment="Top">
