@@ -55,10 +55,10 @@ namespace nwjsCookToolUI
                         break;
                 }
 
-                HeightNumber.Value = (int) projectMetadata["window"]["height"];
-                WidthNumber.Value = (int) projectMetadata["window"]["width"];
-                MinimumHeightNumber.Value = (int) projectMetadata["window"]["min_height"];
-                MinimumWidthNumber.Value = (int) projectMetadata["window"]["min_width"];
+                HeightNumber.Value = ((int?)projectMetadata["window"]["height"] == null) ? 816 : (int) projectMetadata["window"]["height"];
+                WidthNumber.Value = ((int?)projectMetadata["window"]["width"] == null) ? 624 : (int) projectMetadata["window"]["width"];
+                MinimumHeightNumber.Value = ((int?)projectMetadata["window"]["min_height"] == null) ? 816 : (int) projectMetadata["window"]["min_height"];
+                MinimumWidthNumber.Value = ((int?)projectMetadata["window"]["min_width"] == null) ? 624 : (int) projectMetadata["window"]["min_width"];
             }
             else
             {

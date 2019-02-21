@@ -249,7 +249,7 @@
     <value>Πληροφορίες Προγράμματος</value>
   </data>
   <data name="VersionText" xml:space="preserve">
-    <value>Έκδοση D1.04 Ενημέρωση 1</value>
+    <value>Έκδοση D1.04 Ενημέρωση 2</value>
   </data>
   <data name="DevInfoUiText" xml:space="preserve">
     <value>Αναπτύχθηκε από τον AceOfAces. Αδειοδοτείται κάτω από το GNU General Public License v3.</value>
@@ -406,5 +406,8 @@
   </data>
   <data name="ProjectLocationNotValidText" xml:space="preserve">
     <value>Η θέση του project δεν είναι έγκυρη.</value>
+  </data>
+  <data name="StartUiText" xml:space="preserve">
+    <value>Εκκίνηση:</value>
   </data>
 </root>

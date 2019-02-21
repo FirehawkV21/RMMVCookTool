@@ -249,7 +249,7 @@ Compiled on </value>
     <value>Program Information</value>
   </data>
   <data name="VersionText" xml:space="preserve">
-    <value>Version D1.04 Update 1</value>
+    <value>Version D1.04 Update 2</value>
   </data>
   <data name="DevInfoUiText" xml:space="preserve">
     <value>Developed by AceOfAces. Licensed under GNU General Public License v3.</value>
@@ -406,5 +406,8 @@ Compiled on </value>
   </data>
   <data name="ProjectLocationNotValidText" xml:space="preserve">
     <value>The project location isn't valid.</value>
+  </data>
+  <data name="StartUiText" xml:space="preserve">
+    <value>Start:</value>
   </data>
 </root>

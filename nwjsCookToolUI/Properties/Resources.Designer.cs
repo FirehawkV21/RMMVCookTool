@@ -807,6 +807,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start:.
+        /// </summary>
+        public static string StartUiText {
+            get {
+                return ResourceManager.GetString("StartUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The task was cancelled..
         /// </summary>
         public static string TaskCancelledMessage {
@@ -834,7 +843,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version D1.04 Update 1.
+        ///   Looks up a localized string similar to Version D1.04 Update 2.
         /// </summary>
         public static string VersionText {
             get {

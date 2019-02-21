@@ -56,7 +56,7 @@
                             <GroupBox Header="{x:Static properties:Resources.SettingsUiText}" Margin="0,0,224.6,-0.4">
                                 <Grid>
                                     <CheckBox x:Name="ResizableWindowCheckBox" Content="{x:Static properties:Resources.ResizableWindowUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="8,15,0,0"><Run Text="Start:"/></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="8,15,0,0"><Run Text="{x:Static properties:Resources.StartUiText}"/></TextBlock>
                                     <ComboBox x:Name="WindowModeList" Margin="-1,35,10,0" Height="23" VerticalAlignment="Top" SelectedIndex="0">
                                         <ComboBoxItem Content="{x:Static properties:Resources.WindowedListItemText}"/>
                                         <ComboBoxItem Content="{x:Static properties:Resources.InFullScreenListItemText}"/>
