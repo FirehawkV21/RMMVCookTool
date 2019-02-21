@@ -263,6 +263,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Package Metadata.
+        /// </summary>
+        public static string EditPackageMetadataButtonText {
+            get {
+                return ResourceManager.GetString("EditPackageMetadataButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable NodeJS?.
         /// </summary>
         public static string EnableNodeJSCheckBoxText {
@@ -382,11 +391,29 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Game Info.
+        /// </summary>
+        public static string GameInfoTabText {
+            get {
+                return ResourceManager.GetString("GameInfoTabText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game Name.
         /// </summary>
         public static string GameNameUiText {
             get {
                 return ResourceManager.GetString("GameNameUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Package Metadata Editor.
+        /// </summary>
+        public static string GamePackageMetadataEditorTitleText {
+            get {
+                return ResourceManager.GetString("GamePackageMetadataEditorTitleText", resourceCulture);
             }
         }
         
@@ -463,7 +490,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An IO Exception occured. Is an app using the package.json file?.
+        ///   Looks up a localized string similar to An IO Exception occurred. Is an app using the package.json file?.
         /// </summary>
         public static string IOErrorText {
             get {
@@ -614,6 +641,15 @@ namespace nwjsCookToolUI.Properties {
         public static string ProjectFoldersUiText {
             get {
                 return ResourceManager.GetString("ProjectFoldersUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The project location isn&apos;t valid..
+        /// </summary>
+        public static string ProjectLocationNotValidText {
+            get {
+                return ResourceManager.GetString("ProjectLocationNotValidText", resourceCulture);
             }
         }
         

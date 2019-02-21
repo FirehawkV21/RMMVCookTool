@@ -390,9 +390,21 @@ Compiled on </value>
     <value>The path to the project is too long. Please shorten the path.</value>
   </data>
   <data name="IOErrorText" xml:space="preserve">
-    <value>An IO Exception occured. Is an app using the package.json file?</value>
+    <value>An IO Exception occurred. Is an app using the package.json file?</value>
   </data>
   <data name="FileAccessError" xml:space="preserve">
     <value>Cannot access the folder. Please check that you have permission to read and write on the folder.</value>
+  </data>
+  <data name="GameInfoTabText" xml:space="preserve">
+    <value>Game Info</value>
+  </data>
+  <data name="EditPackageMetadataButtonText" xml:space="preserve">
+    <value>Edit Package Metadata</value>
+  </data>
+  <data name="GamePackageMetadataEditorTitleText" xml:space="preserve">
+    <value>Game Package Metadata Editor</value>
+  </data>
+  <data name="ProjectLocationNotValidText" xml:space="preserve">
+    <value>The project location isn't valid.</value>
   </data>
 </root>

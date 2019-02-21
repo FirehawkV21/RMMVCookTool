@@ -7,10 +7,10 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:properties="clr-namespace:nwjsCookToolUI.Properties"
         mc:Ignorable="d"
-        Title="Game Metadata Editor" Height="420.52" Width="449.318" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" ResizeMode="CanMinimize">
+        Title="{x:Static properties:Resources.GamePackageMetadataEditorTitleText}" Height="427.72" Width="449.318" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" ResizeMode="CanMinimize">
     <Grid>
         <TabControl Height="357" VerticalAlignment="Top" Margin="0,0,-0.8,0">
-            <TabItem Header="Game Info">
+            <TabItem Header="{x:Static properties:Resources.GameInfoTabText}">
                 <Grid>
                     <GroupBox Header="{x:Static properties:Resources.EssentialsGroupString}" Height="153" VerticalAlignment="Top" Margin="0,0,-0.4,0">
                         <Grid>
@@ -55,7 +55,7 @@
                         <Grid>
                             <GroupBox Header="{x:Static properties:Resources.SettingsUiText}" Margin="0,0,224.6,-0.4">
                                 <Grid>
-                                    <CheckBox x:Name="ResizableWindowCheckBox" Content="{x:Static properties:Resources.ResizableWindowUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,0,0,0"/>
+                                    <CheckBox x:Name="ResizableWindowCheckBox" Content="{x:Static properties:Resources.ResizableWindowUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="8,15,0,0"><Run Text="Start:"/></TextBlock>
                                     <ComboBox x:Name="WindowModeList" Margin="-1,35,10,0" Height="23" VerticalAlignment="Top" SelectedIndex="0">
                                         <ComboBoxItem Content="{x:Static properties:Resources.WindowedListItemText}"/>
@@ -89,8 +89,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="CloseButton" Content="{x:Static properties:Resources.CloseButtonText}" Margin="0,362,10.2,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="CloseButton_Click"/>
-        <Button x:Name="SaveJsonButton" Content="{x:Static properties:Resources.SaveButtonText}" Margin="0,362,90.2,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="SaveJsonButton_Click"/>
+        <Button x:Name="CloseButton" Content="{x:Static properties:Resources.CloseButtonText}" Margin="0,362,10.2,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="CloseButton_Click" Height="26"/>
+        <Button x:Name="SaveJsonButton" Content="{x:Static properties:Resources.SaveButtonText}" Margin="0,362,90.2,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="SaveJsonButton_Click" Height="26"/>
 
     </Grid>
 </Window>

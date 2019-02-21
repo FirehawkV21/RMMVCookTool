@@ -11,7 +11,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using CompilerCore;
 using nwjsCookToolUI.Properties;
-using Newtonsoft.Json.Linq;
 using Ookii.Dialogs.Wpf;
 
 namespace nwjsCookToolUI
@@ -129,7 +128,7 @@ namespace nwjsCookToolUI
         private void EditJsonButton_Click(object sender, RoutedEventArgs e)
         {
             if (ProjectLocation.Text == null || !Directory.Exists(ProjectLocation.Text))
-                MessageBox.Show("The project location isn't valid.", Properties.Resources.ErrorText,
+                MessageBox.Show(nwjsCookToolUI.Properties.Resources.ProjectLocationNotValidText, Properties.Resources.ErrorText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {

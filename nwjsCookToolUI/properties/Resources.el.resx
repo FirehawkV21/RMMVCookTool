@@ -293,4 +293,118 @@
   <data name="FileOutsideOfProjectError" xml:space="preserve">
     <value>Επιλέξατε αρχείο που βρισκόταν έξω από το φάκελο του project. Παρακαλώ επιλέξτε ένα αρχείο μέσα στο φάκελο του project.</value>
   </data>
+  <data name="EssentialsGroupString" xml:space="preserve">
+    <value>Απαραίτητα</value>
+  </data>
+  <data name="GameIDUiString" xml:space="preserve">
+    <value>Ταυτότητα παιχνιδιού</value>
+  </data>
+  <data name="HTMLFileLocationUiString" xml:space="preserve">
+    <value>Θέση αρχείου HTML</value>
+  </data>
+  <data name="GameVersionUiString" xml:space="preserve">
+    <value>Έκδοση</value>
+  </data>
+  <data name="NWJsFeaturesGroupText" xml:space="preserve">
+    <value>Δυνατότητες NW.js</value>
+  </data>
+  <data name="EnableNodeJSCheckBoxText" xml:space="preserve">
+    <value>Ενεργοποίηση NodeJS;</value>
+  </data>
+  <data name="ChromiumFlagsUiText" xml:space="preserve">
+    <value>Ρυθμίσεις Chromium</value>
+  </data>
+  <data name="JavaScriptFlagsUiText" xml:space="preserve">
+    <value>Ρυθμίσεις JavaScript</value>
+  </data>
+  <data name="GameNameUiText" xml:space="preserve">
+    <value>Όνομα παιχνιδιού</value>
+  </data>
+  <data name="WindowSettingsUiText" xml:space="preserve">
+    <value>Ρυθμίσεις </value>
+  </data>
+  <data name="GameInfoTabText" xml:space="preserve">
+    <value>Πληροφορίες Παιχνιδιού</value>
+  </data>
+  <data name="WindowGroupText" xml:space="preserve">
+    <value>Παράθυρο</value>
+  </data>
+  <data name="IconLocationUiText" xml:space="preserve">
+    <value>Θέση εικονιδίου</value>
+  </data>
+  <data name="WindowTitleUiText" xml:space="preserve">
+    <value>Τίτλος παραθύρου</value>
+  </data>
+  <data name="ResolutionUiText" xml:space="preserve">
+    <value>Ανάλυση</value>
+  </data>
+  <data name="WindowedListItemText" xml:space="preserve">
+    <value>Σε παράθυρο</value>
+  </data>
+  <data name="InFullScreenListItemText" xml:space="preserve">
+    <value>Πλήρης Οθόνη</value>
+  </data>
+  <data name="InKioskModeListItemText" xml:space="preserve">
+    <value>Λειτουργεία Kiosk</value>
+  </data>
+  <data name="NoneListItemText" xml:space="preserve">
+    <value>Καμία</value>
+  </data>
+  <data name="ScreenCenterListItemText" xml:space="preserve">
+    <value>Στο κέντρο της οθόνης</value>
+  </data>
+  <data name="MouseCursorListItemText" xml:space="preserve">
+    <value>Κέρσορας</value>
+  </data>
+  <data name="WindowPositionUiText" xml:space="preserve">
+    <value>Θέση παραθύρου</value>
+  </data>
+  <data name="WindowSizeGroupText" xml:space="preserve">
+    <value>Μέγεθος παραθύρου</value>
+  </data>
+  <data name="HeightUiText" xml:space="preserve">
+    <value>Ύψος</value>
+  </data>
+  <data name="MinimumHeightUiText" xml:space="preserve">
+    <value>Ελάχιστο ύψος</value>
+  </data>
+  <data name="WidthUiText" xml:space="preserve">
+    <value>Πλάτος</value>
+  </data>
+  <data name="MinimumWidthUiText" xml:space="preserve">
+    <value>Ελάχιστο πλάτος</value>
+  </data>
+  <data name="CloseButtonText" xml:space="preserve">
+    <value>Κλείσιμο</value>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>Αποθήκευση</value>
+  </data>
+  <data name="IOErrorText" xml:space="preserve">
+    <value>Προέκυψε σφάλμα εισόδου/εξόδου. Μήπως μια εφαρμογή χρησιμοποιεί το αρχείο pacakge.json;</value>
+  </data>
+  <data name="FileAccessError" xml:space="preserve">
+    <value>Σφάλμα πρόσβασης του φακέλου. Βεβαιωθείτε ότι έχετε άδεια εγγραφής και ανάγνωσης του φακέλου.</value>
+  </data>
+  <data name="FileStreamErrorText" xml:space="preserve">
+    <value>Το File Stream τα έπαιξε.</value>
+  </data>
+  <data name="SaveCompleteText" xml:space="preserve">
+    <value>Το αρχείο package.json αποθηκεύτηκε.</value>
+  </data>
+  <data name="ProjectPathTooLongErrorText" xml:space="preserve">
+    <value>Η διαδρομή για το project είναι πάρα πολύ μεγάλο. Παρακαλώ μικρύνετε την διαδρομή.</value>
+  </data>
+  <data name="ResizableWindowUiText" xml:space="preserve">
+    <value>Διαμορφώσιμο παράθυρο;</value>
+  </data>
+  <data name="EditPackageMetadataButtonText" xml:space="preserve">
+    <value>Επεξεργασία πληροφοριών</value>
+  </data>
+  <data name="GamePackageMetadataEditorTitleText" xml:space="preserve">
+    <value>Επεξεργαστής Πληροφοριών πακέτου παιχνιδιού</value>
+  </data>
+  <data name="ProjectLocationNotValidText" xml:space="preserve">
+    <value>Η θέση του project δεν είναι έγκυρη.</value>
+  </data>
 </root>

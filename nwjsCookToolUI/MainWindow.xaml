@@ -59,7 +59,7 @@
                             <Button x:Name="FindProjectButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Left"
                                     Margin="439,26,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                     Click="FindProjectButton_Click" />
-                            <Button x:Name="editJsonButton" Content="Edit Package Metadata" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="364,49,0,0" Height="23" Click="EditJsonButton_Click"/>
+                            <Button x:Name="editJsonButton" Content="{x:Static properties:Resources.EditPackageMetadataButtonText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="175" Margin="339,49,0,0" Height="23" Click="EditJsonButton_Click"/>
                         </Grid>
                     </GroupBox>
 
