@@ -126,6 +126,18 @@ namespace nwjsCookToolUI
             ProjectLocation.Text = pickProjectFolder.SelectedPath;
         }
 
+        private void EditJsonButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProjectLocation.Text == null || !Directory.Exists(ProjectLocation.Text))
+                MessageBox.Show("The project location isn't valid.", Properties.Resources.ErrorText,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                var JsonEditorGui = new JsonEditor(ProjectLocation.Text);
+                JsonEditorGui.Show();
+            }
+        }
+
         private void CompileButton_Click(object sender, RoutedEventArgs e)
         {
             _compilerStatusReport = 0;
@@ -548,29 +560,5 @@ namespace nwjsCookToolUI
         }
         #endregion Batch Compile Code Set
 
-        private void TestJsonButton_Click(object sender, RoutedEventArgs e)
-        {
-            string printme = JsonProcessor.BuildJson("TestName", "test-game", "www/index.html", true,
-                "--disable-hardware-aceleration", "--expose-gc", "www/icon/icon.png", 1280, 720, 1280, 720, "C:\\Users\\Public\\package.json");
-            MessageBox.Show(printme);
-            printme = "This is from the file:" + JsonProcessor.ReadJson("C:\\Users\\Public\\package.json");
-            MessageBox.Show(printme);
-            JObject JsonFile = JObject.Parse(JsonProcessor.JsonString);
-            printme = "App Name: " + (string)JsonFile["app_name"]
-            +"\nGame ID: " + (string) JsonFile["name"] + "\nHTML File Location: " + (string) JsonFile["main"] + "\n";
-            MessageBox.Show("Interpreted some of the variables as such:\n" + printme);
-        }
-
-        private void EditJsonButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (ProjectLocation.Text == null || !Directory.Exists(ProjectLocation.Text))
-                MessageBox.Show("The project location isn't valid.", Properties.Resources.ErrorText,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            else
-            {
-                var JsonEditorGui = new JsonEditor(ProjectLocation.Text);
-                JsonEditorGui.Show();
-            }
-        }
     }
 }

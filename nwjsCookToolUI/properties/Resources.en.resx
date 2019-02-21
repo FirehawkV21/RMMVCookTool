@@ -284,4 +284,13 @@ Compiled on </value>
   <data name="TaskCancelledOutputText" xml:space="preserve">
     <value>The task was cancelled by the user.</value>
   </data>
+  <data name="PNGFileText" xml:space="preserve">
+    <value>PNG File|*.png</value>
+  </data>
+  <data name="HTMLFileText" xml:space="preserve">
+    <value>HTML File|*.html</value>
+  </data>
+  <data name="FileOutsideOfProjectError" xml:space="preserve">
+    <value>You picked a file that is outside of the project's file. Please pick a file within the project.</value>
+  </data>
 </root>

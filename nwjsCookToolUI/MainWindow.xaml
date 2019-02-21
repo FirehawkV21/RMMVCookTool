@@ -37,7 +37,6 @@
                                 Click="BrowseSDKButton_Click" />
                         <Button x:Name="ReplacementCodeButton" Content="{x:Static properties:Resources.ReplacementCodeUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="0,162,0,0" Height="23" Click="ReplacementCodeButton_Click"/>
                         <CheckBox x:Name="RemoveFilesCheckBox" Content="{x:Static properties:Resources.RemoveSourceFilesUIText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0" IsEnabled="{Binding IsChecked, ElementName=PackageNwCheckbox}" IsChecked="{Binding RemoveFilesAfterPackaging, Mode=TwoWay, UpdateSourceTrigger=Explicit}"  Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged"/>
-                        <Button x:Name="TestJsonButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="0,254,0,-100.8" Click="TestJsonButton_Click"/>
                         <ComboBox x:Name="PackageCompressionComboBox" HorizontalAlignment="Left" Margin="179,84,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="{Binding CompressionMode, Source={x:Static properties:Settings.Default}}">
                             <ComboBoxItem Content="Optimal"/>
                             <ComboBoxItem Content="Fastest"/>

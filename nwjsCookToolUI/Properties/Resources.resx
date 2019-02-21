@@ -284,4 +284,115 @@ Compiled on </value>
   <data name="TaskCancelledMessage" xml:space="preserve">
     <value>The task was cancelled.</value>
   </data>
+  <data name="FileOutsideOfProjectError" xml:space="preserve">
+    <value>You picked a file that is outside of the project's file. Please pick a file within the project.</value>
+  </data>
+  <data name="PNGFileText" xml:space="preserve">
+    <value>PNG File|*.png</value>
+  </data>
+  <data name="HTMLFileText" xml:space="preserve">
+    <value>HTML File|*.html</value>
+  </data>
+  <data name="EssentialsGroupString" xml:space="preserve">
+    <value>Essentials</value>
+  </data>
+  <data name="GameIDUiString" xml:space="preserve">
+    <value>Game ID</value>
+  </data>
+  <data name="HTMLFileLocationUiString" xml:space="preserve">
+    <value>HTML file location</value>
+  </data>
+  <data name="GameVersionUiString" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="NWJsFeaturesGroupText" xml:space="preserve">
+    <value>NW.js features</value>
+  </data>
+  <data name="EnableNodeJSCheckBoxText" xml:space="preserve">
+    <value>Enable NodeJS?</value>
+  </data>
+  <data name="ChromiumFlagsUiText" xml:space="preserve">
+    <value>Chromium Flags</value>
+  </data>
+  <data name="JavaScriptFlagsUiText" xml:space="preserve">
+    <value>JavaScript Flags</value>
+  </data>
+  <data name="GameNameUiText" xml:space="preserve">
+    <value>Game Name</value>
+  </data>
+  <data name="WindowSettingsUiText" xml:space="preserve">
+    <value>Window Settings</value>
+  </data>
+  <data name="WindowGroupText" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="IconLocationUiText" xml:space="preserve">
+    <value>Icon Location</value>
+  </data>
+  <data name="WindowTitleUiText" xml:space="preserve">
+    <value>Window Title</value>
+  </data>
+  <data name="ResolutionUiText" xml:space="preserve">
+    <value>Resolution</value>
+  </data>
+  <data name="ResizableWindowUiText" xml:space="preserve">
+    <value>Resizable Window?</value>
+  </data>
+  <data name="WindowedListItemText" xml:space="preserve">
+    <value>Windowed</value>
+  </data>
+  <data name="InFullScreenListItemText" xml:space="preserve">
+    <value>In Full Screen</value>
+  </data>
+  <data name="InKioskModeListItemText" xml:space="preserve">
+    <value>In Kiosk Mode</value>
+  </data>
+  <data name="NoneListItemText" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ScreenCenterListItemText" xml:space="preserve">
+    <value>Screen Center</value>
+  </data>
+  <data name="MouseCursorListItemText" xml:space="preserve">
+    <value>Mouse Cursor</value>
+  </data>
+  <data name="WindowPositionUiText" xml:space="preserve">
+    <value>Window Position</value>
+  </data>
+  <data name="WindowSizeGroupText" xml:space="preserve">
+    <value>Window Size</value>
+  </data>
+  <data name="HeightUiText" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="MinimumHeightUiText" xml:space="preserve">
+    <value>Minimum Height</value>
+  </data>
+  <data name="WidthUiText" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="MinimumWidthUiText" xml:space="preserve">
+    <value>Minimum Width</value>
+  </data>
+  <data name="CloseButtonText" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveCompleteText" xml:space="preserve">
+    <value>The package metadata file was saved successfully.</value>
+  </data>
+  <data name="FileStreamErrorText" xml:space="preserve">
+    <value>The File Stream went kaput.</value>
+  </data>
+  <data name="ProjectPathTooLongErrorText" xml:space="preserve">
+    <value>The path to the project is too long. Please shorten the path.</value>
+  </data>
+  <data name="IOErrorText" xml:space="preserve">
+    <value>An IO Exception occured. Is an app using the package.json file?</value>
+  </data>
+  <data name="FileAccessError" xml:space="preserve">
+    <value>Cannot access the folder. Please check that you have permission to read and write on the folder.</value>
+  </data>
 </root>

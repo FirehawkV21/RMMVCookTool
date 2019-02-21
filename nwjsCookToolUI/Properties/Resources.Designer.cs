@@ -144,6 +144,24 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chromium Flags.
+        /// </summary>
+        public static string ChromiumFlagsUiText {
+            get {
+                return ResourceManager.GetString("ChromiumFlagsUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string CloseButtonText {
+            get {
+                return ResourceManager.GetString("CloseButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compilation complete!.
         /// </summary>
         public static string CompilationCompleteText {
@@ -245,6 +263,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable NodeJS?.
+        /// </summary>
+        public static string EnableNodeJSCheckBoxText {
+            get {
+                return ResourceManager.GetString("EnableNodeJSCheckBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ack! An error occured! See the output in the About tab..
         /// </summary>
         public static string ErrorOccuredText {
@@ -263,11 +290,29 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Essentials.
+        /// </summary>
+        public static string EssentialsGroupString {
+            get {
+                return ResourceManager.GetString("EssentialsGroupString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed!.
         /// </summary>
         public static string FailedText {
             get {
                 return ResourceManager.GetString("FailedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot access the folder. Please check that you have permission to read and write on the folder..
+        /// </summary>
+        public static string FileAccessError {
+            get {
+                return ResourceManager.GetString("FileAccessError", resourceCulture);
             }
         }
         
@@ -292,6 +337,24 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You picked a file that is outside of the project&apos;s file. Please pick a file within the project..
+        /// </summary>
+        public static string FileOutsideOfProjectError {
+            get {
+                return ResourceManager.GetString("FileOutsideOfProjectError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The File Stream went kaput..
+        /// </summary>
+        public static string FileStreamErrorText {
+            get {
+                return ResourceManager.GetString("FileStreamErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file isn&apos;t available at the moment..
         /// </summary>
         public static string FileUnavailableText {
@@ -310,11 +373,137 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Game ID.
+        /// </summary>
+        public static string GameIDUiString {
+            get {
+                return ResourceManager.GetString("GameIDUiString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Name.
+        /// </summary>
+        public static string GameNameUiText {
+            get {
+                return ResourceManager.GetString("GameNameUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string GameVersionUiString {
+            get {
+                return ResourceManager.GetString("GameVersionUiString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string HeightUiText {
+            get {
+                return ResourceManager.GetString("HeightUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTML file location.
+        /// </summary>
+        public static string HTMLFileLocationUiString {
+            get {
+                return ResourceManager.GetString("HTMLFileLocationUiString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTML File|*.html.
+        /// </summary>
+        public static string HTMLFileText {
+            get {
+                return ResourceManager.GetString("HTMLFileText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icon Location.
+        /// </summary>
+        public static string IconLocationUiText {
+            get {
+                return ResourceManager.GetString("IconLocationUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string InfoText {
             get {
                 return ResourceManager.GetString("InfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Full Screen.
+        /// </summary>
+        public static string InFullScreenListItemText {
+            get {
+                return ResourceManager.GetString("InFullScreenListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Kiosk Mode.
+        /// </summary>
+        public static string InKioskModeListItemText {
+            get {
+                return ResourceManager.GetString("InKioskModeListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An IO Exception occured. Is an app using the package.json file?.
+        /// </summary>
+        public static string IOErrorText {
+            get {
+                return ResourceManager.GetString("IOErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JavaScript Flags.
+        /// </summary>
+        public static string JavaScriptFlagsUiText {
+            get {
+                return ResourceManager.GetString("JavaScriptFlagsUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Height.
+        /// </summary>
+        public static string MinimumHeightUiText {
+            get {
+                return ResourceManager.GetString("MinimumHeightUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Width.
+        /// </summary>
+        public static string MinimumWidthUiText {
+            get {
+                return ResourceManager.GetString("MinimumWidthUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mouse Cursor.
+        /// </summary>
+        public static string MouseCursorListItemText {
+            get {
+                return ResourceManager.GetString("MouseCursorListItemText", resourceCulture);
             }
         }
         
@@ -328,11 +517,29 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string NoneListItemText {
+            get {
+                return ResourceManager.GetString("NoneListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t operate on an non-existent folder..
         /// </summary>
         public static string NonExistantFolderText {
             get {
                 return ResourceManager.GetString("NonExistantFolderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NW.js features.
+        /// </summary>
+        public static string NWJsFeaturesGroupText {
+            get {
+                return ResourceManager.GetString("NWJsFeaturesGroupText", resourceCulture);
             }
         }
         
@@ -375,6 +582,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PNG File|*.png.
+        /// </summary>
+        public static string PNGFileText {
+            get {
+                return ResourceManager.GetString("PNGFileText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Program Information.
         /// </summary>
         public static string ProgramInfoUiText {
@@ -407,6 +623,15 @@ namespace nwjsCookToolUI.Properties {
         public static string ProjectLocationUiText {
             get {
                 return ResourceManager.GetString("ProjectLocationUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path to the project is too long. Please shorten the path..
+        /// </summary>
+        public static string ProjectPathTooLongErrorText {
+            get {
+                return ResourceManager.GetString("ProjectPathTooLongErrorText", resourceCulture);
             }
         }
         
@@ -461,6 +686,51 @@ namespace nwjsCookToolUI.Properties {
         public static string ReplacementCodeUiText {
             get {
                 return ResourceManager.GetString("ReplacementCodeUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resizable Window?.
+        /// </summary>
+        public static string ResizableWindowUiText {
+            get {
+                return ResourceManager.GetString("ResizableWindowUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolution.
+        /// </summary>
+        public static string ResolutionUiText {
+            get {
+                return ResourceManager.GetString("ResolutionUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveButtonText {
+            get {
+                return ResourceManager.GetString("SaveButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The package metadata file was saved successfully..
+        /// </summary>
+        public static string SaveCompleteText {
+            get {
+                return ResourceManager.GetString("SaveCompleteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen Center.
+        /// </summary>
+        public static string ScreenCenterListItemText {
+            get {
+                return ResourceManager.GetString("ScreenCenterListItemText", resourceCulture);
             }
         }
         
@@ -551,6 +821,69 @@ namespace nwjsCookToolUI.Properties {
         public static string WaitingUiText2 {
             get {
                 return ResourceManager.GetString("WaitingUiText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        public static string WidthUiText {
+            get {
+                return ResourceManager.GetString("WidthUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windowed.
+        /// </summary>
+        public static string WindowedListItemText {
+            get {
+                return ResourceManager.GetString("WindowedListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window.
+        /// </summary>
+        public static string WindowGroupText {
+            get {
+                return ResourceManager.GetString("WindowGroupText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window Position.
+        /// </summary>
+        public static string WindowPositionUiText {
+            get {
+                return ResourceManager.GetString("WindowPositionUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window Settings.
+        /// </summary>
+        public static string WindowSettingsUiText {
+            get {
+                return ResourceManager.GetString("WindowSettingsUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window Size.
+        /// </summary>
+        public static string WindowSizeGroupText {
+            get {
+                return ResourceManager.GetString("WindowSizeGroupText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window Title.
+        /// </summary>
+        public static string WindowTitleUiText {
+            get {
+                return ResourceManager.GetString("WindowTitleUiText", resourceCulture);
             }
         }
     }

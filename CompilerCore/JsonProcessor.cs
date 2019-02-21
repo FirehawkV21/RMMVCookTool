@@ -7,33 +7,61 @@ namespace CompilerCore
     public class JsonProcessor
     {
         public static string JsonString;
-        public string JsonData;
-        public static string BuildJson(string appName, string gameId, string fileLocation, bool nodeJsEnabled, string chromiumFlags, string jsFlags, string iconLocation, int windowWidth, int windowHeight, int windowMinWidth, int windowMinHeight, string FileLocation)
+
+        /// <summary>
+        /// The JSON Formatter and saving code.
+        /// </summary>
+        /// <param name="appName">The game's name. Fills the app_name field.</param>
+        /// <param name="gameId">The game's ID. Fills the name field.</param>
+        /// <param name="gameVersion">The version of the game. Fills the version field.</param>
+        /// <param name="fileLocation">The location of the HTML file. THis must be in the context of the nwjs/Game executable's location. Fills the main field.</param>
+        /// <param name="nodeJsEnabled">Enable or disable Node.js . Fills the nodejs field.</param>
+        /// <param name="chromiumFlags">Sets the Chromium flags for the game. Fills the chromium-flags field.</param>
+        /// <param name="jsFlags">Sets V8's flags for the game. Fills the js-flags field.</param>
+        /// <param name="windowId">Set the ID of the game's window. Fills the id field in the window section.</param>
+        /// <param name="iconLocation">Sets the location of the icon. Fills the icon field in the window section.</param>
+        /// <param name="windowTitle">The title that shows up when the game starts. Fills the title field in the window section.</param>
+        /// <param name="windowWidth">The window's width. Fills the width field in the window section.</param>
+        /// <param name="windowHeight">The window's height. Fills the height field in the window section.</param>
+        /// <param name="windowMinWidth">The minimum width of the window. Fills the min_width field in the window section.</param>
+        /// <param name="windowMinHeight">The minimum height of the window. Fills the min_height field in the window section.</param>
+        /// <param name="resizable">The window is resizable when this is true. Fills the resizable field in the window section.</param>
+        /// <param name="fullscreen">The game starts in Fullscreen when it's true. Fills the fullscreen field in the window section.</param>
+        /// <param name="kioskMode">Turns on or off kiosk mode. Fills the kiosk filed in the window section.</param>
+        /// <param name="windowLocation">The location of the window when the game starts up. Fills the position field in the window section.</param>
+        /// <param name="packageFileLocation">The folder where the package.json will be saved.</param>
+        public static void BuildJson(string appName, string gameId, string gameVersion, string fileLocation, bool nodeJsEnabled, string chromiumFlags, string jsFlags,string windowId, string iconLocation, string windowTitle, int windowWidth, int windowHeight, int windowMinWidth, int windowMinHeight, bool resizable, bool fullscreen, bool kioskMode, string windowLocation, string packageFileLocation)
         {
             JObject gameMetadata = new JObject(
                 new JProperty("app_name", appName),
                 new JProperty("name", gameId),
+                new JProperty("version", gameVersion),
                 new JProperty("main", fileLocation),
                 new JProperty("nodejs", nodeJsEnabled),
                 new JProperty("chromium-flags", chromiumFlags),
                 new JProperty("js-flags", jsFlags),
                 new JProperty("window",
                     new JObject(
+                        new JProperty("id", windowId),
                         new JProperty("icon", iconLocation),
+                        new JProperty("title", windowTitle),
+                        new JProperty("position", windowLocation),
+                        new JProperty("resizable", resizable),
+                        new JProperty("fullscreen", fullscreen),
+                        new JProperty("kiosk", kioskMode),
                         new JProperty("width", windowWidth),
                         new JProperty("height", windowHeight),
                         new JProperty("min_width", windowMinWidth),
                         new JProperty("min_height", windowMinHeight))));
-            using (StreamWriter settingsFile = new StreamWriter(Path.Combine(FileLocation, "package.json")))
+            using (StreamWriter settingsFile = new StreamWriter(Path.Combine(packageFileLocation, "package.json")))
             settingsFile.Write(gameMetadata);
-            return gameMetadata.ToString();
         }
 
 
-        public static string ReadJson(string FileLocation)
+        public static string ReadJson(string fileLocation)
         {
             char[] JsonIn;
-            using (StreamReader settingsLoader = new StreamReader(FileLocation))
+            using (StreamReader settingsLoader = new StreamReader(fileLocation))
             {
                 JsonIn = new Char[(int)settingsLoader.BaseStream.Length];
                 settingsLoader.Read(JsonIn, 0, (int)settingsLoader.BaseStream.Length);

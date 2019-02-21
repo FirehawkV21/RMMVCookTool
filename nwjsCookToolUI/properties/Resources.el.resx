@@ -284,4 +284,13 @@
   <data name="TaskCancelledOutputText" xml:space="preserve">
     <value>Η εργασία ακυρώθηκε από τον χρήστη.</value>
   </data>
+  <data name="PNGFileText" xml:space="preserve">
+    <value>Αρχείο PNG|*.png</value>
+  </data>
+  <data name="HTMLFileText" xml:space="preserve">
+    <value>Αρχείο HTML|*.html</value>
+  </data>
+  <data name="FileOutsideOfProjectError" xml:space="preserve">
+    <value>Επιλέξατε αρχείο που βρισκόταν έξω από το φάκελο του project. Παρακαλώ επιλέξτε ένα αρχείο μέσα στο φάκελο του project.</value>
+  </data>
 </root>
