@@ -245,6 +245,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compression Mode.
+        /// </summary>
+        public static string CompressionModeUiText {
+            get {
+                return ResourceManager.GetString("CompressionModeUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Developed by AceOfAces. Licensed under GNU General Public License v3..
         /// </summary>
         public static string DevInfoUiText {
@@ -313,6 +322,15 @@ namespace nwjsCookToolUI.Properties {
         public static string FailedText {
             get {
                 return ResourceManager.GetString("FailedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fastest.
+        /// </summary>
+        public static string FastestListItemText {
+            get {
+                return ResourceManager.GetString("FastestListItemText", resourceCulture);
             }
         }
         
@@ -535,6 +553,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No compression.
+        /// </summary>
+        public static string NoCompressionListItemText {
+            get {
+                return ResourceManager.GetString("NoCompressionListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please add the folders you want the JavaScript files to be compiled..
         /// </summary>
         public static string NoJSFilesPresent {
@@ -567,6 +594,15 @@ namespace nwjsCookToolUI.Properties {
         public static string NWJsFeaturesGroupText {
             get {
                 return ResourceManager.GetString("NWJsFeaturesGroupText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optimal.
+        /// </summary>
+        public static string OptimalListItemText {
+            get {
+                return ResourceManager.GetString("OptimalListItemText", resourceCulture);
             }
         }
         

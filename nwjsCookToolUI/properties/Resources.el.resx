@@ -321,7 +321,7 @@
     <value>Όνομα παιχνιδιού</value>
   </data>
   <data name="WindowSettingsUiText" xml:space="preserve">
-    <value>Ρυθμίσεις </value>
+    <value>Ρυθμίσεις παραθύρου</value>
   </data>
   <data name="GameInfoTabText" xml:space="preserve">
     <value>Πληροφορίες Παιχνιδιού</value>
@@ -409,5 +409,17 @@
   </data>
   <data name="StartUiText" xml:space="preserve">
     <value>Εκκίνηση:</value>
+  </data>
+  <data name="CompressionModeUiText" xml:space="preserve">
+    <value>Λειτουργεία Συμπίεσης</value>
+  </data>
+  <data name="FastestListItemText" xml:space="preserve">
+    <value>Γρηγορότερη</value>
+  </data>
+  <data name="NoCompressionListItemText" xml:space="preserve">
+    <value>Χωρίς συμπίεση</value>
+  </data>
+  <data name="OptimalListItemText" xml:space="preserve">
+    <value>Βέλτιστη</value>
   </data>
 </root>

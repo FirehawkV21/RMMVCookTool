@@ -410,4 +410,16 @@ Compiled on </value>
   <data name="StartUiText" xml:space="preserve">
     <value>Start:</value>
   </data>
+  <data name="CompressionModeUiText" xml:space="preserve">
+    <value>Compression Mode</value>
+  </data>
+  <data name="FastestListItemText" xml:space="preserve">
+    <value>Fastest</value>
+  </data>
+  <data name="NoCompressionListItemText" xml:space="preserve">
+    <value>No compression</value>
+  </data>
+  <data name="OptimalListItemText" xml:space="preserve">
+    <value>Optimal</value>
+  </data>
 </root>
