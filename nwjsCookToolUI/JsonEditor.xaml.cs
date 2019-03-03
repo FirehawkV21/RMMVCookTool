@@ -31,7 +31,7 @@ namespace nwjsCookToolUI
                 VersionTextBox.Text = (string) projectMetadata["version"];
                 EnableNodeJSCheckBox.IsChecked =
                     (bool?) projectMetadata["nodejs"] == null || (bool) projectMetadata["nodejs"];
-                ChromeFlagsTextBox.Text = (string) projectMetadata["chromium-flags"];
+                ChromeFlagsTextBox.Text = (string) projectMetadata["chromium-args"];
                 JsFlagsTextBox.Text = (string) projectMetadata["js-flags"];
                 GameNameTextBox.Text = (string) projectMetadata["app_name"];
                 IconLocationTextBox.Text = (string) projectMetadata["window"]["icon"];

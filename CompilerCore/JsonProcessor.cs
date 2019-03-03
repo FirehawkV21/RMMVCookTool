@@ -38,7 +38,7 @@ namespace CompilerCore
                 new JProperty("version", gameVersion),
                 new JProperty("main", fileLocation),
                 new JProperty("nodejs", nodeJsEnabled),
-                new JProperty("chromium-flags", chromiumFlags),
+                new JProperty("chromium-args", chromiumFlags),
                 new JProperty("js-flags", jsFlags),
                 new JProperty("window",
                     new JObject(

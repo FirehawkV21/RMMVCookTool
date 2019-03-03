@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.1.19053</AssemblyVersion>
-    <FileVersion>1.0.1.19053</FileVersion>
+    <AssemblyVersion>1.0.1.19062</AssemblyVersion>
+    <FileVersion>1.0.1.19062</FileVersion>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
