@@ -141,12 +141,15 @@ namespace nwjsCompilerCLI
                                 {
                                     case 2:
                                         _compressionLevel = 2;
+                                        Console.WriteLine("No compression will be used for the archive.");
                                         break;
                                     case 1:
                                         _compressionLevel = 1;
+                                        Console.WriteLine("The fastest compression will be used for the archive.");
                                         break;
                                     default:
                                         _compressionLevel = 0;
+                                        Console.WriteLine("The optimal compression will be used for the archive (this is the default).");
                                         break;
                                 }
                             }
