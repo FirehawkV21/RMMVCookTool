@@ -27,3 +27,4 @@ You will need Visual Studio 2017, along with the Microsoft .NET Framework 4.7.2 
 ## Libraries Used
 - [Xceed WPF Toolkit](https://github.com/xceedsoftware/wpftoolkit)
 - [Ookii.Dialogs](http://http://www.ookii.org/Software/Dialogs/)
+- [Newtonsoft.Json](https://www.newtonsoft.com/json)
