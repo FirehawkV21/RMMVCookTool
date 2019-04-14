@@ -27,7 +27,7 @@ namespace nwjsCompilerCLI
             Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
             Console.WriteLine("= Version D1.01");
             Console.WriteLine("= Developed by AceOfAces.");
-            Console.WriteLine("= Licensed under GNU General Public License v3.");
+            Console.WriteLine("= Licensed under the MIT license.");
             Console.WriteLine("================================================\n");
 
             if (args.Length >= 1)

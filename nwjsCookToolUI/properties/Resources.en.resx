@@ -252,7 +252,7 @@ Compiled on </value>
     <value>Version D1.04 Update 2</value>
   </data>
   <data name="DevInfoUiText" xml:space="preserve">
-    <value>Developed by AceOfAces. Licensed under GNU General Public License v3.</value>
+    <value>Developed by AceOfAces. Licensed under the MIT License.</value>
   </data>
   <data name="OutputUiText" xml:space="preserve">
     <value>Output</value>
