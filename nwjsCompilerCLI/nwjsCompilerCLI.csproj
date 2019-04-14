@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyVersion>1.1.0.19063</AssemblyVersion>
-    <FileVersion>1.1.0.19063</FileVersion>
+    <AssemblyVersion>1.1.0.19104</AssemblyVersion>
+    <FileVersion>1.1.0.19104</FileVersion>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
     <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
