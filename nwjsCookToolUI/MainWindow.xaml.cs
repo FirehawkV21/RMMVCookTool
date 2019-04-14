@@ -156,6 +156,7 @@ namespace nwjsCookToolUI
                 TestProjectButton.IsEnabled = true;
                 ProjectLocation.IsEnabled = true;
                 FindProjectButton.IsEnabled = true;
+                UnlockSettings(true);
             }
             else if (!Directory.Exists(ProjectLocation.Text))
             {
@@ -339,8 +340,8 @@ namespace nwjsCookToolUI
             //}
             if (e.Cancelled)
             {
-                OutputArea.Text += "\n" + DateTime.Now + "\n" + nwjsCookToolUI.Properties.Resources.TaskCancelledOutputText + "\n";
-                MessageBox.Show(nwjsCookToolUI.Properties.Resources.TaskCancelledMessage, nwjsCookToolUI.Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
+                OutputArea.Text += "\n" + DateTime.Now + "\n" + Properties.Resources.TaskCancelledOutputText + "\n";
+                MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {

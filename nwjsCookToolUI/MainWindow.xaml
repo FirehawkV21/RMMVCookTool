@@ -24,13 +24,13 @@
                         <Label Content="{x:Static properties:Resources.FileExtensionUiText}" HorizontalAlignment="Left"
                                Margin="0,49,0,0" VerticalAlignment="Top" />
                         <TextBox x:Name="FileExtensionTextbox" TextWrapping="Wrap" Margin="179,53,14.4,0"
-                                 Text="{Binding FileExtension, Source={x:Static properties:Settings.Default}}"
+                                 Text="{Binding FileExtension, Mode=TwoWay, Source={x:Static properties:Settings.Default}}"
                                  Height="26" VerticalAlignment="Top" TextChanged="FileExtensionTextbox_TextChanged" />
                         <Label Content="{x:Static properties:Resources.SdkLocationUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"
                                Margin="0,108,0,0" />
                         <TextBox x:Name="NwjsLocation" HorizontalAlignment="Left" Height="23" Margin="0,134,0,0"
                                  TextWrapping="Wrap" VerticalAlignment="Top" Width="434"
-                                 Text="{Binding SDKLocation, Source={x:Static properties:Settings.Default}}"
+                                 Text="{Binding SDKLocation, Mode=TwoWay, Source={x:Static properties:Settings.Default}}"
                                  IsEnabled="False" />
                         <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Left"
                                 Margin="439,134,0,0" VerticalAlignment="Top" Width="75" Height="23"
