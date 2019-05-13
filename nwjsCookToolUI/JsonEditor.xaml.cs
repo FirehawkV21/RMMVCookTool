@@ -117,7 +117,7 @@ namespace nwjsCookToolUI
             {
                 var stringBuffer = iconFilePicker.FileName.Replace(_projectLocation + "\\", "");
                 stringBuffer = stringBuffer.Replace("\\", "/");
-                FileLocationTextBox.Text = stringBuffer;
+                IconLocationTextBox.Text = stringBuffer;
             }
             else
             {
