@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Net.Mime;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +27,7 @@ namespace nwjsCompilerCLI
             string stringBuffer;
             Console.WriteLine("================================================");
             Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
-            Console.WriteLine("= Version D1.01");
+            Console.WriteLine("= Version D1.01 ({0})", Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine("= Developed by AceOfAces.");
             Console.WriteLine("= Licensed under the MIT license.");
             Console.WriteLine("================================================\n");

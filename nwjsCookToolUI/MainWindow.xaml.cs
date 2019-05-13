@@ -150,7 +150,7 @@ namespace nwjsCookToolUI
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n"+ Properties.Resources.CompilerMissingText + "\n-----";
+                OutputArea.Text = OutputArea.Text + "\n" + "[" +DateTime.Now + "]"+ Properties.Resources.CompilerMissingText;
                 CompileButton.Visibility = Visibility.Visible;
                 CancelTaskButton.Visibility = Visibility.Hidden;
                 TestProjectButton.IsEnabled = true;
@@ -162,8 +162,8 @@ namespace nwjsCookToolUI
             {
                 MessageBox.Show(Properties.Resources.NonExistantFolderText, Properties.Resources.ErrorText, MessageBoxButton.OK,
                     MessageBoxImage.Error);
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
-                                  "\n"+ Properties.Resources.NonExistantFolderText +"\n-----";
+                OutputArea.Text = OutputArea.Text + "\n" + "[" + DateTime.Now +
+                                  "]"+ Properties.Resources.NonExistantFolderText;
                 CompileButton.Visibility = Visibility.Visible;
                 CancelTaskButton.Visibility = Visibility.Hidden;
                 TestProjectButton.IsEnabled = true;
@@ -297,36 +297,37 @@ namespace nwjsCookToolUI
                     break;
                 case 5:
                     MainProgress.Value += 1;
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\nRemoving files...\n";
+                    OutputArea.Text = OutputArea.Text + "\n[" +DateTime.Now + "]Removing files...";
                     break;
                 case 4:
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.PackageCreationText;
+                    OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]" + Properties.Resources.PackageCreationText;
                     break;
                 case 3:
                     StatusLabel.Content = Properties.Resources.PackaginStatusText;
-                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + Properties.Resources.FileCopyText;
+                    OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]"+ Properties.Resources.FileCopyText;
                     break;
                 case 2:
                     if (_currentFile < CoreCode.FileMap.Length)
                     {
                         MainProgress.Value = _currentFile;
-                        OutputArea.Text += Properties.Resources.CompiledOutputText + DateTime.Now + "\n";
+                        OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + CoreCode.FileMap[_currentFile] + Properties.Resources.CompiledOutputText;
                         OutputArea.Text +=
-                            "\n" + DateTime.Now + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
-                            "...\n";
+                            "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
+                            "...";
                         StatusLabel.Content = StatusLabel.Content =
                             Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
                     }
                     break;
                 case 1:
-                    OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
-                                       "...\n";
+                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
+                                       "...";
                     StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
                     break;
                 case 0:
+                    OutputArea.Text += nwjsCookToolUI.Properties.Resources.StartTaskPointText;
                     StatusLabel.Content = Properties.Resources.BinRemovalProgressText;
-                    OutputArea.Text += "\n" + DateTime.Now +
-                                       Properties.Resources.BinRemovalText;
+                    OutputArea.Text += "[" + DateTime.Now +
+                                       "]"+Properties.Resources.BinRemovalText;
                     break;
             }
         }
@@ -340,7 +341,7 @@ namespace nwjsCookToolUI
             //}
             if (e.Cancelled)
             {
-                OutputArea.Text += "\n" + DateTime.Now + "\n" + Properties.Resources.TaskCancelledOutputText + "\n";
+                OutputArea.Text += "[" + DateTime.Now + "]" + Properties.Resources.TaskCancelledOutputText + "\n";
                 MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -348,7 +349,7 @@ namespace nwjsCookToolUI
                 MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText,
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 StatusLabel.Content = Properties.Resources.DoneText;
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n " + Properties.Resources.CompilationCompleteText + "\n";
+                OutputArea.Text = OutputArea.Text + "[" + DateTime.Now + "]" + Properties.Resources.CompilationCompleteText + "\n";
             }
             MainProgress.Value = 0;
             MainProgress.Foreground = Brushes.ForestGreen;
@@ -359,6 +360,7 @@ namespace nwjsCookToolUI
             UnlockSettings(true);
             CompileButton.Visibility = Visibility.Visible;
             CancelTaskButton.Visibility = Visibility.Hidden;
+            OutputArea.Text += Properties.Resources.TaskEndPointText;
 
         }
 
@@ -420,6 +422,7 @@ namespace nwjsCookToolUI
             }
             else
             {
+                OutputArea.Text += Properties.Resources.StartTaskPointText;
                 CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
                 MapProgress.Value = 0;
                 MapProgress.Maximum = FolderList.Items.Count;
@@ -503,22 +506,27 @@ namespace nwjsCookToolUI
                 case 3:
                     CurrentWorkloadBar.Value = 0;
                     MapProgress.Value += 1;
+                    OutputArea.Text += Properties.Resources.ProjectCompilationEndPointText;
                     break;
                 case 2:
                     CurrentWorkloadBar.Value += 1;
                     CurrentWorkloadLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
+                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + CoreCode.FileMap[_currentFile] + Properties.Resources.CompiledOutputText;
+                    OutputArea.Text +=
+                        "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
+                        "...";
                     break;
                 case 1:
                     CurrentWorkloadBar.Maximum = CoreCode.FileMap.Length;
-                    OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.BinRemovalText;
+                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.BinRemovalText;
                     CurrentWorkloadLabel.Content =
                         Properties.Resources.BinRemovalStatusText + FolderList.Items[_currentProject] + "...";
                     break;
                 case 0:
                     if (_currentProject < _projectList.Length)
                     {
-                        OutputArea.Text += "\n" + DateTime.Now + Properties.Resources.CompileText1 +
-                                           FolderList.Items[_currentProject] + Properties.Resources.FolderText + "\n";
+                        OutputArea.Text += "[" + DateTime.Now  +"]"+ Properties.Resources.CompileText1 +
+                                           FolderList.Items[_currentProject] + Properties.Resources.FolderText + Properties.Resources.ProjectCompilationStartPointText;
                         MapStatusLabel.Content = Properties.Resources.CompileText1 + FolderList.Items[_currentProject] +
                                                  Properties.Resources.FolderText;
                     }
@@ -535,12 +543,12 @@ namespace nwjsCookToolUI
             //}
             if (e.Cancelled)
             {
-                OutputArea.Text += "\n" + DateTime.Now + "\n" + nwjsCookToolUI.Properties.Resources.TaskCancelledOutputText + "\n";
-                MessageBox.Show(nwjsCookToolUI.Properties.Resources.TaskCancelledMessage, nwjsCookToolUI.Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
+                OutputArea.Text += "\n" + DateTime.Now + "\n" + Properties.Resources.TaskCancelledOutputText + "\n";
+                MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" +
+                OutputArea.Text = OutputArea.Text + "[" + DateTime.Now + "]" +
                                   Properties.Resources.CompilationCompleteText + "\n";
                 MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText,
                     MessageBoxButton.OK, MessageBoxImage.Information);
@@ -552,6 +560,7 @@ namespace nwjsCookToolUI
             AddToMapButton.IsEnabled = true;
             RemoveFromMapButton.IsEnabled = true;
             UnlockSettings(true);
+            OutputArea.Text += Properties.Resources.TaskEndPointText;
         }
 
         private void CancelMapCompileButton_Click(object sender, RoutedEventArgs e)

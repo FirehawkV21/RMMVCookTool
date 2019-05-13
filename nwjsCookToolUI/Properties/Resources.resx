@@ -154,9 +154,7 @@
     <value>Compiling scripts in the </value>
   </data>
   <data name="BinRemovalText" xml:space="preserve">
-    <value>
-Removing binary files from the project (if there are)...
-</value>
+    <value>Removing binary files from the project (if there are)...</value>
   </data>
   <data name="FolderText" xml:space="preserve">
     <value> folder...</value>
@@ -168,25 +166,19 @@ Removing binary files from the project (if there are)...
     <value>Packaging...</value>
   </data>
   <data name="CompilingText" xml:space="preserve">
-    <value>
-Compiling </value>
+    <value>Compiling </value>
   </data>
   <data name="CompiledOutputText" xml:space="preserve">
-    <value>
-Compiled on </value>
+    <value> was compiled.</value>
   </data>
   <data name="NoJSFilesPresent" xml:space="preserve">
     <value>Please add the folders you want the JavaScript files to be compiled.</value>
   </data>
   <data name="PackageCreationText" xml:space="preserve">
-    <value>
- Creating package...
-</value>
+    <value>Creating package...</value>
   </data>
   <data name="FileCopyText" xml:space="preserve">
-    <value>
- Copying files to a temporary area...
-</value>
+    <value>Copying files to a temporary area...</value>
   </data>
   <data name="PackageProgramUiText" xml:space="preserve">
     <value>Package the game into package.nw</value>
@@ -421,5 +413,27 @@ Compiled on </value>
   </data>
   <data name="NoCompressionListItemText" xml:space="preserve">
     <value>No compression</value>
+  </data>
+  <data name="FileText" xml:space="preserve">
+    <value>The file </value>
+  </data>
+  <data name="ProjectCompilationEndPointText" xml:space="preserve">
+    <value>
+---Project Compilation ends here---
+
+</value>
+  </data>
+  <data name="ProjectCompilationStartPointText" xml:space="preserve">
+    <value>
+
+---Project Compilation starts here---</value>
+  </data>
+  <data name="TaskEndPointText" xml:space="preserve">
+    <value>---Ended Task---
+</value>
+  </data>
+  <data name="StartTaskPointText" xml:space="preserve">
+    <value>---Start Task---
+</value>
   </data>
 </root>

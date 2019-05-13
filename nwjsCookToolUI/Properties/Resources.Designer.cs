@@ -115,9 +115,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///Removing binary files from the project (if there are)...
-        ///.
+        ///   Looks up a localized string similar to Removing binary files from the project (if there are)....
         /// </summary>
         public static string BinRemovalText {
             get {
@@ -171,8 +169,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///Compiled on .
+        ///   Looks up a localized string similar to  was compiled..
         /// </summary>
         public static string CompiledOutputText {
             get {
@@ -235,8 +232,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///Compiling .
+        ///   Looks up a localized string similar to Compiling .
         /// </summary>
         public static string CompilingText {
             get {
@@ -344,9 +340,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        /// Copying files to a temporary area...
-        ///.
+        ///   Looks up a localized string similar to Copying files to a temporary area....
         /// </summary>
         public static string FileCopyText {
             get {
@@ -378,6 +372,15 @@ namespace nwjsCookToolUI.Properties {
         public static string FileStreamErrorText {
             get {
                 return ResourceManager.GetString("FileStreamErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file .
+        /// </summary>
+        public static string FileText {
+            get {
+                return ResourceManager.GetString("FileText", resourceCulture);
             }
         }
         
@@ -616,9 +619,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        /// Creating package...
-        ///.
+        ///   Looks up a localized string similar to Creating package....
         /// </summary>
         public static string PackageCreationText {
             get {
@@ -668,6 +669,29 @@ namespace nwjsCookToolUI.Properties {
         public static string ProgramTitle {
             get {
                 return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///---Project Compilation ends here---
+        ///
+        ///.
+        /// </summary>
+        public static string ProjectCompilationEndPointText {
+            get {
+                return ResourceManager.GetString("ProjectCompilationEndPointText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///
+        ///---Project Compilation starts here---.
+        /// </summary>
+        public static string ProjectCompilationStartPointText {
+            get {
+                return ResourceManager.GetString("ProjectCompilationStartPointText", resourceCulture);
             }
         }
         
@@ -843,6 +867,16 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ---Start Task---
+        ///.
+        /// </summary>
+        public static string StartTaskPointText {
+            get {
+                return ResourceManager.GetString("StartTaskPointText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start:.
         /// </summary>
         public static string StartUiText {
@@ -866,6 +900,16 @@ namespace nwjsCookToolUI.Properties {
         public static string TaskCancelledOutputText {
             get {
                 return ResourceManager.GetString("TaskCancelledOutputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ---Ended Task---
+        ///.
+        /// </summary>
+        public static string TaskEndPointText {
+            get {
+                return ResourceManager.GetString("TaskEndPointText", resourceCulture);
             }
         }
         
