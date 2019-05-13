@@ -19,11 +19,19 @@ steps:
   inputs:
     version: '2.2.203' # replace this value with the version that you need for your project
 
-- task: NuGetToolInstaller@0
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: 
+    checkLatest: true
 
+-
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
+    restoreDirectory: '/packages'
+    versioningScheme: 'off'
 
 - script: dotnet restore
 
