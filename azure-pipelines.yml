@@ -15,11 +15,21 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@0
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '2.2.203'
+
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: 
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
 
 - task: VSBuild@1
   inputs:
