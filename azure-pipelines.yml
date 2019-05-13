@@ -24,7 +24,6 @@ steps:
     versionSpec: 
     checkLatest: true
 
--
 - task: NuGetCommand@2
   inputs:
     command: 'restore'
