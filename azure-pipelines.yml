@@ -34,14 +34,14 @@ steps:
 
 - script: dotnet restore
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '$(solution)'
-    project: 'nwjsCookToolUI'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'build'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'test'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
