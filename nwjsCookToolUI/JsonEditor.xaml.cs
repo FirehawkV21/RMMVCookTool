@@ -182,29 +182,29 @@ namespace nwjsCookToolUI
                     isKioskMode,
                     windowPosition,
                     _projectLocation);
-                MessageBox.Show(nwjsCookToolUI.Properties.Resources.SaveCompleteText, Properties.Resources.DoneText,
+                MessageBox.Show(Properties.Resources.SaveCompleteText, Properties.Resources.DoneText,
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (FileFormatException)
             {
-                MessageBox.Show(nwjsCookToolUI.Properties.Resources.FileStreamErrorText, Properties.Resources.ErrorText, MessageBoxButton.OK,
+                MessageBox.Show(Properties.Resources.FileStreamErrorText, Properties.Resources.ErrorText, MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
             catch (PathTooLongException)
             {
-                MessageBox.Show(nwjsCookToolUI.Properties.Resources.ProjectPathTooLongErrorText,
+                MessageBox.Show(Properties.Resources.ProjectPathTooLongErrorText,
                     Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             catch (IOException)
             {
-                MessageBox.Show(nwjsCookToolUI.Properties.Resources.IOErrorText,
+                MessageBox.Show(Properties.Resources.IOErrorText,
                     Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (UnauthorizedAccessException)
             {
                 MessageBox.Show(
-                    nwjsCookToolUI.Properties.Resources.FileAccessError,
+                    Properties.Resources.FileAccessError,
                     Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
