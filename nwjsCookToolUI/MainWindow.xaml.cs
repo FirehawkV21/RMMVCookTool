@@ -297,7 +297,7 @@ namespace nwjsCookToolUI
                     break;
                 case 5:
                     MainProgress.Value += 1;
-                    OutputArea.Text = OutputArea.Text + "\n[" +DateTime.Now + "]Removing files...";
+                    OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]Removing files...";
                     break;
                 case 4:
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]" + Properties.Resources.PackageCreationText;

@@ -302,32 +302,32 @@ namespace nwjsCompilerCLI
                 //Compilation is done in parallel. Handy for multi-core systems.
                 if (_parallelMode)
                 {
-                    Parallel.ForEach(CoreCode.FileMap, fileName =>
+                    Parallel.For(0, CoreCode.FileMap.Length, index =>
                     {
                         //Print the status of the compiler. Show which thread is compiling what as well.
                         Console.WriteLine("\n" + DateTime.Now + "\nThread #" + Thread.CurrentThread.ManagedThreadId +
-                                          " is compiling " + fileName + "...\n");
+                                          " is compiling " + CoreCode.FileMap[index] + "...\n");
                         //Call the compiler task.
-                        CoreCode.CompilerWorkerTask(fileName, _fileExtension, _removeJsFiles);
+                        CoreCode.CompilerWorkerTask(CoreCode.FileMap[index], _fileExtension, _removeJsFiles);
                         Console.WriteLine("\n" + DateTime.Now + "\nThread #" + Thread.CurrentThread.ManagedThreadId +
-                                          " finished compiling " + fileName + ".\n");
+                                          " finished compiling " + CoreCode.FileMap[index] + ".\n");
                     });
                 }
 
                 else
                 {
-                    foreach(string fileName in CoreCode.FileMap) {
+                    for(int index = 0; index < CoreCode.FileMap.Length; index++) {
                         //Print the status of the compiler. Show which thread is compiling what as well.
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.Write("[{0}]", DateTime.Now);
                         Console.ResetColor();
-                        Console.WriteLine("Compiling " + fileName + "...");
+                        Console.WriteLine("Compiling " + CoreCode.FileMap[index] + "...");
                         //Call the compiler task.
-                        CoreCode.CompilerWorkerTask(fileName, _fileExtension, _removeJsFiles);
+                        CoreCode.CompilerWorkerTask(CoreCode.FileMap[index], _fileExtension, _removeJsFiles);
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.Write("[{0}]", DateTime.Now);
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine("Finished compiling " + fileName + ".");
+                        Console.WriteLine("Finished compiling " + CoreCode.FileMap[index] + ".");
                         Console.ResetColor();
                     }
                 }

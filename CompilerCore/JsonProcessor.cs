@@ -54,7 +54,7 @@ namespace CompilerCore
                         new JProperty("min_width", windowMinWidth),
                         new JProperty("min_height", windowMinHeight))));
             using (StreamWriter settingsFile = new StreamWriter(Path.Combine(packageFileLocation, "package.json")))
-            settingsFile.Write(gameMetadata);
+                settingsFile.Write(gameMetadata);
         }
 
 
