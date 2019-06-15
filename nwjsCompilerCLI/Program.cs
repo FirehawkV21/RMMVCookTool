@@ -24,7 +24,6 @@ namespace nwjsCompilerCLI
 
         private static void Main(string[] args)
         {
-            string stringBuffer;
             Console.WriteLine("================================================");
             Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
             Console.WriteLine("= Version D1.01 ({0})", Assembly.GetExecutingAssembly().GetName().Version);
@@ -36,6 +35,7 @@ namespace nwjsCompilerCLI
             {   
                 for (int argnum = 0; argnum < args.Length; argnum++)
                 {
+                    string stringBuffer;
                     switch (args[argnum])
                     {
                         //Turn on Parallel mode.
@@ -247,7 +247,7 @@ namespace nwjsCompilerCLI
                 //This is the check if the tool should delete the JS files.
                 Console.WriteLine(
                     "\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1) ");
-                stringBuffer = Console.ReadLine();
+                string stringBuffer = Console.ReadLine();
                 int.TryParse(stringBuffer, out _checkDeletion);
                 _removeJsFiles = (_checkDeletion == 2);
                 //}

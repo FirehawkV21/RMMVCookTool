@@ -22,7 +22,7 @@ namespace CompilerCore
         /// <param name="sourceDirName">The path of the folder to copy from.</param>
         /// <param name="destDirName">The path where the folder will be copied to.</param>
         /// <param name="copySubDirs">Copy the subdirectories as well.</param>
-        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        private static void DirectoryCopy(in string sourceDirName, string destDirName, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.
             var dir = new DirectoryInfo(sourceDirName);
@@ -60,7 +60,7 @@ namespace CompilerCore
         /// </summary>
         /// <param name="path">Path for Search.</param>
         /// <param name="extension">File Extension.</param>
-        public static void FileFinder(string path, string extension)
+        public static void FileFinder(in string path, in string extension)
         {
             FileMap = Directory.GetFiles(path, extension, SearchOption.AllDirectories);
         }
@@ -98,7 +98,7 @@ namespace CompilerCore
         /// <param name="file">The file to compile.</param>
         /// <param name="extension">The desired file extension.</param>
         /// <param name="removeJs">Remove the JS file after compiling.</param>
-        public static void CompilerWorkerTask(string file, string extension, bool removeJs)
+        public static void CompilerWorkerTask(in string file, in string extension, in bool removeJs)
         {
             //Removing the JavaScript extension. Needed to place our own File Extension.
             var fileBuffer = file.Replace(".js", "");
@@ -120,7 +120,7 @@ namespace CompilerCore
         /// </summary>
         /// <param name="sdkLocation">The location of the NW.js SDK folder.</param>
         /// <param name="projectLocation">The location of the project.</param>
-        public static void RunTest(string sdkLocation, string projectLocation)
+        public static void RunTest(in string sdkLocation, in string projectLocation)
         {
             if (File.Exists(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs")))
                 Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe": "nwjs"), "--nwapp=\"" + projectLocation + "\"");
@@ -133,7 +133,7 @@ namespace CompilerCore
         /// Copies the files to a temporary location (for use with CompressFiles).
         /// </summary>
         /// <param name="inputFolder">The location of the project to compress.</param>
-        public static void PreparePack(string inputFolder)
+        public static void PreparePack(in string inputFolder)
         {
             if (Directory.Exists(TempFolderLocation)) Directory.Delete(TempFolderLocation, true);
             DirectoryCopy(Path.Combine(inputFolder, "www"),
@@ -146,11 +146,12 @@ namespace CompilerCore
         /// Compresses the game's files (after copying them in a temporary location) to a zip file named package.nw (app.nw on Mac).
         /// </summary>
         /// <param name="deployArea">The destination path for the archive.</param>
-        public static void CompressFiles(string deployArea, int CompressionSelector)
+        /// <param name="compressionSelector">What kind of compression will be applied? 0 = Optimal, 1 = Fastest, 2 = None</param>
+        public static void CompressFiles(in string deployArea, in int compressionSelector)
         {
             var packageOutput = Path.Combine(deployArea, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
-            switch (CompressionSelector)
+            switch (compressionSelector)
             {
                 case 2:
                     ZipFile.CreateFromDirectory(TempFolderLocation,
@@ -173,7 +174,7 @@ namespace CompilerCore
         /// Deletes the project's files. Best used after compressing the project.
         /// </summary>
         /// <param name="projectLocation">The location of the project.</param>
-        public static void DeleteFiles(string projectLocation)
+        public static void DeleteFiles(in string projectLocation)
         {
             if (Directory.Exists(Path.Combine(projectLocation, "www"))) Directory.Delete(Path.Combine(projectLocation, "www"), true);
             if (File.Exists(Path.Combine(projectLocation, "package.json"))) File.Delete(Path.Combine(projectLocation, "package.json"));

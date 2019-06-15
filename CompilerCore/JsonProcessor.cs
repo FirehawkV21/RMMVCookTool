@@ -30,7 +30,7 @@ namespace CompilerCore
         /// <param name="kioskMode">Turns on or off kiosk mode. Fills the kiosk filed in the window section.</param>
         /// <param name="windowLocation">The location of the window when the game starts up. Fills the position field in the window section.</param>
         /// <param name="packageFileLocation">The folder where the package.json will be saved.</param>
-        public static void BuildJson(string appName, string gameId, string gameVersion, string fileLocation, bool nodeJsEnabled, string chromiumFlags, string jsFlags,string windowId, string iconLocation, string windowTitle, int windowWidth, int windowHeight, int windowMinWidth, int windowMinHeight, bool resizable, bool fullscreen, bool kioskMode, string windowLocation, string packageFileLocation)
+        public static void BuildJson(in string appName, in string gameId, in string gameVersion, in string fileLocation, in bool nodeJsEnabled, in string chromiumFlags, in string jsFlags, in string windowId, in string iconLocation, in string windowTitle, in int windowWidth, in int windowHeight, in int windowMinWidth, in int windowMinHeight, in bool resizable, in bool fullscreen, in bool kioskMode, in string windowLocation, in string packageFileLocation)
         {
             JObject gameMetadata = new JObject(
                 new JProperty("app_name", appName),
@@ -58,7 +58,7 @@ namespace CompilerCore
         }
 
 
-        public static string ReadJson(string fileLocation)
+        public static string ReadJson(in string fileLocation)
         {
             char[] JsonIn;
             using (StreamReader settingsLoader = new StreamReader(fileLocation))
