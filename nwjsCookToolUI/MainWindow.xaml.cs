@@ -208,7 +208,7 @@ namespace nwjsCookToolUI
                 CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
                 Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
                 if (Settings.Default.PackageCode)
-                    Dispatcher.Invoke(() =>  (Settings.Default.DeleteSourceCode) ? MainProgress.Maximum += 2 : 1);
+                    Dispatcher.Invoke(() => (Settings.Default.DeleteSourceCode) ? MainProgress.Maximum += 2 : 1);
                 _compilerStatusReport = 1;
                 for(_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
                 {
@@ -314,14 +314,13 @@ namespace nwjsCookToolUI
                         OutputArea.Text +=
                             "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
                             "...";
-                        StatusLabel.Content = StatusLabel.Content =
-                            Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
+                        StatusLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
                     }
                     break;
                 case 1:
                     OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
                                        "...";
-                    StatusLabel.Content = StatusLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
+                    StatusLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
                     break;
                 case 0:
                     OutputArea.Text += nwjsCookToolUI.Properties.Resources.StartTaskPointText;

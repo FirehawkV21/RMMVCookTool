@@ -250,7 +250,6 @@ namespace nwjsCompilerCLI
                 string stringBuffer = Console.ReadLine();
                 int.TryParse(stringBuffer, out _checkDeletion);
                 _removeJsFiles = (_checkDeletion == 2);
-                //}
 
                 char charBuffer;
                 if (_checkDeletion == 2)
