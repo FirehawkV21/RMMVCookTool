@@ -38,4 +38,13 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.Platforms" Version="2.2.1" />
+    <PackageReference Include="Microsoft.NETCore.Targets" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.2.5" />
+  </ItemGroup>
+
 </Project>
