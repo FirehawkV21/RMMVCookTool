@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.2.19166</AssemblyVersion>
-    <FileVersion>1.0.1.19166</FileVersion>
+    <AssemblyVersion>1.0.2.19167</AssemblyVersion>
+    <FileVersion>1.0.1.19167</FileVersion>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
@@ -14,6 +14,14 @@
     <Version>1.0.2-20190304</Version>
     <PackageId>StudioACE.RMMVCookTool.Core</PackageId>
     <Copyright>Copyright © 2019 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
 
   <ItemGroup>
