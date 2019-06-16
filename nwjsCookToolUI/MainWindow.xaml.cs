@@ -323,10 +323,16 @@ namespace nwjsCookToolUI
                     StatusLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
                     break;
                 case 0:
-                    OutputArea.Text += nwjsCookToolUI.Properties.Resources.StartTaskPointText;
+                    OutputArea.Text += Properties.Resources.StartTaskPointText;
                     StatusLabel.Content = Properties.Resources.BinRemovalProgressText;
                     OutputArea.Text += "[" + DateTime.Now +
                                        "]"+Properties.Resources.BinRemovalText;
+                    break;
+                default:
+                    OutputArea.Text += "Unknown Status Code";
+                    StatusLabel.Content = "Unknown Status Code";
+                    OutputArea.Text += "[" + DateTime.Now +
+                                       "]" + "Unknown Status Code";
                     break;
             }
         }

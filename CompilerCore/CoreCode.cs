@@ -161,7 +161,7 @@ namespace CompilerCore
                     ZipFile.CreateFromDirectory(TempFolderLocation,
                         packageOutput, CompressionLevel.Fastest, false);
                     break;
-                case 0:
+                default:
                     ZipFile.CreateFromDirectory(TempFolderLocation,
                         packageOutput, CompressionLevel.Optimal, false);
                     break;
