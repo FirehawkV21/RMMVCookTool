@@ -21,11 +21,11 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
- - OS: [e.g. Windows]
- - Release/Distro [e.g. Windows 10, Ubuntu]
- - Version [e.g. 1709, 18.04]
- - System Architecture [e.g. 64-bit, arm32]
- - .NET Runtime [e.g. .NET Framework 4.7.2]
+ - OS: \[e.g. Windows]
+ - Release/Distro \[e.g. Windows 10, Ubuntu]
+ - Version \[e.g. 1709, 18.04]
+ - System Architecture \[e.g. 64-bit, arm32]
+ - .NET Runtime \[e.g. .NET Framework 4.7.2]
 
 **Additional context**
 Add any other context about the problem here.
