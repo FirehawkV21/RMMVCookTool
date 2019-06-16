@@ -15,7 +15,6 @@ The GUI part of the compiler tool.
 The standalone, cross-platform console app. Used for compiling a project quickly.
 
 ## System Requirements
-
 -  Windows 7 Service Pack 1 and newer.
 -  Microsoft .NET Framework 4.7.2 (.NET Core 2.2 or newer for the console app, except if it's the standalone version)
 -  NW.js SDK. Any version you want.
