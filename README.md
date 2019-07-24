@@ -16,12 +16,12 @@ The standalone, cross-platform console app. Used for compiling a project quickly
 
 ## System Requirements
 -  Windows 7 Service Pack 1 and newer.
--  Microsoft .NET Framework 4.7.2 (.NET Core 2.2 or newer for the console app, except if it's the standalone version)
+-  Microsoft .NET Core 3.
 -  NW.js SDK. Any version you want.
 
 ## Compiling
 
-You will need Visual Studio 2017, along with the Microsoft .NET Framework 4.7.2 SDK (.NET Core SDK 2.2 or newer as well, if you want to compile the standalone console app). Once you do have both, open the solution file.
+You will need Visual Studio 2019, along with the Microsoft .NET Core 3 SDK. Once you do have both, open the solution file.
 
 ## Libraries Used
 -  [Xceed WPF Toolkit](https://github.com/xceedsoftware/wpftoolkit)
