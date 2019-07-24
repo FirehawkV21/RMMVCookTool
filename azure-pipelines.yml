@@ -18,7 +18,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '2.2.203'
+    version: '3.0.100-preview7-012821'
 
 - task: NuGetToolInstaller@1
   inputs:
