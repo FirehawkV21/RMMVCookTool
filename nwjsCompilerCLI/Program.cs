@@ -29,7 +29,7 @@ namespace nwjsCompilerCLI
             Console.WriteLine(Resources.ProgramVersionString, Assembly.GetExecutingAssembly().GetName().Version);
             Console.WriteLine(Resources.ProgramAuthorText);
             Console.WriteLine(Resources.ProgramLicenseText);
-            Console.WriteLine(Resources.SpilterText + @"\n");
+            Console.WriteLine(Resources.SpilterText);
 
             if (args.Length >= 1)
             {   
