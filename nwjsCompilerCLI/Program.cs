@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using CompilerCore;
+using nwjsCompilerCLI.Properties;
 
 namespace nwjsCompilerCLI
 {
@@ -19,16 +20,16 @@ namespace nwjsCompilerCLI
         private static bool _settingsSet;
         private static bool _removeJsFiles;
         private static int _checkDeletion = 1;
-        private static int _compressionLevel = 0;
+        private static int _compressionLevel;
 
         private static void Main(string[] args)
         {
-            Console.WriteLine("================================================");
-            Console.WriteLine("= RPG Maker MV Cook Tool (.NET Core CLI Version)");
-            Console.WriteLine("= Version D1.01 ({0})", Assembly.GetExecutingAssembly().GetName().Version);
-            Console.WriteLine("= Developed by AceOfAces.");
-            Console.WriteLine("= Licensed under the MIT license.");
-            Console.WriteLine("================================================\n");
+            Console.WriteLine(Resources.SpilterText);
+            Console.WriteLine(Resources.ProgramNameText);
+            Console.WriteLine(Resources.ProgramVersionString, Assembly.GetExecutingAssembly().GetName().Version);
+            Console.WriteLine(Resources.ProgramAuthorText);
+            Console.WriteLine(Resources.ProgramLicenseText);
+            Console.WriteLine(Resources.SpilterText + @"\n");
 
             if (args.Length >= 1)
             {   
@@ -40,7 +41,7 @@ namespace nwjsCompilerCLI
                         //Turn on Parallel mode.
                         case "--Parallel":
                             _parallelMode = true;
-                            Console.WriteLine("Compiler is now running in parallel mode.");
+                            Console.WriteLine(Resources.ParallelModeActiveText);
                             break;
 
                         //Set the SDK Location
@@ -52,7 +53,7 @@ namespace nwjsCompilerCLI
                                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc")))
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                Console.WriteLine("SDK Location OK.");
+                                Console.WriteLine(Resources.SDKLocationConfirmationText);
                                 Console.ResetColor();
                             }
                             else
@@ -60,10 +61,10 @@ namespace nwjsCompilerCLI
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine(
                                     !Directory.Exists(_sdkLocation)
-                                        ? "The location of the SDK doesn't exist."
-                                        : "The compiler isn't there. Please pick the folder that has the nwjc file");
+                                        ? Resources.SDKLocationInexistantText
+                                        : Resources.CompilerMissingErrorText);
                                 Console.ResetColor();
-                                Console.WriteLine("Push Enter/Return to exit.");
+                                Console.WriteLine(Resources.PushEnterToExitText);
                                 Console.ReadLine();
                                 Environment.Exit(1);
                             }
@@ -77,17 +78,17 @@ namespace nwjsCompilerCLI
                                 Directory.Exists(Path.Combine(_projectLocation, "www", "js")))
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                Console.WriteLine("Project Location OK.");
+                                Console.WriteLine(Resources.ProjectLocationConfirmationText);
                                 Console.ResetColor();
                             }
                             else
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine(!Directory.Exists(Path.Combine(_projectLocation, "www", "js"))
-                                    ? "The location of the project doesn't exist."
-                                    : "The js folder doesn't exist.");
+                                    ? Resources.ProjectLocationInexistantText
+                                    : Resources.JsFolderMissingErrorText);
                                 Console.ResetColor();
-                                Console.WriteLine("Push Enter/Return to exit.");
+                                Console.WriteLine(Resources.PushEnterToExitText);
                                 Console.ReadLine();
                                 Environment.Exit(1);
                             }
@@ -99,7 +100,7 @@ namespace nwjsCompilerCLI
                             if (argnum >= args.Length - 1 && args[argnum].Contains("--")) continue;
                             _fileExtension = args[argnum + 1];
                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.WriteLine("The file extension is set to " + _fileExtension);
+                            Console.WriteLine(Resources.FileExtensionSetText + _fileExtension);
                             Console.ResetColor();
                             break;
 
@@ -109,9 +110,9 @@ namespace nwjsCompilerCLI
                             if (_testProject)
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("You can't compress and test the project at the moment.");
+                                Console.WriteLine(Resources.CannotCompressAndTestErrorText);
                                 Console.ResetColor();
-                                Console.WriteLine("Push Enter/Return to exit.");
+                                Console.WriteLine(Resources.PushEnterToExitText);
                                 Console.ReadLine();
                                 Environment.Exit(1);
                             }
@@ -136,7 +137,7 @@ namespace nwjsCompilerCLI
                             _checkDeletion = 2;
                             _removeJsFiles = true;
                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.WriteLine("The JavaScript files will be deleted after compilation.");
+                            Console.WriteLine(Resources.JavascriptDeletionConfirmationTet);
                             Console.ResetColor();
                             break;
 
@@ -145,9 +146,9 @@ namespace nwjsCompilerCLI
                             if (_compressProject <= 2)
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("You can't compress and test the project at the moment.");
+                                Console.WriteLine(Resources.CannotCompressAndTestErrorText);
                                 Console.ResetColor();
-                                Console.WriteLine("Push Enter/Return to exit.");
+                                Console.WriteLine(Resources.PushEnterToExitText);
                                 Console.ReadLine();
                                 Environment.Exit(1);
                             }
@@ -155,7 +156,7 @@ namespace nwjsCompilerCLI
                             {
                                 _testProject = true;
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                Console.WriteLine("NW.js will start after compiling.");
+                                Console.WriteLine(Resources.nwjsTestStartingText);
                                 Console.ResetColor();
                             }
                             break;
@@ -167,19 +168,19 @@ namespace nwjsCompilerCLI
                                     case 2:
                                         _compressionLevel = 2;
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("No compression will be used for the archive.");
+                                        Console.WriteLine(Resources.NoCompressionConfirmationText);
                                         Console.ResetColor();
                                         break;
                                     case 1:
                                         _compressionLevel = 1;
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("The fastest compression will be used for the archive.");
+                                        Console.WriteLine(Resources.FastestCompressionConfirmationText);
                                         Console.ResetColor();
                                         break;
                                     default:
                                         _compressionLevel = 0;
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("The optimal compression will be used for the archive (this is the default).");
+                                        Console.WriteLine(Resources.OptimalCompressionCOnfirmationText);
                                         Console.ResetColor();
                                         break;
                                 }
@@ -193,9 +194,9 @@ namespace nwjsCompilerCLI
                 else if (_projectLocation == null && _sdkLocation != null)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("The Project location is not set. Please set it with the --ProjectLocation \"<project location>\".");
+                    Console.WriteLine(Resources.ProjectNotSetErrorText);
                     Console.ResetColor();
-                    Console.WriteLine("Push Enter/Return to exit.");
+                    Console.WriteLine(Resources.PushEnterToExitText);
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
@@ -203,9 +204,9 @@ namespace nwjsCompilerCLI
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(
-                        "The SDK location is not set. Please set it with the --SDKLocation \"<project location>\".");
+                        Resources.SDKLocationNotSetErrorText);
                     Console.ResetColor();
-                    Console.WriteLine("Push Enter/Return to exit.");
+                    Console.WriteLine(Resources.PushEnterToExitText);
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
@@ -217,35 +218,35 @@ namespace nwjsCompilerCLI
                 do
                 {
                     //Ask the user where is the SDK. Check if the folder's there.
-                    Console.WriteLine("Where's the SDK location? ");
+                    Console.WriteLine(Resources.SDKLocationQuestion);
                     _sdkLocation = Console.ReadLine();
-                    if (_sdkLocation == null) Console.WriteLine("Please insert the path for the SDK please.\n");
+                    if (_sdkLocation == null) Console.WriteLine(Resources.SDKLocationIsNullText);
                     else if (!Directory.Exists(_sdkLocation))
-                        Console.Write("The directory isn't there. Please select an existing folder.\n");
+                        Console.Write(Resources.SDKDirectoryMissing);
                 } while (_sdkLocation == null || !Directory.Exists(_sdkLocation));
 
                 do
                 {
                     //Ask the user what project to compile. Check if the folder is there and there's a js folder.
-                    Console.WriteLine("\nWhere's the project you want to compile? ");
+                    Console.WriteLine(Resources.ProjectLocationQuestion);
                     _projectLocation = Console.ReadLine();
 
-                    if (_projectLocation == null) Console.WriteLine("Please specify the location of the folder.\n");
+                    if (_projectLocation == null) Console.WriteLine(Resources.ProjectLocationIsNullText);
                     else if (!Directory.Exists(_projectLocation))
-                        Console.WriteLine("The folder you've selected isn't present.\n");
+                        Console.WriteLine(Resources.ProjetDirectoryMissingErrorText);
                     else if (!Directory.Exists(Path.Combine(_projectLocation, "www", "js")))
-                        Console.WriteLine("There is no js folder.\n");
+                        Console.WriteLine(Resources.ProjectJsFolderMissing);
                 } while (_projectLocation == null || !Directory.Exists(_projectLocation) ||
                          !Directory.Exists(Path.Combine(_projectLocation, "www", "js")));
 
 
                 //Ask the user for the file extension.
-                Console.Write("\nWhat Extension will your game use (leave empty for .bin)? ");
+                Console.Write(Resources.FileExtensionQuestion);
                 _fileExtension = Console.ReadLine();
                 if (string.IsNullOrEmpty(_fileExtension)) _fileExtension = "bin";
                 //This is the check if the tool should delete the JS files.
                 Console.WriteLine(
-                    "\nDo you want to:\n1. Test that the binary files are loaded properly?\n2. Prepare for publishing?\n(Default is 1) ");
+                    Resources.WorkloadQuestion);
                 string stringBuffer = Console.ReadLine();
                 int.TryParse(stringBuffer, out _checkDeletion);
                 _removeJsFiles = (_checkDeletion == 2);
@@ -254,14 +255,14 @@ namespace nwjsCompilerCLI
                 if (_checkDeletion == 2)
                 {
                     Console.WriteLine(
-                        "\nWould you like to compress the game's files to an archive?\n1.Yes (delete the files as well).\n2.Yes (but leave the files intact).\n3. No.\n(Default is 3)");
+                        Resources.CompressionQuestion);
                     charBuffer = Console.ReadKey().KeyChar;
                     _compressProject = !char.IsLetterOrDigit(charBuffer) ? Convert.ToInt32(charBuffer) : 3;
                 }
                 else
                 {
                     //Ask if the user would like to test with nwjs.
-                    Console.WriteLine("\nWould you like to test the project after compiling? (Y/N, Default is N)\n");
+                    Console.WriteLine(Resources.TestProjectQuestion);
                     charBuffer = Console.ReadKey().KeyChar;
                     if (char.IsLetterOrDigit(charBuffer))
                     {
@@ -290,7 +291,7 @@ namespace nwjsCompilerCLI
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("[{0}]", DateTime.Now);
             Console.ResetColor();
-            Console.WriteLine("Removing binary files (if present)...");
+            Console.WriteLine(Resources.BinaryRemovalText);
             CoreCode.CleanupBin();
             //Preparing the compiler task.
             CoreCode.CompilerInfo.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
@@ -303,12 +304,12 @@ namespace nwjsCompilerCLI
                     Parallel.For(0, CoreCode.FileMap.Length, index =>
                     {
                         //Print the status of the compiler. Show which thread is compiling what as well.
-                        Console.WriteLine("\n" + DateTime.Now + "\nThread #" + Thread.CurrentThread.ManagedThreadId +
-                                          " is compiling " + CoreCode.FileMap[index] + "...\n");
+                        Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord + Thread.CurrentThread.ManagedThreadId +
+                                          Resources.CompilingWord + CoreCode.FileMap[index] + @"...\n");
                         //Call the compiler task.
                         CoreCode.CompilerWorkerTask(CoreCode.FileMap[index], _fileExtension, _removeJsFiles);
-                        Console.WriteLine("\n" + DateTime.Now + "\nThread #" + Thread.CurrentThread.ManagedThreadId +
-                                          " finished compiling " + CoreCode.FileMap[index] + ".\n");
+                        Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord + Thread.CurrentThread.ManagedThreadId +
+                                          Resources.FinishedCompilingText + CoreCode.FileMap[index] + @".\n");
                     });
                 }
 
@@ -317,50 +318,50 @@ namespace nwjsCompilerCLI
                     for(int index = 0; index < CoreCode.FileMap.Length; index++) {
                         //Print the status of the compiler. Show which thread is compiling what as well.
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write("[{0}]", DateTime.Now);
+                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                         Console.ResetColor();
-                        Console.WriteLine("Compiling " + CoreCode.FileMap[index] + "...");
+                        Console.WriteLine(Resources.CompilingWord2 + CoreCode.FileMap[index] + "...");
                         //Call the compiler task.
                         CoreCode.CompilerWorkerTask(CoreCode.FileMap[index], _fileExtension, _removeJsFiles);
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write("[{0}]", DateTime.Now);
+                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine("Finished compiling " + CoreCode.FileMap[index] + ".");
+                        Console.WriteLine(Resources.FinishedCompilingText2 + CoreCode.FileMap[index] + ".");
                         Console.ResetColor();
                     }
                 }
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.Write("[{0}]", DateTime.Now);
+                Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("Finished compiling files.");
+                Console.WriteLine(Resources.CompilerTaskComplete);
                 Console.ResetColor();
                 if (_testProject)
                 {
-                    Console.WriteLine("\nNW.js will now start. Give it a few seconds to start.");
+                    Console.WriteLine(Resources.NwjsStartingTestNotificationText);
                     CoreCode.RunTest(_sdkLocation, _projectLocation);
                 }
                 else if (_compressProject < 3 && _checkDeletion == 2)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.Write("[{0}]", DateTime.Now);
+                    Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                     Console.ResetColor();
-                    Console.WriteLine("Copying the game files to a temporary location...");
+                    Console.WriteLine(Resources.CopyingToTempLocationText);
                     CoreCode.PreparePack(_projectLocation);
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.Write("[{0}]", DateTime.Now);
+                    Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                     Console.ResetColor();
-                    Console.WriteLine("Compressing files...");
+                    Console.WriteLine(Resources.FileCompressionText);
                     CoreCode.CompressFiles(_projectLocation, _compressionLevel);
                     if (_compressProject == 1)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write("[{0}]", DateTime.Now);
+                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                         Console.ResetColor();
-                        Console.WriteLine("Deleting source files...");
+                        Console.WriteLine(Resources.SourceFileDeletionText);
                         CoreCode.DeleteFiles(_projectLocation);
                     }
                 }
-                Console.WriteLine("\nThe task was completed.");
+                Console.WriteLine(Resources.TaskCompleteText);
 
             }
             catch (Exception e)
@@ -372,7 +373,7 @@ namespace nwjsCompilerCLI
             }
             //Ask the user to press Enter (or Return).
             if (_settingsSet) return;
-            Console.WriteLine("Push Enter/Return to exit.");
+            Console.WriteLine(Resources.PushEnterToExitText);
             Console.ReadLine();
         }
     }
