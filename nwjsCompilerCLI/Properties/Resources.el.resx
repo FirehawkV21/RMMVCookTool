@@ -250,7 +250,7 @@
     <value>Μετάφραση του αρχείου </value>
   </data>
   <data name="FinishedCompilingText2" xml:space="preserve">
-    <value>Τελέιωσε η μετάφραση του </value>
+    <value>Ολοκληρώθηκε η μετάφραση του </value>
   </data>
   <data name="DateTimeFormatText" xml:space="preserve">
     <value>[{0}]</value>
