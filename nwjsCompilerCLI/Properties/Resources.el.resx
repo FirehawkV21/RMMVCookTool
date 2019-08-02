@@ -127,152 +127,158 @@
     <value>= Έκδοση D1.02 ({0})</value>
   </data>
   <data name="ProgramAuthorText" xml:space="preserve">
-    <value>= Developed by AceOfAces.</value>
+    <value>= Δημιουργήθηκε από τον AceOfAces.</value>
   </data>
   <data name="ProgramLicenseText" xml:space="preserve">
-    <value>= Licensed under the MIT license.</value>
+    <value>= Αδειωτοτείται κάτω απο το MIT license.</value>
   </data>
   <data name="ParallelModeActiveText" xml:space="preserve">
-    <value>Compiler is now running in parallel mode.</value>
+    <value>Ο μεταφραστής δουλεύει σε παράλληλη λειτουργεία.</value>
   </data>
   <data name="SDKLocationConfirmationText" xml:space="preserve">
-    <value>SDK Location OK.</value>
+    <value>Θέση SDK OK.</value>
   </data>
   <data name="PushEnterToExitText" xml:space="preserve">
-    <value>Push Enter/Return to exit.</value>
+    <value>Πιεστε Enter/Return για έξοδο.</value>
   </data>
   <data name="ProjectLocationConfirmationText" xml:space="preserve">
-    <value>Project Location OK.</value>
+    <value>Θέση project OK.</value>
   </data>
   <data name="FileExtensionSetText" xml:space="preserve">
-    <value>The file extension is set to </value>
+    <value>H επέκταση αρχείου ορίστικε ως </value>
   </data>
   <data name="CannotCompressAndTestErrorText" xml:space="preserve">
-    <value>You can't compress and test the project at the moment.</value>
+    <value>Αυτή τη στιγμή, δεν μπορείτε να συμπιέσετε και να δοκιμάσετε το project αυτή τη στιγμή.</value>
   </data>
   <data name="JavascriptDeletionConfirmationTet" xml:space="preserve">
-    <value>The JavaScript files will be deleted after compilation.</value>
+    <value>Τα αρχεία JavaScript θα διαγραφούν μετά τη μετάφραση.</value>
   </data>
   <data name="NoCompressionConfirmationText" xml:space="preserve">
-    <value>No compression will be used for the archive.</value>
+    <value>Δεν θα χρησιμοποιηθεί συμπέιση σε αυτό το αρχείο.</value>
   </data>
   <data name="FastestCompressionConfirmationText" xml:space="preserve">
-    <value>The fastest compression will be used for the archive.</value>
+    <value>Θα χρησιμοποιηθεί η γρήγορη συμπέιση σε αυτό το αρχείο.</value>
   </data>
   <data name="OptimalCompressionCOnfirmationText" xml:space="preserve">
-    <value>The optimal compression will be used for the archive (this is the default).</value>
+    <value>Θα χρησιμοποιηθεί η καλύτερη συμπέιση σε αυτό το αρχείο. (αυτό είναι η προεπιλογή).</value>
   </data>
   <data name="SDKLocationInexistantText" xml:space="preserve">
-    <value>The location of the SDK doesn't exist.</value>
+    <value>Η θέση του SDK δεν υπάρχει.</value>
   </data>
   <data name="CompilerMissingErrorText" xml:space="preserve">
-    <value>The compiler isn't there. Please pick the folder that has the nwjc file</value>
+    <value>Ο μεταφραστής δεν υπάρχει. Παρακαλώ επιλέξτε τον φάκελο που περιέχει το αρχείο nwjc.</value>
   </data>
   <data name="ProjectLocationInexistantText" xml:space="preserve">
-    <value>The location of the project doesn't exist.</value>
+    <value>Η θέση του project δεν υπάρχει.</value>
   </data>
   <data name="JsFolderMissingErrorText" xml:space="preserve">
-    <value>The js folder doesn't exist.</value>
+    <value>Ο φάκελος js δεν υπάρχει.</value>
   </data>
   <data name="nwjsTestStartingText" xml:space="preserve">
-    <value>NW.js will start after compiling.</value>
+    <value>Το NW.js θα ξεκινήσει μετά απο την μετ'αφραση.</value>
   </data>
   <data name="ProjectNotSetErrorText" xml:space="preserve">
-    <value>The Project location is not set. Please set it with the --ProjectLocation "&lt;project location&gt;".</value>
+    <value>Η θέση του project δεν έχει οριστεί. Παρακαλώ ορίστε το με το --ProjectLocation "&lt;project location&gt;".</value>
   </data>
   <data name="SDKLocationNotSetErrorText" xml:space="preserve">
-    <value>The SDK location is not set. Please set it with the --SDKLocation "&lt;project location&gt;".</value>
+    <value>Η θέση του SDK δεν έχει οριστεί. Παρακαλώ ορίστε το με το --SDKLocation "&lt;project location&gt;".</value>
   </data>
   <data name="SDKLocationQuestion" xml:space="preserve">
-    <value>Where's the SDK location? </value>
+    <value>Πού είναι η θέση του SDK; </value>
   </data>
   <data name="SDKLocationIsNullText" xml:space="preserve">
-    <value>Please insert the path for the SDK please.
+    <value>Παρακαλώ εισάγετε την θέση του SDK.
 </value>
   </data>
   <data name="SDKDirectoryMissing" xml:space="preserve">
-    <value>The directory isn't there. Please select an existing folder.
+    <value>Ο φάκελος δεν είναι εκεί. Παρακαλώ επιλέξτε έναν φάκελο που υπάρχει.
 </value>
   </data>
   <data name="ProjectLocationQuestion" xml:space="preserve">
     <value>
-Where's the project you want to compile? </value>
+Που είναι ο φάκελος του project που θέλετε να μεταφράσετε; </value>
   </data>
   <data name="ProjectLocationIsNullText" xml:space="preserve">
-    <value>Please specify the location of the folder.
+    <value>Παρακαλώ εισάγετε την θέση του φακέλου.
 </value>
   </data>
   <data name="ProjetDirectoryMissingErrorText" xml:space="preserve">
-    <value>The folder you've selected isn't present.
+    <value>Ο φακελος που επιλέξατε δεν υπάρχει.
 </value>
   </data>
   <data name="ProjectJsFolderMissing" xml:space="preserve">
-    <value>There is no js folder.
+    <value>Δεν υπάρχει ο φάκελος js.
 </value>
   </data>
   <data name="FileExtensionQuestion" xml:space="preserve">
     <value>
-What Extension will your game use (leave empty for .bin)? </value>
+Ποιά επέκταση αρχείου θα χρησιμοποιήσει το παιχνίδι (αφήστε το άδειο για το .bin); </value>
   </data>
   <data name="WorkloadQuestion" xml:space="preserve">
     <value>
-Do you want to:
-1. Test that the binary files are loaded properly?
-2. Prepare for publishing?
-(Default is 1) </value>
+Θέλετε να:
+1. Δοκιμάσετε οτι τα δυαδικά αρχεια δουλεύουν σωστά;
+2. Προετοιμάσετε για έκδοση;
+(Η προεπιλογή είναι το 1) </value>
   </data>
   <data name="CompressionQuestion" xml:space="preserve">
     <value>
-Would you like to compress the game's files to an archive?
-1.Yes (delete the files as well).
-2.Yes (but leave the files intact).
-3. No.
-(Default is 3)</value>
+Θέλετε να συμπιέσεται τα αρχεία του παιχνιδιού;
+1.Ναί (διέγραψε και τα αρχεία).
+2.Ναί (αλλά κράτησε τα αρχεία).
+3. Όχι.
+(Η προεπιλογή είναι το 3)</value>
   </data>
   <data name="TestProjectQuestion" xml:space="preserve">
     <value>
-Would you like to test the project after compiling? (Y/N, Default is N)
+Θέλετε να δοκιμάσετε το project μετά την μετάφραση; (Ν/Ο, Η προεπιλογή είναι το Ο)
 </value>
   </data>
   <data name="BinaryRemovalText" xml:space="preserve">
-    <value>Removing binary files (if present)...</value>
+    <value>Διαγραφή δυαδικών αρχείων (αν υπάρχουν)...</value>
   </data>
   <data name="ThreadWord" xml:space="preserve">
     <value>]Thread #</value>
   </data>
   <data name="CompilingWord" xml:space="preserve">
-    <value> is compiling </value>
+    <value> μεταφράζει το αρχείο </value>
   </data>
   <data name="FinishedCompilingText" xml:space="preserve">
-    <value> finished compiling </value>
+    <value> τελείωσε την μετάφραση του </value>
   </data>
   <data name="CompilingWord2" xml:space="preserve">
-    <value>Compiling </value>
+    <value>Μετάφραση του αρχείου </value>
   </data>
   <data name="FinishedCompilingText2" xml:space="preserve">
-    <value>Finished compiling </value>
+    <value>Τελέιωσε η μετάφραση του </value>
   </data>
   <data name="DateTimeFormatText" xml:space="preserve">
     <value>[{0}]</value>
   </data>
   <data name="CompilerTaskComplete" xml:space="preserve">
-    <value>Finished compiling files.</value>
+    <value>Τελείωσε η μετάφραση σε δυαδικά αρχεία.</value>
   </data>
   <data name="NwjsStartingTestNotificationText" xml:space="preserve">
     <value>
-NW.js will now start. Give it a few seconds to start.</value>
+Το NW.js θα ξεκινήσει τώρα. Δώστε μερικά δευτερόλεπτα για να ξεκινήσει.</value>
   </data>
   <data name="CopyingToTempLocationText" xml:space="preserve">
-    <value>Copying the game files to a temporary location...</value>
+    <value>Αντιγραφή των αρχείων του παιχνιδιού σε προσωρινό φάκελο...</value>
   </data>
   <data name="FileCompressionText" xml:space="preserve">
-    <value>Compressing files...</value>
+    <value>Συμπίεση αρχείων...</value>
   </data>
   <data name="SourceFileDeletionText" xml:space="preserve">
-    <value>Deleting source files...</value>
+    <value>Διαγραφή των αρχικών αρχείων...</value>
   </data>
   <data name="TaskCompleteText" xml:space="preserve">
     <value>
-The task was completed.</value>
+Η εργασία ολοκληρώθηκε.</value>
+  </data>
+  <data name="ProjectFilesRemovalAfterCompressionText" xml:space="preserve">
+    <value>Τα αρχεία του παιχνιδιού θα συμπιεστούν μετά τη μετάφραση (τα αρχικά αρχεία θα διαγραφτούν μετά).</value>
+  </data>
+  <data name="ProjectFilesCompressionConfirmText" xml:space="preserve">
+    <value>Τα αρχεία του παιχνιδιού θα συμπιεστούν μετά τη μετάφραση.</value>
   </data>
 </root>

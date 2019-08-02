@@ -124,8 +124,8 @@ namespace nwjsCompilerCLI
                                     _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
                                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                                     Console.WriteLine((argnum + 1 <= args.Length - 1) && args[argnum + 1] == "Final"
-                                        ? "The project's files will be compressed (the files will be deleted after compressing)."
-                                        : "The Project's files will be compressed");
+                                        ? nwjsCompilerCLI.Properties.Resources.ProjectFilesRemovalAfterCompressionText
+                                        : nwjsCompilerCLI.Properties.Resources.ProjectFilesCompressionConfirmText);
                                     Console.ResetColor();
                                 }
                                 else _compressProject = 2;

@@ -187,7 +187,7 @@
     <value>Where's the SDK location? </value>
   </data>
   <data name="SDKLocationIsNullText" xml:space="preserve">
-    <value>Please insert the path for the SDK please.
+    <value>Please insert the path for the SDK.
 </value>
   </data>
   <data name="SDKDirectoryMissing" xml:space="preserve">
@@ -275,7 +275,10 @@ NW.js will now start. Give it a few seconds to start.</value>
     <value>
 The task was completed.</value>
   </data>
-  <data name="BinaryRemovalText1" xml:space="preserve">
-    <value>Removing binary files (if present)...</value>
+  <data name="ProjectFilesRemovalAfterCompressionText" xml:space="preserve">
+    <value>The project's files will be compressed (the files will be deleted after compressing).</value>
+  </data>
+  <data name="ProjectFilesCompressionConfirmText" xml:space="preserve">
+    <value>The Project's files will be compressed</value>
   </data>
 </root>

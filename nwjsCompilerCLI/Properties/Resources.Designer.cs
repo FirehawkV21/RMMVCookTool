@@ -70,15 +70,6 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removing binary files (if present)....
-        /// </summary>
-        internal static string BinaryRemovalText1 {
-            get {
-                return ResourceManager.GetString("BinaryRemovalText1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You can&apos;t compress and test the project at the moment..
         /// </summary>
         internal static string CannotCompressAndTestErrorText {
@@ -311,6 +302,24 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Project&apos;s files will be compressed.
+        /// </summary>
+        internal static string ProjectFilesCompressionConfirmText {
+            get {
+                return ResourceManager.GetString("ProjectFilesCompressionConfirmText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The project&apos;s files will be compressed (the files will be deleted after compressing)..
+        /// </summary>
+        internal static string ProjectFilesRemovalAfterCompressionText {
+            get {
+                return ResourceManager.GetString("ProjectFilesRemovalAfterCompressionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is no js folder.
         ///.
         /// </summary>
@@ -415,7 +424,7 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please insert the path for the SDK please.
+        ///   Looks up a localized string similar to Please insert the path for the SDK.
         ///.
         /// </summary>
         internal static string SDKLocationIsNullText {
