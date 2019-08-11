@@ -11,7 +11,7 @@ namespace nwjsCookToolUI
     public partial class App : Application
     {
         public App()
-        {
+        {            
             var profileLocation = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData), "RMMVCompiler");
             if (!Directory.Exists(profileLocation)) Directory.CreateDirectory(profileLocation);

@@ -8,7 +8,7 @@
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
     <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-    <Version>1.2.0-20190729</Version>
+    <Version>1.2.0-20190802</Version>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
