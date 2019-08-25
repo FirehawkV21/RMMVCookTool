@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace CompilerCore
 {
-    public class JsonProcessor
+    public static class JsonProcessor
     {
         public static string JsonString;
 

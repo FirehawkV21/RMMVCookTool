@@ -47,7 +47,9 @@ namespace nwjsCompilerCLI
                         //Set the SDK Location
                         case "--SDKLocation":
                             stringBuffer = args[argnum + 1];
+#pragma warning disable CA1307 // Specify StringComparison
                             _sdkLocation = stringBuffer.Replace("\"", "");
+#pragma warning restore CA1307 // Specify StringComparison
                             if (argnum <= args.Length - 1 && Directory.Exists(_sdkLocation) &&
                                 File.Exists(Path.Combine(_sdkLocation,
                                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc")))

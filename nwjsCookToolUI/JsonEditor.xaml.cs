@@ -42,19 +42,12 @@ namespace nwjsCookToolUI
                 if ((bool?) projectMetadata["window"]["fullscreen"] == true) WindowModeList.SelectedIndex = 1;
                 else if ((bool?) projectMetadata["window"]["kiosk"] == true) WindowModeList.SelectedIndex = 2;
                 else WindowModeList.SelectedIndex = 0;
-                switch ((string) projectMetadata["window"]["position"])
+                WindowLocationList.SelectedIndex = ((string)projectMetadata["window"]["position"]) switch
                 {
-                    case "mouse":
-                        WindowLocationList.SelectedIndex = 2;
-                        break;
-                    case "center":
-                        WindowLocationList.SelectedIndex = 1;
-                        break;
-                    default:
-                        WindowLocationList.SelectedIndex = 0;
-                        break;
-                }
-
+                    "mouse" => 2,
+                    "center" => 1,
+                    _ => 0,
+                };
                 HeightNumber.Value = ((int?)projectMetadata["window"]["height"] == null) ? 816 : (int) projectMetadata["window"]["height"];
                 WidthNumber.Value = ((int?)projectMetadata["window"]["width"] == null) ? 624 : (int) projectMetadata["window"]["width"];
                 MinimumHeightNumber.Value = ((int?)projectMetadata["window"]["min_height"] == null) ? 816 : (int) projectMetadata["window"]["min_height"];
@@ -62,12 +55,15 @@ namespace nwjsCookToolUI
             }
             else
             {
+                //Supressing CA1303 since there's no good reason to put the strings in the resource files.
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
                 FileLocationTextBox.Text = "index.html";
                 GameIdTextBox.Text = "NewGame";
                 GameNameTextBox.Text = "My New Game";
                 JsFlagsTextBox.Text = "--expose-gc";
                 ChromeFlagsTextBox.Text =
                     "--enable-gpu-rasterization --enable-gpu-memory-buffer-video-frames --enable-native-gpu-memory-buffers --enable-zero-copy --enable-gpu-async-worker-context";
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
                 EnableNodeJSCheckBox.IsChecked = true;
                 ResizableWindowCheckBox.IsChecked = true;
                 HeightNumber.Value = 816;
@@ -130,7 +126,6 @@ namespace nwjsCookToolUI
         private void SaveJsonButton_Click(object sender, RoutedEventArgs e)
         {
             bool isFullscreen, isKioskMode;
-            string windowPosition;
             switch (WindowModeList.SelectedIndex)
             {
                 case 2:
@@ -147,19 +142,12 @@ namespace nwjsCookToolUI
                     break;
             }
 
-            switch (WindowLocationList.SelectedIndex)
+            var windowPosition = WindowLocationList.SelectedIndex switch
             {
-                case 2:
-                    windowPosition = "mouse";
-                    break;
-                case 1:
-                    windowPosition = "center";
-                    break;
-                default:
-                    windowPosition = "none";
-                    break;
-            }
-
+                2 => "mouse",
+                1 => "center",
+                _ => "none",
+            };
             try
             {
                 JsonProcessor.BuildJson(

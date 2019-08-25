@@ -101,7 +101,7 @@ namespace CompilerCore
         public static void CompilerWorkerTask(in string file, in string extension, in bool removeJs)
         {
             //Removing the JavaScript extension. Needed to place our own File Extension.
-            var fileBuffer = file.Replace(".js", "");
+            string fileBuffer = file.Replace(".js", "");
             //Setting up the compiler by throwing in two arguments.
             //The first bit (the one with the file variable) is the source.
             //The second bit (the one with the fileBuffer variable) makes the final file.
