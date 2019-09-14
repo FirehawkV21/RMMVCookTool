@@ -175,7 +175,8 @@
     <value>Please add the folders you want the JavaScript files to be compiled.</value>
   </data>
   <data name="PackageCreationText" xml:space="preserve">
-    <value>Creating package...</value>
+    <value>Creating package...
+</value>
   </data>
   <data name="FileCopyText" xml:space="preserve">
     <value>Copying files to a temporary area...</value>
@@ -438,5 +439,8 @@
   </data>
   <data name="SafeModeUiText" xml:space="preserve">
     <value>Compression Safe Mode</value>
+  </data>
+  <data name="CopyToTempLocationStatusText" xml:space="preserve">
+    <value>Copying game files to a temporary location...</value>
   </data>
 </root>

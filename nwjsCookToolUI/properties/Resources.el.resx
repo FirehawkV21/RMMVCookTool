@@ -175,7 +175,8 @@
     <value>Παρακαλώ προσθεστε τους φακέλους που περιέχουν τα αρχεία JavaScript για μετάφραση σε δυαδικά αρχεία.</value>
   </data>
   <data name="PackageCreationText" xml:space="preserve">
-    <value> Δημιουργία πακέτου...</value>
+    <value> Δημιουργία πακέτου...
+</value>
   </data>
   <data name="FileCopyText" xml:space="preserve">
     <value>Αντιγραφή αρχείων σε ένα προσωρινό σημείο...</value>
@@ -438,5 +439,8 @@
   </data>
   <data name="SafeModeUiText" xml:space="preserve">
     <value>Ασφαλή λειτουργεία για την συμπίεση</value>
+  </data>
+  <data name="CopyToTempLocationStatusText" xml:space="preserve">
+    <value>Αντιγραφή των αρχείων του παιχνιδιού σε προσωρινό σημείο...</value>
   </data>
 </root>

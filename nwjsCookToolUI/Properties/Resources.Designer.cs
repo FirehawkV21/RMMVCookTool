@@ -250,6 +250,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copying game files to a temporary location....
+        /// </summary>
+        public static string CopyToTempLocationStatusText {
+            get {
+                return ResourceManager.GetString("CopyToTempLocationStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Developed by AceOfAces. Licensed under the MIT License..
         /// </summary>
         public static string DevInfoUiText {
@@ -619,7 +628,8 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating package....
+        ///   Looks up a localized string similar to Creating package...
+        ///.
         /// </summary>
         public static string PackageCreationText {
             get {

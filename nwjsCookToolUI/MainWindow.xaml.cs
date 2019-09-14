@@ -231,9 +231,12 @@ namespace nwjsCookToolUI
                 {
                     if (Settings.Default.PackageCode)
                     {
-                        _compilerStatusReport = 3;
-                        _compilerWorker.ReportProgress(_currentFile + 1);
-                        if (Settings.Default.CompressionEngineSafeMode) CoreCode.PreparePack(compilerInput);
+                        if (Settings.Default.CompressionEngineSafeMode)
+                        {
+                            _compilerStatusReport = 3;
+                            _compilerWorker.ReportProgress(_currentFile + 1);
+                            CoreCode.PreparePack(compilerInput);
+                        }
                         _compilerStatusReport = 4;
                         _compilerWorker.ReportProgress(_currentFile + 2);
                         CoreCode.CompressFiles(compilerInput, compilerInput, Settings.Default.CompressionMode, Settings.Default.CompressionEngineSafeMode);
@@ -304,10 +307,11 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]Removing files...";
                     break;
                 case 4:
+                    StatusLabel.Content = Properties.Resources.PackaginStatusText;
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]" + Properties.Resources.PackageCreationText;
                     break;
                 case 3:
-                    StatusLabel.Content = Properties.Resources.PackaginStatusText;
+                    StatusLabel.Content = nwjsCookToolUI.Properties.Resources.CopyToTempLocationStatusText;
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]"+ Properties.Resources.FileCopyText;
                     break;
                 case 2:
