@@ -13,6 +13,7 @@ namespace nwjsCookToolUI
     public partial class JsonEditor : Window
     {
         private readonly string _projectLocation;
+        private string JsonString;
 
         public JsonEditor(string projectIn)
         {
@@ -24,8 +25,8 @@ namespace nwjsCookToolUI
         {
             if (File.Exists(Path.Combine(_projectLocation, "package.json")))
             {
-                JsonProcessor.ReadJson(Path.Combine(_projectLocation, "package.json"));
-                var projectMetadata = JObject.Parse(JsonProcessor.JsonString);
+                JsonString = JsonProcessor.ReadJson(Path.Combine(_projectLocation, "package.json"));
+                var projectMetadata = JObject.Parse(JsonString);
                 GameIdTextBox.Text = (string) projectMetadata["name"];
                 FileLocationTextBox.Text = (string) projectMetadata["main"];
                 VersionTextBox.Text = (string) projectMetadata["version"];

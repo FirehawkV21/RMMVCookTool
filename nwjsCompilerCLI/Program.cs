@@ -21,6 +21,7 @@ namespace nwjsCompilerCLI
         private static bool _removeJsFiles;
         private static int _checkDeletion = 1;
         private static int _compressionLevel;
+        private static string[] FileMap;
 
         private static void Main(string[] args)
         {
@@ -289,12 +290,12 @@ namespace nwjsCompilerCLI
             //The folder that the tool looks for.
             const string folderMap = "js";
             //Finding all the JS files.
-            CoreCode.FileFinder(Path.Combine(_projectLocation, "www",  folderMap), "*.js");
+            FileMap = CoreCode.FileFinder(Path.Combine(_projectLocation, "www",  folderMap), "*.js");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("[{0}]", DateTime.Now);
             Console.ResetColor();
             Console.WriteLine(Resources.BinaryRemovalText);
-            CoreCode.CleanupBin();
+            CoreCode.CleanupBin(FileMap);
             //Preparing the compiler task.
             CoreCode.CompilerInfo.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
             try
@@ -303,32 +304,32 @@ namespace nwjsCompilerCLI
                 //Compilation is done in parallel. Handy for multi-core systems.
                 if (_parallelMode)
                 {
-                    Parallel.For(0, CoreCode.FileMap.Length, index =>
+                    Parallel.For(0, FileMap.Length, index =>
                     {
                         //Print the status of the compiler. Show which thread is compiling what as well.
                         Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord + Thread.CurrentThread.ManagedThreadId +
-                                          Resources.CompilingWord + CoreCode.FileMap[index] + @"...\n");
+                                          Resources.CompilingWord + FileMap[index] + @"...\n");
                         //Call the compiler task.
-                        CoreCode.CompilerWorkerTask(CoreCode.FileMap[index], _fileExtension, _removeJsFiles);
+                        CoreCode.CompilerWorkerTask(FileMap[index], _fileExtension, _removeJsFiles);
                         Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord + Thread.CurrentThread.ManagedThreadId +
-                                          Resources.FinishedCompilingText + CoreCode.FileMap[index] + @".\n");
+                                          Resources.FinishedCompilingText + FileMap[index] + @".\n");
                     });
                 }
 
                 else
                 {
-                    for(int index = 0; index < CoreCode.FileMap.Length; index++) {
+                    for(int index = 0; index < FileMap.Length; index++) {
                         //Print the status of the compiler. Show which thread is compiling what as well.
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                         Console.ResetColor();
-                        Console.WriteLine(Resources.CompilingWord2 + CoreCode.FileMap[index] + "...");
+                        Console.WriteLine(Resources.CompilingWord2 + FileMap[index] + "...");
                         //Call the compiler task.
-                        CoreCode.CompilerWorkerTask(CoreCode.FileMap[index], _fileExtension, _removeJsFiles);
+                        CoreCode.CompilerWorkerTask(FileMap[index], _fileExtension, _removeJsFiles);
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine(Resources.FinishedCompilingText2 + CoreCode.FileMap[index] + ".");
+                        Console.WriteLine(Resources.FinishedCompilingText2 + FileMap[index] + ".");
                         Console.ResetColor();
                     }
                 }

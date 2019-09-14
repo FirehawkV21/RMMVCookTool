@@ -11,8 +11,7 @@ namespace CompilerCore
     {
         //Some variables needed for the compiler task.
         public static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
-        public static string[] FileMap;
-        private static readonly string ArchiveName = (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) ? "app.nw" : "package.nw";
+        private static readonly string ArchiveName = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "app.nw" : "package.nw";
         private static readonly string TempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
 
         //This bit of code handles copying a directory to a different location.
@@ -60,15 +59,15 @@ namespace CompilerCore
         /// </summary>
         /// <param name="path">Path for Search.</param>
         /// <param name="extension">File Extension.</param>
-        public static void FileFinder(in string path, in string extension)
+        public static string[] FileFinder(in string path, in string extension)
         {
-            FileMap = Directory.GetFiles(path, extension, SearchOption.AllDirectories);
+            return Directory.GetFiles(path, extension, SearchOption.AllDirectories);
         }
         //This bit of code removes binary files when requested. Must run after FileFinder.
         /// <summary>
         /// Removes binary files found in the FileMap array.
         /// </summary>
-        public static void CleanupBin()
+        public static void CleanupBin(string[] FileMap)
         {
             //Do a normal loop for each entry on the FileMap array.
             foreach (var file in FileMap)

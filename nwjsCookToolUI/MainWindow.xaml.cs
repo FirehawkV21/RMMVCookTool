@@ -28,6 +28,7 @@ namespace nwjsCookToolUI
         private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
         private readonly BackgroundWorker _mapCompilerWorker = new BackgroundWorker();
         private int _currentProject;
+        private string[] FileMap;
         #endregion Variables
 
         public MainWindow()
@@ -202,22 +203,22 @@ namespace nwjsCookToolUI
             try
             {
                 const string folderMap = "js";
-                CoreCode.FileFinder(Path.Combine(compilerInput, "www", folderMap), "*.js");
+                FileMap = CoreCode.FileFinder(Path.Combine(compilerInput, "www", folderMap), "*.js");
                 _compilerWorker.ReportProgress(_currentFile + 1);
-                CoreCode.CleanupBin();
+                CoreCode.CleanupBin(FileMap);
                 CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
-                Dispatcher.Invoke(() => MainProgress.Maximum = CoreCode.FileMap.Length);
+                Dispatcher.Invoke(() => MainProgress.Maximum = FileMap.Length);
                 if (Settings.Default.PackageCode)
                     Dispatcher.Invoke(() => (Settings.Default.DeleteSourceCode) ? MainProgress.Maximum += 2 : 1);
                 _compilerStatusReport = 1;
-                for(_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
+                for(_currentFile = 0; _currentFile < FileMap.Length; _currentFile++)
                 {
                     if (_compilerWorker.CancellationPending)
                     {
                         e.Cancel = true;
                         break;
                     }
-                    CoreCode.CompilerWorkerTask(CoreCode.FileMap[_currentFile], Settings.Default.FileExtension, Settings.Default.DeleteSourceCode);
+                    CoreCode.CompilerWorkerTask(FileMap[_currentFile], Settings.Default.FileExtension, Settings.Default.DeleteSourceCode);
                     _compilerWorker.ReportProgress(_currentFile + 1);
                     _compilerStatusReport = 2;
                     Thread.Sleep(200);
@@ -307,20 +308,20 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]"+ Properties.Resources.FileCopyText;
                     break;
                 case 2:
-                    if (_currentFile < CoreCode.FileMap.Length)
+                    if (_currentFile < FileMap.Length)
                     {
                         MainProgress.Value = _currentFile;
-                        OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + CoreCode.FileMap[_currentFile] + Properties.Resources.CompiledOutputText;
+                        OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + FileMap[_currentFile] + Properties.Resources.CompiledOutputText;
                         OutputArea.Text +=
-                            "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
+                            "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + FileMap[_currentFile] +
                             "...";
-                        StatusLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
+                        StatusLabel.Content = Properties.Resources.CompileText + FileMap[_currentFile] + "...";
                     }
                     break;
                 case 1:
-                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
+                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + FileMap[_currentFile] +
                                        "...";
-                    StatusLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
+                    StatusLabel.Content = Properties.Resources.CompileText + FileMap[_currentFile] + "...";
                     break;
                 case 0:
                     OutputArea.Text += Properties.Resources.StartTaskPointText;
@@ -358,7 +359,7 @@ namespace nwjsCookToolUI
             }
             MainProgress.Value = 0;
             MainProgress.Foreground = Brushes.ForestGreen;
-            Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+            Array.Clear(FileMap, 0, FileMap.Length);
             CompileButton.IsEnabled = true;
             TestProjectButton.IsEnabled = true;
             FindProjectButton.IsEnabled = true;
@@ -448,15 +449,15 @@ namespace nwjsCookToolUI
                         e.Cancel = true;
                         break;
                     }                    
-                    CoreCode.FileFinder(FolderList.Items[_currentProject].ToString(), "*.js");
+                    FileMap = CoreCode.FileFinder(FolderList.Items[_currentProject].ToString(), "*.js");
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
                     Thread.Sleep(200);
                     _compilerStatusReport = 1;
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
                     Thread.Sleep(200);
-                    CoreCode.CleanupBin();
+                    CoreCode.CleanupBin(FileMap);
                     _compilerStatusReport = 2;
-                    for (_currentFile = 0; _currentFile < CoreCode.FileMap.Length; _currentFile++)
+                    for (_currentFile = 0; _currentFile < FileMap.Length; _currentFile++)
                     {
                         if (_mapCompilerWorker.CancellationPending)
                         {
@@ -464,11 +465,11 @@ namespace nwjsCookToolUI
                             break;
                         }
                         _mapCompilerWorker.ReportProgress(_currentProject + 1);
-                        CoreCode.CompilerWorkerTask(CoreCode.FileMap[_currentFile], Settings.Default.FileExtension,
+                        CoreCode.CompilerWorkerTask(FileMap[_currentFile], Settings.Default.FileExtension,
                             Settings.Default.DeleteSourceCode);
 
                     }
-                    Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+                    Array.Clear(FileMap, 0, FileMap.Length);
                     _compilerStatusReport = 3;
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
                     Thread.Sleep(200);
@@ -492,7 +493,7 @@ namespace nwjsCookToolUI
                     MapProgress.Foreground = Brushes.ForestGreen;
                     CurrentWorkloadBar.Foreground = Brushes.ForestGreen;
                 });
-                Array.Clear(CoreCode.FileMap, 0, CoreCode.FileMap.Length);
+                Array.Clear(FileMap, 0, FileMap.Length);
                 Array.Clear(_projectList, 0, _projectList.Length);
             }
             //Dispatcher.Invoke(() =>
@@ -515,14 +516,14 @@ namespace nwjsCookToolUI
                     break;
                 case 2:
                     CurrentWorkloadBar.Value += 1;
-                    CurrentWorkloadLabel.Content = Properties.Resources.CompileText + CoreCode.FileMap[_currentFile] + "...";
-                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + CoreCode.FileMap[_currentFile] + Properties.Resources.CompiledOutputText;
+                    CurrentWorkloadLabel.Content = Properties.Resources.CompileText + FileMap[_currentFile] + "...";
+                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + FileMap[_currentFile] + Properties.Resources.CompiledOutputText;
                     OutputArea.Text +=
-                        "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + CoreCode.FileMap[_currentFile] +
+                        "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + FileMap[_currentFile] +
                         "...";
                     break;
                 case 1:
-                    CurrentWorkloadBar.Maximum = CoreCode.FileMap.Length;
+                    CurrentWorkloadBar.Maximum = FileMap.Length;
                     OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.BinRemovalText;
                     CurrentWorkloadLabel.Content =
                         Properties.Resources.BinRemovalStatusText + FolderList.Items[_currentProject] + "...";

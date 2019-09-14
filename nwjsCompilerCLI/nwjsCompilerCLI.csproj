@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <AssemblyVersion>1.2.0.19237</AssemblyVersion>
-    <FileVersion>1.2.0.19237</FileVersion>
+    <AssemblyVersion>1.2.0.19257</AssemblyVersion>
+    <FileVersion>1.2.0.19257</FileVersion>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
     <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
@@ -17,6 +17,7 @@
     <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
     <TieredCompilation>true</TieredCompilation>
+    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
     <Copyright>Copyright © 2019 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PublishReadyToRun>true</PublishReadyToRun>

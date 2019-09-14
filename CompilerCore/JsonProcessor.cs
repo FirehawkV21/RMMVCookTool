@@ -6,7 +6,6 @@ namespace CompilerCore
 {
     public static class JsonProcessor
     {
-        public static string JsonString;
 
         /// <summary>
         /// The JSON Formatter and saving code.
@@ -60,6 +59,7 @@ namespace CompilerCore
 
         public static string ReadJson(in string fileLocation)
         {
+            string JsonString;
             char[] JsonIn;
             using (StreamReader settingsLoader = new StreamReader(fileLocation))
             {
