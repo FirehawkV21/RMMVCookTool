@@ -64,6 +64,8 @@ namespace nwjsCookToolUI
             PackageNwCheckbox.IsEnabled = unlockSetting;
             FileExtensionTextbox.IsEnabled = unlockSetting;
             BrowseSdkButton.IsEnabled = unlockSetting;
+            editJsonButton.IsEnabled = unlockSetting;
+            SafeModeCheckBox.IsEnabled = unlockSetting && PackageNwCheckbox.IsChecked == true;
             RemoveFilesCheckBox.IsEnabled = unlockSetting && PackageNwCheckbox.IsChecked == true;
         }
         #endregion Methods
@@ -130,7 +132,7 @@ namespace nwjsCookToolUI
         private void EditJsonButton_Click(object sender, RoutedEventArgs e)
         {
             if (ProjectLocation.Text == null || !Directory.Exists(ProjectLocation.Text))
-                MessageBox.Show(nwjsCookToolUI.Properties.Resources.ProjectLocationNotValidText, Properties.Resources.ErrorText,
+                MessageBox.Show(Properties.Resources.ProjectLocationNotValidText, Properties.Resources.ErrorText,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
@@ -497,13 +499,6 @@ namespace nwjsCookToolUI
                 Array.Clear(FileMap, 0, FileMap.Length);
                 Array.Clear(_projectList, 0, _projectList.Length);
             }
-            //Dispatcher.Invoke(() =>
-            //{
-            //    MapCompileButton.IsEnabled = true;
-            //    AddToMapButton.IsEnabled = true;
-            //    RemoveFromMapButton.IsEnabled = true;
-            //    UnlockSettings(true);
-            //});
         }
 
         private void MapCompilerReport(object sender, ProgressChangedEventArgs e)
