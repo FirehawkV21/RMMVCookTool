@@ -8,6 +8,9 @@
         xmlns:properties="clr-namespace:nwjsCookToolUI.Properties"
         mc:Ignorable="d"
         Title="{x:Static properties:Resources.ProgramTitle}" Height="390.815" Width="548" ResizeMode="NoResize" Loaded="CookToolUi_Loaded">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="TaskbarInfoHolder"/>
+    </Window.TaskbarItemInfo>
     <Grid>
         <TabControl Margin="0,0,0,0">
             <TabItem Header="{x:Static properties:Resources.SettingsUiText}">
@@ -132,4 +135,5 @@
             </TabItem>
         </TabControl>
     </Grid>
+
 </Window>

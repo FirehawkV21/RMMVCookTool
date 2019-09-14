@@ -28,7 +28,7 @@ namespace nwjsCookToolUI
         private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
         private readonly BackgroundWorker _mapCompilerWorker = new BackgroundWorker();
         private int _currentProject;
-        private string[] FileMap;
+        private string[] FileMap;        
         #endregion Variables
 
         public MainWindow()
@@ -180,7 +180,9 @@ namespace nwjsCookToolUI
                 Array.Resize(ref _projectList, 1);
                 _projectList[0] = ProjectLocation.Text;
                 MainProgress.Value = 0;
-                MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
+                //MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
+                TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
+                TaskbarInfoHolder.ProgressValue = 0;
                 _compilerWorker.RunWorkerAsync();
             }
         }
@@ -210,9 +212,8 @@ namespace nwjsCookToolUI
                 _compilerWorker.ReportProgress(_currentFile + 1);
                 CoreCode.CleanupBin(FileMap);
                 CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
-                Dispatcher.Invoke(() => MainProgress.Maximum = FileMap.Length);
                 if (Settings.Default.PackageCode)
-                    Dispatcher.Invoke(() => (Settings.Default.DeleteSourceCode) ? MainProgress.Maximum += 2 : 1);
+                    Dispatcher.Invoke(() => MainProgress.Maximum = FileMap.Length + ((Settings.Default.PackageCode) ? ((Settings.Default.CompressionEngineSafeMode) ? 2 : 1) : 0));
                 _compilerStatusReport = 1;
                 for(_currentFile = 0; _currentFile < FileMap.Length; _currentFile++)
                 {
@@ -257,6 +258,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -266,6 +268,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -275,6 +278,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -286,6 +290,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -300,24 +305,30 @@ namespace nwjsCookToolUI
             switch (_compilerStatusReport)
             {
                 case 6:
-                    MainProgress.Value += 1;
+
+                    MainProgress.Value += MainProgress.Maximum;
+                    TaskbarInfoHolder.ProgressValue = 1;
                     break;
                 case 5:
                     MainProgress.Value += 1;
+                    TaskbarInfoHolder.ProgressValue = MainProgress.Value / MainProgress.Maximum;
+                    TaskbarInfoHolder.ProgressValue = (double)_currentFile / FileMap.Length;
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]Removing files...";
                     break;
                 case 4:
+                    TaskbarInfoHolder.ProgressValue = MainProgress.Value / MainProgress.Maximum;
                     StatusLabel.Content = Properties.Resources.PackaginStatusText;
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]" + Properties.Resources.PackageCreationText;
                     break;
                 case 3:
-                    StatusLabel.Content = nwjsCookToolUI.Properties.Resources.CopyToTempLocationStatusText;
+                    StatusLabel.Content = Properties.Resources.CopyToTempLocationStatusText;
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]"+ Properties.Resources.FileCopyText;
                     break;
                 case 2:
                     if (_currentFile < FileMap.Length)
                     {
                         MainProgress.Value = _currentFile;
+                        TaskbarInfoHolder.ProgressValue = MainProgress.Value / MainProgress.Maximum;
                         OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + FileMap[_currentFile] + Properties.Resources.CompiledOutputText;
                         OutputArea.Text +=
                             "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + FileMap[_currentFile] +
@@ -354,6 +365,7 @@ namespace nwjsCookToolUI
             //}
             if (e.Cancelled)
             {
+                TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
                 OutputArea.Text += "[" + DateTime.Now + "]" + Properties.Resources.TaskCancelledOutputText + "\n";
                 MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -374,6 +386,8 @@ namespace nwjsCookToolUI
             CompileButton.Visibility = Visibility.Visible;
             CancelTaskButton.Visibility = Visibility.Hidden;
             OutputArea.Text += Properties.Resources.TaskEndPointText;
+            TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
+            TaskbarInfoHolder.ProgressValue = 0;
 
         }
 
@@ -440,6 +454,8 @@ namespace nwjsCookToolUI
                 MapProgress.Value = 0;
                 MapProgress.Maximum = FolderList.Items.Count;
                 Array.Resize(ref _projectList, FolderList.Items.Count);
+                TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
+                TaskbarInfoHolder.ProgressValue = 0;
                 _mapCompilerWorker.RunWorkerAsync();
             }
         }
@@ -461,7 +477,6 @@ namespace nwjsCookToolUI
                     Thread.Sleep(200);
                     _compilerStatusReport = 1;
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
-                    Thread.Sleep(200);
                     CoreCode.CleanupBin(FileMap);
                     _compilerStatusReport = 2;
                     for (_currentFile = 0; _currentFile < FileMap.Length; _currentFile++)
@@ -476,6 +491,7 @@ namespace nwjsCookToolUI
                             Settings.Default.DeleteSourceCode);
 
                     }
+                    if (e.Cancel) break;
                     Array.Clear(FileMap, 0, FileMap.Length);
                     _compilerStatusReport = 3;
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
@@ -486,6 +502,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
                     MapProgress.Foreground = Brushes.DarkRed;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
@@ -495,6 +512,7 @@ namespace nwjsCookToolUI
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Dispatcher.Invoke(() =>
                 {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
                     CurrentWorkloadBar.Value = 0;
                     MapProgress.Value = 0;
                     MapProgress.Foreground = Brushes.ForestGreen;
@@ -511,11 +529,13 @@ namespace nwjsCookToolUI
             {
                 case 3:
                     CurrentWorkloadBar.Value = 0;
+                    TaskbarInfoHolder.ProgressValue = 0;
                     MapProgress.Value += 1;
                     OutputArea.Text += Properties.Resources.ProjectCompilationEndPointText;
                     break;
                 case 2:
                     CurrentWorkloadBar.Value += 1;
+                    TaskbarInfoHolder.ProgressValue = CurrentWorkloadBar.Value / CurrentWorkloadBar.Maximum;
                     CurrentWorkloadLabel.Content = Properties.Resources.CompileText + FileMap[_currentFile] + "...";
                     OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + FileMap[_currentFile] + Properties.Resources.CompiledOutputText;
                     OutputArea.Text +=
@@ -549,6 +569,7 @@ namespace nwjsCookToolUI
             //}
             if (e.Cancelled)
             {
+                TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
                 OutputArea.Text += "\n" + DateTime.Now + "\n" + Properties.Resources.TaskCancelledOutputText + "\n";
                 MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -567,6 +588,10 @@ namespace nwjsCookToolUI
             RemoveFromMapButton.IsEnabled = true;
             UnlockSettings(true);
             OutputArea.Text += Properties.Resources.TaskEndPointText;
+            TaskbarInfoHolder.ProgressValue = 0;
+            TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
+            MapProgress.Value = 0;
+            CurrentWorkloadBar.Value = 0;
         }
 
         private void CancelMapCompileButton_Click(object sender, RoutedEventArgs e)
