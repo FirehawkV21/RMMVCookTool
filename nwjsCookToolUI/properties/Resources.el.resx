@@ -436,4 +436,7 @@
     <value>---Η εργασία ξεκίνησε---
 </value>
   </data>
+  <data name="SafeModeUiText" xml:space="preserve">
+    <value>Ασφαλή λειτουργεία για την συμπίεση</value>
+  </data>
 </root>

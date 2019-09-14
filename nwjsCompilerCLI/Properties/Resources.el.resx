@@ -281,4 +281,7 @@
   <data name="ProjectFilesCompressionConfirmText" xml:space="preserve">
     <value>Τα αρχεία του παιχνιδιού θα συμπιεστούν μετά τη μετάφραση.</value>
   </data>
+  <data name="CompressionSafeModeConfirmationText" xml:space="preserve">
+    <value>H ασφαλής λειτουργεία για την συμπίεση έχει ενεργοποιηθεί.</value>
+  </data>
 </root>

@@ -804,6 +804,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compression Safe Mode.
+        /// </summary>
+        public static string SafeModeUiText {
+            get {
+                return ResourceManager.GetString("SafeModeUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SaveButtonText {
@@ -923,7 +932,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version D1.04 Update 2.
+        ///   Looks up a localized string similar to Version D2.00.
         /// </summary>
         public static string VersionText {
             get {

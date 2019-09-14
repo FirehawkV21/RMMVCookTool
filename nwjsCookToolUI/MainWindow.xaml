@@ -11,7 +11,7 @@
     <Grid>
         <TabControl Margin="0,0,0,0">
             <TabItem Header="{x:Static properties:Resources.SettingsUiText}">
-                <GroupBox Header="{x:Static properties:Resources.SetupUiText}" Margin="0,0,0.2,0" Height="218" VerticalAlignment="Top">
+                <GroupBox Header="{x:Static properties:Resources.SetupUiText}" Height="268" VerticalAlignment="Top">
                     <Grid>
                         <CheckBox x:Name="PackageNwCheckbox" Content="{x:Static properties:Resources.PackageProgramUiText}"
                                   HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -22,27 +22,28 @@
                                   IsChecked="{Binding DeleteSourceCode, Source={x:Static properties:Settings.Default}}"
                                   Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged" />
                         <Label Content="{x:Static properties:Resources.FileExtensionUiText}" HorizontalAlignment="Left"
-                               Margin="0,49,0,0" VerticalAlignment="Top" />
-                        <TextBox x:Name="FileExtensionTextbox" TextWrapping="Wrap" Margin="179,53,14.4,0"
+                               Margin="0,74,0,0" VerticalAlignment="Top" />
+                        <TextBox x:Name="FileExtensionTextbox" TextWrapping="Wrap" Margin="179,74,14,0"
                                  Text="{Binding FileExtension, Mode=TwoWay, Source={x:Static properties:Settings.Default}}"
                                  Height="26" VerticalAlignment="Top" TextChanged="FileExtensionTextbox_TextChanged" />
                         <Label Content="{x:Static properties:Resources.SdkLocationUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"
-                               Margin="0,108,0,0" />
-                        <TextBox x:Name="NwjsLocation" HorizontalAlignment="Left" Height="23" Margin="0,134,0,0"
+                               Margin="0,148,0,0" />
+                        <TextBox x:Name="NwjsLocation" HorizontalAlignment="Left" Height="23" Margin="0,174,0,0"
                                  TextWrapping="Wrap" VerticalAlignment="Top" Width="434"
-                                 Text="{Binding SDKLocation, Mode=TwoWay, Source={x:Static properties:Settings.Default}}"
+                                 Text="{Binding SDKLocation, Mode=TwoWay, UpdateSourceTrigger=Explicit, Source={x:Static properties:Settings.Default}}"
                                  IsEnabled="False" />
                         <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Left"
-                                Margin="439,134,0,0" VerticalAlignment="Top" Width="75" Height="23"
+                                Margin="439,174,0,0" VerticalAlignment="Top" Width="75" Height="23"
                                 Click="BrowseSDKButton_Click" />
-                        <Button x:Name="ReplacementCodeButton" Content="{x:Static properties:Resources.ReplacementCodeUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="0,162,0,0" Height="23" Click="ReplacementCodeButton_Click"/>
+                        <Button x:Name="ReplacementCodeButton" Content="{x:Static properties:Resources.ReplacementCodeUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="0,202,0,0" Height="23" Click="ReplacementCodeButton_Click"/>
                         <CheckBox x:Name="RemoveFilesCheckBox" Content="{x:Static properties:Resources.RemoveSourceFilesUIText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,30,0,0" IsEnabled="{Binding IsChecked, ElementName=PackageNwCheckbox}" IsChecked="{Binding RemoveFilesAfterPackaging, Mode=TwoWay, UpdateSourceTrigger=Explicit}"  Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged"/>
-                        <ComboBox x:Name="PackageCompressionComboBox" HorizontalAlignment="Left" Margin="179,84,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="{Binding CompressionMode, Source={x:Static properties:Settings.Default}}">
+                        <CheckBox x:Name="SafeModeCheckBox" Content="{x:Static properties:Resources.SafeModeUiText}" VerticalAlignment="Top" Margin="0,45,0,0" IsEnabled="{Binding IsChecked, ElementName=PackageNwCheckbox}" IsChecked="{Binding CompressionEngineSafeMode, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Checked="Checkbox_CheckChanged" Unchecked="Checkbox_CheckChanged"/>
+                        <ComboBox x:Name="PackageCompressionComboBox" HorizontalAlignment="Left" Margin="179,100,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="{Binding CompressionMode, Source={x:Static properties:Settings.Default}}">
                             <ComboBoxItem Content="{x:Static properties:Resources.OptimalListItemText}"/>
                             <ComboBoxItem Content="{x:Static properties:Resources.FastestListItemText}"/>
                             <ComboBoxItem Content="{x:Static properties:Resources.NoCompressionListItemText}"/>
                         </ComboBox>
-                        <Label Content="{x:Static properties:Resources.CompressionModeUiText}" Margin="0,80,360.4,89.2"/>
+                        <Label Content="{x:Static properties:Resources.CompressionModeUiText}" Margin="0,98,361,122"/>
                     </Grid>
                 </GroupBox>
             </TabItem>

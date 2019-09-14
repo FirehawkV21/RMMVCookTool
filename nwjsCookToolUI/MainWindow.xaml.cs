@@ -113,6 +113,7 @@ namespace nwjsCookToolUI
         #endregion Settings Code Set
 
         #region Quick Compile Code Set
+        #region Quick Compile Tab UI Logic
         private void FindProjectButton_Click(object sender, RoutedEventArgs e)
         {
             var pickProjectFolder =
@@ -196,7 +197,7 @@ namespace nwjsCookToolUI
             }
 
         }
-
+        #endregion
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
             var compilerInput = _projectList[0];
@@ -230,10 +231,10 @@ namespace nwjsCookToolUI
                     {
                         _compilerStatusReport = 3;
                         _compilerWorker.ReportProgress(_currentFile + 1);
-                        CoreCode.PreparePack(compilerInput);
+                        if (Settings.Default.CompressionEngineSafeMode) CoreCode.PreparePack(compilerInput);
                         _compilerStatusReport = 4;
                         _compilerWorker.ReportProgress(_currentFile + 2);
-                        CoreCode.CompressFiles(compilerInput, Settings.Default.CompressionMode);
+                        CoreCode.CompressFiles(compilerInput, compilerInput, Settings.Default.CompressionMode, Settings.Default.CompressionEngineSafeMode);
                         if (Settings.Default.DeleteSourceCode)
                         {
                             _compilerStatusReport = 5;

@@ -70,7 +70,9 @@ namespace CompilerCore
         public static void CleanupBin(string[] FileMap)
         {
             //Do a normal loop for each entry on the FileMap array.
-            foreach (var file in FileMap)
+#pragma warning disable CA1062 // Validate arguments of public methods
+            foreach (string file in FileMap)
+#pragma warning restore CA1062 // Validate arguments of public methods
             {
                 //This buffer makes the necessary query to do a search for the binaries.
                 //We want to keep the file name to do the search.
@@ -100,10 +102,12 @@ namespace CompilerCore
         public static void CompilerWorkerTask(in string file, in string extension, in bool removeJs)
         {
             //Removing the JavaScript extension. Needed to place our own File Extension.
+#pragma warning disable CA1062 // Validate arguments of public methods
             string fileBuffer = file.Replace(".js", "");
-            //Setting up the compiler by throwing in two arguments.
-            //The first bit (the one with the file variable) is the source.
-            //The second bit (the one with the fileBuffer variable) makes the final file.
+#pragma warning restore CA1062 // Validate arguments of public methods
+                              //Setting up the compiler by throwing in two arguments.
+                              //The first bit (the one with the file variable) is the source.
+                              //The second bit (the one with the fileBuffer variable) makes the final file.
             CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
             //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.   
             CompilerInfo.CreateNoWindow = true;
@@ -144,29 +148,64 @@ namespace CompilerCore
         /// <summary>
         /// Compresses the game's files (after copying them in a temporary location) to a zip file named package.nw (app.nw on Mac).
         /// </summary>
+        /// <param name="projectLocation">The source path. Helpful for cases that the drop area is different.</param>
         /// <param name="deployArea">The destination path for the archive.</param>
         /// <param name="compressionSelector">What kind of compression will be applied? 0 = Optimal, 1 = Fastest, 2 = None</param>
-        public static void CompressFiles(in string deployArea, in int compressionSelector)
+        /// <param name="useSafeMode">Use the old but safe way of compressing the files.</param>
+        public static void CompressFiles(in string projectLocation, in string deployArea, in int compressionSelector, in bool useSafeMode)
         {
             var packageOutput = Path.Combine(deployArea, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
-            switch (compressionSelector)
+            
+            if (!useSafeMode)
             {
-                case 2:
-                    ZipFile.CreateFromDirectory(TempFolderLocation,
-                        packageOutput, CompressionLevel.NoCompression, false);
-                    break;
-                case 1:
-                    ZipFile.CreateFromDirectory(TempFolderLocation,
-                        packageOutput, CompressionLevel.Fastest, false);
-                    break;
-                default:
-                    ZipFile.CreateFromDirectory(TempFolderLocation,
-                        packageOutput, CompressionLevel.Optimal, false);
-                    break;
+                using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
+                {
+                    //Temporary prepare a string for stripping.
+                    string stripPart = Path.Combine(projectLocation, "www") + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
+                    //List all the files in the game's www folder.
+                    string[] gameFiles = FileFinder(Path.Combine(projectLocation, "www"), "*");
+                    foreach (var file in gameFiles)
+                    {
+                        //Start adding files.
+                        switch (compressionSelector)
+                        {
+                            case 2:
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""), CompressionLevel.NoCompression);
+                                break;
+                            case 1:
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""), CompressionLevel.Fastest);
+                                break;
+                            default:
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""), CompressionLevel.Optimal);
+                                break;
+                        }
+                    }
+                    //Add the project.json files to finish the package.
+                    packageArchive.CreateEntryFromFile(Path.Combine(projectLocation, "package.json"), "package.json");
+                };
+            }
+            else {
+                //Compress the files from the temp location.
+                switch (compressionSelector)
+                {
+                    case 2:
+                        ZipFile.CreateFromDirectory(TempFolderLocation,
+                            packageOutput, CompressionLevel.NoCompression, false);
+                        break;
+                    case 1:
+                        ZipFile.CreateFromDirectory(TempFolderLocation,
+                            packageOutput, CompressionLevel.Fastest, false);
+                        break;
+                    default:
+                        ZipFile.CreateFromDirectory(TempFolderLocation,
+                            packageOutput, CompressionLevel.Optimal, false);
+                        break;
+                }
+                //Delete the temp folder once it finishes.
+                Directory.Delete(TempFolderLocation, true);
             }
 
-            Directory.Delete(TempFolderLocation, true);
         }
         //This method deletes the projects files.
         /// <summary>

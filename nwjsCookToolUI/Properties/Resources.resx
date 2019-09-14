@@ -436,4 +436,7 @@
     <value>---Start Task---
 </value>
   </data>
+  <data name="SafeModeUiText" xml:space="preserve">
+    <value>Compression Safe Mode</value>
+  </data>
 </root>

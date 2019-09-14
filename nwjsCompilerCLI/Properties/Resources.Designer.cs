@@ -129,6 +129,15 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Safe mode for compression is now active..
+        /// </summary>
+        internal static string CompressionSafeModeConfirmationText {
+            get {
+                return ResourceManager.GetString("CompressionSafeModeConfirmationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copying the game files to a temporary location....
         /// </summary>
         internal static string CopyingToTempLocationText {

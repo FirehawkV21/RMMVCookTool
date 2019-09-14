@@ -281,4 +281,7 @@ The task was completed.</value>
   <data name="ProjectFilesCompressionConfirmText" xml:space="preserve">
     <value>The Project's files will be compressed</value>
   </data>
+  <data name="CompressionSafeModeConfirmationText" xml:space="preserve">
+    <value>Safe mode for compression is now active.</value>
+  </data>
 </root>
