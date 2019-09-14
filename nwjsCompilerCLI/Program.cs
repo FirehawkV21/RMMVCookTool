@@ -29,7 +29,7 @@ namespace nwjsCompilerCLI {
             Console.WriteLine (Resources.ProgramAuthorText);
             Console.WriteLine (Resources.ProgramLicenseText);
             Console.WriteLine (Resources.SpilterText);
-
+#pragma warning disable CA1307 // Specify StringComparison
             if (args.Length >= 1) {
                 for (int argnum = 0; argnum < args.Length; argnum++) {
                     string stringBuffer;
@@ -48,9 +48,9 @@ namespace nwjsCompilerCLI {
                             //Set the SDK Location
                         case "--SDKLocation":
                             stringBuffer = args[argnum + 1];
-#pragma warning disable CA1307 // Specify StringComparison
+
                             _sdkLocation = stringBuffer.Replace ("\"", "");
-#pragma warning restore CA1307 // Specify StringComparison
+
                             if (argnum <= args.Length - 1 && Directory.Exists (_sdkLocation) &&
                                 File.Exists (Path.Combine (_sdkLocation,
                                     RuntimeInformation.IsOSPlatform (OSPlatform.Windows) ? "nwjc.exe" : "nwjc"))) {
@@ -180,6 +180,7 @@ namespace nwjsCompilerCLI {
                             break;
                     }
                 }
+#pragma warning restore CA1307 // Specify StringComparison
 
                 //Check if both the _projectLocation and _sdkLocation variables are not null.
                 if (_projectLocation != null && _sdkLocation != null) _settingsSet = true;
@@ -267,7 +268,7 @@ namespace nwjsCompilerCLI {
             //Finding all the JS files.
             FileMap = CoreCode.FileFinder (Path.Combine (_projectLocation, "www", folderMap), "*.js");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write ("[{0}]", DateTime.Now);
+            Console.Write (Resources.DateTimeFormatText, DateTime.Now);
             Console.ResetColor ();
             Console.WriteLine (Resources.BinaryRemovalText);
             CoreCode.CleanupBin (FileMap);

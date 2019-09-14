@@ -72,6 +72,7 @@ namespace nwjsCookToolUI
             }
         }
 
+#pragma warning disable CA1307 // Specify StringComparison
         private void BrowseForHtmlFileButton_Click(object sender, RoutedEventArgs e)
         {
             var htmlFilePicker =
@@ -114,6 +115,7 @@ namespace nwjsCookToolUI
             {
                 var stringBuffer = iconFilePicker.FileName.Replace(_projectLocation + "\\", "");
                 stringBuffer = stringBuffer.Replace("\\", "/");
+#pragma warning restore CA1307 // Specify StringComparison
                 IconLocationTextBox.Text = stringBuffer;
             }
             else
