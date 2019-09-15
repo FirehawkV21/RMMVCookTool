@@ -443,4 +443,27 @@
   <data name="CopyToTempLocationStatusText" xml:space="preserve">
     <value>Copying game files to a temporary location...</value>
   </data>
+  <data name="PathTooLongErrorText" xml:space="preserve">
+    <value>The path is too long. Please consider shortening the path for the affected folder (see the output for the affected side).</value>
+  </data>
+  <data name="UnauthorizedAccessErrorText" xml:space="preserve">
+    <value>The program can't access a file.
+Check the output in the About tab for more info.</value>
+  </data>
+  <data name="ArgumentExceptionErrorText" xml:space="preserve">
+    <value>An argument exception occurred. Possibly a bug in the code.
+Check the output in the About tab for more info.</value>
+  </data>
+  <data name="FineNotFoundErrorText" xml:space="preserve">
+    <value>A file was not found. Did a file got moved when the work was in progress?
+Check the Output in the About tab for more info.</value>
+  </data>
+  <data name="DirectoryNotFoundErrorText" xml:space="preserve">
+    <value>A folder was not found. Did it got moved when the work was in progress?
+Check the Output in the About tab for more info.</value>
+  </data>
+  <data name="IOExceptionErrorText" xml:space="preserve">
+    <value>An unknown Input/Output exception occurred.
+Check the output in the About tab for more info.</value>
+  </data>
 </root>

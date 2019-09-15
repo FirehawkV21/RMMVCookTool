@@ -254,6 +254,27 @@ namespace nwjsCookToolUI
                 _compilerStatusReport = 6;
                 _compilerWorker.ReportProgress(_currentFile + 1);
             }
+            catch (PathTooLongException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    StatusLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show(nwjsCookToolUI.Properties.Resources.PathTooLongErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (UnauthorizedAccessException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    StatusLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show(Properties.Resources.UnauthorizedAccessErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             catch (ArgumentException exceptionOutput)
             {
                 Dispatcher.Invoke(() =>
@@ -262,7 +283,7 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
-                MessageBox.Show("An argument exception occured. Possibly a bug in the code.\nCheck the output in the About tab for more info.", Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.ArgumentExceptionErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (FileNotFoundException exceptionOutput)
             {
@@ -272,7 +293,7 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
-                MessageBox.Show("A file was not found. Did a file got moved when the work was in progress?\nCheck the Output in the About tab for more info.", Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.FineNotFoundErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (DirectoryNotFoundException exceptionOutput)
             {
@@ -283,10 +304,10 @@ namespace nwjsCookToolUI
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
                 MessageBox.Show(
-                    "A folder was not found. Did it got moved when the work was in progress?\nCheck the Output in the About tab for more info.",
+                    Properties.Resources.DirectoryNotFoundErrorText,
                     Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception exceptionOutput)
+            catch (IOException exceptionOutput)
             {
                 Dispatcher.Invoke(() =>
                 {
@@ -294,9 +315,7 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
-                MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-
+                MessageBox.Show(Properties.Resources.IOExceptionErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -366,6 +385,7 @@ namespace nwjsCookToolUI
             if (e.Cancelled)
             {
                 TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
+                MainProgress.Foreground = Brushes.YellowGreen;
                 OutputArea.Text += "[" + DateTime.Now + "]" + Properties.Resources.TaskCancelledOutputText + "\n";
                 MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -498,7 +518,7 @@ namespace nwjsCookToolUI
                     Thread.Sleep(200);
                 }
             }
-            catch (Exception exceptionOutput)
+            catch (PathTooLongException exceptionOutput)
             {
                 Dispatcher.Invoke(() =>
                 {
@@ -508,18 +528,70 @@ namespace nwjsCookToolUI
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
                     CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
                 });
-                MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.FailedText,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.PathTooLongErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (UnauthorizedAccessException exceptionOutput)
+            {
                 Dispatcher.Invoke(() =>
                 {
                     TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
-                    CurrentWorkloadBar.Value = 0;
-                    MapProgress.Value = 0;
-                    MapProgress.Foreground = Brushes.ForestGreen;
-                    CurrentWorkloadBar.Foreground = Brushes.ForestGreen;
+                    MapProgress.Foreground = Brushes.DarkRed;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
                 });
-                Array.Clear(FileMap, 0, FileMap.Length);
-                Array.Clear(_projectList, 0, _projectList.Length);
+                MessageBox.Show(Properties.Resources.UnauthorizedAccessErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            catch (ArgumentException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    MapProgress.Foreground = Brushes.DarkRed;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show(Properties.Resources.ArgumentExceptionErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (FileNotFoundException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    MapProgress.Foreground = Brushes.DarkRed;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show(Properties.Resources.FineNotFoundErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (DirectoryNotFoundException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    MapProgress.Foreground = Brushes.DarkRed;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show(
+                    Properties.Resources.DirectoryNotFoundErrorText,
+                    Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IOException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    MapProgress.Foreground = Brushes.DarkRed;
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageBox.Show(Properties.Resources.IOExceptionErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -570,6 +642,8 @@ namespace nwjsCookToolUI
             if (e.Cancelled)
             {
                 TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
+                CurrentWorkloadBar.Foreground = Brushes.YellowGreen;
+                MapProgress.Foreground = Brushes.YellowGreen;
                 OutputArea.Text += "\n" + DateTime.Now + "\n" + Properties.Resources.TaskCancelledOutputText + "\n";
                 MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -582,6 +656,8 @@ namespace nwjsCookToolUI
                 MapStatusLabel.Content = Properties.Resources.DoneText;
                 CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
             }
+            Array.Clear(FileMap, 0, FileMap.Length);
+            Array.Clear(_projectList, 0, _projectList.Length);
             MapCompileButton.Visibility = Visibility.Visible;
             CancelMapCompileButton.Visibility = Visibility.Hidden;
             AddToMapButton.IsEnabled = true;
@@ -592,6 +668,9 @@ namespace nwjsCookToolUI
             TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
             MapProgress.Value = 0;
             CurrentWorkloadBar.Value = 0;
+            MapProgress.Value = 0;
+            MapProgress.Foreground = Brushes.ForestGreen;
+            CurrentWorkloadBar.Foreground = Brushes.ForestGreen;
         }
 
         private void CancelMapCompileButton_Click(object sender, RoutedEventArgs e)

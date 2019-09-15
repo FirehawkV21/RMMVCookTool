@@ -88,6 +88,16 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An argument exception occurred. Possibly a bug in the code.
+        ///Check the output in the About tab for more info..
+        /// </summary>
+        public static string ArgumentExceptionErrorText {
+            get {
+                return ResourceManager.GetString("ArgumentExceptionErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Batch Compile.
         /// </summary>
         public static string BatchCompileUiText {
@@ -268,6 +278,16 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A folder was not found. Did it got moved when the work was in progress?
+        ///Check the Output in the About tab for more info..
+        /// </summary>
+        public static string DirectoryNotFoundErrorText {
+            get {
+                return ResourceManager.GetString("DirectoryNotFoundErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Done!.
         /// </summary>
         public static string DoneText {
@@ -403,6 +423,16 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A file was not found. Did a file got moved when the work was in progress?
+        ///Check the Output in the About tab for more info..
+        /// </summary>
+        public static string FineNotFoundErrorText {
+            get {
+                return ResourceManager.GetString("FineNotFoundErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  folder....
         /// </summary>
         public static string FolderText {
@@ -525,6 +555,16 @@ namespace nwjsCookToolUI.Properties {
         public static string IOErrorText {
             get {
                 return ResourceManager.GetString("IOErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown Input/Output exception occurred.
+        ///Check the output in the About tab for more info..
+        /// </summary>
+        public static string IOExceptionErrorText {
+            get {
+                return ResourceManager.GetString("IOExceptionErrorText", resourceCulture);
             }
         }
         
@@ -652,6 +692,15 @@ namespace nwjsCookToolUI.Properties {
         public static string PackaginStatusText {
             get {
                 return ResourceManager.GetString("PackaginStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path is too long. Please consider shortening the path for the affected folder (see the output for the affected side)..
+        /// </summary>
+        public static string PathTooLongErrorText {
+            get {
+                return ResourceManager.GetString("PathTooLongErrorText", resourceCulture);
             }
         }
         
@@ -938,6 +987,16 @@ namespace nwjsCookToolUI.Properties {
         public static string TestUiText {
             get {
                 return ResourceManager.GetString("TestUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The program can&apos;t access a file.
+        ///Check the output in the About tab for more info..
+        /// </summary>
+        public static string UnauthorizedAccessErrorText {
+            get {
+                return ResourceManager.GetString("UnauthorizedAccessErrorText", resourceCulture);
             }
         }
         

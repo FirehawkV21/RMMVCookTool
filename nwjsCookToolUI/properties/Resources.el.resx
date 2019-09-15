@@ -443,4 +443,27 @@
   <data name="CopyToTempLocationStatusText" xml:space="preserve">
     <value>Αντιγραφή των αρχείων του παιχνιδιού σε προσωρινό σημείο...</value>
   </data>
+  <data name="PathTooLongErrorText" xml:space="preserve">
+    <value>H διαδρομή είναι πάρα πολύ μεγάλη. Παρακαλώ μικρύνετε την διαδρομή που έχει επηρεαστεί (δείτε την έξοδο για περισσότερες πληροφορίες).</value>
+  </data>
+  <data name="UnauthorizedAccessErrorText" xml:space="preserve">
+    <value>Η εφαρμογή δεν έχει πρόσβαση σε ένα αρχείο.
+Δείτε την έξοδο στην καρτέλα πληροφοριών για πληροφορίες.</value>
+  </data>
+  <data name="ArgumentExceptionErrorText" xml:space="preserve">
+    <value>Προέκυψε σφάλμα στον κώδικα.
+Δείτε την έξοδο στην καρτέλα πληροφοριών για πληροφορίες.</value>
+  </data>
+  <data name="FineNotFoundErrorText" xml:space="preserve">
+    <value>Ένα αρχείο δεν βρέθηκε. Μήπως έχει μετακινηθεί;
+Δείτε την έξοδο στην καρτέλα πληροφοριών για πληροφορίες.</value>
+  </data>
+  <data name="DirectoryNotFoundErrorText" xml:space="preserve">
+    <value>Ένας φάκελος δεν υπάρχει. Μήπως έχει μετακινηθεί;
+Δείτε την έξοδο στην καρτέλα πληροφοριών για πληροφορίες.</value>
+  </data>
+  <data name="IOExceptionErrorText" xml:space="preserve">
+    <value>Προέκυψε ένα σφάλμα εισόδου εξόδου.
+Δείτε την έξοδο στην καρτέλα πληροφοριών για πληροφορίες.</value>
+  </data>
 </root>
