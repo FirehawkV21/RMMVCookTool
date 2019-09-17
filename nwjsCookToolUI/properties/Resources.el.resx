@@ -466,4 +466,13 @@
     <value>Προέκυψε ένα σφάλμα εισόδου εξόδου.
 Δείτε την έξοδο στην καρτέλα πληροφοριών για πληροφορίες.</value>
   </data>
+  <data name="MissingNwjsExecutableError" xml:space="preserve">
+    <value>Η εφαρμογή nwjs λείπει.</value>
+  </data>
+  <data name="Win32ApiErrorText" xml:space="preserve">
+    <value>Συνέβη σφάλμα απο το Win32 API. Δείτε την έξοδο για περισσότερες πληροφορίες.</value>
+  </data>
+  <data name="InvalidOperationErrorText" xml:space="preserve">
+    <value>Έγινε μία άκυρη εργασία. Δείτε την έξοδο για πληροφορίες.</value>
+  </data>
 </root>

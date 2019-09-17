@@ -190,7 +190,7 @@ namespace nwjsCookToolUI
         private void TestProjectButton_Click(object sender, RoutedEventArgs e)
         {
             if (!File.Exists(Path.Combine(Settings.Default.SDKLocation, "nwjs.exe")) || !File.Exists(Path.Combine(Settings.Default.SDKLocation, "Game.exe")))
-                MessageBox.Show("The nwjs executable is missing.", Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.MissingNwjsExecutableError, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 try
@@ -199,12 +199,12 @@ namespace nwjsCookToolUI
                 }
                 catch (Win32Exception nwjsException)
                 {
-                    MessageBox.Show("A Win32 API error occured. See the output for more info.", Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Properties.Resources.Win32ApiErrorText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + nwjsException;
                 }
                 catch (InvalidOperationException nwjsException)
                 {
-                    MessageBox.Show("An Invalid operation occured. See the output for more info.", Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Properties.Resources.InvalidOperationErrorText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + nwjsException;
                 }
             }

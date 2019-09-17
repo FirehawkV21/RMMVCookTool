@@ -466,4 +466,13 @@ Check the Output in the About tab for more info.</value>
     <value>An unknown Input/Output exception occurred.
 Check the output in the About tab for more info.</value>
   </data>
+  <data name="MissingNwjsExecutableError" xml:space="preserve">
+    <value>The nwjs executable is missing.</value>
+  </data>
+  <data name="Win32ApiErrorText" xml:space="preserve">
+    <value>A Win32 API error occurred. See the output for more info.</value>
+  </data>
+  <data name="InvalidOperationErrorText" xml:space="preserve">
+    <value>An Invalid operation occurred. See the output for more info.</value>
+  </data>
 </root>

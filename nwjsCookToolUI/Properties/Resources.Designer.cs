@@ -550,6 +550,15 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An Invalid operation occurred. See the output for more info..
+        /// </summary>
+        public static string InvalidOperationErrorText {
+            get {
+                return ResourceManager.GetString("InvalidOperationErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An IO Exception occurred. Is an app using the package.json file?.
         /// </summary>
         public static string IOErrorText {
@@ -592,6 +601,15 @@ namespace nwjsCookToolUI.Properties {
         public static string MinimumWidthUiText {
             get {
                 return ResourceManager.GetString("MinimumWidthUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The nwjs executable is missing..
+        /// </summary>
+        public static string MissingNwjsExecutableError {
+            get {
+                return ResourceManager.GetString("MissingNwjsExecutableError", resourceCulture);
             }
         }
         
@@ -1033,6 +1051,15 @@ namespace nwjsCookToolUI.Properties {
         public static string WidthUiText {
             get {
                 return ResourceManager.GetString("WidthUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Win32 API error occurred. See the output for more info..
+        /// </summary>
+        public static string Win32ApiErrorText {
+            get {
+                return ResourceManager.GetString("Win32ApiErrorText", resourceCulture);
             }
         }
         
