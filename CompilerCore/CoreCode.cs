@@ -126,9 +126,9 @@ namespace CompilerCore
         public static void RunTest(in string sdkLocation, in string projectLocation)
         {
             if (File.Exists(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs")))
-                Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe": "nwjs"), "--nwapp=\"" + projectLocation + "\"");
+                Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs"), "--nwapp=\"" + projectLocation + "\"");
             else if (File.Exists(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game")))
-                Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe": "Game"),
+                Process.Start(Path.Combine(sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game"),
                     "--nwapp=\"" + projectLocation + "\"");
         }
         //This method is used to build an archive.

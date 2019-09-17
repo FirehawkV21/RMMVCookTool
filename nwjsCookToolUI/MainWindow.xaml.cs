@@ -189,19 +189,35 @@ namespace nwjsCookToolUI
 
         private void TestProjectButton_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (!File.Exists(Path.Combine(Settings.Default.SDKLocation, "nwjs.exe")) || !File.Exists(Path.Combine(Settings.Default.SDKLocation, "Game.exe")))
+                MessageBox.Show("The nwjs executable is missing.", Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+            else
             {
-
-                CoreCode.RunTest(Settings.Default.SDKLocation, ProjectLocation.Text);
-            }
-            catch (Exception nwjsException)
-            {
-                MessageBox.Show(Properties.Resources.ErrorOccuredText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
-                OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + nwjsException;
+                try
+                {
+                    CoreCode.RunTest(Settings.Default.SDKLocation, ProjectLocation.Text);
+                }
+                catch (Win32Exception nwjsException)
+                {
+                    MessageBox.Show("A Win32 API error occured. See the output for more info.", Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + nwjsException;
+                }
+                catch (InvalidOperationException nwjsException)
+                {
+                    MessageBox.Show("An Invalid operation occured. See the output for more info.", Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + nwjsException;
+                }
             }
 
         }
+
+        private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            _compilerWorker.CancelAsync();
+        }
         #endregion
+
+        #region Quick Compile Code
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
             var compilerInput = _projectList[0];
@@ -262,7 +278,7 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
-                MessageBox.Show(nwjsCookToolUI.Properties.Resources.PathTooLongErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.PathTooLongErrorText, Properties.Resources.FailedText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (UnauthorizedAccessException exceptionOutput)
             {
@@ -410,11 +426,7 @@ namespace nwjsCookToolUI
             TaskbarInfoHolder.ProgressValue = 0;
 
         }
-
-        private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
-        {
-            _compilerWorker.CancelAsync();
-        }
+        #endregion
         #endregion Quick Compile Code Set
 
         #region Batch Compile Code Set
