@@ -23,12 +23,15 @@ namespace nwjsCompilerCLI {
         private static bool compressionSafeMode = false;
 
         private static void Main (string[] args) {
+            #region Print App Info
             Console.WriteLine (Resources.SpilterText);
             Console.WriteLine (Resources.ProgramNameText);
             Console.WriteLine (Resources.ProgramVersionString, Assembly.GetExecutingAssembly ().GetName ().Version);
             Console.WriteLine (Resources.ProgramAuthorText);
             Console.WriteLine (Resources.ProgramLicenseText);
             Console.WriteLine (Resources.SpilterText);
+            #endregion
+            #region Command line arguments
 #pragma warning disable CA1307 // Specify StringComparison
             if (args.Length >= 1) {
                 for (int argnum = 0; argnum < args.Length; argnum++) {
@@ -181,7 +184,8 @@ namespace nwjsCompilerCLI {
                     }
                 }
 #pragma warning restore CA1307 // Specify StringComparison
-
+                #endregion
+            #region Workload Check
                 //Check if both the _projectLocation and _sdkLocation variables are not null.
                 if (_projectLocation != null && _sdkLocation != null) _settingsSet = true;
                 else if (_projectLocation == null && _sdkLocation != null) {
@@ -210,8 +214,11 @@ namespace nwjsCompilerCLI {
                     if (_sdkLocation == null) Console.WriteLine(Resources.SDKLocationIsNullText);
                     else if (!Directory.Exists(_sdkLocation)) Console.Write (Resources.SDKDirectoryMissing);
                 } while (_sdkLocation == null || !Directory.Exists(_sdkLocation));
+            #endregion
 
-                do {
+            #region Workload Questionaire
+                do
+                {
                     //Ask the user what project to compile. Check if the folder is there and there's a js folder.
                     Console.WriteLine (Resources.ProjectLocationQuestion);
                     _projectLocation = Console.ReadLine ();
@@ -259,7 +266,9 @@ namespace nwjsCompilerCLI {
                     } else _testProject = false;
                 }
             }
+            #endregion
 
+            #region Workload Code
             //The folder that the tool looks for.
             const string folderMap = "js";
             //Finding all the JS files.
@@ -343,5 +352,6 @@ namespace nwjsCompilerCLI {
             Console.WriteLine(Resources.PushEnterToExitText);
             Console.ReadLine();
         }
+        #endregion
     }
 }
