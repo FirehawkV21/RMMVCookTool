@@ -302,7 +302,7 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to = Version D1.02 ({0}).
+        ///   Looks up a localized string similar to = Version R1.02 ({0}).
         /// </summary>
         internal static string ProgramVersionString {
             get {
