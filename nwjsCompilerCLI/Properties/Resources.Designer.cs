@@ -115,6 +115,15 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compression is not allowed if the &quot;--PackageApp&quot; command line argument is specified. Skipping this step..
+        /// </summary>
+        internal static string CompressionNotPermittedText {
+            get {
+                return ResourceManager.GetString("CompressionNotPermittedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///Would you like to compress the game&apos;s files to an archive?
         ///1.Yes (delete the files as well).
@@ -302,7 +311,7 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to = Version R1.02 ({0}).
+        ///   Looks up a localized string similar to = Version R1.03 ({0}).
         /// </summary>
         internal static string ProgramVersionString {
             get {

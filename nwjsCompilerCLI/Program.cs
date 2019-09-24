@@ -116,19 +116,31 @@ namespace nwjsCompilerCLI {
                             }
                             //Else, either just compress or compress and delete the files.
                             else {
-                                if (argnum + 1 <= args.Length - 1) {
-                                    _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine((argnum + 1 <= args.Length - 1) && args[argnum + 1] == "Final" ?
-                                        Resources.ProjectFilesRemovalAfterCompressionText :
-                                        Resources.ProjectFilesCompressionConfirmText);
-                                    Console.ResetColor();
-                                } else {
-                                    _compressProject = 2;
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine(Resources.ProjectFilesCompressionConfirmText);
-                                    Console.ResetColor();
+                                if (_checkDeletion == 2)
+                                {
+                                    if (argnum + 1 <= args.Length - 1)
+                                    {
+                                        _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
+                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                        Console.WriteLine((argnum + 1 <= args.Length - 1) && args[argnum + 1] == "Final" ?
+                                            Resources.ProjectFilesRemovalAfterCompressionText :
+                                            Resources.ProjectFilesCompressionConfirmText);
+                                        Console.ResetColor();
                                     }
+                                    else
+                                    {
+                                        _compressProject = 2;
+                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                        Console.WriteLine(Resources.ProjectFilesCompressionConfirmText);
+                                        Console.ResetColor();
+                                    }
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                    Console.WriteLine(Resources.CompressionNotPermittedText);
+                                    Console.ResetColor();
+                                }
                             }
                             break;
 
@@ -317,7 +329,7 @@ namespace nwjsCompilerCLI {
                 if (_testProject) {
                     Console.WriteLine(Resources.NwjsStartingTestNotificationText);
                     CoreCode.RunTest(_sdkLocation, _projectLocation);
-                } else if (_compressProject < 3) {
+                } else if (_compressProject < 3 && _checkDeletion == 2) {
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                     if (compressionSafeMode)
                     {

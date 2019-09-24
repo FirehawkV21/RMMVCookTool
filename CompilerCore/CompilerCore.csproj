@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.3.19260</AssemblyVersion>
-    <FileVersion>1.0.3.19260</FileVersion>
+    <AssemblyVersion>1.0.4.19267</AssemblyVersion>
+    <FileVersion>1.0.4.19267</FileVersion>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
@@ -11,7 +11,7 @@
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
-    <Version>1.0.3-20190825</Version>
+    <Version>1.0.4-20190924</Version>
     <PackageId>StudioACE.RMMVCookTool.Core</PackageId>
     <Copyright>Copyright © 2019 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

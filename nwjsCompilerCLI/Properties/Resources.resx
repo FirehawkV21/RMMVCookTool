@@ -124,7 +124,7 @@
     <value>= RPG Maker MV Cook Tool (.NET Core CLI Version)</value>
   </data>
   <data name="ProgramVersionString" xml:space="preserve">
-    <value>= Version R1.02 ({0})</value>
+    <value>= Version R1.03 ({0})</value>
   </data>
   <data name="ProgramAuthorText" xml:space="preserve">
     <value>= Developed by AceOfAces.</value>
@@ -283,5 +283,8 @@ The task was completed.</value>
   </data>
   <data name="CompressionSafeModeConfirmationText" xml:space="preserve">
     <value>Safe mode for compression is now active.</value>
+  </data>
+  <data name="CompressionNotPermittedText" xml:space="preserve">
+    <value>Compression is not allowed if the "--PackageApp" command line argument is specified. Skipping this step.</value>
   </data>
 </root>
