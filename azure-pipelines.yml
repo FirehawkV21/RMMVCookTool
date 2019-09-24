@@ -31,9 +31,13 @@ steps:
     feedsToUse: 'select'
     versioningScheme: 'off'
 
-- task: DotNetCoreCLI@2
+- task: MSBuild@1
   inputs:
-    command: 'build'
+    solution: '**/*.sln'
+    msbuildArchitecture: 'x64'
+    platform: 'AnyCPU'
+    configuration: 'Release'
+    restoreNugetPackages: true
 
 - task: VSTest@2
   inputs:
