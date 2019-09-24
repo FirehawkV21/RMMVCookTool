@@ -44,7 +44,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.4" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.0.0-rc1.19456.4" />
+    <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.0.0" />
     <PackageReference Include="Microsoft.NETCore.Targets" Version="3.0.0-rc1.19456.4" />
   </ItemGroup>
 
