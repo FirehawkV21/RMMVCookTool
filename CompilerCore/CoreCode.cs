@@ -162,7 +162,7 @@ namespace CompilerCore
                 using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
                 {
                     //Temporary prepare a string for stripping.
-                    string stripPart = Path.Combine(projectLocation, "www") + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
+                    string stripPart = projectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
                     //List all the files in the game's www folder.
                     string[] gameFiles = FileFinder(Path.Combine(projectLocation, "www"), "*");
                     foreach (var file in gameFiles)
