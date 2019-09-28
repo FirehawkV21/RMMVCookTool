@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.4.19267</AssemblyVersion>
-    <FileVersion>1.0.4.19267</FileVersion>
+    <AssemblyVersion>1.0.4.19271</AssemblyVersion>
+    <FileVersion>1.0.4.19271</FileVersion>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
+    <AssemblyTitle>MV Cook Tool Core</AssemblyTitle>
     <Product>RPG Maker MV Cook Tool</Product>
     <Description>Provides core functionality for both the GUI and Command Line version of the Compiler.</Description>
     <PackageLicenseUrl></PackageLicenseUrl>
