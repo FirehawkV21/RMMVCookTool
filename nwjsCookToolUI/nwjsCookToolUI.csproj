@@ -17,8 +17,8 @@
     <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
     <Description>Automates the compilation of Javascript files to NW.js binaries.</Description>
-    <AssemblyVersion>2.1.0.19271</AssemblyVersion>
-    <FileVersion>2.1.0.19271</FileVersion>
+    <AssemblyVersion>2.1.0.19273</AssemblyVersion>
+    <FileVersion>2.1.0.19273</FileVersion>
     <TieredCompilation>true</TieredCompilation>
     <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
     <PublishReadyToRun>true</PublishReadyToRun>
@@ -52,7 +52,7 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.0.0-preview1" />
+    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
