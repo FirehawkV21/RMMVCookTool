@@ -34,8 +34,8 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '**\*.sln'
-    platform: 'AnyCPU'
-    configuration: 'Release'
+    platform: ''
+    configuration: ''
     maximumCpuCount: true
     msbuildArchitecture: 'x64'
 
