@@ -31,13 +31,13 @@ steps:
     feedsToUse: 'select'
     versioningScheme: 'off'
 
-- task: MSBuild@1
+- task: VSBuild@1
   inputs:
-    solution: '**/*.sln'
-    msbuildArchitecture: 'x64'
+    solution: '**\*.sln'
     platform: 'AnyCPU'
     configuration: 'Release'
-    restoreNugetPackages: true
+    maximumCpuCount: true
+    msbuildArchitecture: 'x64'
 
 - task: VSTest@2
   inputs:
