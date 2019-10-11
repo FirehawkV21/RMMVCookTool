@@ -189,13 +189,13 @@ namespace nwjsCookToolUI
 
         private void TestProjectButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(Path.Combine(Settings.Default.SDKLocation, "nwjs.exe")) || !File.Exists(Path.Combine(Settings.Default.SDKLocation, "Game.exe")))
-                MessageBox.Show(Properties.Resources.MissingNwjsExecutableError, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
-            else
-            {
                 try
                 {
                     CoreCode.RunTest(Settings.Default.SDKLocation, ProjectLocation.Text);
+                }
+                catch (FileNotFoundException nwjsException){
+                    MessageBox.Show(Properties.Resources.MissingNwjsExecutableError, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                    OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + nwjsException;
                 }
                 catch (Win32Exception nwjsException)
                 {
@@ -207,8 +207,6 @@ namespace nwjsCookToolUI
                     MessageBox.Show(Properties.Resources.InvalidOperationErrorText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + nwjsException;
                 }
-            }
-
         }
 
         private void CancelTaskButton_Click(object sender, RoutedEventArgs e)
