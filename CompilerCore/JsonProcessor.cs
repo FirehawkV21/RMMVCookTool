@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace CompilerCore
 {
@@ -70,5 +72,26 @@ namespace CompilerCore
             JsonString = new string(JsonIn);
             return JsonString;
         }
+
+        public static void FindGameFolder(in string metadataFile, out string gameFolder)
+        {
+            if (metadataFile != null)
+            {
+                string metadata = ReadJson(metadataFile);
+                var projectMetadata = JObject.Parse(metadata);
+                string tempstring = (string)projectMetadata["main"];
+                if (tempstring != null)
+                {
+                    tempstring = tempstring.Replace("/*.html", "");
+                    tempstring = tempstring.Replace("/", "\\");
+                    gameFolder = Path.Combine(metadataFile.Replace("\\package.json", ""),  tempstring);
+                }
+                else gameFolder = "Null";
+
+            }
+            else gameFolder = "Unknown";
+        }
+
+
     }
 }

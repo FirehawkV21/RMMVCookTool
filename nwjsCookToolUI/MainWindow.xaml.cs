@@ -28,7 +28,8 @@ namespace nwjsCookToolUI
         private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
         private readonly BackgroundWorker _mapCompilerWorker = new BackgroundWorker();
         private int _currentProject;
-        private string[] FileMap;        
+        private string[] FileMap;
+        private string gameFolder;
         #endregion Variables
 
         public MainWindow()
@@ -141,26 +142,34 @@ namespace nwjsCookToolUI
             }
         }
 
-        private void CompileButton_Click(object sender, RoutedEventArgs e)
+        private void PrepareQuickCompileUI(bool isStartup)
         {
             _compilerStatusReport = 0;
-            CompileButton.Visibility = Visibility.Hidden;
-            CancelTaskButton.Visibility = Visibility.Visible;
-            TestProjectButton.IsEnabled = false;
-            ProjectLocation.IsEnabled = false;
-            FindProjectButton.IsEnabled = false;
-            UnlockSettings(false);
             MainProgress.Foreground = Brushes.ForestGreen;
+            TestProjectButton.IsEnabled = !isStartup;
+            ProjectLocation.IsEnabled = !isStartup;
+            FindProjectButton.IsEnabled = !isStartup;
+            UnlockSettings(!isStartup);
+            if (!isStartup)
+            {
+                CompileButton.Visibility = Visibility.Hidden;
+                CancelTaskButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CompileButton.Visibility = Visibility.Visible;
+                CancelTaskButton.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void CompileButton_Click(object sender, RoutedEventArgs e)
+        {
+            PrepareQuickCompileUI(true);
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + "[" +DateTime.Now + "]"+ Properties.Resources.CompilerMissingText;
-                CompileButton.Visibility = Visibility.Visible;
-                CancelTaskButton.Visibility = Visibility.Hidden;
-                TestProjectButton.IsEnabled = true;
-                ProjectLocation.IsEnabled = true;
-                FindProjectButton.IsEnabled = true;
-                UnlockSettings(true);
+                PrepareQuickCompileUI(false);
             }
             else if (!Directory.Exists(ProjectLocation.Text))
             {
@@ -168,22 +177,36 @@ namespace nwjsCookToolUI
                     MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + "[" + DateTime.Now +
                                   "]"+ Properties.Resources.NonExistantFolderText;
-                CompileButton.Visibility = Visibility.Visible;
-                CancelTaskButton.Visibility = Visibility.Hidden;
-                TestProjectButton.IsEnabled = true;
-                ProjectLocation.IsEnabled = true;
-                FindProjectButton.IsEnabled = true;
-                UnlockSettings(true);
+                PrepareQuickCompileUI(false);
+            }
+            else if (!File.Exists(Path.Combine(ProjectLocation.Text, "package.json")))
+            {
+                MessageBox.Show("The package.json file is missing. Use the JSON Editor to create one.", Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                OutputArea.Text = OutputArea.Text + "\n" + "[" + DateTime.Now +
+                                  "]" + "The package.json file is missing.";
+                PrepareQuickCompileUI(false);
             }
             else
             {
-                Array.Resize(ref _projectList, 1);
-                _projectList[0] = ProjectLocation.Text;
-                MainProgress.Value = 0;
-                //MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
-                TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
-                TaskbarInfoHolder.ProgressValue = 0;
-                _compilerWorker.RunWorkerAsync();
+                JsonProcessor.FindGameFolder(Path.Combine(ProjectLocation.Text, "package.json"), out gameFolder);
+                if (gameFolder == "Null" || gameFolder == "Unknown")
+                {
+                    MessageBox.Show("Could not find the folder specified in the JSON file. Double check that the \"main\" variable is filled or points to a existing folder.", Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                    OutputArea.Text = OutputArea.Text + "\n" + "[" + DateTime.Now +
+                                      "]" + "The game folder is non-existent or the JSON file is broken.";
+                    PrepareQuickCompileUI(false);
+                }
+                else
+                {
+                    Array.Resize(ref _projectList, 1);
+                    _projectList[0] = ProjectLocation.Text;
+                    MainProgress.Value = 0;
+                    //MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
+                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
+                    TaskbarInfoHolder.ProgressValue = 0;
+                    _compilerWorker.RunWorkerAsync();
+                }
+
             }
         }
 
@@ -222,7 +245,7 @@ namespace nwjsCookToolUI
             try
             {
                 const string folderMap = "js";
-                FileMap = CoreCode.FileFinder(Path.Combine(compilerInput, "www", folderMap), "*.js");
+                FileMap = CoreCode.FileFinder(Path.Combine(compilerInput, gameFolder, folderMap), "*.js");
                 _compilerWorker.ReportProgress(_currentFile + 1);
                 CoreCode.CleanupBin(FileMap);
                 CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
@@ -447,24 +470,34 @@ namespace nwjsCookToolUI
                 FolderList.Items.Remove(s);
         }
 
-        private void MapCompileButton_Click(object sender, RoutedEventArgs e)
+        private void PrepareMapCompileUI(bool isStartup)
         {
-            MapCompileButton.Visibility = Visibility.Hidden;
-            CancelMapCompileButton.Visibility = Visibility.Visible;
-            AddToMapButton.IsEnabled = false;
-            RemoveFromMapButton.IsEnabled = false;
+            UnlockSettings(!isStartup);
+            AddToMapButton.IsEnabled = !isStartup;
+            RemoveFromMapButton.IsEnabled = !isStartup;
+            MapProgress.Value = 0;
             MapProgress.Foreground = Brushes.ForestGreen;
             CurrentWorkloadBar.Foreground = Brushes.ForestGreen;
-            MapProgress.Value = 0;
+            if (!isStartup)
+            {
+                MapCompileButton.Visibility = Visibility.Hidden;
+                CancelMapCompileButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MapCompileButton.Visibility = Visibility.Visible;
+                CancelMapCompileButton.Visibility = Visibility.Hidden;
+            }
+        }
 
+        private void MapCompileButton_Click(object sender, RoutedEventArgs e)
+        {
+            PrepareMapCompileUI(true);
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n"+ Properties.Resources.CompilerMissingText +  "\n-----";
-                MapCompileButton.Visibility = Visibility.Visible;
-                CancelMapCompileButton.Visibility = Visibility.Hidden;
-                AddToMapButton.IsEnabled = true;
-                RemoveFromMapButton.IsEnabled = true;
+                PrepareMapCompileUI(false);
             }
             else if (FolderList.Items.Count == 0)
             {
@@ -472,10 +505,7 @@ namespace nwjsCookToolUI
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\n"+ Properties.Resources.NonExistantFolderText + "\n-----";
-                MapCompileButton.Visibility = Visibility.Visible;
-                CancelMapCompileButton.Visibility = Visibility.Hidden;
-                AddToMapButton.IsEnabled = true;
-                RemoveFromMapButton.IsEnabled = true;
+                PrepareMapCompileUI(false);
             }
             else
             {
