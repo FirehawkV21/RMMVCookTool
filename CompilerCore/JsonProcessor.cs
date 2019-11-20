@@ -82,9 +82,18 @@ namespace CompilerCore
                 string tempstring = (string)projectMetadata["main"];
                 if (tempstring != null)
                 {
-                    tempstring = tempstring.Replace("/*.html", "");
-                    tempstring = tempstring.Replace("/", "\\");
-                    gameFolder = Path.Combine(metadataFile.Replace("\\package.json", ""),  tempstring);
+                    string[] dataPart = tempstring.Split('/');
+                    string tempString2 = dataPart[0];
+                    if (dataPart.Length >= 2)
+                    {
+                        for (int i = 1; i < dataPart.Length - 2; i++)
+                        {
+                            tempString2 += dataPart[i] + "\\";
+                        }
+                    }
+
+                    //tempstring = tempstring.Replace("/", "\\");
+                    gameFolder = Path.Combine(metadataFile.Replace("\\package.json", ""),  tempString2);
                 }
                 else gameFolder = "Null";
 

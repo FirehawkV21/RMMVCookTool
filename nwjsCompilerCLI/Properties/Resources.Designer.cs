@@ -229,11 +229,20 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The js folder doesn&apos;t exist..
+        ///   Looks up a localized string similar to The package.json folder doesn&apos;t exist..
         /// </summary>
-        internal static string JsFolderMissingErrorText {
+        internal static string JsonFileMissingErrorText {
             get {
-                return ResourceManager.GetString("JsFolderMissingErrorText", resourceCulture);
+                return ResourceManager.GetString("JsonFileMissingErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No reference was found on the package.json (or the folder mentioned isn&apos;t there). Please check that the json file contains the &quot;main&quot; variable and the folder exists..
+        /// </summary>
+        internal static string JsonReferenceError {
+            get {
+                return ResourceManager.GetString("JsonReferenceError", resourceCulture);
             }
         }
         

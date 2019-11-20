@@ -19,8 +19,9 @@ namespace nwjsCompilerCLI {
         private static bool _removeJsFiles;
         private static int _checkDeletion = 1;
         private static int _compressionLevel;
-        private static string[] FileMap;
-        private static bool compressionSafeMode = false;
+        private static string[] _fileMap;
+        private static bool _compressionSafeMode = false;
+        private static string _gameFolder;
 
         private static void Main (string[] args) {
             #region Print App Info
@@ -39,7 +40,7 @@ namespace nwjsCompilerCLI {
                     switch (args[argnum]) {
 
                         case "--CompressionSafeMode":
-                            compressionSafeMode = true;
+                            _compressionSafeMode = true;
                             Console.ForegroundColor = ConsoleColor.DarkGreen;
                             Console.WriteLine(Resources.CompressionSafeModeConfirmationText);
                             break;
@@ -76,17 +77,14 @@ namespace nwjsCompilerCLI {
                         case "--ProjectLocation":
                             stringBuffer = args[argnum + 1];
                             _projectLocation = stringBuffer.Replace ("\"", "");
-                            if (argnum <= args.Length - 1 && Directory.Exists (_projectLocation) &&
-                                Directory.Exists(Path.Combine (_projectLocation, "www", "js"))) {
+                            if (argnum <= args.Length - 1 && Directory.Exists (_projectLocation)) {
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                                 Console.WriteLine(Resources.ProjectLocationConfirmationText);
                                 Console.ResetColor();
                             } else {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine (!Directory.Exists (Path.Combine (_projectLocation, "www", "js")) ?
-                                    Resources.ProjectLocationInexistantText :
-                                    Resources.JsFolderMissingErrorText);
-                                Console.ResetColor();
+                                Console.WriteLine (!File.Exists (Path.Combine (_projectLocation, "project.json")) ? Resources.JsonFileMissingErrorText : Resources.ProjectLocationInexistantText);
+                                    Console.ResetColor();
                                 Console.WriteLine(Resources.PushEnterToExitText);
                                 Console.ReadLine();
                                 Environment.Exit(1);
@@ -226,9 +224,9 @@ namespace nwjsCompilerCLI {
                     if (_sdkLocation == null) Console.WriteLine(Resources.SDKLocationIsNullText);
                     else if (!Directory.Exists(_sdkLocation)) Console.Write (Resources.SDKDirectoryMissing);
                 } while (_sdkLocation == null || !Directory.Exists(_sdkLocation));
-            #endregion
+                #endregion
 
-            #region Workload Questionaire
+                #region Workload Questionaire
                 do
                 {
                     //Ask the user what project to compile. Check if the folder is there and there's a js folder.
@@ -281,84 +279,118 @@ namespace nwjsCompilerCLI {
             #endregion
 
             #region Workload Code
-            //The folder that the tool looks for.
-            const string folderMap = "js";
-            //Finding all the JS files.
-            FileMap = CoreCode.FileFinder(Path.Combine (_projectLocation, "www", folderMap), "*.js");
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-            Console.ResetColor();
-            Console.WriteLine(Resources.BinaryRemovalText);
-            CoreCode.CleanupBin(FileMap);
-            //Preparing the compiler task.
-            CoreCode.CompilerInfo.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform (OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
-            try {
-                //Read from the FileMap.
-                //Compilation is done in parallel. Handy for multi-core systems.
-                if (_parallelMode) {
-                    Parallel.For(0, FileMap.Length, index => {
-                        //Print the status of the compiler. Show which thread is compiling what as well.
-                        Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord + Thread.CurrentThread.ManagedThreadId +
-                            Resources.CompilingWord + FileMap[index] + @"...\n");
-                        //Call the compiler task.
-                        CoreCode.CompilerWorkerTask(FileMap[index], _fileExtension, _removeJsFiles);
-                        Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord + Thread.CurrentThread.ManagedThreadId +
-                            Resources.FinishedCompilingText + FileMap[index] + @".\n");
-                    });
-                } else {
-                    for (int index = 0; index < FileMap.Length; index++) {
-                        //Print the status of the compiler. Show which thread is compiling what as well.
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                        Console.ResetColor();
-                        Console.WriteLine(Resources.CompilingWord2 + FileMap[index] + "...");
-                        //Call the compiler task.
-                        CoreCode.CompilerWorkerTask(FileMap[index], _fileExtension, _removeJsFiles);
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine(Resources.FinishedCompilingText2 + FileMap[index] + ".");
-                        Console.ResetColor();
-                    }
-                }
+            //Find the game folder.
+            JsonProcessor.FindGameFolder(_projectLocation, out _gameFolder);
+            if (_gameFolder == "Null" || _gameFolder == "Unknown")
+            {
+                //If the Json read returns nothing, throw an error to tell the user to double check their json file.
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine(Resources.JsonReferenceError);
+                Console.ResetColor();
+            }
+            else //If the read returned a valid folder, start the compiler process.
+            {
+                //Finding all the JS files.
+                _fileMap = CoreCode.FileFinder(Path.Combine(_gameFolder), "*.js");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine(Resources.CompilerTaskComplete);
                 Console.ResetColor();
-                if (_testProject) {
-                    Console.WriteLine(Resources.NwjsStartingTestNotificationText);
-                    CoreCode.RunTest(_sdkLocation, _projectLocation);
-                } else if (_compressProject < 3 && _checkDeletion == 2) {
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    if (compressionSafeMode)
+                Console.WriteLine(Resources.BinaryRemovalText);
+                CoreCode.CleanupBin(_fileMap);
+                //Preparing the compiler task.
+                CoreCode.CompilerInfo.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
+                try
+                {
+                    //Read from the FileMap.
+                    //Compilation is done in parallel. Handy for multi-core systems.
+                    if (_parallelMode)
                     {
-                        Console.Write (Resources.DateTimeFormatText, DateTime.Now);
-                        Console.ResetColor();                    
-                        Console.WriteLine(Resources.CopyingToTempLocationText);
-                        CoreCode.PreparePack(_projectLocation);
+                        Parallel.For(0, _fileMap.Length, index =>
+                        {
+                            //Print the status of the compiler. Show which thread is compiling what as well.
+                            Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord +
+                                              Thread.CurrentThread.ManagedThreadId +
+                                              Resources.CompilingWord + _fileMap[index] + @"...\n");
+                            //Call the compiler task.
+                            CoreCode.CompilerWorkerTask(_fileMap[index], _fileExtension, _removeJsFiles);
+                            Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord +
+                                              Thread.CurrentThread.ManagedThreadId +
+                                              Resources.FinishedCompilingText + _fileMap[index] + @".\n");
+                        });
                     }
+                    else
+                    {
+                        for (int index = 0; index < _fileMap.Length; index++)
+                        {
+                            //Print the status of the compiler. Show which thread is compiling what as well.
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.Write(Resources.DateTimeFormatText, DateTime.Now);
+                            Console.ResetColor();
+                            Console.WriteLine(Resources.CompilingWord2 + _fileMap[index] + @"...");
+                            //Call the compiler task.
+                            CoreCode.CompilerWorkerTask(_fileMap[index], _fileExtension, _removeJsFiles);
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.Write(Resources.DateTimeFormatText, DateTime.Now);
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.WriteLine(Resources.FinishedCompilingText2 + _fileMap[index] + @".");
+                            Console.ResetColor();
+                        }
+                    }
+
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.Write(Resources.DateTimeFormatText, DateTime.Now);
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine(Resources.CompilerTaskComplete);
                     Console.ResetColor();
-                    Console.WriteLine(Resources.FileCompressionText);
-                    CoreCode.CompressFiles (_projectLocation, _projectLocation, _compressionLevel, compressionSafeMode);
-                    if (_compressProject == 1) {
+                    if (_testProject)
+                    {
+                        Console.WriteLine(Resources.NwjsStartingTestNotificationText);
+                        CoreCode.RunTest(_sdkLocation, _projectLocation);
+                    }
+                    else if (_compressProject < 3 && _checkDeletion == 2)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        if (_compressionSafeMode)
+                        {
+                            Console.Write(Resources.DateTimeFormatText, DateTime.Now);
+                            Console.ResetColor();
+                            Console.WriteLine(Resources.CopyingToTempLocationText);
+                            CoreCode.PreparePack(_projectLocation);
+                        }
+
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                         Console.ResetColor();
-                        Console.WriteLine(Resources.SourceFileDeletionText);
-                        CoreCode.DeleteFiles(_projectLocation);
+                        Console.WriteLine(Resources.FileCompressionText);
+                        CoreCode.CompressFiles(_projectLocation, _gameFolder, _projectLocation, _compressionLevel,
+                            _compressionSafeMode);
+                        if (_compressProject == 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.Write(Resources.DateTimeFormatText, DateTime.Now);
+                            Console.ResetColor();
+                            Console.WriteLine(Resources.SourceFileDeletionText);
+                            CoreCode.DeleteFiles(_projectLocation);
+                        }
                     }
+
+                    Console.WriteLine(Resources.TaskCompleteText);
+
                 }
-                Console.WriteLine (Resources.TaskCompleteText);
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                catch (Exception e)
+                {
+                    //TODO Improve the handling of the errors.
+                    Console.WriteLine(e);
+                    throw;
 
-            } catch (Exception e) {
-                //TODO Improve the handling of the errors.
-                Console.WriteLine(e);
-                throw;
-
+                }
             }
+
             //Ask the user to press Enter (or Return).
             if (_settingsSet) return;
             Console.WriteLine(Resources.PushEnterToExitText);

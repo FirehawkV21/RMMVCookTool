@@ -149,11 +149,13 @@ namespace CompilerCore
         /// Compresses the game's files (after copying them in a temporary location) to a zip file named package.nw (app.nw on Mac).
         /// </summary>
         /// <param name="projectLocation">The source path. Helpful for cases that the drop area is different.</param>
+        /// <param name="gameFolder">The location of the game folder. Used for reference so it can find the correct folder.</param>
         /// <param name="deployArea">The destination path for the archive.</param>
         /// <param name="compressionSelector">What kind of compression will be applied? 0 = Optimal, 1 = Fastest, 2 = None</param>
         /// <param name="useSafeMode">Use the old but safe way of compressing the files.</param>
-        public static void CompressFiles(in string projectLocation, in string deployArea, in int compressionSelector, in bool useSafeMode)
+        public static void CompressFiles(in string projectLocation, in string gameFolder, in string deployArea, in int compressionSelector, in bool useSafeMode)
         {
+            string[] tempString = gameFolder.Split(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? '\\' : '/');
             var packageOutput = Path.Combine(deployArea, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
             
@@ -164,7 +166,7 @@ namespace CompilerCore
                     //Temporary prepare a string for stripping.
                     string stripPart = projectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
                     //List all the files in the game's www folder.
-                    string[] gameFiles = FileFinder(Path.Combine(projectLocation, "www"), "*");
+                    string[] gameFiles = FileFinder(Path.Combine(projectLocation, tempString[tempString.Length-1]), "*");
                     foreach (var file in gameFiles)
                     {
                         //Start adding files.

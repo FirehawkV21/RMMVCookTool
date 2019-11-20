@@ -171,8 +171,8 @@
   <data name="ProjectLocationInexistantText" xml:space="preserve">
     <value>Η θέση του project δεν υπάρχει.</value>
   </data>
-  <data name="JsFolderMissingErrorText" xml:space="preserve">
-    <value>Ο φάκελος js δεν υπάρχει.</value>
+  <data name="JsonFileMissingErrorText" xml:space="preserve">
+    <value>Το αρχείο package.json δεν υπάρχει.</value>
   </data>
   <data name="nwjsTestStartingText" xml:space="preserve">
     <value>Το NW.js θα ξεκινήσει μετά απο την μετ'αφραση.</value>
@@ -286,5 +286,8 @@
   </data>
   <data name="CompressionNotPermittedText" xml:space="preserve">
     <value>Η συμπίεση δεν επιτρέπεται αν η σημαία "--PackageApp" δεν έχει οριστεί. Αγνοείται αυτό το βήμα.</value>
+  </data>
+  <data name="JsonReferenceError" xml:space="preserve">
+    <value>Δεν υπάρχει αναφορά στον φάκελο παιχνιδιού στο αρχείο package.json (ή δεν υπάρχει ο φάκελος που αναφέρεται). Παρακαλώ, βεβαιωθείτε ότι το αρχείο έχει  τη μεταβλητή "main" και ο φάκελος υπάρχει.</value>
   </data>
 </root>

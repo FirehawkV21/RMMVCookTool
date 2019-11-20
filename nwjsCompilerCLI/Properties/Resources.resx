@@ -171,8 +171,8 @@
   <data name="ProjectLocationInexistantText" xml:space="preserve">
     <value>The location of the project doesn't exist.</value>
   </data>
-  <data name="JsFolderMissingErrorText" xml:space="preserve">
-    <value>The js folder doesn't exist.</value>
+  <data name="JsonFileMissingErrorText" xml:space="preserve">
+    <value>The package.json folder doesn't exist.</value>
   </data>
   <data name="nwjsTestStartingText" xml:space="preserve">
     <value>NW.js will start after compiling.</value>
@@ -286,5 +286,8 @@ The task was completed.</value>
   </data>
   <data name="CompressionNotPermittedText" xml:space="preserve">
     <value>Compression is not allowed if the "--PackageApp" command line argument is specified. Skipping this step.</value>
+  </data>
+  <data name="JsonReferenceError" xml:space="preserve">
+    <value>No reference was found on the package.json (or the folder mentioned isn't there). Please check that the json file contains the "main" variable and the folder exists.</value>
   </data>
 </root>
