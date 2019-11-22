@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.4.19323</AssemblyVersion>
-    <FileVersion>1.0.4.19323</FileVersion>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyVersion>1.0.4.19326</AssemblyVersion>
+    <FileVersion>1.0.4.19326</FileVersion>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <AssemblyTitle>MV Cook Tool Core</AssemblyTitle>

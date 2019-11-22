@@ -166,7 +166,7 @@ namespace CompilerCore
                     //Temporary prepare a string for stripping.
                     string stripPart = projectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
                     //List all the files in the game's www folder.
-                    string[] gameFiles = FileFinder(Path.Combine(projectLocation, tempString[tempString.Length-1]), "*");
+                    string[] gameFiles = FileFinder(Path.Combine(projectLocation, tempString[^1]), "*");
                     foreach (var file in gameFiles)
                     {
                         //Start adding files.
