@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <PackageId>StudioACE.RMMVCookTool.UI</PackageId>
     <Authors>AceOfAces</Authors>
-    <Version>2.1.0-20191012</Version>
+    <Version>2.2.0-20191012</Version>
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyTitle>RPG Maker MV Cook Tool (UI Version)</AssemblyTitle>
     <Product>RPG Maker MV Cook Tool</Product>
@@ -17,8 +17,8 @@
     <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
     <Description>Automates the compilation of Javascript files to NW.js binaries.</Description>
-    <AssemblyVersion>2.1.0.19326</AssemblyVersion>
-    <FileVersion>2.1.0.19326</FileVersion>
+    <AssemblyVersion>2.2.0.19338</AssemblyVersion>
+    <FileVersion>2.2.0.19338</FileVersion>
     <TieredCompilation>true</TieredCompilation>
     <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
     <PublishReadyToRun>true</PublishReadyToRun>

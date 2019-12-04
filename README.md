@@ -16,7 +16,7 @@ The standalone, cross-platform console app. Used for compiling a project quickly
 
 ## System Requirements
 -  Windows 7 Service Pack 1 and newer.
--  Microsoft .NET Core 3.
+-  Microsoft .NET Core 3.1.
 -  NW.js SDK. Any version you want.
 
 ## Compiling
