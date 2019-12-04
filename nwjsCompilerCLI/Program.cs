@@ -280,7 +280,7 @@ namespace nwjsCompilerCLI {
 
             #region Workload Code
             //Find the game folder.
-            JsonProcessor.FindGameFolder(_projectLocation, out _gameFolder);
+            JsonProcessor.FindGameFolder(Path.Combine(_projectLocation, "package.json"), out _gameFolder);
             if (_gameFolder == "Null" || _gameFolder == "Unknown")
             {
                 //If the Json read returns nothing, throw an error to tell the user to double check their json file.
