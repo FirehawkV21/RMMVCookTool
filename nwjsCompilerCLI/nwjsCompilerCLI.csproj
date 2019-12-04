@@ -3,13 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyVersion>1.4.0.19331</AssemblyVersion>
-    <FileVersion>1.4.0.19331</FileVersion>
+    <AssemblyVersion>1.3.1.19331</AssemblyVersion>
+    <FileVersion>1.3.1.19331</FileVersion>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
     <AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
     <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-    <Version>1.4.0-20191012</Version>
+    <Version>1.3.1-20191204</Version>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
