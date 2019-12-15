@@ -79,7 +79,7 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The compiler isn&apos;t there. Please pick the folder that has the nwjc file.
+        ///   Looks up a localized string similar to The compiler isn&apos;t there. Please pick the folder that has the nwjc file..
         /// </summary>
         internal static string CompilerMissingErrorText {
             get {
@@ -229,7 +229,7 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The package.json folder doesn&apos;t exist..
+        ///   Looks up a localized string similar to The package.json file doesn&apos;t exist..
         /// </summary>
         internal static string JsonFileMissingErrorText {
             get {

@@ -151,7 +151,7 @@
     <value>Αποτυχία!</value>
   </data>
   <data name="CompileText1" xml:space="preserve">
-    <value>Μετάφραση των scripts μέσα στο φάκελο</value>
+    <value>Μετάφραση των scripts μέσα στο φάκελο </value>
   </data>
   <data name="BinRemovalText" xml:space="preserve">
     <value>Διαγραφή δυαδικών αρχείων από το project(αν υπάρχουν)...</value>
