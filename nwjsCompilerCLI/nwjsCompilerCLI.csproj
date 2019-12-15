@@ -9,7 +9,7 @@
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
     <AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
     <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-    <Version>1.3.1-20191204</Version>
+    <Version>1.3.1-20191215</Version>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
