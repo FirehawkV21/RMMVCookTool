@@ -17,8 +17,8 @@
     <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
     <Description>Automates the compilation of Javascript files to NW.js binaries.</Description>
-    <AssemblyVersion>2.1.1.19349</AssemblyVersion>
-    <FileVersion>2.1.1.19349</FileVersion>
+    <AssemblyVersion>2.1.1.20032</AssemblyVersion>
+    <FileVersion>2.1.1.20032</FileVersion>
     <TieredCompilation>true</TieredCompilation>
     <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
     <PublishReadyToRun>true</PublishReadyToRun>

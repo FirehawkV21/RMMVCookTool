@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -59,15 +60,15 @@ namespace CompilerCore
         /// </summary>
         /// <param name="path">Path for Search.</param>
         /// <param name="extension">File Extension.</param>
-        public static string[] FileFinder(in string path, in string extension)
+        public static IEnumerable<string> FileFinder(in string path, in string extension)
         {
-            return Directory.GetFiles(path, extension, SearchOption.AllDirectories);
+            return Directory.EnumerateFiles(path, extension, SearchOption.AllDirectories);
         }
         //This bit of code removes binary files when requested. Must run after FileFinder.
         /// <summary>
         /// Removes binary files found in the FileMap array.
         /// </summary>
-        public static void CleanupBin(string[] fileMap)
+        public static void CleanupBin(in IEnumerable<string> fileMap)
         {
             //Do a normal loop for each entry on the FileMap array.
 #pragma warning disable CA1062 // Validate arguments of public methods
@@ -160,7 +161,7 @@ namespace CompilerCore
                     //Temporary prepare a string for stripping.
                     string stripPart = projectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
                     //List all the files in the game's www folder.
-                    string[] gameFiles = FileFinder(Path.Combine(projectLocation, tempString[^1]), "*");
+                    IEnumerable<string> gameFiles = FileFinder(Path.Combine(projectLocation, tempString[^1]), "*");
                     foreach (var file in gameFiles)
                     {
                         //Start adding files.

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -19,7 +20,7 @@ namespace nwjsCompilerCLI {
         private static bool _removeJsFiles;
         private static int _checkDeletion = 1;
         private static int _compressionLevel;
-        private static string[] _fileMap;
+        private static IEnumerable<string> _fileMap;
         private static bool _compressionSafeMode = false;
         private static string _gameFolder;
 
@@ -307,34 +308,34 @@ namespace nwjsCompilerCLI {
                         //Compilation is done in parallel. Handy for multi-core systems.
                         if (_parallelMode)
                         {
-                            Parallel.For(0, _fileMap.Length, index =>
+                            Parallel.ForEach(_fileMap, index =>
                             {
                                 //Print the status of the compiler. Show which thread is compiling what as well.
                                 Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord +
                                                   Thread.CurrentThread.ManagedThreadId +
-                                                  Resources.CompilingWord + _fileMap[index] + @"...\n");
+                                                  Resources.CompilingWord + index + @"...\n");
                                 //Call the compiler task.
-                                CoreCode.CompilerWorkerTask(_fileMap[index], _fileExtension, _removeJsFiles);
+                                CoreCode.CompilerWorkerTask(index, _fileExtension, _removeJsFiles);
                                 Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord +
                                                   Thread.CurrentThread.ManagedThreadId +
-                                                  Resources.FinishedCompilingText + _fileMap[index] + @".\n");
+                                                  Resources.FinishedCompilingText + index + @".\n");
                             });
                         }
                         else
                         {
-                            for (int index = 0; index < _fileMap.Length; index++)
+                            foreach (string index in _fileMap)
                             {
                                 //Print the status of the compiler. Show which thread is compiling what as well.
                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                                 Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                                 Console.ResetColor();
-                                Console.WriteLine(Resources.CompilingWord2 + _fileMap[index] + @"...");
+                                Console.WriteLine(Resources.CompilingWord2 + index + @"...");
                                 //Call the compiler task.
-                                CoreCode.CompilerWorkerTask(_fileMap[index], _fileExtension, _removeJsFiles);
+                                CoreCode.CompilerWorkerTask(index, _fileExtension, _removeJsFiles);
                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                                 Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                Console.WriteLine(Resources.FinishedCompilingText2 + _fileMap[index] + @".");
+                                Console.WriteLine(Resources.FinishedCompilingText2 + index + @".");
                                 Console.ResetColor();
                             }
                         }
