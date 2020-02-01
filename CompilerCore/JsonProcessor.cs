@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 
 namespace CompilerCore
 {
@@ -94,7 +92,7 @@ namespace CompilerCore
                     }
 
                     //tempstring = tempstring.Replace("/", "\\");
-                    gameFolder = Path.Combine(metadataFile.Replace((RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? "\\package.json" : "/package.json", ""),  tempString2);
+                    gameFolder = Path.Combine(metadataFile.Replace((RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? "\\package.json" : "/package.json", ""), tempString2);
                 }
                 else gameFolder = "Null";
 

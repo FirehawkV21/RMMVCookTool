@@ -67,19 +67,16 @@ namespace CompilerCore
         /// <summary>
         /// Removes binary files found in the FileMap array.
         /// </summary>
-        public static void CleanupBin(string[] FileMap)
+        public static void CleanupBin(string[] fileMap)
         {
             //Do a normal loop for each entry on the FileMap array.
 #pragma warning disable CA1062 // Validate arguments of public methods
-            foreach (string file in FileMap)
+            foreach (string file in fileMap)
 #pragma warning restore CA1062 // Validate arguments of public methods
             {
-                //This buffer makes the necessary query to do a search for the binaries.
-                //We want to keep the file name to do the search.
-                var fileBuffer = Path.GetFileNameWithoutExtension(file);
                 //This does a small search in the path specified in the FileMap.
                 //Adding the .* will allow us to search all the files that have an extension.
-                var deletionMap = Directory.GetFiles(file.Replace(fileBuffer + ".js", ""), fileBuffer + ".*");
+                var deletionMap = Directory.GetFiles(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + ".*");
                 //Doing a parallel loop here to speed up the cleanup process.
                 Parallel.ForEach(deletionMap, fileToDelete =>
                 {
@@ -102,13 +99,10 @@ namespace CompilerCore
         public static void CompilerWorkerTask(in string file, in string extension, in bool removeJs)
         {
             //Removing the JavaScript extension. Needed to place our own File Extension.
-#pragma warning disable CA1062 // Validate arguments of public methods
-            string fileBuffer = file.Replace(".js", "");
-#pragma warning restore CA1062 // Validate arguments of public methods
-                              //Setting up the compiler by throwing in two arguments.
-                              //The first bit (the one with the file variable) is the source.
-                              //The second bit (the one with the fileBuffer variable) makes the final file.
-            CompilerInfo.Arguments = "\"" + file + "\"" + " " + "\"" + fileBuffer + "." + extension + "\"";
+            //Setting up the compiler by throwing in two arguments.
+            //The first bit (the one with the file variable) is the source.
+            //The second bit (the one with the fileBuffer variable) makes the final file.
+            CompilerInfo.Arguments = "\"" + file + "\" \"" + file.Replace(".js", "." + extension) + "\"";
             //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.   
             CompilerInfo.CreateNoWindow = true;
             CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -158,7 +152,7 @@ namespace CompilerCore
             string[] tempString = gameFolder.Split(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? '\\' : '/');
             var packageOutput = Path.Combine(deployArea, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
-            
+
             if (!useSafeMode)
             {
                 using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
@@ -173,13 +167,16 @@ namespace CompilerCore
                         switch (compressionSelector)
                         {
                             case 2:
-                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""), CompressionLevel.NoCompression);
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                                    CompressionLevel.NoCompression);
                                 break;
                             case 1:
-                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""), CompressionLevel.Fastest);
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                                    CompressionLevel.Fastest);
                                 break;
                             default:
-                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""), CompressionLevel.Optimal);
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                                    CompressionLevel.Optimal);
                                 break;
                         }
                     }
@@ -187,7 +184,8 @@ namespace CompilerCore
                     packageArchive.CreateEntryFromFile(Path.Combine(projectLocation, "package.json"), "package.json");
                 };
             }
-            else {
+            else
+            {
                 //Compress the files from the temp location.
                 switch (compressionSelector)
                 {
