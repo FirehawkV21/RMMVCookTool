@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyVersion>1.3.1.20032</AssemblyVersion>
-    <FileVersion>1.3.1.20032</FileVersion>
+    <AssemblyVersion>1.3.1.20035</AssemblyVersion>
+    <FileVersion>1.3.1.20035</FileVersion>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <StartupObject>nwjsCompilerCLI.Program</StartupObject>
     <AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>

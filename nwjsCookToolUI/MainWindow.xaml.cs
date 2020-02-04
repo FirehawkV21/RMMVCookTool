@@ -29,7 +29,7 @@ namespace nwjsCookToolUI
         private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
         private readonly BackgroundWorker _mapCompilerWorker = new BackgroundWorker();
         private int _currentProject;
-        private IEnumerable<string> _fileMap;
+        private List<string> _fileMap;
         private string _gameFolder;
         #endregion Variables
 
@@ -69,6 +69,7 @@ namespace nwjsCookToolUI
             editJsonButton.IsEnabled = unlockSetting;
             SafeModeCheckBox.IsEnabled = unlockSetting && PackageNwCheckbox.IsChecked == true;
             RemoveFilesCheckBox.IsEnabled = unlockSetting && PackageNwCheckbox.IsChecked == true;
+            PackageCompressionComboBox.IsEnabled = unlockSetting;
         }
         #endregion Methods
 
@@ -250,17 +251,17 @@ namespace nwjsCookToolUI
                 _compilerWorker.ReportProgress(_currentFile + 1);
                 CoreCode.CleanupBin(_fileMap);
                 CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
-                if (Settings.Default.PackageCode)
-                    Dispatcher.Invoke(() => MainProgress.Maximum = _fileMap.Count() + ((Settings.Default.PackageCode) ? ((Settings.Default.CompressionEngineSafeMode) ? 2 : 1) : 0));
+                Dispatcher.Invoke(() => MainProgress.Maximum = _fileMap.Count + ((Settings.Default.PackageCode) ? ((Settings.Default.CompressionEngineSafeMode) ? 2 : 1) : 0));
                 _compilerStatusReport = 1;
-                for (_currentFile = 0; _currentFile < _fileMap.Count(); _currentFile++)
+                foreach (string sourceFile in _fileMap)
                 {
                     if (_compilerWorker.CancellationPending)
                     {
                         e.Cancel = true;
                         break;
                     }
-                    CoreCode.CompilerWorkerTask(_fileMap.ElementAt(_currentFile), Settings.Default.FileExtension, Settings.Default.DeleteSourceCode);
+                    CoreCode.CompilerWorkerTask(sourceFile, Settings.Default.FileExtension, Settings.Default.DeleteSourceCode);
+                    _currentFile++;
                     _compilerWorker.ReportProgress(_currentFile + 1);
                     _compilerStatusReport = 2;
                     Thread.Sleep(200);
@@ -369,7 +370,7 @@ namespace nwjsCookToolUI
                 case 5:
                     MainProgress.Value += 1;
                     TaskbarInfoHolder.ProgressValue = MainProgress.Value / MainProgress.Maximum;
-                    TaskbarInfoHolder.ProgressValue = (double)_currentFile / _fileMap.Count();
+                    TaskbarInfoHolder.ProgressValue = (double)_currentFile / _fileMap.Count;
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]Removing files...";
                     break;
                 case 4:
@@ -382,7 +383,7 @@ namespace nwjsCookToolUI
                     OutputArea.Text = OutputArea.Text + "\n[" + DateTime.Now + "]" + Properties.Resources.FileCopyText;
                     break;
                 case 2:
-                    if (_currentFile < _fileMap.Count())
+                    if (_currentFile < _fileMap.Count)
                     {
                         MainProgress.Value = _currentFile;
                         TaskbarInfoHolder.ProgressValue = MainProgress.Value / MainProgress.Maximum;
@@ -436,7 +437,7 @@ namespace nwjsCookToolUI
             }
             MainProgress.Value = 0;
             MainProgress.Foreground = Brushes.ForestGreen;
-            _fileMap = Enumerable.Empty<string>();
+            _fileMap.Clear();
             CompileButton.IsEnabled = true;
             TestProjectButton.IsEnabled = true;
             FindProjectButton.IsEnabled = true;
@@ -452,6 +453,7 @@ namespace nwjsCookToolUI
         #endregion Quick Compile Code Set
 
         #region Batch Compile Code Set
+        #region Batch Compile UI Code
         private void AddToMapButton_Click(object sender, RoutedEventArgs e)
         {
             var pickJsFolder =
@@ -471,7 +473,7 @@ namespace nwjsCookToolUI
                 FolderList.Items.Remove(s);
         }
 
-        private void PrepareMapCompileUI(bool isStartup)
+        private void PrepareMapCompileUi(bool isStartup)
         {
             UnlockSettings(!isStartup);
             AddToMapButton.IsEnabled = !isStartup;
@@ -493,12 +495,12 @@ namespace nwjsCookToolUI
 
         private void MapCompileButton_Click(object sender, RoutedEventArgs e)
         {
-            PrepareMapCompileUI(true);
+            PrepareMapCompileUi(true);
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
                 MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + Properties.Resources.CompilerMissingText + "\n-----";
-                PrepareMapCompileUI(false);
+                PrepareMapCompileUi(false);
             }
             else if (FolderList.Items.Count == 0)
             {
@@ -506,7 +508,7 @@ namespace nwjsCookToolUI
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now +
                                   "\n" + Properties.Resources.NonExistantFolderText + "\n-----";
-                PrepareMapCompileUI(false);
+                PrepareMapCompileUi(false);
             }
             else
             {
@@ -520,6 +522,14 @@ namespace nwjsCookToolUI
                 _mapCompilerWorker.RunWorkerAsync();
             }
         }
+
+        private void CancelMapCompileButton_Click(object sender, RoutedEventArgs e)
+        {
+            _mapCompilerWorker.CancelAsync();
+        }
+        #endregion
+
+        #region Batch Compile Task Code
 
         private void StartMapCompiler(object sender, DoWorkEventArgs e)
         {
@@ -540,7 +550,7 @@ namespace nwjsCookToolUI
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
                     CoreCode.CleanupBin(_fileMap);
                     _compilerStatusReport = 2;
-                    for (_currentFile = 0; _currentFile < _fileMap.Count(); _currentFile++)
+                    foreach (string sourcefile in _fileMap)
                     {
                         if (_mapCompilerWorker.CancellationPending)
                         {
@@ -548,14 +558,15 @@ namespace nwjsCookToolUI
                             break;
                         }
                         _mapCompilerWorker.ReportProgress(_currentProject + 1);
-                        CoreCode.CompilerWorkerTask(_fileMap.ElementAt(_currentFile), Settings.Default.FileExtension,
+                        CoreCode.CompilerWorkerTask(sourcefile, Settings.Default.FileExtension,
                             Settings.Default.DeleteSourceCode);
+                        _currentFile++;
 
                     }
                     if (e.Cancel) break;
-                    _fileMap = Enumerable.Empty<string>();
                     _compilerStatusReport = 3;
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
+                    _fileMap.Clear();
                     Thread.Sleep(200);
                 }
             }
@@ -656,7 +667,7 @@ namespace nwjsCookToolUI
                         "...";
                     break;
                 case 1:
-                    CurrentWorkloadBar.Maximum = _fileMap.Count();
+                    CurrentWorkloadBar.Maximum = _fileMap.Count;
                     OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.BinRemovalText;
                     CurrentWorkloadLabel.Content =
                         Properties.Resources.BinRemovalStatusText + FolderList.Items[_currentProject] + "...";
@@ -697,9 +708,8 @@ namespace nwjsCookToolUI
                 MapStatusLabel.Content = Properties.Resources.DoneText;
                 CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
             }
-
-            _fileMap = Enumerable.Empty<string>();
             Array.Clear(_projectList, 0, _projectList.Length);
+            _fileMap.Clear();
             MapCompileButton.Visibility = Visibility.Visible;
             CancelMapCompileButton.Visibility = Visibility.Hidden;
             AddToMapButton.IsEnabled = true;
@@ -714,11 +724,7 @@ namespace nwjsCookToolUI
             MapProgress.Foreground = Brushes.ForestGreen;
             CurrentWorkloadBar.Foreground = Brushes.ForestGreen;
         }
-
-        private void CancelMapCompileButton_Click(object sender, RoutedEventArgs e)
-        {
-            _mapCompilerWorker.CancelAsync();
-        }
+        #endregion
         #endregion Batch Compile Code Set
 
     }

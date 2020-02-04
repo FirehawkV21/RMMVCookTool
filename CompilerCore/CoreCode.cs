@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -60,15 +61,15 @@ namespace CompilerCore
         /// </summary>
         /// <param name="path">Path for Search.</param>
         /// <param name="extension">File Extension.</param>
-        public static IEnumerable<string> FileFinder(in string path, in string extension)
+        public static List<string> FileFinder(in string path, in string extension)
         {
-            return Directory.EnumerateFiles(path, extension, SearchOption.AllDirectories);
+            return Directory.EnumerateFiles(path, extension, SearchOption.AllDirectories).ToList();
         }
         //This bit of code removes binary files when requested. Must run after FileFinder.
         /// <summary>
         /// Removes binary files found in the FileMap array.
         /// </summary>
-        public static void CleanupBin(in IEnumerable<string> fileMap)
+        public static void CleanupBin(in List<string> fileMap)
         {
             //Do a normal loop for each entry on the FileMap array.
 #pragma warning disable CA1062 // Validate arguments of public methods
