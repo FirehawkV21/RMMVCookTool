@@ -32,8 +32,8 @@ namespace nwjsCookToolUI
         private int _currentProject;
         private List<string> _fileMap;
         private string _gameFolder;
-        private StringBuilder stringBuffer = new StringBuilder();
-        private StringBuilder nextFile = new StringBuilder();
+        private readonly StringBuilder _stringBuffer = new StringBuilder();
+        private readonly StringBuilder _nextFile = new StringBuilder();
         #endregion Variables
 
         public MainWindow()
@@ -365,7 +365,7 @@ namespace nwjsCookToolUI
         {
             if (_compilerStatusReport > 0 && _compilerStatusReport < 4)
             {
-                stringBuffer.Insert(0, _fileMap.ElementAt(_currentFile));
+                _stringBuffer.Insert(0, _fileMap.ElementAt(_currentFile));
             }
             switch (_compilerStatusReport)
             {
@@ -393,21 +393,21 @@ namespace nwjsCookToolUI
 
                     MainProgress.Value = _currentFile;
                     TaskbarInfoHolder.ProgressValue = MainProgress.Value / MainProgress.Maximum;
-                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + stringBuffer + Properties.Resources.CompiledOutputText;
+                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + _stringBuffer + Properties.Resources.CompiledOutputText;
                     if (_currentFile < _fileMap.Count - 1)
                     {
-                        nextFile.Insert(0, _fileMap.ElementAt(_currentFile + 1));
+                        _nextFile.Insert(0, _fileMap.ElementAt(_currentFile + 1));
                         OutputArea.Text +=
-                            "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + nextFile +
+                            "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + _nextFile +
                             "...";
-                        StatusLabel.Content = Properties.Resources.CompileText + nextFile + "...";
+                        StatusLabel.Content = Properties.Resources.CompileText + _nextFile + "...";
                         _currentFile++;
                     }
                     break;
                 case 1:
-                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + stringBuffer +
+                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + _stringBuffer +
                                        "...";
-                    StatusLabel.Content = Properties.Resources.CompileText + stringBuffer + "...";
+                    StatusLabel.Content = Properties.Resources.CompileText + _stringBuffer + "...";
                     break;
                 case 0:
                     OutputArea.Text += Properties.Resources.StartTaskPointText;
@@ -423,8 +423,8 @@ namespace nwjsCookToolUI
                     break;
             }
 
-            stringBuffer?.Clear();
-            nextFile?.Clear();
+            _stringBuffer?.Clear();
+            _nextFile?.Clear();
         }
 
         private void CompilerFinisher(object sender, RunWorkerCompletedEventArgs e)
@@ -663,7 +663,7 @@ namespace nwjsCookToolUI
 
         private void MapCompilerReport(object sender, ProgressChangedEventArgs e)
         {
-            if (_compilerStatusReport > 0 && _compilerStatusReport < 3) stringBuffer.Insert(0, _fileMap.ElementAt(_currentFile));
+            if (_compilerStatusReport > 0 && _compilerStatusReport < 3) _stringBuffer.Insert(0, _fileMap.ElementAt(_currentFile));
             switch (_compilerStatusReport)
             {
                 case 4:
@@ -675,27 +675,27 @@ namespace nwjsCookToolUI
                 case 3:
                     CurrentWorkloadBar.Value += 1;
                     TaskbarInfoHolder.ProgressValue = CurrentWorkloadBar.Value / CurrentWorkloadBar.Maximum;
-                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + stringBuffer +
+                    OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.FileText + _stringBuffer +
                                        Properties.Resources.CompiledOutputText;
                     if (_currentFile < _fileMap.Count - 1)
                     {
-                        nextFile.Insert(0, _fileMap.ElementAt(_currentFile + 1));
-                        CurrentWorkloadLabel.Content = Properties.Resources.CompileText + nextFile + "...";
+                        _nextFile.Insert(0, _fileMap.ElementAt(_currentFile + 1));
+                        CurrentWorkloadLabel.Content = Properties.Resources.CompileText + _nextFile + "...";
                         OutputArea.Text +=
-                            "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + nextFile +
+                            "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + _nextFile +
                             "...";
                         _currentFile++;
                     }
 
-                    stringBuffer.Clear();
-                    nextFile.Clear();
+                    _stringBuffer.Clear();
+                    _nextFile.Clear();
                     break;
                 case 2:
-                    CurrentWorkloadLabel.Content = Properties.Resources.CompileText + stringBuffer + "...";
+                    CurrentWorkloadLabel.Content = Properties.Resources.CompileText + _stringBuffer + "...";
                     OutputArea.Text +=
-                        "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + stringBuffer +
+                        "\n[" + DateTime.Now + "]" + Properties.Resources.CompilingText + _stringBuffer +
                         "...";
-                    stringBuffer.Clear();
+                    _stringBuffer.Clear();
                     break;
                 case 1:
                     CurrentWorkloadBar.Maximum = _fileMap.Count;
