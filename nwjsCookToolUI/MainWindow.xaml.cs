@@ -14,6 +14,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shell;
 
 namespace nwjsCookToolUI
 {
@@ -74,6 +75,20 @@ namespace nwjsCookToolUI
             RemoveFilesCheckBox.IsEnabled = unlockSetting && PackageNwCheckbox.IsChecked == true;
             PackageCompressionComboBox.IsEnabled = unlockSetting;
         }
+
+        private void PrepareForCompiling(int projectSize)
+        {
+            Array.Resize(ref _projectList, projectSize);
+            CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
+        }
+
+        public void CleanupProject(in string compilerInput)
+        {
+            _fileMap = CoreCode.FileFinder(Path.Combine(compilerInput, _gameFolder), "*.js");
+            _compilerWorker.ReportProgress(_currentFile + 1);
+            CoreCode.CleanupBin(_fileMap);
+        }
+
         #endregion Methods
 
         #region Settings Code Set
@@ -203,11 +218,10 @@ namespace nwjsCookToolUI
                 }
                 else
                 {
-                    Array.Resize(ref _projectList, 1);
+                    PrepareForCompiling(1);
                     _projectList[0] = ProjectLocation.Text;
                     MainProgress.Value = 0;
-                    //MainProgress.Maximum = PackageNwCheckbox.IsChecked == true ? 4 : 3;
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Normal;
                     TaskbarInfoHolder.ProgressValue = 0;
                     _compilerWorker.RunWorkerAsync();
                 }
@@ -250,10 +264,7 @@ namespace nwjsCookToolUI
             var compilerInput = _projectList[0];
             try
             {
-                _fileMap = CoreCode.FileFinder(Path.Combine(compilerInput, _gameFolder), "*.js");
-                _compilerWorker.ReportProgress(_currentFile + 1);
-                CoreCode.CleanupBin(_fileMap);
-                CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
+                CleanupProject(compilerInput);
                 Dispatcher.Invoke(() => MainProgress.Maximum = _fileMap.Count + ((Settings.Default.PackageCode) ? ((Settings.Default.CompressionEngineSafeMode) ? 2 : 1) : 0));
                 _compilerStatusReport = 1;
                 _compilerWorker.ReportProgress(_currentFile);
@@ -300,7 +311,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -310,7 +321,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -321,7 +332,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -331,7 +342,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -341,7 +352,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -353,7 +364,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     StatusLabel.Content = Properties.Resources.FailedText;
                 });
@@ -436,7 +447,7 @@ namespace nwjsCookToolUI
             //}
             if (e.Cancelled)
             {
-                TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
+                TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Paused;
                 MainProgress.Foreground = Brushes.YellowGreen;
                 OutputArea.Text += "\n[" + DateTime.Now + "]" + Properties.Resources.TaskCancelledOutputText + "\n";
                 MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
@@ -458,7 +469,7 @@ namespace nwjsCookToolUI
             CompileButton.Visibility = Visibility.Visible;
             CancelTaskButton.Visibility = Visibility.Hidden;
             OutputArea.Text += Properties.Resources.TaskEndPointText;
-            TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
+            TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.None;
             TaskbarInfoHolder.ProgressValue = 0;
 
         }
@@ -526,12 +537,9 @@ namespace nwjsCookToolUI
             else
             {
                 OutputArea.Text += Properties.Resources.StartTaskPointText;
-                CoreCode.CompilerInfo.FileName = Path.Combine(Settings.Default.SDKLocation, "nwjc.exe");
                 MapProgress.Value = 0;
                 MapProgress.Maximum = FolderList.Items.Count;
-                Array.Resize(ref _projectList, FolderList.Items.Count);
-                TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
-                TaskbarInfoHolder.ProgressValue = 0;
+                PrepareForCompiling(FolderList.Items.Count);
                 _mapCompilerWorker.RunWorkerAsync();
             }
         }
@@ -556,12 +564,10 @@ namespace nwjsCookToolUI
                         e.Cancel = true;
                         break;
                     }
-                    _fileMap = CoreCode.FileFinder(FolderList.Items[_currentProject].ToString(), "*.js");
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
-                    Thread.Sleep(200);
                     _compilerStatusReport = 1;
                     _mapCompilerWorker.ReportProgress(_currentProject + 1);
-                    CoreCode.CleanupBin(_fileMap);
+                    CleanupProject(FolderList.Items[_currentProject].ToString());
                     _compilerStatusReport = 2;
                     _mapCompilerWorker.ReportProgress(_currentFile + 1);
                     _compilerStatusReport = 3;
@@ -588,7 +594,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     MapProgress.Foreground = Brushes.DarkRed;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
@@ -600,7 +606,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     MapProgress.Foreground = Brushes.DarkRed;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
@@ -613,7 +619,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     MapProgress.Foreground = Brushes.DarkRed;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
@@ -625,7 +631,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     MapProgress.Foreground = Brushes.DarkRed;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
@@ -637,7 +643,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     MapProgress.Foreground = Brushes.DarkRed;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
@@ -651,7 +657,7 @@ namespace nwjsCookToolUI
             {
                 Dispatcher.Invoke(() =>
                 {
-                    TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
                     MapProgress.Foreground = Brushes.DarkRed;
                     OutputArea.Text = OutputArea.Text + "\n" + DateTime.Now + "\n" + exceptionOutput + "\n";
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
@@ -724,7 +730,7 @@ namespace nwjsCookToolUI
             //}
             if (e.Cancelled)
             {
-                TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
+                TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Paused;
                 CurrentWorkloadBar.Foreground = Brushes.YellowGreen;
                 MapProgress.Foreground = Brushes.YellowGreen;
                 OutputArea.Text += "\n" + DateTime.Now + "\n" + Properties.Resources.TaskCancelledOutputText + "\n";
@@ -748,7 +754,7 @@ namespace nwjsCookToolUI
             UnlockSettings(true);
             OutputArea.Text += Properties.Resources.TaskEndPointText;
             TaskbarInfoHolder.ProgressValue = 0;
-            TaskbarInfoHolder.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
+            TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.None;
             MapProgress.Value = 0;
             CurrentWorkloadBar.Value = 0;
             MapProgress.Value = 0;
@@ -757,6 +763,5 @@ namespace nwjsCookToolUI
         }
         #endregion
         #endregion Batch Compile Code Set
-
     }
 }
