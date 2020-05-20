@@ -46,7 +46,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'nwjsCompilerCLI\bin\Release\netcoreapp3.1\publish'
+    SourceFolder: 'nwjsCompilerCLI\bin\Release\netcoreapp3.1\win-x64\publish'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\CLI'
     OverWrite: true
@@ -71,7 +71,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'nwjsCookToolUI\bin\Release\netcoreapp3.1\publish'
+    SourceFolder: 'nwjsCookToolUI\bin\Release\netcoreapp3.1\win-x64\publish'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)\UI'
     OverWrite: true
@@ -79,7 +79,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)\CLI'
-    ArtifactName: 'clidrop'
+    ArtifactName: 'uidrop'
     publishLocation: 'Container'
 
 - task: VSTest@2
