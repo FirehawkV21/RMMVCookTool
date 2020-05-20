@@ -1,4 +1,5 @@
 # .NET Desktop
+
 # Build and run tests for .NET Desktop or Windows classic desktop solutions.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
@@ -38,18 +39,48 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: 'nwjsCompilerCLI\nwjsCompilerCLI.csproj'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'nwjsCompilerCLI\bin\Release\netcoreapp3.1\publish'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\CLI'
+    OverWrite: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\CLI'
+    ArtifactName: 'clidrop'
+    publishLocation: 'Container'
+
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'build'
     projects: 'nwjsCookToolUI\nwjsCookToolUI.csproj'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: 'nwjsCoookToolUI\nwjsCookToolUI.csproj'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'nwjsCookToolUI\bin\Release\netcoreapp3.1\publish'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\UI'
+    OverWrite: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\CLI'
+    ArtifactName: 'clidrop'
+    publishLocation: 'Container'
 
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: '7z'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
