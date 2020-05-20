@@ -42,7 +42,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'nwjsCompilerCLI\nwjsCompilerCLI.csproj'
-    arguments: '--self-contained true -r win-x64'
+    arguments: '--self-contained true -c Release -r win-x64'
 
 - task: CopyFiles@2
   inputs:
@@ -67,7 +67,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'nwjsCoookToolUI\nwjsCookToolUI.csproj'
-    arguments: '--self-contained true -r win-x64'
+    arguments: '--self-contained true -c Release -r win-x64'
 
 - task: CopyFiles@2
   inputs:
