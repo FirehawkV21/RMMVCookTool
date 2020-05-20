@@ -39,48 +39,8 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: 'nwjsCompilerCLI\nwjsCompilerCLI.csproj'
-    arguments: '--self-contained true -c Release -r win-x64'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: 'nwjsCompilerCLI\bin\Release\netcoreapp3.1\win-x64\publish'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\CLI'
-    OverWrite: true
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\CLI'
-    ArtifactName: 'clidrop'
-    publishLocation: 'Container'
-
-- task: DotNetCoreCLI@2
-  inputs:
     command: 'build'
     projects: 'nwjsCookToolUI\nwjsCookToolUI.csproj'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: 'nwjsCoookToolUI\nwjsCookToolUI.csproj'
-    arguments: '--self-contained true -c Release -r win-x64'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: 'nwjsCookToolUI\bin\Release\netcoreapp3.1\win-x64\publish'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\UI'
-    OverWrite: true
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\UI'
-    ArtifactName: 'uidrop'
-    publishLocation: 'Container'
 
 - task: VSTest@2
   inputs:
