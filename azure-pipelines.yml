@@ -11,14 +11,14 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
+  buildPlatform: 'x64'
   buildConfiguration: 'Release'
 
 steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '3.1.100'
+    version: '3.1.300'
 
 - task: NuGetToolInstaller@1
   inputs:

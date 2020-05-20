@@ -4,16 +4,18 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap rescap">
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  IgnorableNamespaces="uap rescap uap3">
 
   <Identity
     Name="b559327c-1e7c-42d4-b9ad-610ff6154d22"
-    Publisher="CN=acemo"
-    Version="1.0.0.0" />
+    Publisher="CN=Studio ACE"
+    Version="2.1.20036.0" />
 
   <Properties>
     <DisplayName>RMMVCookTool.Package</DisplayName>
-    <PublisherDisplayName>acemo</PublisherDisplayName>
+    <PublisherDisplayName>Studio ACE</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
@@ -27,18 +29,25 @@
   </Resources>
 
   <Applications>
-    <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="$targetentrypoint$">
+    <Application Id="RMMVCookTool.UIApp"
+                 Executable="$targetnametoken$.exe"
+                 EntryPoint="$targetentrypoint$" ResourceGroup="defaultGroup">
       <uap:VisualElements
-        DisplayName="RMMVCookTool.Package"
-        Description="RMMVCookTool.Package"
+        DisplayName="RPG Maker MV Cook Tool"
+        Description="RMMVCookToolPack"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png"/>
         <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <uap3:Extension Category="windows.appExecutionAlias" EntryPoint="Windows.FullTrustApplication" Executable="nwjsCompilerCLI/nwjsCompilerCLI.exe">
+          <uap3:AppExecutionAlias>
+            <desktop:ExecutionAlias Alias="RMMVCookTool.exe" />
+          </uap3:AppExecutionAlias>
+        </uap3:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
