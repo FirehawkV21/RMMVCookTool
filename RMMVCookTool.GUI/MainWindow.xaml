@@ -1,0 +1,79 @@
+﻿<Window x:Class="RMMVCookTool.GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RMMVCookTool.GUI"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="RPG Maker MV Cook Tool" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Compiler">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="98"/>
+                        <RowDefinition Height="209*"/>
+                        <RowDefinition Height="147"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Settings">
+                        <Grid>
+                            <Label Content="Location of the NW.js SDK" Margin="0,0,0,40" HorizontalAlignment="Left"/>
+                            <TextBox Margin="0,22,65,0" Text="" TextWrapping="Wrap" Height="20" VerticalAlignment="Top"/>
+                            <Button Content="Browse..." Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50"/>
+                            <Button Content="Default Settings..." HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Projects" Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="37"/>
+                            </Grid.RowDefinitions>
+
+                            <ListBox x:Name="FolderList"/>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0"/>
+                                <Button Content="Remove" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0"/>
+                                <Button Content="Project Settings" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0"/>
+                                <Button Content="Edit Metadata" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Progress" Grid.Row="2">
+                        <Grid>
+                            <Label Content="Total Progress:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <ProgressBar Height="20" Margin="0,26,124,0" VerticalAlignment="Top"/>
+                            <Label Content="Current Project Progress:" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top"/>
+                            <ProgressBar Height="20" Margin="0,77,124,0" VerticalAlignment="Top"/>
+                            <Button Content="Compile" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1"/>
+                            <Button Content="Cancel" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Visibility="Hidden" UseLayoutRounding="True" Height="20" Padding="2,1,2,1"/>
+
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="About...">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="108"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="About">
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="RPG Maker MV Cook Tool" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0"/>
+                            <Label Content="Version R3.00" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
+                            <Label Content="Developed by Studio ACE. Licensed under the MIT license." VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0"/>
+                            </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Credits and License" Grid.Row="1">
+                        <TextBlock/>
+                    </GroupBox>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
