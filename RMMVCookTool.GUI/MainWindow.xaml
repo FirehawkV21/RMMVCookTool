@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RMMVCookTool.GUI"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="RPG Maker MV Cook Tool" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640">
+        Title="RPG Maker MV Cook Tool" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640" Loaded="Window_Loaded">
     <Grid>
         <TabControl>
             <TabItem Header="Compiler">
@@ -55,7 +54,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="About...">
-                <Grid>
+                <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="108"/>
                         <RowDefinition/>
@@ -63,12 +62,14 @@
                     <GroupBox Header="About">
                         <StackPanel Orientation="Vertical">
                             <Label Content="RPG Maker MV Cook Tool" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0"/>
-                            <Label Content="Version R3.00" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
+                            <Label x:Name="ProgramVersionLabel" Content="Version R3.00" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
                             <Label Content="Developed by Studio ACE. Licensed under the MIT license." VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0"/>
                             </StackPanel>
                     </GroupBox>
-                    <GroupBox Header="Credits and License" Grid.Row="1">
-                        <TextBlock/>
+                    <GroupBox Header="User Manual" Grid.Row="1">
+                        <RichTextBox x:Name="UserManualBox" VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" IsReadOnly="True">
+
+                        </RichTextBox>
                     </GroupBox>
 
                 </Grid>

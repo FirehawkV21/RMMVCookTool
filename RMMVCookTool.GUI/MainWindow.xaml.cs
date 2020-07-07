@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +26,20 @@ namespace RMMVCookTool.GUI
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+             var assembly = Assembly.GetExecutingAssembly();
+             var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+             var version = fvi.FileVersion;
+             ProgramVersionLabel.Content = ProgramVersionLabel.Content + @" (" + version + @")";
+
+            byte[] loader = Encoding.ASCII.GetBytes(Properties.Resources.Manual);
+            using (MemoryStream stream = new MemoryStream(loader))
+            {
+                UserManualBox.Selection.Load(stream, DataFormats.Rtf);
+            }
         }
     }
 }

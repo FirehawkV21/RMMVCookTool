@@ -22,7 +22,7 @@ namespace RMMVCookTool.GUI.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace RMMVCookTool.GUI.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RMMVCookTool.GUI.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace RMMVCookTool.GUI.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Browse....
         /// </summary>
-        internal static string BrowseUiText {
+        public static string BrowseUiText {
             get {
                 return ResourceManager.GetString("BrowseUiText", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Chromium Flags.
         /// </summary>
-        internal static string ChromiumFlagsUiText {
+        public static string ChromiumFlagsUiText {
             get {
                 return ResourceManager.GetString("ChromiumFlagsUiText", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
-        internal static string CloseButtonText {
+        public static string CloseButtonText {
             get {
                 return ResourceManager.GetString("CloseButtonText", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Done!.
         /// </summary>
-        internal static string DoneText {
+        public static string DoneText {
             get {
                 return ResourceManager.GetString("DoneText", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Enable NodeJS?.
         /// </summary>
-        internal static string EnableNodeJSCheckBoxText {
+        public static string EnableNodeJSCheckBoxText {
             get {
                 return ResourceManager.GetString("EnableNodeJSCheckBoxText", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
-        internal static string ErrorText {
+        public static string ErrorText {
             get {
                 return ResourceManager.GetString("ErrorText", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Essentials.
         /// </summary>
-        internal static string EssentialsGroupString {
+        public static string EssentialsGroupString {
             get {
                 return ResourceManager.GetString("EssentialsGroupString", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Cannot access the folder. Please check that you have permission to read and write on the folder..
         /// </summary>
-        internal static string FileAccessError {
+        public static string FileAccessError {
             get {
                 return ResourceManager.GetString("FileAccessError", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to You picked a file that is outside of the project&apos;s file. Please pick a file within the project..
         /// </summary>
-        internal static string FileOutsideOfProjectError {
+        public static string FileOutsideOfProjectError {
             get {
                 return ResourceManager.GetString("FileOutsideOfProjectError", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The File Stream went kaput..
         /// </summary>
-        internal static string FileStreamErrorText {
+        public static string FileStreamErrorText {
             get {
                 return ResourceManager.GetString("FileStreamErrorText", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Game ID.
         /// </summary>
-        internal static string GameIDUiString {
+        public static string GameIDUiString {
             get {
                 return ResourceManager.GetString("GameIDUiString", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Game Info.
         /// </summary>
-        internal static string GameInfoTabText {
+        public static string GameInfoTabText {
             get {
                 return ResourceManager.GetString("GameInfoTabText", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Game Name.
         /// </summary>
-        internal static string GameNameUiText {
+        public static string GameNameUiText {
             get {
                 return ResourceManager.GetString("GameNameUiText", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Game Package Metadata Editor.
         /// </summary>
-        internal static string GamePackageMetadataEditorTitleText {
+        public static string GamePackageMetadataEditorTitleText {
             get {
                 return ResourceManager.GetString("GamePackageMetadataEditorTitleText", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Version.
         /// </summary>
-        internal static string GameVersionUiString {
+        public static string GameVersionUiString {
             get {
                 return ResourceManager.GetString("GameVersionUiString", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Height.
         /// </summary>
-        internal static string HeightUiText {
+        public static string HeightUiText {
             get {
                 return ResourceManager.GetString("HeightUiText", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to HTML file location.
         /// </summary>
-        internal static string HTMLFileLocationUiString {
+        public static string HTMLFileLocationUiString {
             get {
                 return ResourceManager.GetString("HTMLFileLocationUiString", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to HTML File|*.html.
         /// </summary>
-        internal static string HTMLFileText {
+        public static string HTMLFileText {
             get {
                 return ResourceManager.GetString("HTMLFileText", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Icon Location.
         /// </summary>
-        internal static string IconLocationUiText {
+        public static string IconLocationUiText {
             get {
                 return ResourceManager.GetString("IconLocationUiText", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to In Full Screen.
         /// </summary>
-        internal static string InFullScreenListItemText {
+        public static string InFullScreenListItemText {
             get {
                 return ResourceManager.GetString("InFullScreenListItemText", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to In Kiosk Mode.
         /// </summary>
-        internal static string InKioskModeListItemText {
+        public static string InKioskModeListItemText {
             get {
                 return ResourceManager.GetString("InKioskModeListItemText", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An IO Exception occurred. Is an app using the package.json file?.
         /// </summary>
-        internal static string IOErrorText {
+        public static string IOErrorText {
             get {
                 return ResourceManager.GetString("IOErrorText", resourceCulture);
             }
@@ -261,16 +261,26 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to JavaScript Flags.
         /// </summary>
-        internal static string JavaScriptFlagsUiText {
+        public static string JavaScriptFlagsUiText {
             get {
                 return ResourceManager.GetString("JavaScriptFlagsUiText", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {\rtf1\ansi\deff3\adeflang1025
+        ///{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset161 Liberation Serif{\*\falt Times New Roman};}{\f4\froman\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f5\froman\fprq2\fcharset161 Liberation Mono{\*\falt Courier New};}{\f6\fmodern\fprq1\fcharset128 Lucida Console;}{\f7\fswiss\fprq2\fcharset128 Segoe UI;}{\f8\fnil\fprq2\fcharset161 Arial;}{\f9\fnil\fprq2\fcharset161 Li [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Manual {
+            get {
+                return ResourceManager.GetString("Manual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Minimum Height.
         /// </summary>
-        internal static string MinimumHeightUiText {
+        public static string MinimumHeightUiText {
             get {
                 return ResourceManager.GetString("MinimumHeightUiText", resourceCulture);
             }
@@ -279,7 +289,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Minimum Width.
         /// </summary>
-        internal static string MinimumWidthUiText {
+        public static string MinimumWidthUiText {
             get {
                 return ResourceManager.GetString("MinimumWidthUiText", resourceCulture);
             }
@@ -288,7 +298,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Mouse Cursor.
         /// </summary>
-        internal static string MouseCursorListItemText {
+        public static string MouseCursorListItemText {
             get {
                 return ResourceManager.GetString("MouseCursorListItemText", resourceCulture);
             }
@@ -297,7 +307,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        internal static string NoneListItemText {
+        public static string NoneListItemText {
             get {
                 return ResourceManager.GetString("NoneListItemText", resourceCulture);
             }
@@ -306,7 +316,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to NW.js features.
         /// </summary>
-        internal static string NWJsFeaturesGroupText {
+        public static string NWJsFeaturesGroupText {
             get {
                 return ResourceManager.GetString("NWJsFeaturesGroupText", resourceCulture);
             }
@@ -315,7 +325,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to PNG File|*.png.
         /// </summary>
-        internal static string PNGFileText {
+        public static string PNGFileText {
             get {
                 return ResourceManager.GetString("PNGFileText", resourceCulture);
             }
@@ -324,7 +334,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The path to the project is too long. Please shorten the path..
         /// </summary>
-        internal static string ProjectPathTooLongErrorText {
+        public static string ProjectPathTooLongErrorText {
             get {
                 return ResourceManager.GetString("ProjectPathTooLongErrorText", resourceCulture);
             }
@@ -333,7 +343,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Please select the location of the project..
         /// </summary>
-        internal static string ProjectPickerText {
+        public static string ProjectPickerText {
             get {
                 return ResourceManager.GetString("ProjectPickerText", resourceCulture);
             }
@@ -342,7 +352,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Resizable Window?.
         /// </summary>
-        internal static string ResizableWindowUiText {
+        public static string ResizableWindowUiText {
             get {
                 return ResourceManager.GetString("ResizableWindowUiText", resourceCulture);
             }
@@ -351,7 +361,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Resolution.
         /// </summary>
-        internal static string ResolutionUiText {
+        public static string ResolutionUiText {
             get {
                 return ResourceManager.GetString("ResolutionUiText", resourceCulture);
             }
@@ -360,7 +370,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        internal static string SaveButtonText {
+        public static string SaveButtonText {
             get {
                 return ResourceManager.GetString("SaveButtonText", resourceCulture);
             }
@@ -369,7 +379,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The package metadata file was saved successfully..
         /// </summary>
-        internal static string SaveCompleteText {
+        public static string SaveCompleteText {
             get {
                 return ResourceManager.GetString("SaveCompleteText", resourceCulture);
             }
@@ -378,7 +388,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Screen Center.
         /// </summary>
-        internal static string ScreenCenterListItemText {
+        public static string ScreenCenterListItemText {
             get {
                 return ResourceManager.GetString("ScreenCenterListItemText", resourceCulture);
             }
@@ -387,7 +397,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        internal static string SettingsUiText {
+        public static string SettingsUiText {
             get {
                 return ResourceManager.GetString("SettingsUiText", resourceCulture);
             }
@@ -396,7 +406,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Start:.
         /// </summary>
-        internal static string StartUiText {
+        public static string StartUiText {
             get {
                 return ResourceManager.GetString("StartUiText", resourceCulture);
             }
@@ -405,7 +415,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Width.
         /// </summary>
-        internal static string WidthUiText {
+        public static string WidthUiText {
             get {
                 return ResourceManager.GetString("WidthUiText", resourceCulture);
             }
@@ -414,7 +424,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Windowed.
         /// </summary>
-        internal static string WindowedListItemText {
+        public static string WindowedListItemText {
             get {
                 return ResourceManager.GetString("WindowedListItemText", resourceCulture);
             }
@@ -423,7 +433,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Window.
         /// </summary>
-        internal static string WindowGroupText {
+        public static string WindowGroupText {
             get {
                 return ResourceManager.GetString("WindowGroupText", resourceCulture);
             }
@@ -432,7 +442,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Window Position.
         /// </summary>
-        internal static string WindowPositionUiText {
+        public static string WindowPositionUiText {
             get {
                 return ResourceManager.GetString("WindowPositionUiText", resourceCulture);
             }
@@ -441,7 +451,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Window Settings.
         /// </summary>
-        internal static string WindowSettingsUiText {
+        public static string WindowSettingsUiText {
             get {
                 return ResourceManager.GetString("WindowSettingsUiText", resourceCulture);
             }
@@ -450,7 +460,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Window Size.
         /// </summary>
-        internal static string WindowSizeGroupText {
+        public static string WindowSizeGroupText {
             get {
                 return ResourceManager.GetString("WindowSizeGroupText", resourceCulture);
             }
@@ -459,7 +469,7 @@ namespace RMMVCookTool.GUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Window Title.
         /// </summary>
-        internal static string WindowTitleUiText {
+        public static string WindowTitleUiText {
             get {
                 return ResourceManager.GetString("WindowTitleUiText", resourceCulture);
             }
