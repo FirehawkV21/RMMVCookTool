@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using RMMVCookTool.Core;
 using Newtonsoft.Json.Linq;
 using Ookii.Dialogs.Wpf;
-using RMMVCookTool.Core;
 
 namespace RMMVCookTool.GUI
 {
@@ -94,7 +94,7 @@ namespace RMMVCookTool.GUI
             else
             {
                 MessageBox.Show(
-                    RMMVCookTool.GUI.Properties.Resources.FileOutsideOfProjectError,
+                    Properties.Resources.FileOutsideOfProjectError,
                     Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -164,7 +164,7 @@ namespace RMMVCookTool.GUI
                     WindowIdTextBox.Text,
                     IconLocationTextBox.Text,                    
                     WindowTitleTextBox.Text,
-                    (int)WidthNumber.Value,
+                    (int) WidthNumber.Value,                    
                     (int) HeightNumber.Value,
                     (int) MinimumWidthNumber.Value,
                     (int) MinimumHeightNumber.Value,

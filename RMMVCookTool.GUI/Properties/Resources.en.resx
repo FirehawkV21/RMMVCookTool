@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BrowseUiText" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="ChromiumFlagsUiText" xml:space="preserve">
+    <value>Chromium Flags</value>
+  </data>
+  <data name="CloseButtonText" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="DoneText" xml:space="preserve">
+    <value>Done!</value>
+  </data>
+  <data name="EnableNodeJSCheckBoxText" xml:space="preserve">
+    <value>Enable NodeJS?</value>
+  </data>
+  <data name="ErrorText" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="EssentialsGroupString" xml:space="preserve">
+    <value>Essentials</value>
+  </data>
+  <data name="FileAccessError" xml:space="preserve">
+    <value>Cannot access the folder. Please check that you have permission to read and write on the folder.</value>
+  </data>
+  <data name="FileOutsideOfProjectError" xml:space="preserve">
+    <value>You picked a file that is outside of the project's file. Please pick a file within the project.</value>
+  </data>
+  <data name="FileStreamErrorText" xml:space="preserve">
+    <value>The File Stream went kaput.</value>
+  </data>
+  <data name="GameIDUiString" xml:space="preserve">
+    <value>Game ID</value>
+  </data>
+  <data name="GameInfoTabText" xml:space="preserve">
+    <value>Game Info</value>
+  </data>
+  <data name="GameNameUiText" xml:space="preserve">
+    <value>Game Name</value>
+  </data>
+  <data name="GamePackageMetadataEditorTitleText" xml:space="preserve">
+    <value>Game Package Metadata Editor</value>
+  </data>
+  <data name="GameVersionUiString" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="HeightUiText" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="HTMLFileLocationUiString" xml:space="preserve">
+    <value>HTML file location</value>
+  </data>
+  <data name="HTMLFileText" xml:space="preserve">
+    <value>HTML File|*.html</value>
+  </data>
+  <data name="IconLocationUiText" xml:space="preserve">
+    <value>Icon Location</value>
+  </data>
+  <data name="InFullScreenListItemText" xml:space="preserve">
+    <value>In Full Screen</value>
+  </data>
+  <data name="InKioskModeListItemText" xml:space="preserve">
+    <value>In Kiosk Mode</value>
+  </data>
+  <data name="IOErrorText" xml:space="preserve">
+    <value>An IO Exception occurred. Is an app using the package.json file?</value>
+  </data>
+  <data name="JavaScriptFlagsUiText" xml:space="preserve">
+    <value>JavaScript Flags</value>
+  </data>
+  <data name="MinimumHeightUiText" xml:space="preserve">
+    <value>Minimum Height</value>
+  </data>
+  <data name="MinimumWidthUiText" xml:space="preserve">
+    <value>Minimum Width</value>
+  </data>
+  <data name="MouseCursorListItemText" xml:space="preserve">
+    <value>Mouse Cursor</value>
+  </data>
+  <data name="NoneListItemText" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="NWJsFeaturesGroupText" xml:space="preserve">
+    <value>NW.js features</value>
+  </data>
+  <data name="PNGFileText" xml:space="preserve">
+    <value>PNG File|*.png</value>
+  </data>
+  <data name="ProjectPathTooLongErrorText" xml:space="preserve">
+    <value>The path to the project is too long. Please shorten the path.</value>
+  </data>
+  <data name="ProjectPickerText" xml:space="preserve">
+    <value>Please select the location of the project.</value>
+  </data>
+  <data name="ResizableWindowUiText" xml:space="preserve">
+    <value>Resizable Window?</value>
+  </data>
+  <data name="ResolutionUiText" xml:space="preserve">
+    <value>Resolution</value>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveCompleteText" xml:space="preserve">
+    <value>The package metadata file was saved successfully.</value>
+  </data>
+  <data name="ScreenCenterListItemText" xml:space="preserve">
+    <value>Screen Center</value>
+  </data>
+  <data name="SettingsUiText" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="StartUiText" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="WidthUiText" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="WindowedListItemText" xml:space="preserve">
+    <value>Windowed</value>
+  </data>
+  <data name="WindowGroupText" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="WindowPositionUiText" xml:space="preserve">
+    <value>Window Position</value>
+  </data>
+  <data name="WindowSettingsUiText" xml:space="preserve">
+    <value>Window Settings</value>
+  </data>
+  <data name="WindowSizeGroupText" xml:space="preserve">
+    <value>Window Size</value>
+  </data>
+  <data name="WindowTitleUiText" xml:space="preserve">
+    <value>Window Title</value>
+  </data>
+</root>
