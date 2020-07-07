@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:cntrl="clr-namespace:NumericUpDownLib;assembly=NumericUpDownLib"
         xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
         mc:Ignorable="d"
         Title="{x:Static properties:Resources.GamePackageMetadataEditorTitleText}" Height="427.72" Width="449.318" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" ResizeMode="CanMinimize">
@@ -72,13 +72,13 @@
                             <GroupBox Header="{x:Static properties:Resources.WindowSizeGroupText}" Margin="206,0,-0.4,-0.4">
                                 <Grid>
                                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.HeightUiText}" VerticalAlignment="Top" Margin="0,43,0,0"/>
-                                    <xctk:IntegerUpDown x:Name="HeightNumber" Value="1564" Margin="0,59,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="86" UpdateValueOnEnterKey="True" />
+                                    <cntrl:UIntegerUpDown x:Name="HeightNumber" Value="1564" Margin="0,59,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="86" />
                                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.MinimumHeightUiText}" VerticalAlignment="Top" Margin="108,43,0,0"/>
-                                    <xctk:IntegerUpDown x:Name="MinimumHeightNumber" Value="1564" Margin="111,59,0,0" HorizontalAlignment="Left" Width="86" Height="22" VerticalAlignment="Top" UpdateValueOnEnterKey="True" />
+                                    <cntrl:UIntegerUpDown x:Name="MinimumHeightNumber" Value="1564" Margin="111,59,0,0" HorizontalAlignment="Left" Width="86" Height="22" VerticalAlignment="Top" />
                                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.WidthUiText}" VerticalAlignment="Top"/>
-                                    <xctk:IntegerUpDown x:Name="WidthNumber" Value="1564" Margin="0,16,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="86" UpdateValueOnEnterKey="True" />
+                                    <cntrl:UIntegerUpDown x:Name="WidthNumber" Value="1564" Margin="0,16,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="86"/>
                                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.MinimumWidthUiText}" VerticalAlignment="Top" Margin="108,0,0,0"/>
-                                    <xctk:IntegerUpDown x:Name="MinimumWidthNumber" Value="1564" Margin="111,16,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="86" UpdateValueOnEnterKey="True" />
+                                    <cntrl:UIntegerUpDown x:Name="MinimumWidthNumber" Value="1564" Margin="111,16,0,0" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="86" />
                                 </Grid>
                             </GroupBox>
 

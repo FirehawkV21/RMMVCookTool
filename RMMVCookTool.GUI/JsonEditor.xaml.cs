@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using CompilerCore;
 using Newtonsoft.Json.Linq;
 using Ookii.Dialogs.Wpf;
+using RMMVCookTool.Core;
 
 namespace RMMVCookTool.GUI
 {
@@ -49,10 +49,10 @@ namespace RMMVCookTool.GUI
                     "center" => 1,
                     _ => 0,
                 };
-                HeightNumber.Value = ((int?)projectMetadata["window"]["height"] == null) ? 816 : (int) projectMetadata["window"]["height"];
-                WidthNumber.Value = ((int?)projectMetadata["window"]["width"] == null) ? 624 : (int) projectMetadata["window"]["width"];
-                MinimumHeightNumber.Value = ((int?)projectMetadata["window"]["min_height"] == null) ? 816 : (int) projectMetadata["window"]["min_height"];
-                MinimumWidthNumber.Value = ((int?)projectMetadata["window"]["min_width"] == null) ? 624 : (int) projectMetadata["window"]["min_width"];
+                HeightNumber.Value = ((uint?)projectMetadata["window"]["height"] == null) ? 816 : (uint) projectMetadata["window"]["height"];
+                WidthNumber.Value = ((uint?)projectMetadata["window"]["width"] == null) ? 624 : (uint) projectMetadata["window"]["width"];
+                MinimumHeightNumber.Value = ((uint?)projectMetadata["window"]["min_height"] == null) ? 816 : (uint) projectMetadata["window"]["min_height"];
+                MinimumWidthNumber.Value = ((uint?)projectMetadata["window"]["min_width"] == null) ? 624 : (uint) projectMetadata["window"]["min_width"];
             }
             else
             {
@@ -164,7 +164,7 @@ namespace RMMVCookTool.GUI
                     WindowIdTextBox.Text,
                     IconLocationTextBox.Text,                    
                     WindowTitleTextBox.Text,
-                    (int) WidthNumber.Value,                    
+                    (int)WidthNumber.Value,
                     (int) HeightNumber.Value,
                     (int) MinimumWidthNumber.Value,
                     (int) MinimumHeightNumber.Value,
