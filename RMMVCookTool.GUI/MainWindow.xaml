@@ -18,8 +18,8 @@
                     <GroupBox Header="Settings">
                         <Grid>
                             <Label Content="Location of the NW.js SDK" Margin="0,0,0,40" HorizontalAlignment="Left"/>
-                            <TextBox Margin="0,22,65,0" Text="" TextWrapping="Wrap" Height="20" VerticalAlignment="Top"/>
-                            <Button Content="Browse..." Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50"/>
+                            <TextBox x:Name="NwjsLocation" Margin="0,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" Drop="NwjsLocation_Drop" MouseMove="NwjsLocation_MouseMove" DragEnter="NwjsLocation_DragEnter" DragLeave="NwjsLocation_DragLeave" DragOver="NwjsLocation_DragOver" AllowDrop="True" Text="{Binding SDKLocation, Mode=TwoWay, UpdateSourceTrigger=Explicit, Source={x:Static local:AppSettings.Default}}"/>
+                            <Button x:Name="BrowseSDKButton" Content="Browse..." Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Click="BrowseSDKButton_Click"/>
                             <Button Content="Default Settings..." HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom"/>
                         </Grid>
                     </GroupBox>
@@ -30,7 +30,7 @@
                                 <RowDefinition Height="37"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="FolderList"/>
+                            <ListBox x:Name="FolderList" AllowDrop="True"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
                                 <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0"/>

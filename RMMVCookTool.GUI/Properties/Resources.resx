@@ -229,6 +229,9 @@
   <data name="ScreenCenterListItemText" xml:space="preserve">
     <value>Screen Center</value>
   </data>
+  <data name="SDKPickerText" xml:space="preserve">
+    <value>Please select the location of the SDK folder.</value>
+  </data>
   <data name="SettingsUiText" xml:space="preserve">
     <value>Settings</value>
   </data>

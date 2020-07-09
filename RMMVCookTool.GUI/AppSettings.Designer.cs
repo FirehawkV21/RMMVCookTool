@@ -22,5 +22,77 @@ namespace RMMVCookTool.GUI {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SDKLocation {
+            get {
+                return ((string)(this["SDKLocation"]));
+            }
+            set {
+                this["SDKLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("bin")]
+        public string FileLocation {
+            get {
+                return ((string)(this["FileLocation"]));
+            }
+            set {
+                this["FileLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PackageCode {
+            get {
+                return ((bool)(this["PackageCode"]));
+            }
+            set {
+                this["PackageCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DeleteSourceCode {
+            get {
+                return ((bool)(this["DeleteSourceCode"]));
+            }
+            set {
+                this["DeleteSourceCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RemoveFilesAfterPackaging {
+            get {
+                return ((bool)(this["RemoveFilesAfterPackaging"]));
+            }
+            set {
+                this["RemoveFilesAfterPackaging"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CompressionMode {
+            get {
+                return ((int)(this["CompressionMode"]));
+            }
+            set {
+                this["CompressionMode"] = value;
+            }
+        }
     }
 }

@@ -204,6 +204,9 @@
   <data name="ScreenCenterListItemText" xml:space="preserve">
     <value>Κέντρο της οθόνης</value>
   </data>
+  <data name="SDKPickerText" xml:space="preserve">
+    <value>Παρακακλώ επιλέξτε τον φάκελο του SDK .</value>
+  </data>
   <data name="SettingsUiText" xml:space="preserve">
     <value>Ρυθμίσεις</value>
   </data>

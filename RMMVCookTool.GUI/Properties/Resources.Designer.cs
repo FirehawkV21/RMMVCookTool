@@ -395,6 +395,15 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select the location of the SDK folder..
+        /// </summary>
+        public static string SDKPickerText {
+            get {
+                return ResourceManager.GetString("SDKPickerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string SettingsUiText {

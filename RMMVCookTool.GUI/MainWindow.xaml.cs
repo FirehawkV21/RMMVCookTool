@@ -1,8 +1,12 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using Ookii.Dialogs.Wpf;
 
 namespace RMMVCookTool.GUI
 {
@@ -16,6 +20,7 @@ namespace RMMVCookTool.GUI
             InitializeComponent();
         }
 
+        private string _previousPath;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
              var assembly = Assembly.GetExecutingAssembly();
@@ -27,6 +32,75 @@ namespace RMMVCookTool.GUI
             using (MemoryStream stream = new MemoryStream(loader))
             {
                 UserManualBox.Selection.Load(stream, DataFormats.Rtf);
+            }
+        }
+
+        private void BrowseSDKButton_Click(object sender, RoutedEventArgs e)
+        {
+            var pickSdkFolder = new VistaFolderBrowserDialog
+            {
+                Description = Properties.Resources.SDKPickerText,
+                UseDescriptionForTitle = true
+            };
+            var pickerResult = pickSdkFolder.ShowDialog();
+            if (pickerResult != true) return;
+            AppSettings.Default.SDKLocation = pickSdkFolder.SelectedPath;
+            NwjsLocation.Text = pickSdkFolder.SelectedPath;
+            AppSettings.Default.Save();
+        }
+
+        private void NwjsLocation_Drop(object sender, DragEventArgs e)
+        {
+            TextBox nwjsBox = sender as TextBox;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                NwjsLocation.Text = Path.GetFullPath((string) e.Data.GetData(DataFormats.FileDrop));
+            }
+        }
+
+        private void NwjsLocation_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                TextBox nwjsBox = sender as TextBox;
+                DragDrop.DoDragDrop(nwjsBox, nwjsBox.Text, DragDropEffects.Copy);
+            }
+        }
+
+        private void NwjsLocation_DragEnter(object sender, DragEventArgs e)
+        {
+            if (NwjsLocation.Text != null) _previousPath = NwjsLocation.Text;
+            TextBox nwjsBox = sender as TextBox;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string data = (string) e.Data.GetData(DataFormats.FileDrop);
+                if (Path.IsPathFullyQualified(data))
+                {
+                    NwjsLocation.Text = Path.GetFullPath(data);
+                }
+            }
+        }
+
+        private void NwjsLocation_DragLeave(object sender, DragEventArgs e)
+        {
+            TextBox nwjsBox = sender as TextBox;
+            if (NwjsLocation.Text != null)
+            {
+                NwjsLocation.Text = _previousPath;
+            }
+        }
+
+        private void NwjsLocation_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                string data = (string)e.Data.GetData(DataFormats.StringFormat);
+
+                // If the string can be converted into a Brush, allow copying.
+                if (Path.IsPathFullyQualified(data))
+                {
+                    e.Effects = DragDropEffects.Copy | DragDropEffects.Move;
+                }
             }
         }
     }
