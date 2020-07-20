@@ -103,5 +103,11 @@ namespace RMMVCookTool.GUI
                 }
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectSettingsWindow defSettingsWindow = new ProjectSettingsWindow();
+            defSettingsWindow.Show();
+        }
     }
 }

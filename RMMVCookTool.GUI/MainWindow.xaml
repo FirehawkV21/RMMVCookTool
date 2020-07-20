@@ -20,7 +20,7 @@
                             <Label Content="Location of the NW.js SDK" Margin="0,0,0,40" HorizontalAlignment="Left"/>
                             <TextBox x:Name="NwjsLocation" Margin="0,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" Drop="NwjsLocation_Drop" MouseMove="NwjsLocation_MouseMove" DragEnter="NwjsLocation_DragEnter" DragLeave="NwjsLocation_DragLeave" DragOver="NwjsLocation_DragOver" AllowDrop="True" Text="{Binding SDKLocation, Mode=TwoWay, UpdateSourceTrigger=Explicit, Source={x:Static local:AppSettings.Default}}"/>
                             <Button x:Name="BrowseSDKButton" Content="Browse..." Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Click="BrowseSDKButton_Click"/>
-                            <Button Content="Default Settings..." HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom"/>
+                            <Button Content="Default Settings..." HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" Click="Button_Click"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Projects" Grid.Row="1">

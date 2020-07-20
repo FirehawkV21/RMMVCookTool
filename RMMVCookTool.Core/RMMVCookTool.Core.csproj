@@ -2,12 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyVersion>1.0.0.20191</AssemblyVersion>
-    <FileVersion>1.0.0.20191</FileVersion>
+    <AssemblyVersion>1.0.0.20202</AssemblyVersion>
+    <FileVersion>1.0.0.20202</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dirkster.NumericUpDownLib" Version="2.4.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

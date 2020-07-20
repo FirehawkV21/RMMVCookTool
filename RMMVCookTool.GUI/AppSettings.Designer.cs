@@ -38,12 +38,12 @@ namespace RMMVCookTool.GUI {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("bin")]
-        public string FileLocation {
+        public string FileExtension {
             get {
-                return ((string)(this["FileLocation"]));
+                return ((string)(this["FileExtension"]));
             }
             set {
-                this["FileLocation"] = value;
+                this["FileExtension"] = value;
             }
         }
         

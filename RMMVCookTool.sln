@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nwjsCookToolUI", "nwjsCookT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMMVCookTool.GUI", "RMMVCookTool.GUI\RMMVCookTool.GUI.csproj", "{84CEA489-95AB-4D85-B6B9-031AC2E9E830}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMMVCookTool.Core", "RMMVCookTool.Core\RMMVCookTool.Core.csproj", "{AE50839A-9E84-4342-9EEB-FB1EF7E52EE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMMVCookTool.Core", "RMMVCookTool.Core\RMMVCookTool.Core.csproj", "{AE50839A-9E84-4342-9EEB-FB1EF7E52EE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

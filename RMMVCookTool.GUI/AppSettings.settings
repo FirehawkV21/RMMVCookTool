@@ -5,7 +5,7 @@
     <Setting Name="SDKLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="FileLocation" Type="System.String" Scope="User">
+    <Setting Name="FileExtension" Type="System.String" Scope="User">
       <Value Profile="(Default)">bin</Value>
     </Setting>
     <Setting Name="PackageCode" Type="System.Boolean" Scope="User">
