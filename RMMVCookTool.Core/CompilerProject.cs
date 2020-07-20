@@ -9,7 +9,7 @@ namespace RMMVCookTool.Core
 {
     public class CompilerProject : CompilerProjectBase
     {
-        private string ProjectLocation;
+        private readonly string ProjectLocation;
         public List<string> FileMap;
         public string FileExtension;
         public bool RemoveSourceCodeAfterCompiling;
@@ -24,6 +24,11 @@ namespace RMMVCookTool.Core
             FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
         }
 
+        //This method starts the nw.exe file.
+        /// <summary>
+        /// Starts the NW.js compiler.
+        /// </summary>
+        /// <param name="index">The index in the list.</param>
         public void CompileFile(int index)
         {
             //Removing the JavaScript extension. Needed to place our own File Extension.

@@ -16,7 +16,7 @@ namespace RMMVCookTool.Core
         /// <param name="sourceDirName">The path of the folder to copy from.</param>
         /// <param name="destDirName">The path where the folder will be copied to.</param>
         /// <param name="copySubDirs">Copy the subdirectories as well.</param>
-        private static void DirectoryCopy(in string sourceDirName, string destDirName, bool copySubDirs)
+        public static void DirectoryCopy(in string sourceDirName, string destDirName, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.
             var dir = new DirectoryInfo(sourceDirName);
