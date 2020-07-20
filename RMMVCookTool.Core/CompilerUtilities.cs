@@ -58,5 +58,27 @@ namespace RMMVCookTool.Core
         {
             return Directory.EnumerateFiles(path, extension, SearchOption.AllDirectories).ToList();
         }
+
+        public static void CleanupBin(in List<string> fileMap)
+        {
+            //Do a normal loop for each entry on the FileMap array.
+#pragma warning disable CA1062 // Validate arguments of public methods
+            foreach (string file in fileMap)
+#pragma warning restore CA1062 // Validate arguments of public methods
+            {
+                //This does a small search in the path specified in the FileMap.
+                //Adding the .* will allow us to search all the files that have an extension.
+                var deletionMap = Directory.GetFiles(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + ".*");
+                //Doing a parallel loop here to speed up the cleanup process.
+                Parallel.ForEach(deletionMap, fileToDelete =>
+                {
+                    //Run a check if the file in the array is actually a JavaScript file.
+                    //If not, delete it.
+                    if (fileToDelete != file) File.Delete(fileToDelete);
+                });
+                //Cleaning up the deletionMap array before refilling it.
+                Array.Clear(deletionMap, 0, deletionMap.Length);
+            }
+        }
     }
 }

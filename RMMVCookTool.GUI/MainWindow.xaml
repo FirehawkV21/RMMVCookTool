@@ -27,10 +27,10 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
-                                <RowDefinition Height="37"/>
+                                <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="FolderList" AllowDrop="True"/>
+                            <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
                                 <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0"/>
