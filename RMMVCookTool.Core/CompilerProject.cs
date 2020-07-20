@@ -17,14 +17,9 @@ namespace RMMVCookTool.Core
         public bool RemoveFilesAfterCompression;
         public int CompressionModeLevel;
 
-        public CompilerProject(string project, string fileExtension, bool removeSourceCode, bool compressFilesToPackage,
-            bool removeFilesAfterCompression)
+        public CompilerProject(string project)
         {
             ProjectLocation = project;
-            FileExtension = fileExtension;
-            RemoveSourceCodeAfterCompiling = removeSourceCode;
-            CompressFilesToPackage = compressFilesToPackage;
-            RemoveFilesAfterCompression = removeFilesAfterCompression;
             FileMap = new List<string>();
             FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
         }
