@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -9,31 +8,37 @@ namespace RMMVCookTool.Core
 {
     public class CompilerProject : CompilerProjectBase
     {
-        private readonly string ProjectLocation;
+        private readonly string _projectLocation;
         public readonly List<string> FileMap;
-        public string FileExtension;
-        public bool RemoveSourceCodeAfterCompiling;
-        public bool CompressFilesToPackage;
-        public bool RemoveFilesAfterCompression;
-        public int CompressionModeLevel;
+
+        public string FileExtension { get; set; }
+
+        public bool RemoveSourceCodeAfterCompiling { get; set; }
+
+        public bool CompressFilesToPackage { get; set; }
+
+        public bool RemoveFilesAfterCompression { get; set; }
+
+        public int CompressionModeLevel { get; set; }
+
 
         public CompilerProject(string project)
         {
-            ProjectLocation = project;
+            _projectLocation = project;
             FileMap = new List<string>();
-            FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
+            FileMap = CompilerUtilities.FileFinder(_projectLocation, "*.js");
         }
 
         public CompilerProject(string project, string fileExtension, bool removeAfterCompile, bool compressToPackage, bool removeAfterCompression, int compressionLevel)
         {
-            ProjectLocation = project;
+            _projectLocation = project;
             RemoveSourceCodeAfterCompiling = removeAfterCompile;
             FileExtension = fileExtension;
             CompressFilesToPackage = compressToPackage;
             RemoveFilesAfterCompression = removeAfterCompression;
             CompressionModeLevel = compressionLevel;
             FileMap = new List<string>();
-            FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
+            FileMap = CompilerUtilities.FileFinder(_projectLocation, "*.js");
         }
 
         //This method starts the nw.exe file.
@@ -70,13 +75,13 @@ namespace RMMVCookTool.Core
                 Process.Start(
                     Path.Combine(sdkLocation,
                         RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs"),
-                    "--nwapp=\"" + ProjectLocation + "\"");
+                    "--nwapp=\"" + _projectLocation + "\"");
             else if (File.Exists(Path.Combine(sdkLocation,
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game")))
                 Process.Start(
                     Path.Combine(sdkLocation,
                         RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game"),
-                    "--nwapp=\"" + ProjectLocation + "\"");
+                    "--nwapp=\"" + _projectLocation + "\"");
         }
 
         //This method compresses the files found on the temporary location.
@@ -86,16 +91,16 @@ namespace RMMVCookTool.Core
         public void CompressFiles()
         {
             string[] tempString =
-                ProjectLocation.Split(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? '\\' : '/');
-            var packageOutput = Path.Combine(ProjectLocation, ArchiveName);
+                _projectLocation.Split(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? '\\' : '/');
+            var packageOutput = Path.Combine(_projectLocation, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
             using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
             {
                 //Temporary prepare a string for stripping.
-                string stripPart = ProjectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
+                string stripPart = _projectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
                 //List all the files in the game's www folder.
                 IEnumerable<string> gameFiles =
-                    CompilerUtilities.FileFinder(Path.Combine(ProjectLocation, tempString[^1]), "*");
+                    CompilerUtilities.FileFinder(Path.Combine(_projectLocation, tempString[^1]), "*");
                 foreach (var file in gameFiles)
                 {
                     //Start adding files.
@@ -117,7 +122,7 @@ namespace RMMVCookTool.Core
                 }
 
                 //Add the project.json files to finish the package.
-                packageArchive.CreateEntryFromFile(Path.Combine(ProjectLocation, "package.json"), "package.json");
+                packageArchive.CreateEntryFromFile(Path.Combine(_projectLocation, "package.json"), "package.json");
             }
 
         }
@@ -128,8 +133,8 @@ namespace RMMVCookTool.Core
         /// </summary>
         public void DeleteFiles()
         {
-            if (Directory.Exists(Path.Combine(ProjectLocation, "www"))) Directory.Delete(Path.Combine(ProjectLocation, "www"), true);
-            if (File.Exists(Path.Combine(ProjectLocation, "package.json"))) File.Delete(Path.Combine(ProjectLocation, "package.json"));
+            if (Directory.Exists(Path.Combine(_projectLocation, "www"))) Directory.Delete(Path.Combine(_projectLocation, "www"), true);
+            if (File.Exists(Path.Combine(_projectLocation, "package.json"))) File.Delete(Path.Combine(_projectLocation, "package.json"));
 
         }
     }
