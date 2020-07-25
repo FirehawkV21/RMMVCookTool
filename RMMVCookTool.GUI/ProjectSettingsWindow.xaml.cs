@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RMMVCookTool.GUI
 {
@@ -18,10 +8,17 @@ namespace RMMVCookTool.GUI
     /// </summary>
     public partial class ProjectSettingsWindow : Window
     {
-        private int pickedProject;
-        private bool isEditingProjectSettings;
+        private readonly int pickedProject;
+        private readonly bool isEditingProjectSettings;
         public ProjectSettingsWindow()
         {
+            InitializeComponent();
+        }
+
+        public ProjectSettingsWindow(int index)
+        {
+            pickedProject = index;
+            isEditingProjectSettings = true;
             InitializeComponent();
         }
 
@@ -29,11 +26,20 @@ namespace RMMVCookTool.GUI
         {
             if (!isEditingProjectSettings)
             {
+                Title = "Default Project Settings";
                 RemoveSourceFilesAfterCompilingCheckbox.IsChecked = AppSettings.Default.DeleteSourceCode;
                 CompressFilesToPackageCheckbox.IsChecked = AppSettings.Default.PackageCode;
                 RemoveFilesAfterPackagingCheckbox.IsChecked = AppSettings.Default.RemoveFilesAfterPackaging;
                 CompressionLevelBox.SelectedIndex = AppSettings.Default.CompressionMode;
                 FileExtensionTextBox.Text = AppSettings.Default.FileExtension;
+            }
+            else
+            {
+                RemoveSourceFilesAfterCompilingCheckbox.IsChecked = MainWindow.ProjectList[pickedProject].RemoveSourceCodeAfterCompiling;
+                CompressFilesToPackageCheckbox.IsChecked = MainWindow.ProjectList[pickedProject].CompressFilesToPackage;
+                RemoveFilesAfterPackagingCheckbox.IsChecked = MainWindow.ProjectList[pickedProject].RemoveFilesAfterCompression;
+                CompressionLevelBox.SelectedIndex = MainWindow.ProjectList[pickedProject].CompressionModeLevel;
+                FileExtensionTextBox.Text = MainWindow.ProjectList[pickedProject].FileExtension;
             }
         }
 
@@ -47,8 +53,16 @@ namespace RMMVCookTool.GUI
                 AppSettings.Default.CompressionMode = CompressionLevelBox.SelectedIndex;
                 AppSettings.Default.FileExtension = FileExtensionTextBox.Text;
                 AppSettings.Default.Save();
-                Close();
             }
+            else
+            {
+                MainWindow.ProjectList[pickedProject].RemoveSourceCodeAfterCompiling = RemoveSourceFilesAfterCompilingCheckbox.IsChecked == true;
+                MainWindow.ProjectList[pickedProject].CompressFilesToPackage = CompressFilesToPackageCheckbox.IsChecked == true;
+                MainWindow.ProjectList[pickedProject].RemoveFilesAfterCompression = RemoveFilesAfterPackagingCheckbox.IsChecked == true;
+                MainWindow.ProjectList[pickedProject].CompressionModeLevel = CompressionLevelBox.SelectedIndex;
+                MainWindow.ProjectList[pickedProject].FileExtension = FileExtensionTextBox.Text;
+            }
+            Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

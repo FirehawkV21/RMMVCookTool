@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Mime;
 using System.Reflection;
 using System.Text;
@@ -7,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Ookii.Dialogs.Wpf;
+using RMMVCookTool.Core;
 
 namespace RMMVCookTool.GUI
 {
@@ -21,6 +24,7 @@ namespace RMMVCookTool.GUI
         }
 
         private string _previousPath;
+        public static List<CompilerProject> ProjectList = new List<CompilerProject>();
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
              var assembly = Assembly.GetExecutingAssembly();
@@ -108,6 +112,38 @@ namespace RMMVCookTool.GUI
         {
             ProjectSettingsWindow defSettingsWindow = new ProjectSettingsWindow();
             defSettingsWindow.Show();
+        }
+
+        private void AddProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            var pickJsFolder =
+                new VistaFolderBrowserDialog
+                {
+                    Description = Properties.Resources.ProjectPickerText,
+                    UseDescriptionForTitle = true
+                };
+            var pickerResult = pickJsFolder.ShowDialog();
+            if (pickerResult != true) return;
+            if (pickJsFolder.SelectedPath != null) FolderList.Items.Add(pickJsFolder.SelectedPath);
+            ProjectList.Add(new CompilerProject(pickJsFolder.SelectedPath, AppSettings.Default.FileExtension, AppSettings.Default.DeleteSourceCode, AppSettings.Default.PackageCode, AppSettings.Default.RemoveFilesAfterPackaging, AppSettings.Default.CompressionMode));
+        }
+
+        private void RemoveProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var s in FolderList.SelectedItems.OfType<string>().ToList())
+            {
+                var temp = FolderList.Items.IndexOf(s);
+                FolderList.Items.Remove(s);
+                ProjectList.RemoveAt(temp);
+            }
+
+        }
+
+        private void ProjectSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var temp = FolderList.SelectedIndex;
+            ProjectSettingsWindow SettingsWindow = new ProjectSettingsWindow(temp);
+            SettingsWindow.Show();
         }
     }
 }

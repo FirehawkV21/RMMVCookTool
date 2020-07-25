@@ -33,9 +33,9 @@
                             <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
-                                <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0"/>
-                                <Button Content="Remove" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0"/>
-                                <Button Content="Project Settings" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0"/>
+                                <Button x:Name="AddProjectButton" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" Click="AddProjectButton_Click"/>
+                                <Button x:Name="RemoveProjectButton" Content="Remove" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Click="RemoveProjectButton_Click"/>
+                                <Button x:Name="ProjectSettingsButton" Content="Project Settings" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Click="ProjectSettingsButton_Click"/>
                                 <Button Content="Edit Metadata" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0"/>
                             </StackPanel>
                         </Grid>

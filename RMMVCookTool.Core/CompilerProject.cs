@@ -10,7 +10,7 @@ namespace RMMVCookTool.Core
     public class CompilerProject : CompilerProjectBase
     {
         private readonly string ProjectLocation;
-        public List<string> FileMap;
+        public readonly List<string> FileMap;
         public string FileExtension;
         public bool RemoveSourceCodeAfterCompiling;
         public bool CompressFilesToPackage;
@@ -20,6 +20,18 @@ namespace RMMVCookTool.Core
         public CompilerProject(string project)
         {
             ProjectLocation = project;
+            FileMap = new List<string>();
+            FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
+        }
+
+        public CompilerProject(string project, string fileExtension, bool removeAfterCompile, bool compressToPackage, bool removeAfterCompression, int compressionLevel)
+        {
+            ProjectLocation = project;
+            RemoveSourceCodeAfterCompiling = removeAfterCompile;
+            FileExtension = fileExtension;
+            CompressFilesToPackage = compressToPackage;
+            RemoveFilesAfterCompression = removeAfterCompression;
+            CompressionModeLevel = compressionLevel;
             FileMap = new List<string>();
             FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
         }
