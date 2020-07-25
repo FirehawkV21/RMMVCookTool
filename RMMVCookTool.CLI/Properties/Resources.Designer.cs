@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace nwjsCompilerCLI.Properties {
+namespace RMMVCookTool.CLI.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace nwjsCompilerCLI.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("nwjsCompilerCLI.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RMMVCookTool.CLI.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -320,7 +320,7 @@ namespace nwjsCompilerCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to = Version R1.03 Update 2 ({0}).
+        ///   Looks up a localized string similar to = Version R2.00 ({0}).
         /// </summary>
         internal static string ProgramVersionString {
             get {

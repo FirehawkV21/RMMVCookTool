@@ -35,12 +35,12 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'nwjsCompilerCLI\nwjsCompilerCLI.csproj'
+    projects: 'RMMVCookTool.CLI\RMMVCookTool.CLI.csproj'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'nwjsCookToolUI\nwjsCookToolUI.csproj'
+    projects: 'RMMVCookTool.GUI\RMMVCookTool.GUI.csproj'
 
 - task: VSTest@2
   inputs:

@@ -9,8 +9,8 @@ namespace RMMVCookTool.Core
 {
     public class CompilerProject : CompilerProjectBase
     {
-        private readonly string _projectLocation;
-        public List<string> FileMap { get; }
+        public string ProjectLocation { get; set; }
+        public List<string> FileMap;
 
         public string FileExtension { get; set; }
 
@@ -22,24 +22,31 @@ namespace RMMVCookTool.Core
 
         public int CompressionModeLevel { get; set; }
 
+        public CompilerProject()
+        {
+            FileExtension = ".bin";
+            CompressionModeLevel = 0;
+        }
 
         public CompilerProject(string project)
         {
-            _projectLocation = project;
+            ProjectLocation = project;
+            FileExtension = ".bin";
+            CompressionModeLevel = 0;
             FileMap = new List<string>();
-            FileMap = CompilerUtilities.FileFinder(_projectLocation, "*.js");
+            FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
         }
 
         public CompilerProject(string project, string fileExtension, bool removeAfterCompile, bool compressToPackage, bool removeAfterCompression, int compressionLevel)
         {
-            _projectLocation = project;
+            ProjectLocation = project;
             RemoveSourceCodeAfterCompiling = removeAfterCompile;
             FileExtension = fileExtension;
             CompressFilesToPackage = compressToPackage;
             RemoveFilesAfterCompression = removeAfterCompression;
             CompressionModeLevel = compressionLevel;
             FileMap = new List<string>();
-            FileMap = CompilerUtilities.FileFinder(_projectLocation, "*.js");
+            FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
         }
 
         //This method starts the nw.exe file.
@@ -55,11 +62,12 @@ namespace RMMVCookTool.Core
             //The second bit (the one with the fileBuffer variable) makes the final file.
             CompilerInfo.Arguments = "\"" + FileMap[index] + "\" \"" +
                                      FileMap[index].Replace(".js", "." + FileExtension, StringComparison.Ordinal) + "\"";
-            //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.   
+            //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.
             CompilerInfo.CreateNoWindow = true;
             CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
             //Run the compiler.
             Process.Start(CompilerInfo)?.WaitForExit();
+
             //If the user asked to remove the JS files, delete them.
             if (RemoveSourceCodeAfterCompiling) File.Delete(FileMap[index]);
         }
@@ -76,13 +84,13 @@ namespace RMMVCookTool.Core
                 Process.Start(
                     Path.Combine(sdkLocation,
                         RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjs.exe" : "nwjs"),
-                    "--nwapp=\"" + _projectLocation + "\"");
+                    "--nwapp=\"" + ProjectLocation + "\"");
             else if (File.Exists(Path.Combine(sdkLocation,
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game")))
                 Process.Start(
                     Path.Combine(sdkLocation,
                         RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Game.exe" : "Game"),
-                    "--nwapp=\"" + _projectLocation + "\"");
+                    "--nwapp=\"" + ProjectLocation + "\"");
         }
 
         //This method compresses the files found on the temporary location.
@@ -92,16 +100,16 @@ namespace RMMVCookTool.Core
         public void CompressFiles()
         {
             string[] tempString =
-                _projectLocation.Split(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? '\\' : '/');
-            var packageOutput = Path.Combine(_projectLocation, ArchiveName);
+                ProjectLocation.Split(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? '\\' : '/');
+            var packageOutput = Path.Combine(ProjectLocation, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
             using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
             {
                 //Temporary prepare a string for stripping.
-                string stripPart = _projectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
+                string stripPart = ProjectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
                 //List all the files in the game's www folder.
                 IEnumerable<string> gameFiles =
-                    CompilerUtilities.FileFinder(Path.Combine(_projectLocation, tempString[^1]), "*");
+                    CompilerUtilities.FileFinder(Path.Combine(ProjectLocation, tempString[^1]), "*");
                 foreach (var file in gameFiles)
                 {
                     //Start adding files.
@@ -123,7 +131,7 @@ namespace RMMVCookTool.Core
                 }
 
                 //Add the project.json files to finish the package.
-                packageArchive.CreateEntryFromFile(Path.Combine(_projectLocation, "package.json"), "package.json");
+                packageArchive.CreateEntryFromFile(Path.Combine(ProjectLocation, "package.json"), "package.json");
             }
 
         }
@@ -134,8 +142,8 @@ namespace RMMVCookTool.Core
         /// </summary>
         public void DeleteFiles()
         {
-            if (Directory.Exists(Path.Combine(_projectLocation, "www"))) Directory.Delete(Path.Combine(_projectLocation, "www"), true);
-            if (File.Exists(Path.Combine(_projectLocation, "package.json"))) File.Delete(Path.Combine(_projectLocation, "package.json"));
+            if (Directory.Exists(Path.Combine(ProjectLocation, "www"))) Directory.Delete(Path.Combine(ProjectLocation, "www"), true);
+            if (File.Exists(Path.Combine(ProjectLocation, "package.json"))) File.Delete(Path.Combine(ProjectLocation, "package.json"));
 
         }
     }
