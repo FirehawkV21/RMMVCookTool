@@ -9,7 +9,7 @@ namespace RMMVCookTool.Core
     public class CompilerProject : CompilerProjectBase
     {
         private readonly string _projectLocation;
-        public readonly List<string> FileMap;
+        public List<string> FileMap { get; }
 
         public string FileExtension { get; set; }
 
