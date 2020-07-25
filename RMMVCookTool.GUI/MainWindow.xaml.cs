@@ -24,7 +24,7 @@ namespace RMMVCookTool.GUI
         }
 
         private string _previousPath;
-        public static List<CompilerProject> ProjectList = new List<CompilerProject>();
+        public static List<CompilerProject> ProjectList { get; } = new List<CompilerProject>();
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
              var assembly = Assembly.GetExecutingAssembly();
