@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using RMMVCookTool.CLI.Properties;
 using RMMVCookTool.Core;
-//using JsonProcessor = RMMVCookTool.Core.JsonProcessor;
 
 namespace RMMVCookTool.CLI
 {
