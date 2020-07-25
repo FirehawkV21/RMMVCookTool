@@ -104,7 +104,8 @@ namespace CompilerCore
             //Setting up the compiler by throwing in two arguments.
             //The first bit (the one with the file variable) is the source.
             //The second bit (the one with the fileBuffer variable) makes the final file.
-            CompilerInfo.Arguments = "\"" + file + "\" \"" + file.Replace(".js", "." + extension) + "\"";
+            CompilerInfo.Arguments = "\"" + file + "\" \"" + file.Replace(".js", "." + extension,
+            StringComparison.Ordinal) + "\"";
             //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.   
             CompilerInfo.CreateNoWindow = true;
             CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -169,15 +170,15 @@ namespace CompilerCore
                         switch (compressionSelector)
                         {
                             case 2:
-                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, "", StringComparison.Ordinal),
                                     CompressionLevel.NoCompression);
                                 break;
                             case 1:
-                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, "", StringComparison.Ordinal),
                                     CompressionLevel.Fastest);
                                 break;
                             default:
-                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                                packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, "", StringComparison.Ordinal),
                                     CompressionLevel.Optimal);
                                 break;
                         }

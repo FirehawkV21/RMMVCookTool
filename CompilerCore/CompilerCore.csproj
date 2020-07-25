@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyVersion>1.0.5.20189</AssemblyVersion>
-    <FileVersion>1.0.5.20189</FileVersion>
+    <AssemblyVersion>1.0.5.20207</AssemblyVersion>
+    <FileVersion>1.0.5.20207</FileVersion>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <AssemblyTitle>MV Cook Tool Core</AssemblyTitle>

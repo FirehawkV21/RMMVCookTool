@@ -9,8 +9,7 @@ namespace RMMVCookTool.Core
 {
     public class CompilerProjectBase
     {
-        public static readonly ProcessStartInfo CompilerInfo = new ProcessStartInfo();
+        public ProcessStartInfo CompilerInfo { get; } = new ProcessStartInfo();
         protected static readonly string ArchiveName = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "app.nw" : "package.nw";
-        protected static readonly string TempFolderLocation = Path.Combine(Path.GetTempPath(), "nwjspackage");
     }
 }

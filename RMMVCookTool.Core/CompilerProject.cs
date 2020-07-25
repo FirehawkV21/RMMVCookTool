@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -53,7 +54,7 @@ namespace RMMVCookTool.Core
             //The first bit (the one with the file variable) is the source.
             //The second bit (the one with the fileBuffer variable) makes the final file.
             CompilerInfo.Arguments = "\"" + FileMap[index] + "\" \"" +
-                                     FileMap[index].Replace(".js", "." + FileExtension) + "\"";
+                                     FileMap[index].Replace(".js", "." + FileExtension, StringComparison.Ordinal) + "\"";
             //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.   
             CompilerInfo.CreateNoWindow = true;
             CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -107,15 +108,15 @@ namespace RMMVCookTool.Core
                     switch (CompressionModeLevel)
                     {
                         case 2:
-                            packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                            packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, "", StringComparison.Ordinal),
                                 CompressionLevel.NoCompression);
                             break;
                         case 1:
-                            packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                            packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, "", StringComparison.Ordinal),
                                 CompressionLevel.Fastest);
                             break;
                         default:
-                            packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, ""),
+                            packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, "", StringComparison.Ordinal),
                                 CompressionLevel.Optimal);
                             break;
                     }

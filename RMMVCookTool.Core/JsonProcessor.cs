@@ -92,7 +92,7 @@ namespace RMMVCookTool.Core
                     }
 
                     //tempstring = tempstring.Replace("/", "\\");
-                    gameFolder = Path.Combine(metadataFile.Replace(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\package.json" : "/package.json", ""), tempString2);
+                    gameFolder = Path.Combine(metadataFile.Replace(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\package.json" : "/package.json", "", StringComparison.Ordinal), tempString2);
                 }
                 else gameFolder = "Null";
 
