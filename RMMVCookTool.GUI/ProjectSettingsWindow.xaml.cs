@@ -62,7 +62,7 @@ namespace RMMVCookTool.GUI
                 MainWindow.ProjectList[pickedProject].RemoveFilesAfterCompression = RemoveFilesAfterPackagingCheckbox.IsChecked == true;
                 MainWindow.ProjectList[pickedProject].CompressionModeLevel = CompressionLevelBox.SelectedIndex;
                 MainWindow.ProjectList[pickedProject].FileExtension = FileExtensionTextBox.Text;
-                MessageDialog.ThrowCompleteMessage(RMMVCookTool.GUI.Properties.Resources.SProjectSettingsUpdatedText);
+                MessageDialog.ThrowCompleteMessage(Properties.Resources.SProjectSettingsUpdatedText);
             }
             Close();
         }
