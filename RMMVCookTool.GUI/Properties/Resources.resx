@@ -132,6 +132,9 @@
   <data name="EnableNodeJSCheckBoxText" xml:space="preserve">
     <value>Enable NodeJS?</value>
   </data>
+  <data name="ErrorDetailsMessage" xml:space="preserve">
+    <value>Clicking on the "More Details" button will show the stack trace. Make sure to include this if you are filling a bug report, since it can help with diagnosing the bug.</value>
+  </data>
   <data name="ErrorText" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -235,6 +238,9 @@
   <data name="SettingsUiText" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="StackTraceLine" xml:space="preserve">
+    <value>--- The Stack Trace is below this line ---</value>
+  </data>
   <data name="StartUiText" xml:space="preserve">
     <value>Start:</value>
   </data>
@@ -258,5 +264,29 @@
   </data>
   <data name="WindowTitleUiText" xml:space="preserve">
     <value>Window Title</value>
+  </data>
+  <data name="ErrorOccuredTitle" xml:space="preserve">
+    <value>Ack! An error has occured.</value>
+  </data>
+  <data name="CompleteText" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="WarningText" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="ProjectNotSelectedMessage" xml:space="preserve">
+    <value>A project was not selected.</value>
+  </data>
+  <data name="ProjectMessageNotSelected_Details" xml:space="preserve">
+    <value>Please select a project from the list. You may have to add it to the list (if you haven't done so).</value>
+  </data>
+  <data name="DefaultSettingsUpdatedText" xml:space="preserve">
+    <value>Your default settings have been updated.</value>
+  </data>
+  <data name="DefaultSettingsUpdatedMessage" xml:space="preserve">
+    <value>The settings will be used for new projects added from this point on.</value>
+  </data>
+  <data name="SProjectSettingsUpdatedText" xml:space="preserve">
+    <value>The project's settings have been updated.</value>
   </data>
 </root>

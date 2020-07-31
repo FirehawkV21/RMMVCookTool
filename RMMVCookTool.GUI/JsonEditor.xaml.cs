@@ -93,9 +93,7 @@ namespace RMMVCookTool.GUI
             }
             else
             {
-                MessageBox.Show(
-                    Properties.Resources.FileOutsideOfProjectError,
-                    Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.ThrowErrorMessage(Properties.Resources.ErrorText,Properties.Resources.FileOutsideOfProjectError);
             }
         }
 
@@ -120,9 +118,7 @@ namespace RMMVCookTool.GUI
             }
             else
             {
-                MessageBox.Show(
-                    Properties.Resources.FileOutsideOfProjectError,
-                    Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.ThrowErrorMessage(Properties.Resources.ErrorText, Properties.Resources.FileOutsideOfProjectError);
             }
         }
 
@@ -173,30 +169,24 @@ namespace RMMVCookTool.GUI
                     isKioskMode,
                     windowPosition,
                     _projectLocation);
-                MessageBox.Show(Properties.Resources.SaveCompleteText, Properties.Resources.DoneText,
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageDialog.ThrowCompleteMessage(Properties.Resources.SaveCompleteText);
             }
-            catch (FileFormatException)
+            catch (FileFormatException ex)
             {
-                MessageBox.Show(Properties.Resources.FileStreamErrorText, Properties.Resources.ErrorText, MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                MessageDialog.ThrowErrorMessage(ex);
             }
-            catch (PathTooLongException)
+            catch (PathTooLongException ex)
             {
-                MessageBox.Show(Properties.Resources.ProjectPathTooLongErrorText,
-                    Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.ThrowErrorMessage(ex);
             }
 
-            catch (IOException)
+            catch (IOException ex)
             {
-                MessageBox.Show(Properties.Resources.IOErrorText,
-                    Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.ThrowErrorMessage(ex);
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
-                MessageBox.Show(
-                    Properties.Resources.FileAccessError,
-                    Properties.Resources.ErrorText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.ThrowErrorMessage(ex);
             }
         }
 

@@ -88,6 +88,33 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complete.
+        /// </summary>
+        public static string CompleteText {
+            get {
+                return ResourceManager.GetString("CompleteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The settings will be used for new projects added from this point on..
+        /// </summary>
+        public static string DefaultSettingsUpdatedMessage {
+            get {
+                return ResourceManager.GetString("DefaultSettingsUpdatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your default settings have been updated..
+        /// </summary>
+        public static string DefaultSettingsUpdatedText {
+            get {
+                return ResourceManager.GetString("DefaultSettingsUpdatedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Done!.
         /// </summary>
         public static string DoneText {
@@ -102,6 +129,24 @@ namespace RMMVCookTool.GUI.Properties {
         public static string EnableNodeJSCheckBoxText {
             get {
                 return ResourceManager.GetString("EnableNodeJSCheckBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clicking on the &quot;More Details&quot; button will show the stack trace. Make sure to include this if you are filling a bug report, since it can help with diagnosing the bug..
+        /// </summary>
+        public static string ErrorDetailsMessage {
+            get {
+                return ResourceManager.GetString("ErrorDetailsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ack! An error has occured..
+        /// </summary>
+        public static string ErrorOccuredTitle {
+            get {
+                return ResourceManager.GetString("ErrorOccuredTitle", resourceCulture);
             }
         }
         
@@ -332,6 +377,24 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select a project from the list. You may have to add it to the list (if you haven&apos;t done so)..
+        /// </summary>
+        public static string ProjectMessageNotSelected_Details {
+            get {
+                return ResourceManager.GetString("ProjectMessageNotSelected_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A project was not selected..
+        /// </summary>
+        public static string ProjectNotSelectedMessage {
+            get {
+                return ResourceManager.GetString("ProjectNotSelectedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The path to the project is too long. Please shorten the path..
         /// </summary>
         public static string ProjectPathTooLongErrorText {
@@ -413,11 +476,38 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The project&apos;s settings have been updated..
+        /// </summary>
+        public static string SProjectSettingsUpdatedText {
+            get {
+                return ResourceManager.GetString("SProjectSettingsUpdatedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to --- The Stack Trace is below this line ---.
+        /// </summary>
+        public static string StackTraceLine {
+            get {
+                return ResourceManager.GetString("StackTraceLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start:.
         /// </summary>
         public static string StartUiText {
             get {
                 return ResourceManager.GetString("StartUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string WarningText {
+            get {
+                return ResourceManager.GetString("WarningText", resourceCulture);
             }
         }
         

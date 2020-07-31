@@ -149,8 +149,8 @@ namespace RMMVCookTool.GUI
         private void EditMetadataButton_Click(object sender, RoutedEventArgs e)
         {
             if (!FolderList.SelectedItems.OfType<string>().Any())
-                MessageBox.Show("Please select a project.", Properties.Resources.ErrorText,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.ThrowWarningMessage(Properties.Resources.WarningText, Properties.Resources.ProjectNotSelectedMessage,
+                    Properties.Resources.ProjectMessageNotSelected_Details);
             else
             {
                 var jsonEditorGui = new JsonEditor(FolderList.SelectedItem.ToString());
