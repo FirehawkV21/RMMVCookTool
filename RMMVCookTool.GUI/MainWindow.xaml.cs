@@ -145,5 +145,17 @@ namespace RMMVCookTool.GUI
             ProjectSettingsWindow SettingsWindow = new ProjectSettingsWindow(temp);
             SettingsWindow.Show();
         }
+
+        private void EditMetadataButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!FolderList.SelectedItems.OfType<string>().Any())
+                MessageBox.Show("Please select a project.", Properties.Resources.ErrorText,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                var jsonEditorGui = new JsonEditor(FolderList.SelectedItem.ToString());
+                jsonEditorGui.Show();
+            }
+        }
     }
 }
