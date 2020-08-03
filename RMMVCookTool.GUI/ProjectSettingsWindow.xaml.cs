@@ -8,8 +8,8 @@ namespace RMMVCookTool.GUI
     /// </summary>
     public partial class ProjectSettingsWindow : Window
     {
-        private readonly int pickedProject;
-        private readonly bool isEditingProjectSettings;
+        private readonly int _pickedProject;
+        private readonly bool _isEditingProjectSettings;
         public ProjectSettingsWindow()
         {
             InitializeComponent();
@@ -17,14 +17,14 @@ namespace RMMVCookTool.GUI
 
         public ProjectSettingsWindow(int index)
         {
-            pickedProject = index;
-            isEditingProjectSettings = true;
+            _pickedProject = index;
+            _isEditingProjectSettings = true;
             InitializeComponent();
         }
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            if (!isEditingProjectSettings)
+            if (!_isEditingProjectSettings)
             {
                 Title = "Default Project Settings";
                 RemoveSourceFilesAfterCompilingCheckbox.IsChecked = AppSettings.Default.DeleteSourceCode;
@@ -35,17 +35,17 @@ namespace RMMVCookTool.GUI
             }
             else
             {
-                RemoveSourceFilesAfterCompilingCheckbox.IsChecked = MainWindow.ProjectList[pickedProject].RemoveSourceCodeAfterCompiling;
-                CompressFilesToPackageCheckbox.IsChecked = MainWindow.ProjectList[pickedProject].CompressFilesToPackage;
-                RemoveFilesAfterPackagingCheckbox.IsChecked = MainWindow.ProjectList[pickedProject].RemoveFilesAfterCompression;
-                CompressionLevelBox.SelectedIndex = MainWindow.ProjectList[pickedProject].CompressionModeLevel;
-                FileExtensionTextBox.Text = MainWindow.ProjectList[pickedProject].FileExtension;
+                RemoveSourceFilesAfterCompilingCheckbox.IsChecked = MainWindow.ProjectList[_pickedProject].RemoveSourceCodeAfterCompiling;
+                CompressFilesToPackageCheckbox.IsChecked = MainWindow.ProjectList[_pickedProject].CompressFilesToPackage;
+                RemoveFilesAfterPackagingCheckbox.IsChecked = MainWindow.ProjectList[_pickedProject].RemoveFilesAfterCompression;
+                CompressionLevelBox.SelectedIndex = MainWindow.ProjectList[_pickedProject].CompressionModeLevel;
+                FileExtensionTextBox.Text = MainWindow.ProjectList[_pickedProject].FileExtension;
             }
         }
 
         private void SaveSettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!isEditingProjectSettings)
+            if (!_isEditingProjectSettings)
             {
                 AppSettings.Default.DeleteSourceCode = RemoveSourceFilesAfterCompilingCheckbox.IsChecked == true;
                 AppSettings.Default.PackageCode = CompressFilesToPackageCheckbox.IsChecked == true;
@@ -57,11 +57,11 @@ namespace RMMVCookTool.GUI
             }
             else
             {
-                MainWindow.ProjectList[pickedProject].RemoveSourceCodeAfterCompiling = RemoveSourceFilesAfterCompilingCheckbox.IsChecked == true;
-                MainWindow.ProjectList[pickedProject].CompressFilesToPackage = CompressFilesToPackageCheckbox.IsChecked == true;
-                MainWindow.ProjectList[pickedProject].RemoveFilesAfterCompression = RemoveFilesAfterPackagingCheckbox.IsChecked == true;
-                MainWindow.ProjectList[pickedProject].CompressionModeLevel = CompressionLevelBox.SelectedIndex;
-                MainWindow.ProjectList[pickedProject].FileExtension = FileExtensionTextBox.Text;
+                MainWindow.ProjectList[_pickedProject].RemoveSourceCodeAfterCompiling = RemoveSourceFilesAfterCompilingCheckbox.IsChecked == true;
+                MainWindow.ProjectList[_pickedProject].CompressFilesToPackage = CompressFilesToPackageCheckbox.IsChecked == true;
+                MainWindow.ProjectList[_pickedProject].RemoveFilesAfterCompression = RemoveFilesAfterPackagingCheckbox.IsChecked == true;
+                MainWindow.ProjectList[_pickedProject].CompressionModeLevel = CompressionLevelBox.SelectedIndex;
+                MainWindow.ProjectList[_pickedProject].FileExtension = FileExtensionTextBox.Text;
                 MessageDialog.ThrowCompleteMessage(Properties.Resources.SProjectSettingsUpdatedText);
             }
             Close();

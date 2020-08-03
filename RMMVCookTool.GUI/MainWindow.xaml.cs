@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -6,10 +9,16 @@ using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Ookii.Dialogs.Wpf;
 using RMMVCookTool.Core;
+using DataFormats = System.Windows.DataFormats;
+using DragDropEffects = System.Windows.DragDropEffects;
+using DragEventArgs = System.Windows.DragEventArgs;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace RMMVCookTool.GUI
 {
@@ -24,9 +33,10 @@ namespace RMMVCookTool.GUI
         }
 
         private string _previousPath;
-        public static List<CompilerProject> ProjectList { get; } = new List<CompilerProject>();
+        public static ObservableCollection<CompilerProject> ProjectList { get; } = new ObservableCollection<CompilerProject>();
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+             FolderList.ItemsSource = ProjectList;
              var assembly = Assembly.GetExecutingAssembly();
              var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
              var version = fvi.FileVersion;
@@ -124,36 +134,47 @@ namespace RMMVCookTool.GUI
                 };
             var pickerResult = pickJsFolder.ShowDialog();
             if (pickerResult != true) return;
-            if (pickJsFolder.SelectedPath != null) FolderList.Items.Add(pickJsFolder.SelectedPath);
-            ProjectList.Add(new CompilerProject(pickJsFolder.SelectedPath, AppSettings.Default.FileExtension, AppSettings.Default.DeleteSourceCode, AppSettings.Default.PackageCode, AppSettings.Default.RemoveFilesAfterPackaging, AppSettings.Default.CompressionMode));
-        }
-
-        private void RemoveProjectButton_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var s in FolderList.SelectedItems.OfType<string>().ToList())
+            if (pickJsFolder.SelectedPath != null)
             {
-                var temp = FolderList.Items.IndexOf(s);
-                FolderList.Items.Remove(s);
-                ProjectList.RemoveAt(temp);
+                ProjectList.Add(new CompilerProject(pickJsFolder.SelectedPath, AppSettings.Default.FileExtension,
+                    AppSettings.Default.DeleteSourceCode, AppSettings.Default.PackageCode,
+                    AppSettings.Default.RemoveFilesAfterPackaging, AppSettings.Default.CompressionMode));
+
             }
 
         }
 
+        private void RemoveProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectList.RemoveAt(FolderList.SelectedIndex);
+        }
+
         private void ProjectSettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            var temp = FolderList.SelectedIndex;
-            ProjectSettingsWindow SettingsWindow = new ProjectSettingsWindow(temp);
-            SettingsWindow.Show();
+
+            if (FolderList.SelectedItems.Count == 0)
+            {
+                MessageDialog.ThrowWarningMessage(Properties.Resources.WarningText, Properties.Resources.ProjectNotSelectedMessage,
+                    Properties.Resources.ProjectMessageNotSelected_Details);
+            }
+            else
+            {
+                var temp = FolderList.SelectedIndex;
+                ProjectSettingsWindow settingsWindow = new ProjectSettingsWindow(temp);
+                settingsWindow.ShowDialog();
+                ICollectionView view = CollectionViewSource.GetDefaultView(ProjectList);
+                view.Refresh();
+            }
         }
 
         private void EditMetadataButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!FolderList.SelectedItems.OfType<string>().Any())
+            if (FolderList.SelectedItems.Count == 0)
                 MessageDialog.ThrowWarningMessage(Properties.Resources.WarningText, Properties.Resources.ProjectNotSelectedMessage,
                     Properties.Resources.ProjectMessageNotSelected_Details);
             else
             {
-                var jsonEditorGui = new JsonEditor(FolderList.SelectedItem.ToString());
+                var jsonEditorGui = new JsonEditor(ProjectList[FolderList.SelectedIndex].ProjectLocation);
                 jsonEditorGui.Show();
             }
         }

@@ -6,7 +6,30 @@
         xmlns:local="clr-namespace:RMMVCookTool.GUI"
         mc:Ignorable="d"
         Title="RPG Maker MV Cook Tool" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640" Loaded="Window_Loaded">
-    <Grid>
+    <Window.Resources>
+        <DataTemplate x:Key="listBoxTemplate">
+            <StackPanel Margin="3">
+                <DockPanel>
+                    <TextBlock FontWeight="Bold" Text="Location:" DockPanel.Dock="Left" Margin="5,0,10,0" />
+                    <TextBlock Text="" />
+                    <TextBlock Text="{Binding ProjectLocation}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock FontWeight="Bold" Text="File Extension:" DockPanel.Dock="Left" Margin="5,0,5,0" />
+                    <TextBlock Text="{Binding FileExtension}" />
+                    <TextBlock FontWeight="Bold" Text="Remove Source Files after Compiling:" Margin="5,0,5,0"/>
+                    <TextBlock Text="{Binding RemoveSourceCodeAfterCompiling}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock FontWeight="Bold" Text="Compress Files:" Margin="5,0,5,0"/>
+                    <TextBlock Text="{Binding CompressFilesToPackage}"/>
+                    <TextBlock FontWeight="Bold" Text="Remove source files after compression:" Margin="5,0,5,0"/>
+                    <TextBlock Text="{Binding RemoveFilesAfterCompression}"/>
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+<Grid>
         <TabControl>
             <TabItem Header="Compiler">
                 <Grid>
@@ -30,7 +53,7 @@
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False"/>
+                            <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
                                 <Button x:Name="AddProjectButton" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" Click="AddProjectButton_Click"/>

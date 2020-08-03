@@ -4,8 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.0.20213</AssemblyVersion>
-    <FileVersion>3.0.0.20213</FileVersion>
+    <AssemblyVersion>3.0.0.20216</AssemblyVersion>
+    <FileVersion>3.0.0.20216</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <NeutralLanguage>en</NeutralLanguage>
