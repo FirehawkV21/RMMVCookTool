@@ -175,7 +175,7 @@ namespace RMMVCookTool.GUI
             else
             {
                 var jsonEditorGui = new JsonEditor(ProjectList[FolderList.SelectedIndex].ProjectLocation);
-                jsonEditorGui.Show();
+                jsonEditorGui.ShowDialog();
             }
         }
     }
