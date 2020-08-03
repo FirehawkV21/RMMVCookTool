@@ -4,32 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RMMVCookTool.GUI"
+        xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
         mc:Ignorable="d"
-        Title="Project Settings" Height="210" Width="422" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True" WindowStyle="SingleBorderWindow" Initialized="Window_Initialized">
+        Title="{x:Static properties:Resources.ProjectSettingsUiText}" Height="210" Width="422" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True" WindowStyle="SingleBorderWindow" Initialized="Window_Initialized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="157*"/>
             <RowDefinition Height="37*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Project Settings">
+        <GroupBox Header="{x:Static properties:Resources.ProjectSettingsUiText}">
             <Grid>
-                <CheckBox x:Name="RemoveSourceFilesAfterCompilingCheckbox" Content="Remove the source JS files after compiling." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <CheckBox x:Name="CompressFilesToPackageCheckbox" Content="Package the game files into package.nw" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
-                <CheckBox x:Name="RemoveFilesAfterPackagingCheckbox" Content="Remove the game files after packaging." HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
-                <Label Content="Compression Level:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="RemoveSourceFilesAfterCompilingCheckbox" Content="{x:Static properties:Resources.RemoveSourceCodeUiText}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="CompressFilesToPackageCheckbox" Content="{x:Static properties:Resources.CompressFilesToPackageUiText}" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="RemoveFilesAfterPackagingCheckbox" Content="{x:Static properties:Resources.RemoveFilesAfterCompressionUiText}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+                <Label Content="{x:Static properties:Resources.CompressionLevelUiText}" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="CompressionLevelBox" HorizontalAlignment="Left" Margin="135,64,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
-                    <ComboBoxItem Content="Optimal"/>
-                    <ComboBoxItem Content="Fastest"/>
-                    <ComboBoxItem Content="No Compression"/>
+                    <ComboBoxItem Content="{x:Static properties:Resources.OptimalListItemText}"/>
+                    <ComboBoxItem Content="{x:Static properties:Resources.FastestListItemText}"/>
+                    <ComboBoxItem Content="{x:Static properties:Resources.NoCompressionListItemText}"/>
                 </ComboBox>
-                <Label Content="File Extension:" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="26"/>
+                <Label Content="{x:Static properties:Resources.FileExtensionText}" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="26"/>
                 <TextBox x:Name="FileExtensionTextBox" HorizontalAlignment="Left" Margin="135,97,0,0" Text="bin" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
             </Grid>
         </GroupBox>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button x:Name="SaveSettingsButton" Content="Save" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Padding="1,1,1,1" Margin="5,5,5,5" Click="SaveSettingsButton_Click"/>
-            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Margin="0,5,10,5" Click="CancelButton_Click"/>
+            <Button x:Name="SaveSettingsButton" Content="{x:Static properties:Resources.SaveButtonText}" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" Padding="1,1,1,1" Margin="5,5,5,5" Click="SaveSettingsButton_Click"/>
+            <Button x:Name="CancelButton" Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" Margin="0,5,10,5" Click="CancelButton_Click"/>
         </StackPanel>
 
     </Grid>

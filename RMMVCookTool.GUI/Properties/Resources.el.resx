@@ -211,7 +211,7 @@
     <value>Ρυθμίσεις</value>
   </data>
   <data name="StartUiText" xml:space="preserve">
-    <value>Εκκίνηση</value>
+    <value>Εκκίνηση:</value>
   </data>
   <data name="WidthUiText" xml:space="preserve">
     <value>Πλάτος</value>
@@ -233,5 +233,125 @@
   </data>
   <data name="WindowTitleUiText" xml:space="preserve">
     <value>Τίτλος παραθύρου</value>
+  </data>
+  <data name="NoCompressionListItemText" xml:space="preserve">
+    <value>Χωρίς συμπίεση</value>
+  </data>
+  <data name="ProgramTitle" xml:space="preserve">
+    <value>RPG Maker MV Cook Tool</value>
+  </data>
+  <data name="ProgramVersionLabelUiText" xml:space="preserve">
+    <value>Έκδοση R3.00</value>
+  </data>
+  <data name="ProjectSettingsUiText" xml:space="preserve">
+    <value>Ρυθμίσεις Project</value>
+  </data>
+  <data name="RemoveProjectUiText" xml:space="preserve">
+    <value>Αφαίρεση</value>
+  </data>
+  <data name="NwjsLZocationUiText" xml:space="preserve">
+    <value>Θέση του NW.js</value>
+  </data>
+  <data name="UserManualUiText" xml:space="preserve">
+    <value>Οδηγός Χρήσης</value>
+  </data>
+  <data name="WarningText" xml:space="preserve">
+    <value>Προσοχή</value>
+  </data>
+  <data name="FastestListItemText" xml:space="preserve">
+    <value>Γρηγορότερη</value>
+  </data>
+  <data name="OptimalListItemText" xml:space="preserve">
+    <value>Βέλτιστη</value>
+  </data>
+  <data name="FileExtensionText" xml:space="preserve">
+    <value>Επέκταση αρχείου:</value>
+  </data>
+  <data name="ErrorOccuredTitle" xml:space="preserve">
+    <value>Αμάν! Συνέβη ένα σφάλμα.</value>
+  </data>
+  <data name="FolderLocationText" xml:space="preserve">
+    <value>Θέση;</value>
+  </data>
+  <data name="SProjectSettingsUpdatedText" xml:space="preserve">
+    <value>Οι ρυθμίσεις του project ενημερώθηκαν.</value>
+  </data>
+  <data name="EditMetadataUiText" xml:space="preserve">
+    <value>Επεξεργασία πληροφοριών</value>
+  </data>
+  <data name="DeveloperCreditUiText" xml:space="preserve">
+    <value>Αναπτύχθηκε από τον Studio ACE(AceOfAces). Αδειοδοτείται κάτω από το MIT License.</value>
+  </data>
+  <data name="DefaultSettingsUpdatedText" xml:space="preserve">
+    <value>Οι προεπιλεγμένες ρυθμίσεις έχουν ενημερωθεί.</value>
+  </data>
+  <data name="DefaultSettingsUpdatedMessage" xml:space="preserve">
+    <value>Οι ρυθμίσεις θα χρησιμοποιηθούν για νέα projects.</value>
+  </data>
+  <data name="CompressionLevelUiText" xml:space="preserve">
+    <value>Επίπεδο συμπίεσης:</value>
+  </data>
+  <data name="CompressionModeUiText" xml:space="preserve">
+    <value>Λειτουργεία συμπίεσης:</value>
+  </data>
+  <data name="CompileUiText" xml:space="preserve">
+    <value>Μετάφραση</value>
+  </data>
+  <data name="CompilerUiText" xml:space="preserve">
+    <value>Μεταφραστής</value>
+  </data>
+  <data name="CompleteText" xml:space="preserve">
+    <value>Ολοκληρώθηκε</value>
+  </data>
+  <data name="CompressFilesText" xml:space="preserve">
+    <value>Συμπίεση αρχείων:</value>
+  </data>
+  <data name="CancelButtonUiText" xml:space="preserve">
+    <value>Ακύρωση</value>
+  </data>
+  <data name="AddProjectUiText" xml:space="preserve">
+    <value>Προσθήκη</value>
+  </data>
+  <data name="AboutTabUiText" xml:space="preserve">
+    <value>Περί...</value>
+  </data>
+  <data name="DefaultSettingsButtonUiText" xml:space="preserve">
+    <value>Προεπιλεγμένες ρυθμίσεις...</value>
+  </data>
+  <data name="ProjectMessageNotSelected_Details" xml:space="preserve">
+    <value>Παρακαλώ επιλέξτε το project απο τη λίστα.</value>
+  </data>
+  <data name="ProjectNotSelectedMessage" xml:space="preserve">
+    <value>Δεν επιλέχθηκε κανένα project.</value>
+  </data>
+  <data name="RemoveFilesAfterCompressionUiText" xml:space="preserve">
+    <value>Αφαίρεση των αρχείων του project μετά το πακετάρισμα.</value>
+  </data>
+  <data name="ProjectPickerText" xml:space="preserve">
+    <value>Παρακαλώ επιλέξτε τη θέση του project.</value>
+  </data>
+  <data name="RemoveSourceCodeUiText" xml:space="preserve">
+    <value>Αφαίρεση των αρχείων JS μετά τη μετάφραση.</value>
+  </data>
+  <data name="RemoveSourceFilesAfterCompiling" xml:space="preserve">
+    <value>Αφαίρεση των αρχείων JS μετά τη μετάφραση:</value>
+  </data>
+  <data name="RemoveSourceFilesAfterCompressionText" xml:space="preserve">
+    <value>Αφαίρεση των αρχείων μετά τη συμπίεση:</value>
+  </data>
+  <data name="SaveCompleteText" xml:space="preserve">
+    <value>Αποθηκεύτηκαν οι πληροφορίες του πακέτου.</value>
+  </data>
+  <data name="FileOutsideOfProjectError" xml:space="preserve">
+    <value>Επιλέξατε ένα αρχείο που είναι εκτός του project.</value>
+  </data>
+  <data name="DefaultProjectSettingsUiText" xml:space="preserve">
+    <value>Προεπιλεγμένες ρυθμίσεις project</value>
+  </data>
+  <data name="CompressFilesToPackageUiText" xml:space="preserve">
+    <value>Συμπίεση των αρχείων παιχνιδιού στο package.nw.</value>
+  </data>
+  <data name="ProgressUiText" xml:space="preserve">
+    <value>Κατάσταση</value>
   </data>
 </root>

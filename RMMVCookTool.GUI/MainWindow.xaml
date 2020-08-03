@@ -4,46 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RMMVCookTool.GUI"
+        xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
         mc:Ignorable="d"
-        Title="RPG Maker MV Cook Tool" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640" Loaded="Window_Loaded">
+        Title="{x:Static properties:Resources.ProgramTitle}" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640" Loaded="Window_Loaded">
     <Window.Resources>
         <DataTemplate x:Key="listBoxTemplate">
             <StackPanel Margin="3">
                 <DockPanel>
-                    <TextBlock FontWeight="Bold" Text="Location:" DockPanel.Dock="Left" Margin="5,0,10,0" />
+                    <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.FolderLocationText}" DockPanel.Dock="Left" Margin="5,0,10,0" />
                     <TextBlock Text="" />
                     <TextBlock Text="{Binding ProjectLocation}"/>
                 </DockPanel>
                 <DockPanel>
-                    <TextBlock FontWeight="Bold" Text="File Extension:" DockPanel.Dock="Left" Margin="5,0,5,0" />
+                    <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.FileExtensionText}" DockPanel.Dock="Left" Margin="5,0,5,0" />
                     <TextBlock Text="{Binding FileExtension}" />
-                    <TextBlock FontWeight="Bold" Text="Remove Source Files after Compiling:" Margin="5,0,5,0"/>
+                    <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.RemoveSourceFilesAfterCompiling}" Margin="5,0,5,0"/>
                     <TextBlock Text="{Binding RemoveSourceCodeAfterCompiling}"/>
                 </DockPanel>
                 <DockPanel>
-                    <TextBlock FontWeight="Bold" Text="Compress Files:" Margin="5,0,5,0"/>
+                    <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.CompressFilesText}" Margin="5,0,5,0"/>
                     <TextBlock Text="{Binding CompressFilesToPackage}"/>
-                    <TextBlock FontWeight="Bold" Text="Remove source files after compression:" Margin="5,0,5,0"/>
+                    <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.RemoveSourceFilesAfterCompressionText}" Margin="5,0,5,0"/>
                     <TextBlock Text="{Binding RemoveFilesAfterCompression}"/>
+                    <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.CompressionModeUiText}" Margin="5,0,5,0"/>
+                    <TextBlock Text="{Binding CompressionModeLevel}"/>
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
 <Grid>
         <TabControl>
-            <TabItem Header="Compiler">
+            <TabItem x:Name="TotalWorkProgress" Header="{x:Static properties:Resources.CompilerUiText}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="98"/>
                         <RowDefinition Height="209*"/>
                         <RowDefinition Height="147"/>
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Settings">
+                    <GroupBox Header="{x:Static properties:Resources.SettingsUiText}">
                         <Grid>
-                            <Label Content="Location of the NW.js SDK" Margin="0,0,0,40" HorizontalAlignment="Left"/>
+                            <Label Content="{x:Static properties:Resources.NwjsLZocationUiText}" Margin="0,0,0,40" HorizontalAlignment="Left"/>
                             <TextBox x:Name="NwjsLocation" Margin="0,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" Drop="NwjsLocation_Drop" MouseMove="NwjsLocation_MouseMove" DragEnter="NwjsLocation_DragEnter" DragLeave="NwjsLocation_DragLeave" DragOver="NwjsLocation_DragOver" AllowDrop="True" Text="{Binding SDKLocation, Mode=TwoWay, UpdateSourceTrigger=Explicit, Source={x:Static local:AppSettings.Default}}"/>
-                            <Button x:Name="BrowseSdkButton" Content="Browse..." Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Click="BrowseSDKButton_Click"/>
-                            <Button Content="Default Settings..." HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" Click="Button_Click"/>
+                            <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Click="BrowseSDKButton_Click"/>
+                            <Button Content="{x:Static properties:Resources.DefaultSettingsButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" Click="Button_Click"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Projects" Grid.Row="1">
@@ -56,27 +59,27 @@
                             <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
-                                <Button x:Name="AddProjectButton" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" Click="AddProjectButton_Click"/>
-                                <Button x:Name="RemoveProjectButton" Content="Remove" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Click="RemoveProjectButton_Click"/>
-                                <Button x:Name="ProjectSettingsButton" Content="Project Settings" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Click="ProjectSettingsButton_Click"/>
-                                <Button x:Name="EditMetadataButton" Content="Edit Metadata" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0" Click="EditMetadataButton_Click"/>
+                                <Button x:Name="AddProjectButton" Content="{x:Static properties:Resources.AddProjectUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" Click="AddProjectButton_Click"/>
+                                <Button x:Name="RemoveProjectButton" Content="{x:Static properties:Resources.RemoveProjectUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Click="RemoveProjectButton_Click"/>
+                                <Button x:Name="ProjectSettingsButton" Content="{x:Static properties:Resources.ProjectSettingsUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Click="ProjectSettingsButton_Click"/>
+                                <Button x:Name="EditMetadataButton" Content="{x:Static properties:Resources.EditMetadataUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0" Click="EditMetadataButton_Click"/>
                             </StackPanel>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Progress" Grid.Row="2">
+                    <GroupBox Header="{x:Static properties:Resources.ProgressUiText}" Grid.Row="2">
                         <Grid>
-                            <Label Content="Total Progress:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="{x:Static properties:Resources.TotalProgressBarUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <ProgressBar Height="20" Margin="0,26,124,0" VerticalAlignment="Top"/>
-                            <Label Content="Current Project Progress:" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top"/>
+                            <Label Content="{x:Static properties:Resources.CurrentProjectProgressBarUiText}" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top"/>
                             <ProgressBar Height="20" Margin="0,77,124,0" VerticalAlignment="Top"/>
-                            <Button Content="Compile" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1"/>
-                            <Button Content="Cancel" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Visibility="Hidden" UseLayoutRounding="True" Height="20" Padding="2,1,2,1"/>
+                            <Button Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1"/>
+                            <Button Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Visibility="Hidden" UseLayoutRounding="True" Height="20" Padding="2,1,2,1"/>
 
                         </Grid>
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="About...">
+            <TabItem Header="{x:Static properties:Resources.AboutTabUiText}">
                 <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="108"/>
@@ -84,12 +87,12 @@
                     </Grid.RowDefinitions>
                     <GroupBox Header="About">
                         <StackPanel Orientation="Vertical">
-                            <Label Content="RPG Maker MV Cook Tool" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0"/>
-                            <Label x:Name="ProgramVersionLabel" Content="Version R3.00" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
-                            <Label Content="Developed by Studio ACE. Licensed under the MIT license." VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0"/>
+                            <Label Content="{x:Static properties:Resources.ProgramTitle}" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0"/>
+                            <Label x:Name="ProgramVersionLabel" Content="{x:Static properties:Resources.ProgramVersionLabelUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
+                            <Label Content="{x:Static properties:Resources.DeveloperCreditUiText}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0"/>
                             </StackPanel>
                     </GroupBox>
-                    <GroupBox Header="User Manual" Grid.Row="1">
+                    <GroupBox Header="{x:Static properties:Resources.UserManualUiText}" Grid.Row="1">
                         <RichTextBox x:Name="UserManualBox" VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" IsReadOnly="True">
 
                         </RichTextBox>

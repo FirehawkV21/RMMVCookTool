@@ -141,14 +141,8 @@
   <data name="EssentialsGroupString" xml:space="preserve">
     <value>Essentials</value>
   </data>
-  <data name="FileAccessError" xml:space="preserve">
-    <value>Cannot access the folder. Please check that you have permission to read and write on the folder.</value>
-  </data>
   <data name="FileOutsideOfProjectError" xml:space="preserve">
     <value>You picked a file that is outside of the project's file. Please pick a file within the project.</value>
-  </data>
-  <data name="FileStreamErrorText" xml:space="preserve">
-    <value>The File Stream went kaput.</value>
   </data>
   <data name="GameIDUiString" xml:space="preserve">
     <value>Game ID</value>
@@ -182,9 +176,6 @@
   </data>
   <data name="InKioskModeListItemText" xml:space="preserve">
     <value>In Kiosk Mode</value>
-  </data>
-  <data name="IOErrorText" xml:space="preserve">
-    <value>An IO Exception occurred. Is an app using the package.json file?</value>
   </data>
   <data name="JavaScriptFlagsUiText" xml:space="preserve">
     <value>JavaScript Flags</value>
@@ -266,7 +257,7 @@
     <value>Window Title</value>
   </data>
   <data name="ErrorOccuredTitle" xml:space="preserve">
-    <value>Ack! An error has occured.</value>
+    <value>Ack! An error has occurred.</value>
   </data>
   <data name="CompleteText" xml:space="preserve">
     <value>Complete</value>
@@ -288,5 +279,98 @@
   </data>
   <data name="SProjectSettingsUpdatedText" xml:space="preserve">
     <value>The project's settings have been updated.</value>
+  </data>
+  <data name="FolderLocationText" xml:space="preserve">
+    <value>Location:</value>
+  </data>
+  <data name="FileExtensionText" xml:space="preserve">
+    <value>File Extension:</value>
+  </data>
+  <data name="RemoveSourceFilesAfterCompiling" xml:space="preserve">
+    <value>Remove JS Files after Compiling:</value>
+  </data>
+  <data name="CompressFilesText" xml:space="preserve">
+    <value>Compress Files:</value>
+  </data>
+  <data name="RemoveSourceFilesAfterCompressionText" xml:space="preserve">
+    <value>Remove Source Files after Compression:</value>
+  </data>
+  <data name="CompressionModeUiText" xml:space="preserve">
+    <value>Compression Mode:</value>
+  </data>
+  <data name="NwjsLZocationUiText" xml:space="preserve">
+    <value>Location of the NW.js SDK</value>
+  </data>
+  <data name="ProgramTitle" xml:space="preserve">
+    <value>RPG Maker MV Cook Tool</value>
+  </data>
+  <data name="CompilerUiText" xml:space="preserve">
+    <value>Compiler</value>
+  </data>
+  <data name="AddProjectUiText" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="RemoveProjectUiText" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ProjectSettingsUiText" xml:space="preserve">
+    <value>Project Settings</value>
+  </data>
+  <data name="EditMetadataUiText" xml:space="preserve">
+    <value>Edit Metadata</value>
+  </data>
+  <data name="ProgressUiText" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="TotalProgressBarUiText" xml:space="preserve">
+    <value>Total Progress:</value>
+  </data>
+  <data name="CurrentProjectProgressBarUiText" xml:space="preserve">
+    <value>Current Project Progress:</value>
+  </data>
+  <data name="CompileUiText" xml:space="preserve">
+    <value>Compile</value>
+  </data>
+  <data name="CancelButtonUiText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AboutTabUiText" xml:space="preserve">
+    <value>About...</value>
+  </data>
+  <data name="ProgramVersionLabelUiText" xml:space="preserve">
+    <value>Version R3.00</value>
+  </data>
+  <data name="DeveloperCreditUiText" xml:space="preserve">
+    <value>Developed by Studio ACE(AceOfAces). Licensed under the MIT license.</value>
+  </data>
+  <data name="UserManualUiText" xml:space="preserve">
+    <value>User Manual</value>
+  </data>
+  <data name="CompressionLevelUiText" xml:space="preserve">
+    <value>Compression Level:</value>
+  </data>
+  <data name="RemoveFilesAfterCompressionUiText" xml:space="preserve">
+    <value>Remove the game files after packaging.</value>
+  </data>
+  <data name="CompressFilesToPackageUiText" xml:space="preserve">
+    <value>Compress the game files into package.nw.</value>
+  </data>
+  <data name="RemoveSourceCodeUiText" xml:space="preserve">
+    <value>Remove the source JS files after compiling.</value>
+  </data>
+  <data name="OptimalListItemText" xml:space="preserve">
+    <value>Optimal</value>
+  </data>
+  <data name="FastestListItemText" xml:space="preserve">
+    <value>Fastest</value>
+  </data>
+  <data name="NoCompressionListItemText" xml:space="preserve">
+    <value>No Compression</value>
+  </data>
+  <data name="DefaultSettingsButtonUiText" xml:space="preserve">
+    <value>Default Settings...</value>
+  </data>
+  <data name="DefaultProjectSettingsUiText" xml:space="preserve">
+    <value>Default Project Settings</value>
   </data>
 </root>

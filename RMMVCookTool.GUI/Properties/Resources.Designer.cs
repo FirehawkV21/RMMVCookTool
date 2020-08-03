@@ -61,11 +61,38 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About....
+        /// </summary>
+        public static string AboutTabUiText {
+            get {
+                return ResourceManager.GetString("AboutTabUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string AddProjectUiText {
+            get {
+                return ResourceManager.GetString("AddProjectUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browse....
         /// </summary>
         public static string BrowseUiText {
             get {
                 return ResourceManager.GetString("BrowseUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelButtonUiText {
+            get {
+                return ResourceManager.GetString("CancelButtonUiText", resourceCulture);
             }
         }
         
@@ -88,11 +115,92 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compiler.
+        /// </summary>
+        public static string CompilerUiText {
+            get {
+                return ResourceManager.GetString("CompilerUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compile.
+        /// </summary>
+        public static string CompileUiText {
+            get {
+                return ResourceManager.GetString("CompileUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Complete.
         /// </summary>
         public static string CompleteText {
             get {
                 return ResourceManager.GetString("CompleteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compress Files:.
+        /// </summary>
+        public static string CompressFilesText {
+            get {
+                return ResourceManager.GetString("CompressFilesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compress the game files into package.nw..
+        /// </summary>
+        public static string CompressFilesToPackageUiText {
+            get {
+                return ResourceManager.GetString("CompressFilesToPackageUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compression Level:.
+        /// </summary>
+        public static string CompressionLevelUiText {
+            get {
+                return ResourceManager.GetString("CompressionLevelUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compression Mode:.
+        /// </summary>
+        public static string CompressionModeUiText {
+            get {
+                return ResourceManager.GetString("CompressionModeUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Project Progress:.
+        /// </summary>
+        public static string CurrentProjectProgressBarUiText {
+            get {
+                return ResourceManager.GetString("CurrentProjectProgressBarUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Project Settings.
+        /// </summary>
+        public static string DefaultProjectSettingsUiText {
+            get {
+                return ResourceManager.GetString("DefaultProjectSettingsUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Settings....
+        /// </summary>
+        public static string DefaultSettingsButtonUiText {
+            get {
+                return ResourceManager.GetString("DefaultSettingsButtonUiText", resourceCulture);
             }
         }
         
@@ -115,11 +223,29 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Developed by Studio ACE(AceOfAces). Licensed under the MIT license..
+        /// </summary>
+        public static string DeveloperCreditUiText {
+            get {
+                return ResourceManager.GetString("DeveloperCreditUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Done!.
         /// </summary>
         public static string DoneText {
             get {
                 return ResourceManager.GetString("DoneText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Metadata.
+        /// </summary>
+        public static string EditMetadataUiText {
+            get {
+                return ResourceManager.GetString("EditMetadataUiText", resourceCulture);
             }
         }
         
@@ -142,7 +268,7 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ack! An error has occured..
+        ///   Looks up a localized string similar to Ack! An error has occurred..
         /// </summary>
         public static string ErrorOccuredTitle {
             get {
@@ -169,11 +295,20 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot access the folder. Please check that you have permission to read and write on the folder..
+        ///   Looks up a localized string similar to Fastest.
         /// </summary>
-        public static string FileAccessError {
+        public static string FastestListItemText {
             get {
-                return ResourceManager.GetString("FileAccessError", resourceCulture);
+                return ResourceManager.GetString("FastestListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Extension:.
+        /// </summary>
+        public static string FileExtensionText {
+            get {
+                return ResourceManager.GetString("FileExtensionText", resourceCulture);
             }
         }
         
@@ -187,11 +322,11 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The File Stream went kaput..
+        ///   Looks up a localized string similar to Location:.
         /// </summary>
-        public static string FileStreamErrorText {
+        public static string FolderLocationText {
             get {
-                return ResourceManager.GetString("FileStreamErrorText", resourceCulture);
+                return ResourceManager.GetString("FolderLocationText", resourceCulture);
             }
         }
         
@@ -295,15 +430,6 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An IO Exception occurred. Is an app using the package.json file?.
-        /// </summary>
-        public static string IOErrorText {
-            get {
-                return ResourceManager.GetString("IOErrorText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to JavaScript Flags.
         /// </summary>
         public static string JavaScriptFlagsUiText {
@@ -350,6 +476,15 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Compression.
+        /// </summary>
+        public static string NoCompressionListItemText {
+            get {
+                return ResourceManager.GetString("NoCompressionListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
         public static string NoneListItemText {
@@ -368,11 +503,56 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location of the NW.js SDK.
+        /// </summary>
+        public static string NwjsLZocationUiText {
+            get {
+                return ResourceManager.GetString("NwjsLZocationUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optimal.
+        /// </summary>
+        public static string OptimalListItemText {
+            get {
+                return ResourceManager.GetString("OptimalListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PNG File|*.png.
         /// </summary>
         public static string PNGFileText {
             get {
                 return ResourceManager.GetString("PNGFileText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RPG Maker MV Cook Tool.
+        /// </summary>
+        public static string ProgramTitle {
+            get {
+                return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version R3.00.
+        /// </summary>
+        public static string ProgramVersionLabelUiText {
+            get {
+                return ResourceManager.GetString("ProgramVersionLabelUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Progress.
+        /// </summary>
+        public static string ProgressUiText {
+            get {
+                return ResourceManager.GetString("ProgressUiText", resourceCulture);
             }
         }
         
@@ -409,6 +589,60 @@ namespace RMMVCookTool.GUI.Properties {
         public static string ProjectPickerText {
             get {
                 return ResourceManager.GetString("ProjectPickerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Settings.
+        /// </summary>
+        public static string ProjectSettingsUiText {
+            get {
+                return ResourceManager.GetString("ProjectSettingsUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the game files after packaging..
+        /// </summary>
+        public static string RemoveFilesAfterCompressionUiText {
+            get {
+                return ResourceManager.GetString("RemoveFilesAfterCompressionUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string RemoveProjectUiText {
+            get {
+                return ResourceManager.GetString("RemoveProjectUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the source JS files after compiling..
+        /// </summary>
+        public static string RemoveSourceCodeUiText {
+            get {
+                return ResourceManager.GetString("RemoveSourceCodeUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove JS Files after Compiling:.
+        /// </summary>
+        public static string RemoveSourceFilesAfterCompiling {
+            get {
+                return ResourceManager.GetString("RemoveSourceFilesAfterCompiling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Source Files after Compression:.
+        /// </summary>
+        public static string RemoveSourceFilesAfterCompressionText {
+            get {
+                return ResourceManager.GetString("RemoveSourceFilesAfterCompressionText", resourceCulture);
             }
         }
         
@@ -499,6 +733,24 @@ namespace RMMVCookTool.GUI.Properties {
         public static string StartUiText {
             get {
                 return ResourceManager.GetString("StartUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Progress:.
+        /// </summary>
+        public static string TotalProgressBarUiText {
+            get {
+                return ResourceManager.GetString("TotalProgressBarUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Manual.
+        /// </summary>
+        public static string UserManualUiText {
+            get {
+                return ResourceManager.GetString("UserManualUiText", resourceCulture);
             }
         }
         

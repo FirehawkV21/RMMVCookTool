@@ -26,7 +26,7 @@ namespace RMMVCookTool.GUI
         {
             if (!_isEditingProjectSettings)
             {
-                Title = "Default Project Settings";
+                Title = Properties.Resources.DefaultProjectSettingsUiText;
                 RemoveSourceFilesAfterCompilingCheckbox.IsChecked = AppSettings.Default.DeleteSourceCode;
                 CompressFilesToPackageCheckbox.IsChecked = AppSettings.Default.PackageCode;
                 RemoveFilesAfterPackagingCheckbox.IsChecked = AppSettings.Default.RemoveFilesAfterPackaging;
