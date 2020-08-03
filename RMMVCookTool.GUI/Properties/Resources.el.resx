@@ -384,4 +384,10 @@
   <data name="CompilingText" xml:space="preserve">
     <value>Μετάφραση του </value>
   </data>
+  <data name="NoJSFilesPresent" xml:space="preserve">
+    <value>Παρακαλώ προσθεστε τους φακέλους που περιέχουν τα αρχεία JavaScript για μετάφραση σε δυαδικά αρχεία.</value>
+  </data>
+  <data name="PackaginStatusText" xml:space="preserve">
+    <value>Πακετάρισμα...</value>
+  </data>
 </root>

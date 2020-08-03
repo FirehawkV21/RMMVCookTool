@@ -620,6 +620,15 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Packaging....
+        /// </summary>
+        public static string PackaginStatusText {
+            get {
+                return ResourceManager.GetString("PackaginStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PNG File|*.png.
         /// </summary>
         public static string PNGFileText {
@@ -818,7 +827,8 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to --- The Stack Trace is below this line ---.
+        ///   Looks up a localized string similar to --- The Stack Trace is below this line ---
+        ///.
         /// </summary>
         public static string StackTraceLine {
             get {

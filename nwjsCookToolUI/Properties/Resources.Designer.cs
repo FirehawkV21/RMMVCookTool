@@ -686,8 +686,7 @@ namespace nwjsCookToolUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating package...
-        ///.
+        ///   Looks up a localized string similar to Creating package....
         /// </summary>
         public static string PackageCreationText {
             get {

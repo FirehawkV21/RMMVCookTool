@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -85,9 +84,19 @@ namespace RMMVCookTool.GUI
                     }
                     if (e.Cancel) break;
                     if (ProjectList[currentProject].CompressFilesToPackage)
+                    {
+                        _compilerStatusReport = 4;
+                        _compilerWorker.ReportProgress(1);
                         ProjectList[currentProject].CompressFiles();
-                    if (ProjectList[currentProject].RemoveFilesAfterCompression) ProjectList[currentProject].DeleteFiles();
-                    _compilerStatusReport = 4;
+                    }
+
+                    if (ProjectList[currentProject].RemoveFilesAfterCompression)
+                    {
+                        _compilerStatusReport = 5;
+                        _compilerWorker.ReportProgress(1);
+                        ProjectList[currentProject].DeleteFiles();
+                    }
+                    _compilerStatusReport = 6;
                     _compilerWorker.ReportProgress(currentProject + 1);
                 }
             }
@@ -162,13 +171,21 @@ namespace RMMVCookTool.GUI
 
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
         {
-            if (_compilerStatusReport > 0 && _compilerStatusReport < 3) _stringBuffer.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile));
+            if ((_compilerStatusReport > 0 && _compilerStatusReport < 3) && currentFile > ProjectList[currentProject].FileMap.Count) _stringBuffer.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile));
             switch (_compilerStatusReport)
             {
-                case 4:
+                case 6:
                     CurrentWorkloadBar.Value = 0;
                     TaskbarInfoHolder.ProgressValue = 0;
                     TotalWorkProgressBar.Value += 1;
+                    break;
+                case 5:
+                    CurrentWorkloadBar.Value += 1;
+                    TaskbarInfoHolder.ProgressValue = CurrentWorkloadBar.Value / CurrentWorkloadBar.Maximum;
+                    break;
+                case 4:
+                    TaskbarInfoHolder.ProgressValue = CurrentWorkloadBar.Value / CurrentWorkloadBar.Maximum;
+                    CurrentWorkloadLabel.Content = Properties.Resources.PackaginStatusText;
                     break;
                 case 3:
                     CurrentWorkloadBar.Value += 1;
@@ -187,14 +204,14 @@ namespace RMMVCookTool.GUI
                     _stringBuffer.Clear();
                     break;
                 case 1:
-                    CurrentWorkloadBar.Maximum = ProjectList[currentProject].FileMap.Count;
+                    CurrentWorkloadBar.Maximum = ProjectList[currentProject].FileMap.Count +  ((ProjectList[currentProject].CompressFilesToPackage) ? ((ProjectList[currentProject].RemoveFilesAfterCompression) ? 2 : 1) : 0);
                     CurrentWorkloadLabel.Content =
                         Properties.Resources.BinRemovalStatusText + ProjectList[currentProject].ProjectLocation + "...";
                     break;
                 case 0:
                     if (currentProject < ProjectList.Count)
                     {
-                        TotalProgressLabel.Content = Properties.Resources.CompileText1 + FolderList.Items[currentProject] +
+                        TotalProgressLabel.Content = Properties.Resources.CompileText1 + ProjectList[currentProject].ProjectLocation +
                                                  Properties.Resources.FolderText;
                     }
                     break;

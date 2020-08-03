@@ -289,7 +289,8 @@
     <value>The project's settings have been updated.</value>
   </data>
   <data name="StackTraceLine" xml:space="preserve">
-    <value>--- The Stack Trace is below this line ---</value>
+    <value>--- The Stack Trace is below this line ---
+</value>
   </data>
   <data name="WarningText" xml:space="preserve">
     <value>Warning</value>
@@ -395,5 +396,14 @@
   </data>
   <data name="CompilingText" xml:space="preserve">
     <value>Compiling </value>
+  </data>
+  <data name="CompilerMissingText" xml:space="preserve">
+    <value>The nwjs Compiler is missing.</value>
+  </data>
+  <data name="NoJSFilesPresent" xml:space="preserve">
+    <value>Please add the folders you want the JavaScript files to be compiled.</value>
+  </data>
+  <data name="PackaginStatusText" xml:space="preserve">
+    <value>Packaging...</value>
   </data>
 </root>

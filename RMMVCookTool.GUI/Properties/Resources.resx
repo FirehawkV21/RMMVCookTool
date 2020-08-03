@@ -230,7 +230,8 @@
     <value>Settings</value>
   </data>
   <data name="StackTraceLine" xml:space="preserve">
-    <value>--- The Stack Trace is below this line ---</value>
+    <value>--- The Stack Trace is below this line ---
+</value>
   </data>
   <data name="StartUiText" xml:space="preserve">
     <value>Start:</value>
@@ -405,6 +406,9 @@
   </data>
   <data name="NoJSFilesPresent" xml:space="preserve">
     <value>Please add the folders you want the JavaScript files to be compiled.</value>
+  </data>
+  <data name="PackaginStatusText" xml:space="preserve">
+    <value>Packaging...</value>
   </data>
   <data name="TaskCancelledMessage" xml:space="preserve">
     <value>The task was cancelled.</value>

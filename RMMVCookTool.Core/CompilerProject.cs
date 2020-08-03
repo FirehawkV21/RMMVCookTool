@@ -99,17 +99,15 @@ namespace RMMVCookTool.Core
         /// </summary>
         public void CompressFiles()
         {
-            string[] tempString =
-                ProjectLocation.Split(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? '\\' : '/');
             var packageOutput = Path.Combine(ProjectLocation, ArchiveName);
             if (File.Exists(packageOutput)) File.Delete(packageOutput);
+            //Temporary prepare a string for stripping.
+            string stripPart = ProjectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
+            //List all the files in the game's www folder.
+            List<string> gameFiles =
+                CompilerUtilities.FileFinder(ProjectLocation, "*");
             using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
             {
-                //Temporary prepare a string for stripping.
-                string stripPart = ProjectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
-                //List all the files in the game's www folder.
-                IEnumerable<string> gameFiles =
-                    CompilerUtilities.FileFinder(Path.Combine(ProjectLocation, tempString[^1]), "*");
                 foreach (var file in gameFiles)
                 {
                     //Start adding files.
