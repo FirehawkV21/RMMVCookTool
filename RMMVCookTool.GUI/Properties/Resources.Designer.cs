@@ -61,6 +61,15 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aborted.
+        /// </summary>
+        public static string AbortedText {
+            get {
+                return ResourceManager.GetString("AbortedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About....
         /// </summary>
         public static string AboutTabUiText {
@@ -75,6 +84,15 @@ namespace RMMVCookTool.GUI.Properties {
         public static string AddProjectUiText {
             get {
                 return ResourceManager.GetString("AddProjectUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing binary files from .
+        /// </summary>
+        public static string BinRemovalStatusText {
+            get {
+                return ResourceManager.GetString("BinRemovalStatusText", resourceCulture);
             }
         }
         
@@ -115,6 +133,33 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compilation complete!.
+        /// </summary>
+        public static string CompilationCompleteText {
+            get {
+                return ResourceManager.GetString("CompilationCompleteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compiling scripts in the js folder....
+        /// </summary>
+        public static string CompileJsFolderProgressText {
+            get {
+                return ResourceManager.GetString("CompileJsFolderProgressText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The nwjs Compiler is missing..
+        /// </summary>
+        public static string CompilerMissingText {
+            get {
+                return ResourceManager.GetString("CompilerMissingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compiler.
         /// </summary>
         public static string CompilerUiText {
@@ -124,11 +169,38 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compiling .
+        /// </summary>
+        public static string CompileText {
+            get {
+                return ResourceManager.GetString("CompileText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compiling scripts in the .
+        /// </summary>
+        public static string CompileText1 {
+            get {
+                return ResourceManager.GetString("CompileText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compile.
         /// </summary>
         public static string CompileUiText {
             get {
                 return ResourceManager.GetString("CompileUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compiling .
+        /// </summary>
+        public static string CompilingText {
+            get {
+                return ResourceManager.GetString("CompilingText", resourceCulture);
             }
         }
         
@@ -295,6 +367,15 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed!.
+        /// </summary>
+        public static string FailedText {
+            get {
+                return ResourceManager.GetString("FailedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fastest.
         /// </summary>
         public static string FastestListItemText {
@@ -327,6 +408,15 @@ namespace RMMVCookTool.GUI.Properties {
         public static string FolderLocationText {
             get {
                 return ResourceManager.GetString("FolderLocationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  folder....
+        /// </summary>
+        public static string FolderText {
+            get {
+                return ResourceManager.GetString("FolderText", resourceCulture);
             }
         }
         
@@ -481,6 +571,15 @@ namespace RMMVCookTool.GUI.Properties {
         public static string NoCompressionListItemText {
             get {
                 return ResourceManager.GetString("NoCompressionListItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please add the folders you want the JavaScript files to be compiled..
+        /// </summary>
+        public static string NoJSFilesPresent {
+            get {
+                return ResourceManager.GetString("NoJSFilesPresent", resourceCulture);
             }
         }
         
@@ -733,6 +832,15 @@ namespace RMMVCookTool.GUI.Properties {
         public static string StartUiText {
             get {
                 return ResourceManager.GetString("StartUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The task was cancelled..
+        /// </summary>
+        public static string TaskCancelledMessage {
+            get {
+                return ResourceManager.GetString("TaskCancelledMessage", resourceCulture);
             }
         }
         

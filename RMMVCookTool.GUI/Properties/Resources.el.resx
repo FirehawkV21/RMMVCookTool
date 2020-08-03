@@ -354,4 +354,34 @@
   <data name="ProgressUiText" xml:space="preserve">
     <value>Κατάσταση</value>
   </data>
+  <data name="FailedText" xml:space="preserve">
+    <value>Αποτυχία!</value>
+  </data>
+  <data name="FolderText" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="ProjectPathTooLongErrorText" xml:space="preserve">
+    <value>Η διαδρομή για το project είναι πάρα πολύ μεγάλο. Παρακαλώ μικρύνετε την διαδρομή.</value>
+  </data>
+  <data name="TaskCancelledMessage" xml:space="preserve">
+    <value>Η εργασία ακυρώθηκε.</value>
+  </data>
+  <data name="CompilationCompleteText" xml:space="preserve">
+    <value>Η μετάφραση ολοκληρώθηκε!</value>
+  </data>
+  <data name="CompileJsFolderProgressText" xml:space="preserve">
+    <value>Μετάφραση των scripts μέσα στον φάκελο js...</value>
+  </data>
+  <data name="BinRemovalStatusText" xml:space="preserve">
+    <value>Διαγραφή δυαδικών αρχείων απο τον φάκελο </value>
+  </data>
+  <data name="CompileText" xml:space="preserve">
+    <value>Μετάφραση του αρχείου </value>
+  </data>
+  <data name="CompileText1" xml:space="preserve">
+    <value>Μετάφραση των scripts μέσα στο φάκελο </value>
+  </data>
+  <data name="CompilingText" xml:space="preserve">
+    <value>Μετάφραση του </value>
+  </data>
 </root>

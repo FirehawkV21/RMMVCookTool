@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shell;
 using Ookii.Dialogs.Wpf;
 using RMMVCookTool.Core;
 using DataFormats = System.Windows.DataFormats;
@@ -27,13 +28,229 @@ namespace RMMVCookTool.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+            SetupWorkers();
+        }
+        private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
+        private string _previousPath;
+        private int _compilerStatusReport;
+        private StringBuilder _stringBuffer = new StringBuilder();
+        private int currentFile;
+        private int currentProject;
+        private StringBuilder _nextFile = new StringBuilder();
+        public static ObservableCollection<CompilerProject> ProjectList { get; } = new ObservableCollection<CompilerProject>();
+
+        #region Compiler Worker
+        private void SetupWorkers()
+        {
+            _compilerWorker.WorkerReportsProgress = true;
+            _compilerWorker.WorkerSupportsCancellation = true;
+            _compilerWorker.DoWork += StartCompiler;
+            _compilerWorker.ProgressChanged += CompilerReport;
+            _compilerWorker.RunWorkerCompleted += CompilerFinisher;
         }
 
-        private string _previousPath;
-        public static ObservableCollection<CompilerProject> ProjectList { get; } = new ObservableCollection<CompilerProject>();
+        private void StartCompiler(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                for (int currentProject = 0; currentProject < ProjectList.Count; currentProject++)
+                {
+                    ProjectList[currentProject].CompilerInfo.FileName = Path.Combine(AppSettings.Default.SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
+                    _compilerStatusReport = 0;
+                    if (_compilerWorker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    _compilerWorker.ReportProgress(currentProject + 1);
+                    _compilerStatusReport = 1;
+                    _compilerWorker.ReportProgress(currentProject + 1);
+                    CompilerUtilities.CleanupBin(ProjectList[currentProject].FileMap);
+                    _compilerStatusReport = 2;
+                    _compilerWorker.ReportProgress(1);
+                    _compilerStatusReport = 3;
+                    for (currentFile = 0; currentFile < ProjectList[currentProject].FileMap.Count; currentFile++)
+                    {
+                        if (_compilerWorker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            break;
+                        }
+                        _compilerWorker.ReportProgress(currentProject + 1);
+                        ProjectList[currentProject].CompileFile(currentFile);
+                    }
+                    if (e.Cancel) break;
+                    if (ProjectList[currentProject].CompressFilesToPackage)
+                        ProjectList[currentProject].CompressFiles();
+                    if (ProjectList[currentProject].RemoveFilesAfterCompression) ProjectList[currentProject].DeleteFiles();
+                    _compilerStatusReport = 4;
+                    _compilerWorker.ReportProgress(currentProject + 1);
+                }
+            }
+            catch (PathTooLongException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
+                    TotalWorkProgressBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageDialog.ThrowErrorMessage(exceptionOutput);
+            }
+            catch (UnauthorizedAccessException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
+                    TotalWorkProgressBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageDialog.ThrowErrorMessage(exceptionOutput);
+            }
+
+            catch (ArgumentException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
+                    TotalWorkProgressBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageDialog.ThrowErrorMessage(exceptionOutput);
+            }
+            catch (FileNotFoundException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
+                    TotalWorkProgressBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageDialog.ThrowErrorMessage(exceptionOutput);
+            }
+            catch (DirectoryNotFoundException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
+                    TotalWorkProgressBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageDialog.ThrowErrorMessage(exceptionOutput);
+            }
+            catch (IOException exceptionOutput)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Error;
+                    TotalWorkProgressBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadBar.Foreground = Brushes.DarkRed;
+                    CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
+                });
+                MessageDialog.ThrowErrorMessage(exceptionOutput);
+            }
+        }
+
+        private void CompilerReport(object sender, ProgressChangedEventArgs e)
+        {
+            if (_compilerStatusReport > 0 && _compilerStatusReport < 3) _stringBuffer.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile));
+            switch (_compilerStatusReport)
+            {
+                case 4:
+                    CurrentWorkloadBar.Value = 0;
+                    TaskbarInfoHolder.ProgressValue = 0;
+                    TotalWorkProgressBar.Value += 1;
+                    break;
+                case 3:
+                    CurrentWorkloadBar.Value += 1;
+                    TaskbarInfoHolder.ProgressValue = CurrentWorkloadBar.Value / CurrentWorkloadBar.Maximum;
+                    if (currentFile < ProjectList[currentProject].FileMap.Count - 1)
+                    {
+                        _nextFile.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile + 1));
+                        CurrentWorkloadLabel.Content = Properties.Resources.CompileText + _nextFile + "...";
+                    }
+
+                    _stringBuffer.Clear();
+                    _nextFile.Clear();
+                    break;
+                case 2:
+                    CurrentWorkloadLabel.Content = Properties.Resources.CompileText + _stringBuffer + "...";
+                    _stringBuffer.Clear();
+                    break;
+                case 1:
+                    CurrentWorkloadBar.Maximum = ProjectList[currentProject].FileMap.Count;
+                    CurrentWorkloadLabel.Content =
+                        Properties.Resources.BinRemovalStatusText + ProjectList[currentProject].ProjectLocation + "...";
+                    break;
+                case 0:
+                    if (currentProject < ProjectList.Count)
+                    {
+                        TotalProgressLabel.Content = Properties.Resources.CompileText1 + FolderList.Items[currentProject] +
+                                                 Properties.Resources.FolderText;
+                    }
+                    break;
+
+            }
+        }
+
+        private void CompilerFinisher(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //if (e.Error != null)
+            //{
+
+            //}
+            if (e.Cancelled)
+            {
+                TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Paused;
+                CurrentWorkloadBar.Foreground = Brushes.YellowGreen;
+                TotalWorkProgressBar.Foreground = Brushes.YellowGreen;
+                MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText,
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                TotalProgressLabel.Content = Properties.Resources.DoneText;
+                CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
+            }
+            CompileButton.Visibility = Visibility.Visible;
+            CancelCompileButton.Visibility = Visibility.Hidden;
+            UnlockSettings(true);
+            TaskbarInfoHolder.ProgressValue = 0;
+            TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.None;
+            TotalWorkProgressBar.Value = 0;
+            CurrentWorkloadBar.Value = 0;
+            TotalWorkProgressBar.Value = 0;
+            TotalWorkProgressBar.Foreground = Brushes.ForestGreen;
+            CurrentWorkloadBar.Foreground = Brushes.ForestGreen;
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void UnlockSettings(bool setting)
+        {
+            NwjsLocation.IsEnabled = setting;
+            BrowseSdkButton.IsEnabled = setting;
+            DefaultProjectSettingsButton.IsEnabled = setting;
+            FolderList.IsEnabled = setting;
+            AddProjectButton.IsEnabled = setting;
+            RemoveProjectButton.IsEnabled = setting;
+            ProjectSettingsButton.IsEnabled = setting;
+            EditMetadataButton.IsEnabled = setting;
+        }
+        #endregion
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
              FolderList.ItemsSource = ProjectList;
@@ -177,6 +394,31 @@ namespace RMMVCookTool.GUI
                 var jsonEditorGui = new JsonEditor(ProjectList[FolderList.SelectedIndex].ProjectLocation);
                 jsonEditorGui.ShowDialog();
             }
+        }
+
+        private void CompileButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
+            {
+                MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (FolderList.Items.Count == 0)
+            {
+                MessageBox.Show(Properties.Resources.NoJSFilesPresent, Properties.Resources.ErrorText,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                TotalWorkProgressBar.Value = 0;
+                TotalWorkProgressBar.Maximum = FolderList.Items.Count;
+                _compilerWorker.RunWorkerAsync();
+            }
+        }
+
+        private void CancelCompileButton_Click(object sender, RoutedEventArgs e)
+        {
+            _compilerWorker.CancelAsync();
         }
     }
 }

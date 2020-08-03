@@ -7,6 +7,9 @@
         xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
         mc:Ignorable="d"
         Title="{x:Static properties:Resources.ProgramTitle}" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640" Loaded="Window_Loaded">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="TaskbarInfoHolder"/>
+    </Window.TaskbarItemInfo>
     <Window.Resources>
         <DataTemplate x:Key="listBoxTemplate">
             <StackPanel Margin="3">
@@ -43,10 +46,10 @@
                     </Grid.RowDefinitions>
                     <GroupBox Header="{x:Static properties:Resources.SettingsUiText}">
                         <Grid>
-                            <Label Content="{x:Static properties:Resources.NwjsLZocationUiText}" Margin="0,0,0,40" HorizontalAlignment="Left"/>
-                            <TextBox x:Name="NwjsLocation" Margin="0,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" Drop="NwjsLocation_Drop" MouseMove="NwjsLocation_MouseMove" DragEnter="NwjsLocation_DragEnter" DragLeave="NwjsLocation_DragLeave" DragOver="NwjsLocation_DragOver" AllowDrop="True" Text="{Binding SDKLocation, Mode=TwoWay, UpdateSourceTrigger=Explicit, Source={x:Static local:AppSettings.Default}}"/>
+                            <Label Content="{x:Static properties:Resources.NwjsLZocationUiText}" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
+                            <TextBox x:Name="NwjsLocation" Margin="5,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" Drop="NwjsLocation_Drop" MouseMove="NwjsLocation_MouseMove" DragEnter="NwjsLocation_DragEnter" DragLeave="NwjsLocation_DragLeave" DragOver="NwjsLocation_DragOver" AllowDrop="True" Text="{Binding SDKLocation, Mode=TwoWay, UpdateSourceTrigger=Explicit, Source={x:Static local:AppSettings.Default}}"/>
                             <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Click="BrowseSDKButton_Click"/>
-                            <Button Content="{x:Static properties:Resources.DefaultSettingsButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" Click="Button_Click"/>
+                            <Button x:Name="DefaultProjectSettingsButton" Content="{x:Static properties:Resources.DefaultSettingsButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" Click="Button_Click"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Projects" Grid.Row="1">
@@ -68,12 +71,12 @@
                     </GroupBox>
                     <GroupBox Header="{x:Static properties:Resources.ProgressUiText}" Grid.Row="2">
                         <Grid>
-                            <Label Content="{x:Static properties:Resources.TotalProgressBarUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <ProgressBar Height="20" Margin="0,26,124,0" VerticalAlignment="Top"/>
-                            <Label Content="{x:Static properties:Resources.CurrentProjectProgressBarUiText}" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top"/>
-                            <ProgressBar Height="20" Margin="0,77,124,0" VerticalAlignment="Top"/>
-                            <Button Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1"/>
-                            <Button Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Visibility="Hidden" UseLayoutRounding="True" Height="20" Padding="2,1,2,1"/>
+                            <Label x:Name="TotalProgressLabel" Content="{x:Static properties:Resources.TotalProgressBarUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <ProgressBar x:Name="TotalWorkProgressBar" Height="20" Margin="0,26,124,0" VerticalAlignment="Top"/>
+                            <Label x:Name="CurrentWorkloadLabel" Content="{x:Static properties:Resources.CurrentProjectProgressBarUiText}" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top"/>
+                            <ProgressBar x:Name="CurrentWorkloadBar" Height="20" Margin="0,77,124,0" VerticalAlignment="Top"/>
+                            <Button x:Name="CompileButton" Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1" Click="CompileButton_Click"/>
+                            <Button x:Name="CancelCompileButton" Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Visibility="Hidden" UseLayoutRounding="True" Height="20" Padding="2,1,2,1" Click="CancelCompileButton_Click"/>
 
                         </Grid>
                     </GroupBox>
