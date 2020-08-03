@@ -146,7 +146,7 @@ namespace RMMVCookTool.GUI
 
         private void RemoveProjectButton_Click(object sender, RoutedEventArgs e)
         {
-            ProjectList.RemoveAt(FolderList.SelectedIndex);
+            if (FolderList.SelectedIndex != -1) ProjectList.RemoveAt(FolderList.SelectedIndex);
         }
 
         private void ProjectSettingsButton_Click(object sender, RoutedEventArgs e)
