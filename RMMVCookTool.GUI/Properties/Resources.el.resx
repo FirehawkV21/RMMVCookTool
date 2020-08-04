@@ -390,4 +390,26 @@
   <data name="PackaginStatusText" xml:space="preserve">
     <value>Πακετάρισμα...</value>
   </data>
+  <data name="StackTraceLine" xml:space="preserve">
+    <value>--- Το ίχνος στοίβας είναι κάτω από τη γραμμή ---</value>
+  </data>
+  <data name="ErrorDetailsMessage" xml:space="preserve">
+    <value>Κάνοντας κλίκ στο "Περισσότερες πληροφορίες" θα δέιξει το ίχνος στοίβας. Συμπεριλάβετε το ωστε να είναι εύκολη η αντιμετώπιση του προβλήματος.</value>
+  </data>
+  <data name="AbortedText" xml:space="preserve">
+    <value>Ακυρώθηκε</value>
+  </data>
+  <data name="CompilerMissingText" xml:space="preserve">
+    <value>Λείπει ο μεταφραστής του nwjs.</value>
+  </data>
+  <data name="CurrentProjectProgressBarUiText" xml:space="preserve">
+    <value>Τρέχουσα κατάσταση του project:</value>
+  </data>
+  <data name="TotalProgressBarUiText" xml:space="preserve">
+    <value>Τελική κατάσταση:</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\manual.el.rtf;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1253</value>
+  </data>
 </root>

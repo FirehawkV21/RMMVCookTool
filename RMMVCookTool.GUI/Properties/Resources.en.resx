@@ -406,4 +406,7 @@
   <data name="PackaginStatusText" xml:space="preserve">
     <value>Packaging...</value>
   </data>
+  <data name="AbortedText" xml:space="preserve">
+    <value>Aborted</value>
+  </data>
 </root>
