@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shell;
@@ -17,6 +18,7 @@ using RMMVCookTool.Core;
 using DataFormats = System.Windows.DataFormats;
 using DragDropEffects = System.Windows.DragDropEffects;
 using DragEventArgs = System.Windows.DragEventArgs;
+using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -230,12 +232,11 @@ namespace RMMVCookTool.GUI
                 TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Paused;
                 CurrentWorkloadBar.Foreground = Brushes.YellowGreen;
                 TotalWorkProgressBar.Foreground = Brushes.YellowGreen;
-                MessageBox.Show(Properties.Resources.TaskCancelledMessage, Properties.Resources.AbortedText, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageDialog.ThrowWarningMessage(Properties.Resources.AbortedText, Properties.Resources.TaskCancelledMessage, "");
             }
             else
             {
-                MessageBox.Show(Properties.Resources.CompilationCompleteText, Properties.Resources.DoneText,
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageDialog.ThrowCompleteMessage(Properties.Resources.CompilationCompleteText);
                 TotalProgressLabel.Content = Properties.Resources.DoneText;
                 CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
             }
@@ -417,18 +418,19 @@ namespace RMMVCookTool.GUI
         {
             if (!File.Exists(Path.Combine(NwjsLocation.Text, "nwjc.exe")))
             {
-                MessageBox.Show(Properties.Resources.CompilerMissingText, Properties.Resources.ErrorText,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.ThrowErrorMessage(Properties.Resources.ErrorText, Properties.Resources.CompilerMissingText);
             }
             else if (FolderList.Items.Count == 0)
             {
-                MessageBox.Show(Properties.Resources.NoJSFilesPresent, Properties.Resources.ErrorText,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageDialog.ThrowErrorMessage(Properties.Resources.ErrorText, Properties.Resources.NoJSFilesPresent);
             }
             else
             {
+                UnlockSettings(false);
                 TotalWorkProgressBar.Value = 0;
                 TotalWorkProgressBar.Maximum = FolderList.Items.Count;
+                CompileButton.Visibility = Visibility.Hidden;
+                CancelCompileButton.Visibility = Visibility.Visible;
                 _compilerWorker.RunWorkerAsync();
             }
         }
