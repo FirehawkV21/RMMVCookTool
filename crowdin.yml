@@ -1,0 +1,7 @@
+files:
+  - source: /RMMVCookTool.CLI/Properties/
+    translation: /RMMVCookTool.CLI/Properties/Resources.%locale%.resx
+  - source: /RMMVCookTool.GUI/Properties/
+    translation: /RMMVCookTool.GUI/Properties/Resources.%locale%.resx
+  - source: /RMMVCookTool.GUI/Resources
+    translation: /RMMVCookTool.GUI/Resources/Manual.%locale%.rtf
