@@ -1,3 +1,0 @@
-files:
-  - source: RMMVCookTool.*/Properties
-    translation: RMMVCookTool.*/Properties/Resources.%locale%.resx
