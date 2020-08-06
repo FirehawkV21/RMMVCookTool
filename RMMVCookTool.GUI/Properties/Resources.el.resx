@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -132,11 +132,17 @@
   <data name="EnableNodeJSCheckBoxText" xml:space="preserve">
     <value>Ενεργοποίηση του NodeJS;</value>
   </data>
+  <data name="ErrorDetailsMessage" xml:space="preserve">
+    <value>Κάνοντας κλίκ στο "Περισσότερες πληροφορίες" θα δέιξει το ίχνος στοίβας. Συμπεριλάβετε το ωστε να είναι εύκολη η αντιμετώπιση του προβλήματος.</value>
+  </data>
   <data name="ErrorText" xml:space="preserve">
     <value>Σφάλμα</value>
   </data>
   <data name="EssentialsGroupString" xml:space="preserve">
     <value>Απαραίτητα</value>
+  </data>
+  <data name="FileOutsideOfProjectError" xml:space="preserve">
+    <value>Επιλέξατε ένα αρχείο που είναι εκτός του project.</value>
   </data>
   <data name="GameIDUiString" xml:space="preserve">
     <value>ID Παιχνιδιού</value>
@@ -174,6 +180,10 @@
   <data name="JavaScriptFlagsUiText" xml:space="preserve">
     <value>JavaScript Flags</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="Manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\manual.rtf;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1253</value>
+  </data>
   <data name="MinimumHeightUiText" xml:space="preserve">
     <value>Ελάχιστο ύψος</value>
   </data>
@@ -192,6 +202,12 @@
   <data name="PNGFileText" xml:space="preserve">
     <value>Αρχείο PNG|*.png</value>
   </data>
+  <data name="ProjectPathTooLongErrorText" xml:space="preserve">
+    <value>Η διαδρομή για το project είναι πάρα πολύ μεγάλο. Παρακαλώ μικρύνετε την διαδρομή.</value>
+  </data>
+  <data name="ProjectPickerText" xml:space="preserve">
+    <value>Παρακαλώ επιλέξτε τη θέση του project.</value>
+  </data>
   <data name="ResizableWindowUiText" xml:space="preserve">
     <value>Ξεκλείδωτο μέγεθος;</value>
   </data>
@@ -201,6 +217,9 @@
   <data name="SaveButtonText" xml:space="preserve">
     <value>Αποθήκευση</value>
   </data>
+  <data name="SaveCompleteText" xml:space="preserve">
+    <value>Αποθηκεύτηκαν οι πληροφορίες του πακέτου.</value>
+  </data>
   <data name="ScreenCenterListItemText" xml:space="preserve">
     <value>Κέντρο της οθόνης</value>
   </data>
@@ -209,6 +228,9 @@
   </data>
   <data name="SettingsUiText" xml:space="preserve">
     <value>Ρυθμίσεις</value>
+  </data>
+  <data name="StackTraceLine" xml:space="preserve">
+    <value>--- Το ίχνος στοίβας είναι κάτω από τη γραμμή ---</value>
   </data>
   <data name="StartUiText" xml:space="preserve">
     <value>Εκκίνηση:</value>
@@ -234,53 +256,20 @@
   <data name="WindowTitleUiText" xml:space="preserve">
     <value>Τίτλος παραθύρου</value>
   </data>
-  <data name="NoCompressionListItemText" xml:space="preserve">
-    <value>Χωρίς συμπίεση</value>
+  <data name="ErrorOccuredTitle" xml:space="preserve">
+    <value>Αμάν! Συνέβη ένα σφάλμα.</value>
   </data>
-  <data name="ProgramTitle" xml:space="preserve">
-    <value>RPG Maker MV Cook Tool</value>
-  </data>
-  <data name="ProgramVersionLabelUiText" xml:space="preserve">
-    <value>Έκδοση R3.00</value>
-  </data>
-  <data name="ProjectSettingsUiText" xml:space="preserve">
-    <value>Ρυθμίσεις Project</value>
-  </data>
-  <data name="RemoveProjectUiText" xml:space="preserve">
-    <value>Αφαίρεση</value>
-  </data>
-  <data name="NwjsLZocationUiText" xml:space="preserve">
-    <value>Θέση του NW.js</value>
-  </data>
-  <data name="UserManualUiText" xml:space="preserve">
-    <value>Οδηγός Χρήσης</value>
+  <data name="CompleteText" xml:space="preserve">
+    <value>Ολοκληρώθηκε</value>
   </data>
   <data name="WarningText" xml:space="preserve">
     <value>Προσοχή</value>
   </data>
-  <data name="FastestListItemText" xml:space="preserve">
-    <value>Γρηγορότερη</value>
+  <data name="ProjectNotSelectedMessage" xml:space="preserve">
+    <value>Δεν επιλέχθηκε κανένα project.</value>
   </data>
-  <data name="OptimalListItemText" xml:space="preserve">
-    <value>Βέλτιστη</value>
-  </data>
-  <data name="FileExtensionText" xml:space="preserve">
-    <value>Επέκταση αρχείου:</value>
-  </data>
-  <data name="ErrorOccuredTitle" xml:space="preserve">
-    <value>Αμάν! Συνέβη ένα σφάλμα.</value>
-  </data>
-  <data name="FolderLocationText" xml:space="preserve">
-    <value>Θέση;</value>
-  </data>
-  <data name="SProjectSettingsUpdatedText" xml:space="preserve">
-    <value>Οι ρυθμίσεις του project ενημερώθηκαν.</value>
-  </data>
-  <data name="EditMetadataUiText" xml:space="preserve">
-    <value>Επεξεργασία πληροφοριών</value>
-  </data>
-  <data name="DeveloperCreditUiText" xml:space="preserve">
-    <value>Αναπτύχθηκε από τον Studio ACE(AceOfAces). Αδειοδοτείται κάτω από το MIT License.</value>
+  <data name="ProjectMessageNotSelected_Details" xml:space="preserve">
+    <value>Παρακαλώ επιλέξτε το project απο τη λίστα.</value>
   </data>
   <data name="DefaultSettingsUpdatedText" xml:space="preserve">
     <value>Οι προεπιλεγμένες ρυθμίσεις έχουν ενημερωθεί.</value>
@@ -288,83 +277,107 @@
   <data name="DefaultSettingsUpdatedMessage" xml:space="preserve">
     <value>Οι ρυθμίσεις θα χρησιμοποιηθούν για νέα projects.</value>
   </data>
-  <data name="CompressionLevelUiText" xml:space="preserve">
-    <value>Επίπεδο συμπίεσης:</value>
+  <data name="SProjectSettingsUpdatedText" xml:space="preserve">
+    <value>Οι ρυθμίσεις του project ενημερώθηκαν.</value>
   </data>
-  <data name="CompressionModeUiText" xml:space="preserve">
-    <value>Λειτουργεία συμπίεσης:</value>
+  <data name="FolderLocationText" xml:space="preserve">
+    <value>Θέση;</value>
   </data>
-  <data name="CompileUiText" xml:space="preserve">
-    <value>Μετάφραση</value>
-  </data>
-  <data name="CompilerUiText" xml:space="preserve">
-    <value>Μεταφραστής</value>
-  </data>
-  <data name="CompleteText" xml:space="preserve">
-    <value>Ολοκληρώθηκε</value>
-  </data>
-  <data name="CompressFilesText" xml:space="preserve">
-    <value>Συμπίεση αρχείων:</value>
-  </data>
-  <data name="CancelButtonUiText" xml:space="preserve">
-    <value>Ακύρωση</value>
-  </data>
-  <data name="AddProjectUiText" xml:space="preserve">
-    <value>Προσθήκη</value>
-  </data>
-  <data name="AboutTabUiText" xml:space="preserve">
-    <value>Περί...</value>
-  </data>
-  <data name="DefaultSettingsButtonUiText" xml:space="preserve">
-    <value>Προεπιλεγμένες ρυθμίσεις...</value>
-  </data>
-  <data name="ProjectMessageNotSelected_Details" xml:space="preserve">
-    <value>Παρακαλώ επιλέξτε το project απο τη λίστα.</value>
-  </data>
-  <data name="ProjectNotSelectedMessage" xml:space="preserve">
-    <value>Δεν επιλέχθηκε κανένα project.</value>
-  </data>
-  <data name="RemoveFilesAfterCompressionUiText" xml:space="preserve">
-    <value>Αφαίρεση των αρχείων του project μετά το πακετάρισμα.</value>
-  </data>
-  <data name="ProjectPickerText" xml:space="preserve">
-    <value>Παρακαλώ επιλέξτε τη θέση του project.</value>
-  </data>
-  <data name="RemoveSourceCodeUiText" xml:space="preserve">
-    <value>Αφαίρεση των αρχείων JS μετά τη μετάφραση.</value>
+  <data name="FileExtensionText" xml:space="preserve">
+    <value>Επέκταση αρχείου:</value>
   </data>
   <data name="RemoveSourceFilesAfterCompiling" xml:space="preserve">
     <value>Αφαίρεση των αρχείων JS μετά τη μετάφραση:</value>
   </data>
+  <data name="CompressFilesText" xml:space="preserve">
+    <value>Συμπίεση αρχείων:</value>
+  </data>
   <data name="RemoveSourceFilesAfterCompressionText" xml:space="preserve">
     <value>Αφαίρεση των αρχείων μετά τη συμπίεση:</value>
   </data>
-  <data name="SaveCompleteText" xml:space="preserve">
-    <value>Αποθηκεύτηκαν οι πληροφορίες του πακέτου.</value>
+  <data name="CompressionModeUiText" xml:space="preserve">
+    <value>Λειτουργεία συμπίεσης:</value>
   </data>
-  <data name="FileOutsideOfProjectError" xml:space="preserve">
-    <value>Επιλέξατε ένα αρχείο που είναι εκτός του project.</value>
+  <data name="NwjsLZocationUiText" xml:space="preserve">
+    <value>Θέση του NW.js</value>
   </data>
-  <data name="DefaultProjectSettingsUiText" xml:space="preserve">
-    <value>Προεπιλεγμένες ρυθμίσεις project</value>
+  <data name="ProgramTitle" xml:space="preserve">
+    <value>RPG Maker MV Cook Tool</value>
   </data>
-  <data name="CompressFilesToPackageUiText" xml:space="preserve">
-    <value>Συμπίεση των αρχείων παιχνιδιού στο package.nw.</value>
+  <data name="CompilerUiText" xml:space="preserve">
+    <value>Μεταφραστής</value>
+  </data>
+  <data name="AddProjectUiText" xml:space="preserve">
+    <value>Προσθήκη</value>
+  </data>
+  <data name="RemoveProjectUiText" xml:space="preserve">
+    <value>Αφαίρεση</value>
+  </data>
+  <data name="ProjectSettingsUiText" xml:space="preserve">
+    <value>Ρυθμίσεις Project</value>
+  </data>
+  <data name="EditMetadataUiText" xml:space="preserve">
+    <value>Επεξεργασία πληροφοριών</value>
   </data>
   <data name="ProgressUiText" xml:space="preserve">
     <value>Κατάσταση</value>
   </data>
-  <data name="FailedText" xml:space="preserve">
-    <value>Αποτυχία!</value>
+  <data name="TotalProgressBarUiText" xml:space="preserve">
+    <value>Τελική κατάσταση:</value>
   </data>
-  <data name="FolderText" xml:space="preserve">
-    <value>...</value>
+  <data name="CurrentProjectProgressBarUiText" xml:space="preserve">
+    <value>Τρέχουσα κατάσταση του project:</value>
   </data>
-  <data name="ProjectPathTooLongErrorText" xml:space="preserve">
-    <value>Η διαδρομή για το project είναι πάρα πολύ μεγάλο. Παρακαλώ μικρύνετε την διαδρομή.</value>
+  <data name="CompileUiText" xml:space="preserve">
+    <value>Μετάφραση</value>
   </data>
-  <data name="TaskCancelledMessage" xml:space="preserve">
-    <value>Η εργασία ακυρώθηκε.</value>
+  <data name="CancelButtonUiText" xml:space="preserve">
+    <value>Ακύρωση</value>
+  </data>
+  <data name="AboutTabUiText" xml:space="preserve">
+    <value>Περί...</value>
+  </data>
+  <data name="ProgramVersionLabelUiText" xml:space="preserve">
+    <value>Έκδοση R3.00</value>
+  </data>
+  <data name="DeveloperCreditUiText" xml:space="preserve">
+    <value>Αναπτύχθηκε από τον Studio ACE(AceOfAces). Αδειοδοτείται κάτω από το MIT License.</value>
+  </data>
+  <data name="UserManualUiText" xml:space="preserve">
+    <value>Οδηγός Χρήσης</value>
+  </data>
+  <data name="CompressionLevelUiText" xml:space="preserve">
+    <value>Επίπεδο συμπίεσης:</value>
+  </data>
+  <data name="RemoveFilesAfterCompressionUiText" xml:space="preserve">
+    <value>Αφαίρεση των αρχείων του project μετά το πακετάρισμα.</value>
+  </data>
+  <data name="CompressFilesToPackageUiText" xml:space="preserve">
+    <value>Συμπίεση των αρχείων παιχνιδιού στο package.nw.</value>
+  </data>
+  <data name="RemoveSourceCodeUiText" xml:space="preserve">
+    <value>Αφαίρεση των αρχείων JS μετά τη μετάφραση.</value>
+  </data>
+  <data name="OptimalListItemText" xml:space="preserve">
+    <value>Βέλτιστη</value>
+  </data>
+  <data name="FastestListItemText" xml:space="preserve">
+    <value>Γρηγορότερη</value>
+  </data>
+  <data name="NoCompressionListItemText" xml:space="preserve">
+    <value>Χωρίς συμπίεση</value>
+  </data>
+  <data name="DefaultSettingsButtonUiText" xml:space="preserve">
+    <value>Προεπιλεγμένες ρυθμίσεις...</value>
+  </data>
+  <data name="DefaultProjectSettingsUiText" xml:space="preserve">
+    <value>Προεπιλεγμένες ρυθμίσεις project</value>
+  </data>
+  <data name="AbortedText" xml:space="preserve">
+    <value>Ακυρώθηκε</value>
+  </data>
+  <data name="BinRemovalStatusText" xml:space="preserve">
+    <value>Διαγραφή δυαδικών αρχείων απο τον φάκελο </value>
   </data>
   <data name="CompilationCompleteText" xml:space="preserve">
     <value>Η μετάφραση ολοκληρώθηκε!</value>
@@ -372,8 +385,8 @@
   <data name="CompileJsFolderProgressText" xml:space="preserve">
     <value>Μετάφραση των scripts μέσα στον φάκελο js...</value>
   </data>
-  <data name="BinRemovalStatusText" xml:space="preserve">
-    <value>Διαγραφή δυαδικών αρχείων απο τον φάκελο </value>
+  <data name="CompilerMissingText" xml:space="preserve">
+    <value>Λείπει ο μεταφραστής του nwjs.</value>
   </data>
   <data name="CompileText" xml:space="preserve">
     <value>Μετάφραση του αρχείου </value>
@@ -384,32 +397,19 @@
   <data name="CompilingText" xml:space="preserve">
     <value>Μετάφραση του </value>
   </data>
+  <data name="FailedText" xml:space="preserve">
+    <value>Αποτυχία!</value>
+  </data>
+  <data name="FolderText" xml:space="preserve">
+    <value>...</value>
+  </data>
   <data name="NoJSFilesPresent" xml:space="preserve">
     <value>Παρακαλώ προσθεστε τους φακέλους που περιέχουν τα αρχεία JavaScript για μετάφραση σε δυαδικά αρχεία.</value>
   </data>
   <data name="PackaginStatusText" xml:space="preserve">
     <value>Πακετάρισμα...</value>
   </data>
-  <data name="StackTraceLine" xml:space="preserve">
-    <value>--- Το ίχνος στοίβας είναι κάτω από τη γραμμή ---</value>
-  </data>
-  <data name="ErrorDetailsMessage" xml:space="preserve">
-    <value>Κάνοντας κλίκ στο "Περισσότερες πληροφορίες" θα δέιξει το ίχνος στοίβας. Συμπεριλάβετε το ωστε να είναι εύκολη η αντιμετώπιση του προβλήματος.</value>
-  </data>
-  <data name="AbortedText" xml:space="preserve">
-    <value>Ακυρώθηκε</value>
-  </data>
-  <data name="CompilerMissingText" xml:space="preserve">
-    <value>Λείπει ο μεταφραστής του nwjs.</value>
-  </data>
-  <data name="CurrentProjectProgressBarUiText" xml:space="preserve">
-    <value>Τρέχουσα κατάσταση του project:</value>
-  </data>
-  <data name="TotalProgressBarUiText" xml:space="preserve">
-    <value>Τελική κατάσταση:</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\manual.el.rtf;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1253</value>
+  <data name="TaskCancelledMessage" xml:space="preserve">
+    <value>Η εργασία ακυρώθηκε.</value>
   </data>
 </root>
