@@ -3,9 +3,9 @@ files:
     ignore:
       - /RMMVCookTool.CLI/Properties/Resources.*.resx
       - /RMMVCookTool.CLI/Properties/Resources.*.cs
-    translation: /RMMVCookTool.CLI/Properties/Resources.%two_letters_code%.resx
+    translation: /RMMVCookTool.CLI/Properties/Resources.%locale%.resx
   - source: /RMMVCookTool.GUI/Properties/
     ignore:
       - /RMMVCookTool.GUI/Properties/Resources.*.resx
       - /RMMVCookTool.GUI/Properties/Resources.*.cs
-    translation: /RMMVCookTool.GUI/Properties/Resources.%two_letters_code%.resx
+    translation: /RMMVCookTool.GUI/Properties/Resources.%locale%.resx
