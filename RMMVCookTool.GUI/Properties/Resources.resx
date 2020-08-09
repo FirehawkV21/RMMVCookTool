@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"></xsd:import>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"></xsd:element>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"></xsd:attribute>
-              <xsd:attribute name="type" type="xsd:string"></xsd:attribute>
-              <xsd:attribute name="mimetype" type="xsd:string"></xsd:attribute>
-              <xsd:attribute ref="xml:space"></xsd:attribute>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"></xsd:attribute>
-              <xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"></xsd:element>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"></xsd:element>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"></xsd:attribute>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"></xsd:attribute>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"></xsd:attribute>
-              <xsd:attribute ref="xml:space"></xsd:attribute>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"></xsd:element>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -119,54 +119,30 @@
   </resheader>
   <data name="BrowseUiText" xml:space="preserve">
     <value>Browse...</value>
-    <comment>String ID: BrowseUiText
-This is the text for the browse button. This used on buttons that allow the user to pick a file or a folder.</comment>
   </data>
   <data name="ChromiumFlagsUiText" xml:space="preserve">
     <value>Chromium Flags</value>
-    <comment>String ID: ChromiumFlagsUiText
-This the label of the text box that holds the Chromium flags for the package.json file. These flags affect some settings of Chromium (which NW.js is based on).</comment>
   </data>
   <data name="CloseButtonText" xml:space="preserve">
     <value>Close</value>
-    <comment>String ID: CloseButtonText
-
-This is the text for the button that closes the window.</comment>
   </data>
   <data name="DoneText" xml:space="preserve">
     <value>Done!</value>
-    <comment>DoneText
-
-This is the title for the message boxes that appear when a task is completed (saving the package metadata, finishng the compiler task, etc.).</comment>
   </data>
   <data name="EnableNodeJSCheckBoxText" xml:space="preserve">
     <value>Enable NodeJS?</value>
-    <comment>String ID: EnableNodeJSCheckBoxText
-This is a checkbox that turns NodeJS (which handles some features for NW.js) on or off.</comment>
   </data>
   <data name="ErrorDetailsMessage" xml:space="preserve">
     <value>Clicking on the "More Details" button will show the stack trace. Make sure to include this if you are filling a bug report, since it can help with diagnosing the bug.</value>
-    <comment>String ID: ErrorDetailsMessage
-
-This is shown in the error messages to hint the user that the stack trace (used for diagnosing bugs) can be seen by clicking the "More Details" button.</comment>
   </data>
   <data name="ErrorText" xml:space="preserve">
     <value>Error</value>
-    <comment>String ID: ErrorText
-
-This is the title for the Error messages.</comment>
   </data>
   <data name="EssentialsGroupString" xml:space="preserve">
     <value>Essentials</value>
-    <comment>String ID: EssentialsGroupString
-
-This is the name of a group that has all the required details for the game to work.</comment>
   </data>
   <data name="FileOutsideOfProjectError" xml:space="preserve">
     <value>You picked a file that is outside of the project's file. Please pick a file within the project.</value>
-    <comment>String ID: FileOutsideOfProjectError
-
-This error message is shown when the user picks a file that is outside of the project's folder (in the Package Metadata Editor).</comment>
   </data>
   <data name="GameIDUiString" xml:space="preserve">
     <value>Game ID</value>
@@ -204,7 +180,7 @@ This error message is shown when the user picks a file that is outside of the pr
   <data name="JavaScriptFlagsUiText" xml:space="preserve">
     <value>JavaScript Flags</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"></assembly>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\manual.rtf;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1253</value>
   </data>
@@ -436,5 +412,13 @@ This error message is shown when the user picks a file that is outside of the pr
   </data>
   <data name="TaskCancelledMessage" xml:space="preserve">
     <value>The task was cancelled.</value>
+  </data>
+  <data name="CannotFindGameFolderTitle" xml:space="preserve">
+    <value>Could not find the folder specified in the JSON file.</value>
+    <comment>String ID: CannotFindGameFolderTitle
+This is the title of the message shown if the JSON file is missing an important detail.</comment>
+  </data>
+  <data name="CannotFindGameFolderMessage" xml:space="preserve">
+    <value>Double check that the "main" variable is filled or points to a existing folder. This folder will be skipped.</value>
   </data>
 </root>
