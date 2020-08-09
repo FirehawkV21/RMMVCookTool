@@ -19,7 +19,6 @@ namespace RMMVCookTool.CLI
         private static bool _parallelMode;
         private static bool _settingsSet;
         private static int _checkDeletion = 1;
-        private static string _gameFolder;
 
         private static void Main(string[] args)
         {
@@ -302,8 +301,8 @@ namespace RMMVCookTool.CLI
 
             #region Workload Code
             //Find the game folder.
-            JsonProcessor.FindGameFolder(Path.Combine(newProject.ProjectLocation, "package.json"), out _gameFolder);
-            if (_gameFolder == "Null" || _gameFolder == "Unknown")
+            newProject.GameFilesLocation = JsonProcessor.FindGameFolder(Path.Combine(newProject.ProjectLocation, "package.json"));
+            if (newProject.GameFilesLocation == "Null" || newProject.GameFilesLocation == "Unknown")
             {
                 //If the Json read returns nothing, throw an error to tell the user to double check their json file.
                 Console.ForegroundColor = ConsoleColor.DarkRed;

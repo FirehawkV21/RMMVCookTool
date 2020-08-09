@@ -72,7 +72,7 @@ namespace RMMVCookTool.Core
             return JsonString;
         }
 
-        public static void FindGameFolder(in string metadataFile, out string gameFolder)
+        public static string FindGameFolder(in string metadataFile)
         {
             if (metadataFile != null)
             {
@@ -90,12 +90,14 @@ namespace RMMVCookTool.Core
                             tempString2 += dataPart[i] + ((RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? "\\" : "/");
                         }
                     }
-                    gameFolder = Path.Combine(metadataFile.Replace(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\package.json" : "/package.json", "", StringComparison.Ordinal), tempString2);
+                    return Path.Combine(metadataFile.Replace(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\package.json" : "/package.json", "", StringComparison.Ordinal), tempString2);
                 }
-                else gameFolder = "Null";
+
+                return "Null";
 
             }
-            else gameFolder = "Unknown";
+
+            return "Unknown";
         }
 
 
