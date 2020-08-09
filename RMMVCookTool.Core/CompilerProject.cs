@@ -14,6 +14,8 @@ namespace RMMVCookTool.Core
 
         public string FileExtension { get; set; }
 
+        public string GameFilesLocation { get; set; }
+
         public bool RemoveSourceCodeAfterCompiling { get; set; }
 
         public bool CompressFilesToPackage { get; set; }
@@ -105,7 +107,7 @@ namespace RMMVCookTool.Core
             string stripPart = ProjectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
             //List all the files in the game's www folder.
             List<string> gameFiles =
-                CompilerUtilities.FileFinder(ProjectLocation, "*");
+                CompilerUtilities.FileFinder(GameFilesLocation, "*");
             using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
             {
                 foreach (var file in gameFiles)

@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shell;
@@ -18,7 +17,6 @@ using RMMVCookTool.Core;
 using DataFormats = System.Windows.DataFormats;
 using DragDropEffects = System.Windows.DragDropEffects;
 using DragEventArgs = System.Windows.DragEventArgs;
-using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -58,48 +56,57 @@ namespace RMMVCookTool.GUI
         {
             try
             {
-                for (int currentProject = 0; currentProject < ProjectList.Count; currentProject++)
+                for (currentProject = 0; currentProject < ProjectList.Count; currentProject++)
                 {
                     ProjectList[currentProject].CompilerInfo.FileName = Path.Combine(AppSettings.Default.SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
-                    _compilerStatusReport = 0;
-                    if (_compilerWorker.CancellationPending)
+                    ProjectList[currentProject].GameFilesLocation = JsonProcessor.FindGameFolder(Path.Combine(ProjectList[currentProject].ProjectLocation, "package.json"));
+                    if (ProjectList[currentProject].GameFilesLocation == "Null" || ProjectList[currentProject].GameFilesLocation == "Unknown")
                     {
-                        e.Cancel = true;
-                        break;
+                        MessageDialog.ThrowErrorMessage(Properties.Resources.CannotFindGameFolderTitle, Properties.Resources.CannotFindGameFolderMessage);
                     }
-                    _compilerWorker.ReportProgress(currentProject + 1);
-                    _compilerStatusReport = 1;
-                    _compilerWorker.ReportProgress(currentProject + 1);
-                    CompilerUtilities.CleanupBin(ProjectList[currentProject].FileMap);
-                    _compilerStatusReport = 2;
-                    _compilerWorker.ReportProgress(1);
-                    _compilerStatusReport = 3;
-                    for (currentFile = 0; currentFile < ProjectList[currentProject].FileMap.Count; currentFile++)
+                    else
                     {
+                        
+                        _compilerStatusReport = 0;
                         if (_compilerWorker.CancellationPending)
                         {
                             e.Cancel = true;
                             break;
                         }
                         _compilerWorker.ReportProgress(currentProject + 1);
-                        ProjectList[currentProject].CompileFile(currentFile);
-                    }
-                    if (e.Cancel) break;
-                    if (ProjectList[currentProject].CompressFilesToPackage)
-                    {
-                        _compilerStatusReport = 4;
+                        _compilerStatusReport = 1;
+                        _compilerWorker.ReportProgress(currentProject + 1);
+                        CompilerUtilities.CleanupBin(ProjectList[currentProject].FileMap);
+                        _compilerStatusReport = 2;
                         _compilerWorker.ReportProgress(1);
-                        ProjectList[currentProject].CompressFiles();
-                    }
+                        _compilerStatusReport = 3;
+                        for (currentFile = 0; currentFile < ProjectList[currentProject].FileMap.Count; currentFile++)
+                        {
+                            if (_compilerWorker.CancellationPending)
+                            {
+                                e.Cancel = true;
+                                break;
+                            }
+                            _compilerWorker.ReportProgress(currentProject + 1);
+                            ProjectList[currentProject].CompileFile(currentFile);
+                        }
+                        if (e.Cancel) break;
+                        if (ProjectList[currentProject].CompressFilesToPackage)
+                        {
+                            _compilerStatusReport = 4;
+                            _compilerWorker.ReportProgress(1);
+                            ProjectList[currentProject].CompressFiles();
+                        }
 
-                    if (ProjectList[currentProject].RemoveFilesAfterCompression)
-                    {
-                        _compilerStatusReport = 5;
-                        _compilerWorker.ReportProgress(1);
-                        ProjectList[currentProject].DeleteFiles();
+                        if (ProjectList[currentProject].RemoveFilesAfterCompression)
+                        {
+                            _compilerStatusReport = 5;
+                            _compilerWorker.ReportProgress(1);
+                            ProjectList[currentProject].DeleteFiles();
+                        }
+                        _compilerStatusReport = 6;
+                        _compilerWorker.ReportProgress(currentProject + 1);
                     }
-                    _compilerStatusReport = 6;
-                    _compilerWorker.ReportProgress(currentProject + 1);
                 }
             }
             catch (PathTooLongException exceptionOutput)

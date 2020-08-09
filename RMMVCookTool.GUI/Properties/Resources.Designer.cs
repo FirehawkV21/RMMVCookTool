@@ -115,6 +115,24 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Double check that the &quot;main&quot; variable is filled or points to a existing folder. This folder will be skipped..
+        /// </summary>
+        public static string CannotFindGameFolderMessage {
+            get {
+                return ResourceManager.GetString("CannotFindGameFolderMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find the folder specified in the JSON file..
+        /// </summary>
+        public static string CannotFindGameFolderTitle {
+            get {
+                return ResourceManager.GetString("CannotFindGameFolderTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chromium Flags.
         /// </summary>
         public static string ChromiumFlagsUiText {
@@ -530,7 +548,7 @@ namespace RMMVCookTool.GUI.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {\rtf1\ansi\deff3\adeflang1025
-        ///{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset161 Liberation Serif{\*\falt Times New Roman};}{\f4\froman\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f5\froman\fprq2\fcharset161 Liberation Mono{\*\falt Courier New};}{\f6\fmodern\fprq1\fcharset128 Lucida Console;}{\f7\fswiss\fprq2\fcharset128 Segoe UI;}{\f8\fnil\fprq2\fcharset161 Arial;}{\f9\fnil\fprq2\fcharset161 Li [rest of string was truncated]&quot;;.
+        ///{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset161 Liberation Serif{\*\falt Times New Roman};}{\f4\fswiss\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f5\froman\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f6\froman\fprq2\fcharset161 Liberation Mono{\*\falt Courier New};}{\f7\froman\fprq2\fcharset161 Segoe UI;}{\f8\froman\fprq2\fcharset161 Lucida Console;}{\f9 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Manual {
             get {
