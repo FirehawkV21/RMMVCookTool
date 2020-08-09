@@ -58,6 +58,13 @@ namespace RMMVCookTool.GUI
             {
                 for (currentProject = 0; currentProject < ProjectList.Count; currentProject++)
                 {
+                    if (_compilerWorker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    _compilerStatusReport = 0;
+                    _compilerWorker.ReportProgress(currentProject + 1);
                     ProjectList[currentProject].CompilerInfo.FileName = Path.Combine(AppSettings.Default.SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
                     ProjectList[currentProject].GameFilesLocation = JsonProcessor.FindGameFolder(Path.Combine(ProjectList[currentProject].ProjectLocation, "package.json"));
                     if (ProjectList[currentProject].GameFilesLocation == "Null" || ProjectList[currentProject].GameFilesLocation == "Unknown")
@@ -66,14 +73,7 @@ namespace RMMVCookTool.GUI
                     }
                     else
                     {
-                        
-                        _compilerStatusReport = 0;
-                        if (_compilerWorker.CancellationPending)
-                        {
-                            e.Cancel = true;
-                            break;
-                        }
-                        _compilerWorker.ReportProgress(currentProject + 1);
+
                         _compilerStatusReport = 1;
                         _compilerWorker.ReportProgress(currentProject + 1);
                         CompilerUtilities.CleanupBin(ProjectList[currentProject].FileMap);
@@ -204,7 +204,6 @@ namespace RMMVCookTool.GUI
                         _nextFile.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile + 1));
                         CurrentWorkloadLabel.Content = Properties.Resources.CompileText + _nextFile + "...";
                     }
-
                     _stringBuffer.Clear();
                     _nextFile.Clear();
                     break;
@@ -218,11 +217,8 @@ namespace RMMVCookTool.GUI
                         Properties.Resources.BinRemovalStatusText + ProjectList[currentProject].ProjectLocation + "...";
                     break;
                 case 0:
-                    if (currentProject < ProjectList.Count)
-                    {
-                        TotalProgressLabel.Content = Properties.Resources.CompileText1 + ProjectList[currentProject].ProjectLocation +
+                    TotalProgressLabel.Content = Properties.Resources.CompileText1 + ProjectList[currentProject].ProjectLocation +
                                                  Properties.Resources.FolderText;
-                    }
                     break;
 
             }
