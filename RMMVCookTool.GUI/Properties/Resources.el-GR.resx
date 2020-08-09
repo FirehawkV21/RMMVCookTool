@@ -414,11 +414,11 @@
     <value>Η εργασία ακυρώθηκε.</value>
   </data>
   <data name="CannotFindGameFolderTitle" xml:space="preserve">
-    <value>Could not find the folder specified in the JSON file.</value>
+    <value>Δεν βρέθηκε ο φάκελος που αναγράφεται στο αρχείο JSON.</value>
     <comment>String ID: CannotFindGameFolderTitle
 This is the title of the message shown if the JSON file is missing an important detail.</comment>
   </data>
   <data name="CannotFindGameFolderMessage" xml:space="preserve">
-    <value>Double check that the "main" variable is filled or points to a existing folder. This folder will be skipped.</value>
+    <value>Βεβαιωθείτε ότι η μεταβλητή "main" είναι γραμμένη και δείχνει σε έναν φάκελο που υπάρχει. Αυτός ο φάκελος θα αγνοηθεί.</value>
   </data>
 </root>
