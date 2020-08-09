@@ -125,6 +125,8 @@
   </data>
   <data name="ProgramVersionString" xml:space="preserve">
     <value>= Version R2.00 ({0})</value>
+    <comment>String ID: ProgramVersionString
+This is the command line app's version string.</comment>
   </data>
   <data name="ProgramAuthorText" xml:space="preserve">
     <value>= Developed by AceOfAces.</value>
