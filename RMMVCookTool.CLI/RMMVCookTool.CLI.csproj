@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyVersion>2.0.0.20207</AssemblyVersion>
-    <FileVersion>2.0.0.20207</FileVersion>
+    <AssemblyVersion>2.0.0.20222</AssemblyVersion>
+    <FileVersion>2.0.0.20222</FileVersion>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <StartupObject>RMMVCookTool.CLI.Program</StartupObject>
     <AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
