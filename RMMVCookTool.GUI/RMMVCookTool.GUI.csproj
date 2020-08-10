@@ -4,12 +4,27 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.0.20222</AssemblyVersion>
-    <FileVersion>3.0.0.20222</FileVersion>
+    <AssemblyVersion>3.0.0.20223</AssemblyVersion>
+    <FileVersion>3.0.0.20223</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    <AssemblyTitle>RPG Maker MV Cook Tool (GUI Version)</AssemblyTitle>
+    <Authors>AceOfAces</Authors>
+    <Company>Studio ACE</Company>
+    <Product>RPG Maker MV Cook Tool</Product>
+    <Version>3.0.0-20200810</Version>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+    <PublishTrimmed>false</PublishTrimmed>
+    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+    <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
+    <Description>GUI version of the RPG Maker MV Cook Tool.</Description>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
