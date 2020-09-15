@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>.net5-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.0.20223</AssemblyVersion>
-    <FileVersion>3.0.0.20223</FileVersion>
+    <AssemblyVersion>3.0.1.20225</AssemblyVersion>
+    <FileVersion>3.0.1.20225</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <NeutralLanguage>en</NeutralLanguage>
