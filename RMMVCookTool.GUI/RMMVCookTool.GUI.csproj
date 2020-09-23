@@ -4,8 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>.net5-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.1.20225</AssemblyVersion>
-    <FileVersion>3.0.1.20225</FileVersion>
+    <AssemblyVersion>3.0.1.20267</AssemblyVersion>
+    <FileVersion>3.0.1.20267</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <NeutralLanguage>en</NeutralLanguage>
@@ -15,7 +15,7 @@
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
-    <Version>3.0.0-20200810</Version>
+    <Version>3.0.0-20200923</Version>
     <PublishReadyToRun>true</PublishReadyToRun>
     <TieredCompilation>true</TieredCompilation>
     <TieredCompilationQuickJit>true</TieredCompilationQuickJit>

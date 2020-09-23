@@ -3,13 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>.net5</TargetFramework>
-    <AssemblyVersion>2.0.0.20259</AssemblyVersion>
-    <FileVersion>2.0.0.20259</FileVersion>
+    <AssemblyVersion>2.0.0.20267</AssemblyVersion>
+    <FileVersion>2.0.0.20267</FileVersion>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <StartupObject>RMMVCookTool.CLI.Program</StartupObject>
     <AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
     <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-    <Version>2.0.0-20200810</Version>
+    <Version>2.0.0-20200923</Version>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
