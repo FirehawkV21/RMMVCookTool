@@ -62,13 +62,13 @@ namespace RMMVCookTool.Core
             //Setting up the compiler by throwing in two arguments.
             //The first bit (the one with the file variable) is the source.
             //The second bit (the one with the fileBuffer variable) makes the final file.
-            CompilerInfo.Arguments = "\"" + FileMap[index] + "\" \"" +
+            CompilerInfo.Value.Arguments = "\"" + FileMap[index] + "\" \"" +
                                      FileMap[index].Replace(".js", "." + FileExtension, StringComparison.Ordinal) + "\"";
             //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.
-            CompilerInfo.CreateNoWindow = true;
-            CompilerInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            CompilerInfo.Value.CreateNoWindow = true;
+            CompilerInfo.Value.WindowStyle = ProcessWindowStyle.Hidden;
             //Run the compiler.
-            Process.Start(CompilerInfo)?.WaitForExit();
+            Process.Start(CompilerInfo.Value)?.WaitForExit();
 
             //If the user asked to remove the JS files, delete them.
             if (RemoveSourceCodeAfterCompiling) File.Delete(FileMap[index]);

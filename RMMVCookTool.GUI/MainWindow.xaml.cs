@@ -65,7 +65,7 @@ namespace RMMVCookTool.GUI
                     }
                     _compilerStatusReport = 0;
                     _compilerWorker.ReportProgress(currentProject + 1);
-                    ProjectList[currentProject].CompilerInfo.FileName = Path.Combine(AppSettings.Default.SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
+                    ProjectList[currentProject].CompilerInfo.Value.FileName = Path.Combine(AppSettings.Default.SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
                     ProjectList[currentProject].GameFilesLocation = JsonProcessor.FindGameFolder(Path.Combine(ProjectList[currentProject].ProjectLocation, "package.json"));
                     if (ProjectList[currentProject].GameFilesLocation == "Null" || ProjectList[currentProject].GameFilesLocation == "Unknown")
                     {

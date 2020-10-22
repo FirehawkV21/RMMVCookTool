@@ -12,7 +12,7 @@ namespace RMMVCookTool.CLI
 {
     class Program
     {
-        private static CompilerProject newProject = new CompilerProject();
+        private static Lazy<CompilerProject> newProject = new Lazy<CompilerProject>(() => new CompilerProject(), true);
         private static bool _testProject;
         private static int _compressProject = 3;
         private static string _sdkLocation;
@@ -74,8 +74,8 @@ namespace RMMVCookTool.CLI
                         //Set the Project Location.
                         case "--ProjectLocation":
                             stringBuffer = args[argnum + 1];
-                            newProject.ProjectLocation = stringBuffer.Replace("\"", "");
-                            if (argnum <= args.Length - 1 && (Directory.Exists(newProject.ProjectLocation) && File.Exists(Path.Combine(newProject.ProjectLocation, "package.json"))))
+                            newProject.Value.ProjectLocation = stringBuffer.Replace("\"", "");
+                            if (argnum <= args.Length - 1 && (Directory.Exists(newProject.Value.ProjectLocation) && File.Exists(Path.Combine(newProject.Value.ProjectLocation, "package.json"))))
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                                 Console.WriteLine(Resources.ProjectLocationConfirmationText);
@@ -84,7 +84,7 @@ namespace RMMVCookTool.CLI
                             else
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine(!File.Exists(Path.Combine(newProject.ProjectLocation, "project.json")) ? Resources.JsonFileMissingErrorText : Resources.ProjectLocationInexistantText);
+                                Console.WriteLine(!File.Exists(Path.Combine(newProject.Value.ProjectLocation, "project.json")) ? Resources.JsonFileMissingErrorText : Resources.ProjectLocationInexistantText);
                                 Console.ResetColor();
                                 Console.WriteLine(Resources.PushEnterToExitText);
                                 Console.ReadLine();
@@ -96,9 +96,9 @@ namespace RMMVCookTool.CLI
                         case "--FileExtension":
                             //Check if the next variable in the args array is a command line argument or it's the end of the array.
                             if (argnum >= args.Length - 1 && args[argnum].Contains("--")) continue;
-                            newProject.FileExtension = args[argnum + 1];
+                            newProject.Value.FileExtension = args[argnum + 1];
                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.WriteLine(Resources.FileExtensionSetText + newProject.FileExtension);
+                            Console.WriteLine(Resources.FileExtensionSetText + newProject.Value.FileExtension);
                             Console.ResetColor();
                             break;
 
@@ -148,7 +148,7 @@ namespace RMMVCookTool.CLI
                         //This command line argument deletes the JavaScript files after compiling.
                         case "--ReleaseMode":
                             _checkDeletion = 2;
-                            newProject.RemoveSourceCodeAfterCompiling = true;
+                            newProject.Value.RemoveSourceCodeAfterCompiling = true;
                             Console.ForegroundColor = ConsoleColor.DarkGreen;
                             Console.WriteLine(Resources.JavascriptDeletionConfirmationTet);
                             Console.ResetColor();
@@ -179,19 +179,19 @@ namespace RMMVCookTool.CLI
                                 switch (argnum + 1)
                                 {
                                     case 2:
-                                        newProject.CompressionModeLevel = 2;
+                                        newProject.Value.CompressionModeLevel = 2;
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                         Console.WriteLine(Resources.NoCompressionConfirmationText);
                                         Console.ResetColor();
                                         break;
                                     case 1:
-                                        newProject.CompressionModeLevel = 1;
+                                        newProject.Value.CompressionModeLevel = 1;
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                         Console.WriteLine(Resources.FastestCompressionConfirmationText);
                                         Console.ResetColor();
                                         break;
                                     default:
-                                        newProject.CompressionModeLevel = 0;
+                                        newProject.Value.CompressionModeLevel = 0;
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                         Console.WriteLine(Resources.OptimalCompressionCOnfirmationText);
                                         Console.ResetColor();
@@ -205,8 +205,8 @@ namespace RMMVCookTool.CLI
                 #endregion
                 #region Workload Check
                 //Check if both the _projectLocation and _sdkLocation variables are not null.
-                if (newProject.ProjectLocation != null && _sdkLocation != null) _settingsSet = true;
-                else if (newProject.ProjectLocation == null && _sdkLocation != null)
+                if (newProject.Value.ProjectLocation != null && _sdkLocation != null) _settingsSet = true;
+                else if (newProject.Value.ProjectLocation == null && _sdkLocation != null)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(Resources.ProjectNotSetErrorText);
@@ -215,7 +215,7 @@ namespace RMMVCookTool.CLI
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
-                else if (_sdkLocation == null && newProject.ProjectLocation != null)
+                else if (_sdkLocation == null && newProject.Value.ProjectLocation != null)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(Resources.SDKLocationNotSetErrorText);
@@ -244,27 +244,27 @@ namespace RMMVCookTool.CLI
                 {
                     //Ask the user what project to compile. Check if the folder is there and there's a js folder.
                     Console.WriteLine(Resources.ProjectLocationQuestion);
-                    newProject.ProjectLocation = Console.ReadLine();
+                    newProject.Value.ProjectLocation = Console.ReadLine();
 
-                    if (newProject.ProjectLocation == null) Console.WriteLine(Resources.ProjectLocationIsNullText);
-                    else if (!Directory.Exists(newProject.ProjectLocation))
+                    if (newProject.Value.ProjectLocation == null) Console.WriteLine(Resources.ProjectLocationIsNullText);
+                    else if (!Directory.Exists(newProject.Value.ProjectLocation))
                         Console.WriteLine(Resources.ProjetDirectoryMissingErrorText);
-                    else if (!Directory.Exists(Path.Combine(newProject.ProjectLocation, "www", "js")))
+                    else if (!Directory.Exists(Path.Combine(newProject.Value.ProjectLocation, "www", "js")))
                         Console.WriteLine(Resources.ProjectJsFolderMissing);
-                    else if (!File.Exists(Path.Combine(newProject.ProjectLocation, "package.json")))
+                    else if (!File.Exists(Path.Combine(newProject.Value.ProjectLocation, "package.json")))
                         Console.WriteLine(Resources.JsonFileMissingErrorText);
-                } while (newProject.ProjectLocation == null || !Directory.Exists(newProject.ProjectLocation) ||
-                         !Directory.Exists(Path.Combine(newProject.ProjectLocation, "www", "js")));
+                } while (newProject.Value.ProjectLocation == null || !Directory.Exists(newProject.Value.ProjectLocation) ||
+                         !Directory.Exists(Path.Combine(newProject.Value.ProjectLocation, "www", "js")));
 
                 //Ask the user for the file extension.
                 Console.Write(Resources.FileExtensionQuestion);
-                newProject.FileExtension = Console.ReadLine();
-                if (string.IsNullOrEmpty(newProject.FileExtension)) newProject.FileExtension = "bin";
+                newProject.Value.FileExtension = Console.ReadLine();
+                if (string.IsNullOrEmpty(newProject.Value.FileExtension)) newProject.Value.FileExtension = "bin";
                 //This is the check if the tool should delete the JS files.
                 Console.WriteLine(Resources.WorkloadQuestion);
                 string stringBuffer = Console.ReadLine();
                 int.TryParse(stringBuffer, out _checkDeletion);
-                newProject.RemoveSourceCodeAfterCompiling = _checkDeletion == 2;
+                newProject.Value.RemoveSourceCodeAfterCompiling = _checkDeletion == 2;
 
                 char charBuffer;
                 if (_checkDeletion == 2)
@@ -301,8 +301,8 @@ namespace RMMVCookTool.CLI
 
             #region Workload Code
             //Find the game folder.
-            newProject.GameFilesLocation = JsonProcessor.FindGameFolder(Path.Combine(newProject.ProjectLocation, "package.json"));
-            if (newProject.GameFilesLocation == "Null" || newProject.GameFilesLocation == "Unknown")
+            newProject.Value.GameFilesLocation = JsonProcessor.FindGameFolder(Path.Combine(newProject.Value.ProjectLocation, "package.json"));
+            if (newProject.Value.GameFilesLocation == "Null" || newProject.Value.GameFilesLocation == "Unknown")
             {
                 //If the Json read returns nothing, throw an error to tell the user to double check their json file.
                 Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -312,48 +312,48 @@ namespace RMMVCookTool.CLI
             else //If the read returned a valid folder, start the compiler process.
             {
                 //Finding all the JS files.
-                newProject.FileMap ??= new List<string>(CompilerUtilities.FileFinder(Path.Combine(newProject.ProjectLocation), "*.js"));
+                newProject.Value.FileMap ??= new List<string>(CompilerUtilities.FileFinder(Path.Combine(newProject.Value.ProjectLocation), "*.js"));
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                 Console.ResetColor();
                 Console.WriteLine(Resources.BinaryRemovalText);
-                CompilerUtilities.CleanupBin(newProject.FileMap);
+                CompilerUtilities.CleanupBin(newProject.Value.FileMap);
                 //Preparing the compiler task.
-                newProject.CompilerInfo.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
+                newProject.Value.CompilerInfo.Value.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
                 try
                 {
                     //Read from the FileMap.
                     //Compilation is done in parallel. Handy for multi-core systems.
                     if (_parallelMode)
                     {
-                        Parallel.For(0, newProject.FileMap.Count, index =>
+                        Parallel.For(0, newProject.Value.FileMap.Count, index =>
                         {
                                 //Print the status of the compiler. Show which thread is compiling what as well.
                                 Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord +
                                               Thread.CurrentThread.ManagedThreadId +
-                                              Resources.CompilingWord + newProject.FileMap[index] + @"...\n");
+                                              Resources.CompilingWord + newProject.Value.FileMap[index] + @"...\n");
                                 //Call the compiler task.
-                                newProject.CompileFile(index);
+                                newProject.Value.CompileFile(index);
                             Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord +
                                               Thread.CurrentThread.ManagedThreadId +
-                                              Resources.FinishedCompilingText + newProject.FileMap[index] + @".\n");
+                                              Resources.FinishedCompilingText + newProject.Value.FileMap[index] + @".\n");
                         });
                     }
                     else
                     {
-                        for (var i = 0; i < newProject.FileMap.Count; i++)
+                        for (var i = 0; i < newProject.Value.FileMap.Count; i++)
                         {
                             //Print the status of the compiler. Show which thread is compiling what as well.
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
                             Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                             Console.ResetColor();
-                            Console.WriteLine(Resources.CompilingWord2 + newProject.FileMap[i] + @"...");
+                            Console.WriteLine(Resources.CompilingWord2 + newProject.Value.FileMap[i] + @"...");
                             //Call the compiler task.
-                            newProject.CompileFile(i);
+                            newProject.Value.CompileFile(i);
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
                             Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.WriteLine(Resources.FinishedCompilingText2 + newProject.FileMap[i] + @".");
+                            Console.WriteLine(Resources.FinishedCompilingText2 + newProject.Value.FileMap[i] + @".");
                             Console.ResetColor();
                         }
                     }
@@ -366,7 +366,7 @@ namespace RMMVCookTool.CLI
                     if (_testProject)
                     {
                         Console.WriteLine(Resources.NwjsStartingTestNotificationText);
-                        newProject.RunTest(_sdkLocation);
+                        newProject.Value.RunTest(_sdkLocation);
                     }
                     else if (_compressProject < 3 && _checkDeletion == 2)
                     {
@@ -374,14 +374,14 @@ namespace RMMVCookTool.CLI
                         Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                         Console.ResetColor();
                         Console.WriteLine(Resources.FileCompressionText);
-                        newProject.CompressFiles();
+                        newProject.Value.CompressFiles();
                         if (_compressProject == 1)
                         {
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
                             Console.Write(Resources.DateTimeFormatText, DateTime.Now);
                             Console.ResetColor();
                             Console.WriteLine(Resources.SourceFileDeletionText);
-                            newProject.DeleteFiles();
+                            newProject.Value.DeleteFiles();
                         }
                     }
 

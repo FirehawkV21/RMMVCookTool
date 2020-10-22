@@ -9,7 +9,7 @@ namespace RMMVCookTool.Core
 {
     public class CompilerProjectBase
     {
-        public ProcessStartInfo CompilerInfo { get; } = new ProcessStartInfo();
+        public Lazy<ProcessStartInfo> CompilerInfo { get; } = new Lazy<ProcessStartInfo>(() => new ProcessStartInfo(), true);
         protected static readonly string ArchiveName = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "app.nw" : "package.nw";
     }
 }
