@@ -12,7 +12,7 @@ namespace RMMVCookTool.CLI
 {
     class Program
     {
-        private static Lazy<CompilerProject> newProject = new Lazy<CompilerProject>(() => new CompilerProject(), true);
+        private static readonly Lazy<CompilerProject> newProject = new Lazy<CompilerProject>(() => new CompilerProject(), true);
         private static bool _testProject;
         private static int _compressProject = 3;
         private static string _sdkLocation;
@@ -31,7 +31,6 @@ namespace RMMVCookTool.CLI
             Console.WriteLine(Resources.SpilterText);
             #endregion
             #region Command line arguments
-#pragma warning disable CA1307 // Specify StringComparison
             if (args.Length >= 1)
             {
                 for (int argnum = 0; argnum < args.Length; argnum++)
@@ -201,7 +200,6 @@ namespace RMMVCookTool.CLI
                             break;
                     }
                 }
-#pragma warning restore CA1307 // Specify StringComparison
                 #endregion
                 #region Workload Check
                 //Check if both the _projectLocation and _sdkLocation variables are not null.
@@ -281,18 +279,11 @@ namespace RMMVCookTool.CLI
                     charBuffer = Console.ReadKey().KeyChar;
                     if (char.IsLetterOrDigit(charBuffer))
                     {
-                        switch (charBuffer)
+                        _testProject = charBuffer switch
                         {
-                            case 'Y':
-                            case 'y':
-                            case 'Ν':
-                            case 'ν':
-                                _testProject = true;
-                                break;
-                            default:
-                                _testProject = false;
-                                break;
-                        }
+                            'Y' or 'y' or 'Ν' or 'ν' => true,
+                            _ => false,
+                        };
                     }
                     else _testProject = false;
                 }

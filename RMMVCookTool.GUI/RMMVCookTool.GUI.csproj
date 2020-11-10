@@ -4,12 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>.net5-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.1.20296</AssemblyVersion>
-    <FileVersion>3.0.1.20296</FileVersion>
+    <AssemblyVersion>3.0.1.20310</AssemblyVersion>
+    <FileVersion>3.0.1.20310</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile></PackageLicenseFile>
     <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
     <AssemblyTitle>RPG Maker MV Cook Tool (GUI Version)</AssemblyTitle>
     <Authors>AceOfAces</Authors>
@@ -25,14 +25,11 @@
     <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
     <Description>GUI version of the RPG Maker MV Cook Tool.</Description>
     <Platforms>AnyCPU;x64;x86</Platforms>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Brick-02-WF.ico" />
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +39,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.1.1" />
+    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.2.0-alpha.1" />
   </ItemGroup>
 
   <ItemGroup>
