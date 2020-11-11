@@ -281,10 +281,8 @@ namespace RMMVCookTool.GUI
              ProgramVersionLabel.Content = ProgramVersionLabel.Content + @" (" + version + @")";
 
             byte[] loader = Encoding.ASCII.GetBytes(Properties.Resources.Manual);
-            using (MemoryStream stream = new MemoryStream(loader))
-            {
-                UserManualBox.Selection.Load(stream, DataFormats.Rtf);
-            }
+            using MemoryStream stream = new MemoryStream(loader);
+            UserManualBox.Selection.Load(stream, DataFormats.Rtf);
         }
 
         private void BrowseSDKButton_Click(object sender, RoutedEventArgs e)

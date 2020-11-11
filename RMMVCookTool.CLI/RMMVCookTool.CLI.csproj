@@ -1,85 +1,86 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>.net5</TargetFramework>
-    <AssemblyVersion>2.0.0.20296</AssemblyVersion>
-    <FileVersion>2.0.0.20296</FileVersion>
-    <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
-    <StartupObject>RMMVCookTool.CLI.Program</StartupObject>
-    <AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
-    <PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-    <Version>2.0.0-20201005</Version>
-    <Authors>AceOfAces</Authors>
-    <Company>Studio ACE</Company>
-    <Product>RPG Maker MV Cook Tool</Product>
-    <Description>Command-line version of the RPG Maker MV Cook Tool.</Description>
-    <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
-    <TieredCompilation>true</TieredCompilation>
-    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
-    <Copyright>Copyright © 2019 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    <PublishTrimmed>false</PublishTrimmed>
-    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-    <NeutralLanguage>en</NeutralLanguage>
-    <Platforms>AnyCPU;x86;x64</Platforms>
+	<OutputType>Exe</OutputType>
+	<TargetFramework>.net5</TargetFramework>
+	<AssemblyVersion>2.0.0.20296</AssemblyVersion>
+	<FileVersion>2.0.0.20296</FileVersion>
+	<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
+	<StartupObject>RMMVCookTool.CLI.Program</StartupObject>
+	<AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
+	<PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
+	<Version>2.0.0-20201005</Version>
+	<Authors>AceOfAces</Authors>
+	<Company>Studio ACE</Company>
+	<Product>RPG Maker MV Cook Tool</Product>
+	<Description>Command-line version of the RPG Maker MV Cook Tool.</Description>
+	<PackageLicenseUrl></PackageLicenseUrl>
+	<PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
+	<TieredCompilation>true</TieredCompilation>
+	<TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+	<Copyright>Copyright © 2019 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	<PublishReadyToRun>true</PublishReadyToRun>
+	<PublishTrimmed>false</PublishTrimmed>
+	<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+	<NeutralLanguage>en</NeutralLanguage>
+	<Platforms>AnyCPU;x86;x64</Platforms>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <FileAlignment>4096</FileAlignment>
+	<FileAlignment>4096</FileAlignment>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <FileAlignment>4096</FileAlignment>
+	<FileAlignment>4096</FileAlignment>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <FileAlignment>4096</FileAlignment>
+	<FileAlignment>4096</FileAlignment>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RMMVCookTool.Core\RMMVCookTool.Core.csproj" />
+	<ProjectReference Include="..\RMMVCookTool.Core\RMMVCookTool.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+	<None Include="..\LICENSE.txt">
+	  <Pack>True</Pack>
+	  <PackagePath></PackagePath>
+	</None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.0" />
-    <PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
+	<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1" />
+	<PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.0" />
+	<PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+	<Compile Update="Properties\Resources.Designer.cs">
+	  <DesignTime>True</DesignTime>
+	  <AutoGen>True</AutoGen>
+	  <DependentUpon>Resources.resx</DependentUpon>
+	</Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.en.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.el.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+	<EmbeddedResource Update="Properties\Resources.en.resx">
+	  <Generator></Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Properties\Resources.el.resx">
+	  <Generator></Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Properties\Resources.resx">
+	  <Generator>ResXFileCodeGenerator</Generator>
+	  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	</EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.NETCore.App" />
+	<PackageReference Update="Microsoft.NETCore.App" />
   </ItemGroup>
 
 </Project>

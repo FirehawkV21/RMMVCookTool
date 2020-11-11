@@ -1,19 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <AssemblyVersion>2.0.0.20316</AssemblyVersion>
-    <FileVersion>2.0.0.20316</FileVersion>
-    <Version>2.0.0-20200810</Version>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+	<TargetFramework>net5.0</TargetFramework>
+	<AssemblyVersion>2.0.1.20316</AssemblyVersion>
+	<FileVersion>2.0.1.20316</FileVersion>
+	<Version>2.0.1-20200810</Version>
+	<Platforms>AnyCPU;x64;x86</Platforms>
+	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>
+	<Authors>AceOfAces</Authors>
+	<Company>Studio ACE</Company>
+	<Product>RPG Maker MV Cook Tool</Product>
+	<TieredCompilation>true</TieredCompilation>
+	<TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+	<PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
+	<Description>The core library of the RPG Maker MV Cook Tool.</Description>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+	<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
 </Project>

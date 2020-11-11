@@ -4,8 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>.net5-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.1.20316</AssemblyVersion>
-    <FileVersion>3.0.1.20316</FileVersion>
+    <AssemblyVersion>3.0.2.20316</AssemblyVersion>
+    <FileVersion>3.0.2.20316</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <NeutralLanguage>en</NeutralLanguage>
@@ -15,7 +15,7 @@
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
-    <Version>3.0.1-20201009</Version>
+    <Version>3.0.2-20201111</Version>
     <PublishReadyToRun>true</PublishReadyToRun>
     <TieredCompilation>true</TieredCompilation>
     <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
@@ -39,7 +39,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.2.0-alpha.1" />
+    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.2.1" />
   </ItemGroup>
 
   <ItemGroup>
