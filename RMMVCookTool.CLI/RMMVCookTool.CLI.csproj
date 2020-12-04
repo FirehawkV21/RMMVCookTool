@@ -53,7 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1" />
+	<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2" />
 	<PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.0" />
 	<PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
   </ItemGroup>
