@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace RMMVCookTool.Core
@@ -56,6 +57,7 @@ namespace RMMVCookTool.Core
         /// Starts the NW.js compiler.
         /// </summary>
         /// <param name="index">The index in the list.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
         public void CompileFile(int index)
         {
             //Removing the JavaScript extension. Needed to place our own File Extension.

@@ -62,9 +62,7 @@ namespace RMMVCookTool.Core
         public static void CleanupBin(in List<string> fileMap)
         {
             //Do a normal loop for each entry on the FileMap array.
-#pragma warning disable CA1062 // Validate arguments of public methods
             foreach (string file in fileMap)
-#pragma warning restore CA1062 // Validate arguments of public methods
             {
                 //This does a small search in the path specified in the FileMap.
                 //Adding the .* will allow us to search all the files that have an extension.

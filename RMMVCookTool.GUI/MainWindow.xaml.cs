@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
@@ -52,6 +53,7 @@ namespace RMMVCookTool.GUI
             _compilerWorker.RunWorkerCompleted += CompilerFinisher;
         }
 
+        [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
             try
@@ -178,6 +180,7 @@ namespace RMMVCookTool.GUI
             }
         }
 
+        [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
         private void CompilerReport(object sender, ProgressChangedEventArgs e)
         {
             if ((_compilerStatusReport > 0 && _compilerStatusReport < 3) && currentFile > ProjectList[currentProject].FileMap.Count) _stringBuffer.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile));
@@ -224,6 +227,7 @@ namespace RMMVCookTool.GUI
             }
         }
 
+        [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
         private void CompilerFinisher(object sender, RunWorkerCompletedEventArgs e)
         {
             //if (e.Error != null)
