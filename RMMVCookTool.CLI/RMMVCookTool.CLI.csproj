@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+	<PropertyGroup>
 	<OutputType>Exe</OutputType>
 	<TargetFramework>.net5.0</TargetFramework>
 	<AssemblyVersion>2.0.1.20316</AssemblyVersion>
@@ -9,7 +9,7 @@
 	<StartupObject>RMMVCookTool.CLI.Program</StartupObject>
 	<AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
 	<PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-	<Version>2.0.1-20201111</Version>
+	<Version>2.0.1-20210319</Version>
 	<Authors>AceOfAces</Authors>
 	<Company>Studio ACE</Company>
 	<Product>RPG Maker MV Cook Tool</Product>
@@ -27,63 +27,63 @@
 	<NeutralLanguage>en</NeutralLanguage>
 	<Platforms>AnyCPU;x86;x64</Platforms>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	<FileAlignment>4096</FileAlignment>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
 	<FileAlignment>4096</FileAlignment>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
 	<FileAlignment>4096</FileAlignment>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 	<ProjectReference Include="..\RMMVCookTool.Core\RMMVCookTool.Core.csproj" />
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 	<None Include="..\LICENSE.txt">
-	  <Pack>True</Pack>
-	  <PackagePath></PackagePath>
+		<Pack>True</Pack>
+		<PackagePath></PackagePath>
 	</None>
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 	<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-	  <PrivateAssets>all</PrivateAssets>
-	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
 	<PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.1" />
 	<PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 	<Compile Update="Properties\Resources.Designer.cs">
-	  <DesignTime>True</DesignTime>
-	  <AutoGen>True</AutoGen>
-	  <DependentUpon>Resources.resx</DependentUpon>
+		<DesignTime>True</DesignTime>
+		<AutoGen>True</AutoGen>
+		<DependentUpon>Resources.resx</DependentUpon>
 	</Compile>
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 	<EmbeddedResource Update="Properties\Resources.en.resx">
-	  <Generator></Generator>
+		<Generator></Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Properties\Resources.el.resx">
-	  <Generator></Generator>
+		<Generator></Generator>
 	</EmbeddedResource>
 	<EmbeddedResource Update="Properties\Resources.resx">
-	  <Generator>ResXFileCodeGenerator</Generator>
-	  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		<Generator>ResXFileCodeGenerator</Generator>
+		<LastGenOutput>Resources.Designer.cs</LastGenOutput>
 	</EmbeddedResource>
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 	<PackageReference Update="Microsoft.NETCore.App" />
-  </ItemGroup>
+	</ItemGroup>
 
 </Project>

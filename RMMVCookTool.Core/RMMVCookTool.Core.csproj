@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+	<PropertyGroup>
 	<TargetFramework>net5.0</TargetFramework>
 	<AssemblyVersion>2.0.1.21078</AssemblyVersion>
 	<FileVersion>2.0.1.21078</FileVersion>
-	<Version>2.0.1-20200810</Version>
+	<Version>2.0.1-20210319</Version>
 	<Platforms>AnyCPU;x64;x86</Platforms>
 	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>
 	<Authors>AceOfAces</Authors>
@@ -16,14 +16,26 @@
 	<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
 	<Description>The core library of the RPG Maker MV Cook Tool.</Description>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
 
-  <ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+
+	<ItemGroup>
 	<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-	  <PrivateAssets>all</PrivateAssets>
-	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
 	<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
+	</ItemGroup>
 
 </Project>
