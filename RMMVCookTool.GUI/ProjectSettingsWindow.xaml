@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RMMVCookTool.GUI"
         xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
         mc:Ignorable="d"
-        Title="{x:Static properties:Resources.ProjectSettingsUiText}" Height="210" Width="422" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True" WindowStyle="SingleBorderWindow" Initialized="Window_Initialized">
+        Title="{x:Static properties:Resources.ProjectSettingsUiText}" Height="210" Width="422" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True" WindowStyle="SingleBorderWindow" Initialized="Window_Initialized" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="157*"/>

@@ -12,7 +12,7 @@ namespace RMMVCookTool.CLI
 {
     class Program
     {
-        private static readonly Lazy<CompilerProject> newProject = new Lazy<CompilerProject>(() => new CompilerProject(), true);
+        private static readonly Lazy<CompilerProject> newProject = new(() => new CompilerProject(), true);
         private static bool _testProject;
         private static int _compressProject = 3;
         private static string _sdkLocation;

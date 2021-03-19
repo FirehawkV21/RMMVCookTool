@@ -6,7 +6,7 @@
         xmlns:cntrl="clr-namespace:NumericUpDownLib;assembly=NumericUpDownLib"
         xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
         mc:Ignorable="d"
-        Title="{x:Static properties:Resources.GamePackageMetadataEditorTitleText}" Height="434" Width="466" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="ToolWindow">
+        Title="{x:Static properties:Resources.GamePackageMetadataEditorTitleText}" Height="434" Width="466" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="ToolWindow" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

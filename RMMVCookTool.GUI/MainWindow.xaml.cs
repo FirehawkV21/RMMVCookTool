@@ -34,13 +34,13 @@ namespace RMMVCookTool.GUI
             InitializeComponent();
             SetupWorkers();
         }
-        private readonly BackgroundWorker _compilerWorker = new BackgroundWorker();
+        private readonly BackgroundWorker _compilerWorker = new();
         private string _previousPath;
         private int _compilerStatusReport;
-        private StringBuilder _stringBuffer = new StringBuilder();
+        private StringBuilder _stringBuffer = new();
         private int currentFile;
         private int currentProject;
-        private StringBuilder _nextFile = new StringBuilder();
+        private StringBuilder _nextFile = new();
         public static ObservableCollection<CompilerProject> ProjectList { get; } = new ObservableCollection<CompilerProject>();
 
         #region Compiler Worker
@@ -285,7 +285,7 @@ namespace RMMVCookTool.GUI
              ProgramVersionLabel.Content = ProgramVersionLabel.Content + @" (" + version + @")";
 
             byte[] loader = Encoding.ASCII.GetBytes(Properties.Resources.Manual);
-            using MemoryStream stream = new MemoryStream(loader);
+            using MemoryStream stream = new(loader);
             UserManualBox.Selection.Load(stream, DataFormats.Rtf);
         }
 
@@ -360,7 +360,7 @@ namespace RMMVCookTool.GUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ProjectSettingsWindow defSettingsWindow = new ProjectSettingsWindow();
+            ProjectSettingsWindow defSettingsWindow = new();
             defSettingsWindow.Show();
         }
 
@@ -400,7 +400,7 @@ namespace RMMVCookTool.GUI
             else
             {
                 var temp = FolderList.SelectedIndex;
-                ProjectSettingsWindow settingsWindow = new ProjectSettingsWindow(temp);
+                ProjectSettingsWindow settingsWindow = new(temp);
                 settingsWindow.ShowDialog();
                 ICollectionView view = CollectionViewSource.GetDefaultView(ProjectList);
                 view.Refresh();
