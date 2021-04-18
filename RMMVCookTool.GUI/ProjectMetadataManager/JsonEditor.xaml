@@ -114,7 +114,7 @@
             </TabItem>
         </TabControl>
         <WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <CheckBox x:Name="MinifyJsonFileCheckBox" Content="Minify the package.json file" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Padding="5,0,5,0"/>
+            <CheckBox x:Name="MinifyJsonFileCheckBox" Content="{x:Static properties:Resources.MinifyPackageFileUiText}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Padding="5,0,5,0"/>
             <Button x:Name="SaveJsonButton" Content="{x:Static properties:Resources.SaveButtonText}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="SaveJsonButton_Click" Height="26" Grid.Row="1" Margin="0,5,0,0"/>
             <Button x:Name="CloseButton" Content="{x:Static properties:Resources.CloseButtonText}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Click="CloseButton_Click" Height="26" Grid.Row="1" Margin="5,5,5,0"/>
         </WrapPanel>

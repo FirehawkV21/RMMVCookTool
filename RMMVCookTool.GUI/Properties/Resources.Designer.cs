@@ -557,6 +557,15 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minify the package.json file.
+        /// </summary>
+        public static string MinifyPackageFileUiText {
+            get {
+                return ResourceManager.GetString("MinifyPackageFileUiText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Minimum Height.
         /// </summary>
         public static string MinimumHeightUiText {

@@ -409,4 +409,7 @@
   <data name="AbortedText" xml:space="preserve">
     <value>Aborted</value>
   </data>
+  <data name="MinifyPackageFileUiText" xml:space="preserve">
+    <value>Minify the package.json file</value>
+  </data>
 </root>
