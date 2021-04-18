@@ -78,5 +78,14 @@ namespace RMMVCookTool.Core
                 Array.Clear(deletionMap, 0, deletionMap.Length);
             }
         }
+
+        public static void RemoveDebugFiles(in string projectLocation)
+        {
+            if (File.Exists(Path.Combine(projectLocation, "js", "jsconfig.json"))) File.Delete(Path.Combine(projectLocation, "js", "jsconfig.json"));
+            var TSDeletionMap = Directory.GetFiles(projectLocation, "*.d.ts");
+            foreach (string file in TSDeletionMap) File.Delete(file);
+            var JsFileMaps = Directory.GetFiles(projectLocation, "*.js.map");
+            foreach (string file in JsFileMaps) File.Delete(file);
+        }
     }
 }

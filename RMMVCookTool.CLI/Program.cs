@@ -309,6 +309,7 @@ namespace RMMVCookTool.CLI
                 Console.ResetColor();
                 Console.WriteLine(Resources.BinaryRemovalText);
                 CompilerUtilities.CleanupBin(newProject.Value.FileMap);
+                CompilerUtilities.RemoveDebugFiles(newProject.Value.ProjectLocation);
                 //Preparing the compiler task.
                 newProject.Value.CompilerInfo.Value.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
                 try
