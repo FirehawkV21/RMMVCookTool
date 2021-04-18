@@ -421,4 +421,7 @@ This is the title of the message shown if the JSON file is missing an important 
   <data name="CannotFindGameFolderMessage" xml:space="preserve">
     <value>Βεβαιωθείτε ότι η μεταβλητή "main" είναι γραμμένη και δείχνει σε έναν φάκελο που υπάρχει. Αυτός ο φάκελος θα αγνοηθεί.</value>
   </data>
+  <data name="MinifyPackageFileUiText" xml:space="preserve">
+    <value>Minify the package.json file</value>
+  </data>
 </root>
