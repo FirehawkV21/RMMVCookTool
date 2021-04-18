@@ -421,4 +421,7 @@ This is the title of the message shown if the JSON file is missing an important 
   <data name="CannotFindGameFolderMessage" xml:space="preserve">
     <value>Double check that the "main" variable is filled or points to a existing folder. This folder will be skipped.</value>
   </data>
+  <data name="MinifyPackageFileUiText" xml:space="preserve">
+    <value>Minify the package.json file</value>
+  </data>
 </root>
