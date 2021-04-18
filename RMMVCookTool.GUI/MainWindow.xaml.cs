@@ -415,7 +415,7 @@ namespace RMMVCookTool.GUI
                     Properties.Resources.ProjectMessageNotSelected_Details);
             else
             {
-                var jsonEditorGui = new JsonEditor(ProjectList[FolderList.SelectedIndex].ProjectLocation);
+                var jsonEditorGui = new ProjectMetadataManager.JsonEditor(ProjectList[FolderList.SelectedIndex].ProjectLocation);
                 jsonEditorGui.ShowDialog();
             }
         }
