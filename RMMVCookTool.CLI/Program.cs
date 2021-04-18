@@ -6,7 +6,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using RMMVCookTool.CLI.Properties;
-using RMMVCookTool.Core;
+using RMMVCookTool.Core.Compiler;
+using RMMVCookTool.Core.Utilities;
 
 namespace RMMVCookTool.CLI
 {

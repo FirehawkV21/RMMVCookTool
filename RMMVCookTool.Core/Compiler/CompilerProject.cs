@@ -5,8 +5,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using RMMVCookTool.Core.Utilities;
 
-namespace RMMVCookTool.Core
+namespace RMMVCookTool.Core.Compiler
 {
     public class CompilerProject : CompilerProjectBase
     {
