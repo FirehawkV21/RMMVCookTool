@@ -293,7 +293,7 @@ namespace RMMVCookTool.CLI
 
             #region Workload Code
             //Find the game folder.
-            newProject.Value.GameFilesLocation = JsonProcessor.FindGameFolder(Path.Combine(newProject.Value.ProjectLocation, "package.json"));
+            newProject.Value.GameFilesLocation = CompilerUtilities.GetProjectFilesLocation(Path.Combine(newProject.Value.ProjectLocation, "package.json"));
             if (newProject.Value.GameFilesLocation == "Null" || newProject.Value.GameFilesLocation == "Unknown")
             {
                 //If the Json read returns nothing, throw an error to tell the user to double check their json file.

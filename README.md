@@ -26,5 +26,4 @@ You will need Visual Studio 2019, along with the Microsoft .NET 5 SDK. Once you 
 
 ## Libraries Used
 -  [Dirkster.NumericUpDownLib](https://github.com/Dirkster99/NumericUpDownLib)
--  [Ookii.Dialogs](http://http://www.ookii.org/Software/Dialogs/)
--  [Newtonsoft.Json](https://www.newtonsoft.com/json)
+-  [Ookii.Dialogs](https://github.com/ookii-dialogs/ookii-dialogs-wpf)

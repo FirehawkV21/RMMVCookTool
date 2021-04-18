@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace RMMVCookTool.Core.Utilities
@@ -85,6 +87,33 @@ namespace RMMVCookTool.Core.Utilities
             foreach (string file in TSDeletionMap) File.Delete(file);
             var JsFileMaps = Directory.GetFiles(projectLocation, "*.js.map");
             foreach (string file in JsFileMaps) File.Delete(file);
+        }
+
+        public static string GetProjectFilesLocation(string projectLocation)
+        {
+            if (File.Exists(projectLocation))
+            {
+                var input = File.ReadAllText(projectLocation);
+                using (JsonDocument inputJson = JsonDocument.Parse(input))
+                {
+                    var tempstring = inputJson.RootElement.GetProperty("main");
+                    if (tempstring.GetString() != null)
+                    {
+                        string[] dataPart = tempstring.GetString().Split('/');
+                        string tempString2 = dataPart[0];
+                        if (dataPart.Length >= 2)
+                        {
+                            for (int i = 1; i < dataPart.Length - 2; i++)
+                            {
+                                tempString2 += dataPart[i] + ((RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? "\\" : "/");
+                            }
+                        }
+                        return Path.Combine(tempstring.GetString().Replace(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\package.json" : "/package.json", "", StringComparison.Ordinal), tempString2);
+                    }
+                    else return "Null";
+                }
+            }
+            else return "Unknown";
         }
     }
 }
