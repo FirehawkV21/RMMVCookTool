@@ -71,5 +71,12 @@ namespace RMMVCookTool.GUI
         {
             Close();
         }
+
+        private void CompressFilesToPackageCheckbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            RemoveFilesAfterPackagingCheckbox.IsChecked = false;
+            CompressionLevelBox.SelectedIndex = 0;
+        }
+
     }
 }

@@ -15,7 +15,7 @@
         <GroupBox Header="{x:Static properties:Resources.ProjectSettingsUiText}">
             <Grid>
                 <CheckBox x:Name="RemoveSourceFilesAfterCompilingCheckbox" Content="{x:Static properties:Resources.RemoveSourceCodeUiText}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <CheckBox x:Name="CompressFilesToPackageCheckbox" Content="{x:Static properties:Resources.CompressFilesToPackageUiText}" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="CompressFilesToPackageCheckbox" Content="{x:Static properties:Resources.CompressFilesToPackageUiText}" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Unchecked="CompressFilesToPackageCheckbox_Unchecked"/>
                 <CheckBox x:Name="RemoveFilesAfterPackagingCheckbox" Content="{x:Static properties:Resources.RemoveFilesAfterCompressionUiText}" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=CompressFilesToPackageCheckbox}"/>
                 <Label Content="{x:Static properties:Resources.CompressionLevelUiText}" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=CompressFilesToPackageCheckbox}"/>
                 <ComboBox x:Name="CompressionLevelBox" HorizontalAlignment="Left" Margin="135,64,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" IsEnabled="{Binding IsChecked, ElementName=CompressFilesToPackageCheckbox}">
