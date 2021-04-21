@@ -1,13 +1,11 @@
-﻿using System;
+﻿using RMMVCookTool.CLI.Properties;
+using RMMVCookTool.Core.Compiler;
+using RMMVCookTool.Core.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
-using RMMVCookTool.CLI.Properties;
-using RMMVCookTool.Core.Compiler;
-using RMMVCookTool.Core.Utilities;
 
 namespace RMMVCookTool.CLI
 {
@@ -17,7 +15,6 @@ namespace RMMVCookTool.CLI
         private static bool _testProject;
         private static int _compressProject = 3;
         private static string _sdkLocation;
-        private static bool _parallelMode;
         private static bool _settingsSet;
         private static int _checkDeletion = 1;
 
@@ -39,12 +36,6 @@ namespace RMMVCookTool.CLI
                     string stringBuffer;
                     switch (args[argnum])
                     {
-
-                        //Turn on Parallel mode.
-                        case "--Parallel":
-                            _parallelMode = true;
-                            Console.WriteLine(Resources.ParallelModeActiveText);
-                            break;
 
                         //Set the SDK Location
                         case "--SDKLocation":
@@ -310,45 +301,25 @@ namespace RMMVCookTool.CLI
                 Console.ResetColor();
                 Console.WriteLine(Resources.BinaryRemovalText);
                 CompilerUtilities.CleanupBin(newProject.Value.FileMap);
-                CompilerUtilities.RemoveDebugFiles(newProject.Value.ProjectLocation);
+                CompilerUtilities.RemoveDebugFiles(newProject.Value.GameFilesLocation);
                 //Preparing the compiler task.
                 newProject.Value.CompilerInfo.Value.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
                 try
                 {
-                    //Read from the FileMap.
-                    //Compilation is done in parallel. Handy for multi-core systems.
-                    if (_parallelMode)
+                    for (var i = 0; i < newProject.Value.FileMap.Count; i++)
                     {
-                        Parallel.For(0, newProject.Value.FileMap.Count, index =>
-                        {
-                                //Print the status of the compiler. Show which thread is compiling what as well.
-                                Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord +
-                                              Thread.CurrentThread.ManagedThreadId +
-                                              Resources.CompilingWord + newProject.Value.FileMap[index] + @"...\n");
-                                //Call the compiler task.
-                                newProject.Value.CompileFile(index);
-                            Console.WriteLine(@"[" + DateTime.Now + Resources.ThreadWord +
-                                              Thread.CurrentThread.ManagedThreadId +
-                                              Resources.FinishedCompilingText + newProject.Value.FileMap[index] + @".\n");
-                        });
-                    }
-                    else
-                    {
-                        for (var i = 0; i < newProject.Value.FileMap.Count; i++)
-                        {
-                            //Print the status of the compiler. Show which thread is compiling what as well.
-                            Console.ForegroundColor = ConsoleColor.DarkCyan;
-                            Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                            Console.ResetColor();
-                            Console.WriteLine(Resources.CompilingWord2 + newProject.Value.FileMap[i] + @"...");
-                            //Call the compiler task.
-                            newProject.Value.CompileFile(i);
-                            Console.ForegroundColor = ConsoleColor.DarkCyan;
-                            Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.WriteLine(Resources.FinishedCompilingText2 + newProject.Value.FileMap[i] + @".");
-                            Console.ResetColor();
-                        }
+                        //Print the status of the compiler. Show which thread is compiling what as well.
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
+                        Console.ResetColor();
+                        Console.WriteLine(Resources.CompilingWord2 + newProject.Value.FileMap[i] + @"...");
+                        //Call the compiler task.
+                        newProject.Value.CompileFile(i);
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine(Resources.FinishedCompilingText2 + newProject.Value.FileMap[i] + @".");
+                        Console.ResetColor();
                     }
 
                     Console.ForegroundColor = ConsoleColor.DarkCyan;

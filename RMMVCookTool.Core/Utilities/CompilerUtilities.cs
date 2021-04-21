@@ -83,9 +83,9 @@ namespace RMMVCookTool.Core.Utilities
         public static void RemoveDebugFiles(in string projectLocation)
         {
             if (File.Exists(Path.Combine(projectLocation, "js", "jsconfig.json"))) File.Delete(Path.Combine(projectLocation, "js", "jsconfig.json"));
-            var TSDeletionMap = Directory.GetFiles(projectLocation, "*.d.ts");
+            var TSDeletionMap = Directory.GetFiles(projectLocation, "*.d.ts", SearchOption.AllDirectories);
             foreach (string file in TSDeletionMap) File.Delete(file);
-            var JsFileMaps = Directory.GetFiles(projectLocation, "*.js.map");
+            var JsFileMaps = Directory.GetFiles(projectLocation, "*.js.map", SearchOption.AllDirectories);
             foreach (string file in JsFileMaps) File.Delete(file);
         }
 

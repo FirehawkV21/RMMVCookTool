@@ -79,6 +79,30 @@ namespace RMMVCookTool.Core.Compiler
 
         //This method starts the nw.exe file.
         /// <summary>
+        /// Starts the NW.js compiler.
+        /// </summary>
+        /// <param name="index">The index in the list.</param>
+        [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
+        public void CompileFile(string file)
+        {
+            //Removing the JavaScript extension. Needed to place our own File Extension.
+            //Setting up the compiler by throwing in two arguments.
+            //The first bit (the one with the file variable) is the source.
+            //The second bit (the one with the fileBuffer variable) makes the final file.
+            CompilerInfo.Value.Arguments = "\"" + file + "\" \"" +
+                                     file.Replace(".js", "." + FileExtension, StringComparison.Ordinal) + "\"";
+            //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.
+            CompilerInfo.Value.CreateNoWindow = true;
+            CompilerInfo.Value.WindowStyle = ProcessWindowStyle.Hidden;
+            //Run the compiler.
+            Process.Start(CompilerInfo.Value)?.WaitForExit();
+
+            //If the user asked to remove the JS files, delete them.
+            if (RemoveSourceCodeAfterCompiling) File.Delete(file);
+        }
+
+        //This method starts the nw.exe file.
+        /// <summary>
         /// Starts the NW.js binary.
         /// </summary>
         /// <param name="sdkLocation">The location of the NW.js SDK folder.</param>

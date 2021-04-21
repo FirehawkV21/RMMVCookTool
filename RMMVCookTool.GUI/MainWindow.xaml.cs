@@ -80,7 +80,7 @@ namespace RMMVCookTool.GUI
                         _compilerStatusReport = 1;
                         _compilerWorker.ReportProgress(currentProject + 1);
                         CompilerUtilities.CleanupBin(ProjectList[currentProject].FileMap);
-                        CompilerUtilities.RemoveDebugFiles(ProjectList[currentProject].ProjectLocation);
+                        CompilerUtilities.RemoveDebugFiles(ProjectList[currentProject].GameFilesLocation);
                         _compilerStatusReport = 2;
                         _compilerWorker.ReportProgress(1);
                         _compilerStatusReport = 3;
