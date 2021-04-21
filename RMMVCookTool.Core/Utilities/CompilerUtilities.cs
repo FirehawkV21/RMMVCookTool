@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RMMVCookTool.Core.Utilities
@@ -62,31 +64,56 @@ namespace RMMVCookTool.Core.Utilities
 
         public static void CleanupBin(in List<string> fileMap)
         {
+            CompilerUtilities.RecordToLog("Searching for existing binary files...", 3);
             //Do a normal loop for each entry on the FileMap array.
             foreach (string file in fileMap)
             {
+                RecordToLog($"Checking for binary files that are related to {file}.", 3);
                 //This does a small search in the path specified in the FileMap.
                 //Adding the .* will allow us to search all the files that have an extension.
                 var deletionMap = Directory.GetFiles(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + ".*");
+                RecordToLog($"Found {deletionMap.Length} files related to {Path.GetFileName(file)}.", 3);
                 //Doing a parallel loop here to speed up the cleanup process.
                 Parallel.ForEach(deletionMap, fileToDelete =>
                 {
                     //Run a check if the file in the array is actually a JavaScript file.
                     //If not, delete it.
-                    if (fileToDelete != file) File.Delete(fileToDelete);
+                    if (fileToDelete != file){
+                        RecordToLog($"Thread #{Thread.CurrentThread.ManagedThreadId} is deleting {Path.GetFileName(fileToDelete)}...", 3);
+                        File.Delete(fileToDelete);
+                        }
                 });
                 //Cleaning up the deletionMap array before refilling it.
                 Array.Clear(deletionMap, 0, deletionMap.Length);
             }
+            RecordToLog("Completed the removal of the previous binary files.", 3);
         }
 
         public static void RemoveDebugFiles(in string projectLocation)
         {
-            if (File.Exists(Path.Combine(projectLocation, "js", "jsconfig.json"))) File.Delete(Path.Combine(projectLocation, "js", "jsconfig.json"));
-            var TSDeletionMap = Directory.GetFiles(projectLocation, "*.d.ts", SearchOption.AllDirectories);
-            foreach (string file in TSDeletionMap) File.Delete(file);
-            var JsFileMaps = Directory.GetFiles(projectLocation, "*.js.map", SearchOption.AllDirectories);
-            foreach (string file in JsFileMaps) File.Delete(file);
+            RecordToLog("Checking for the jsconfig.json file...", 3);
+            if (File.Exists(Path.Combine(projectLocation, "js", "jsconfig.json")))
+            {
+                RecordToLog("Found it. Removing...", 3);
+                File.Delete(Path.Combine(projectLocation, "js", "jsconfig.json"));
+            }
+            else RecordToLog("Not found.", 3);
+            RecordToLog("Searching for Typescript definition files...", 3);
+            var TSDeletionMap = Directory.GetFiles(projectLocation, ".d.ts", SearchOption.AllDirectories);
+            RecordToLog($"Found {TSDeletionMap.Length}.", 3);
+            foreach (string file in TSDeletionMap)
+            {
+                RecordToLog($"Removing{file}...",3);
+                File.Delete(file);
+            }
+            RecordToLog("Searching for JS Map files...", 3);
+            var JsFileMaps = Directory.GetFiles(projectLocation, ".js.map", SearchOption.AllDirectories);
+            RecordToLog($"Found {JsFileMaps.Length} JS Map files.",3);
+            foreach (string file in JsFileMaps) {
+                RecordToLog($"Removing{file}...", 3);
+                File.Delete(file); 
+            }
+            RecordToLog("Completed the removal of debug files.", 3);
         }
 
         public static string GetProjectFilesLocation(string projectLocation)
@@ -114,6 +141,40 @@ namespace RMMVCookTool.Core.Utilities
                 }
             }
             else return "Unknown";
+        }
+
+        public static void StartEngineLogger (string CompilerName, bool needsConsoleForLog)
+        {
+            Log.Logger = (needsConsoleForLog) ? new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Console().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log").CreateLogger() : new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now.ToString("yyyyMMdd-hhmm")}.log").CreateLogger();
+        }
+
+        public static void RecordToLog(Exception ex)
+        {
+            Log.Fatal(ex, $" Crash! ");
+        }
+
+        public static void RecordToLog(string message, int type)
+        {
+            switch (type)
+            {
+                case 3:
+                    Log.Debug($"[Internal mechanism]{message}");
+                    break;
+                case 2:
+                    Log.Error($"{message}");
+                    break;
+                case 1:
+                    Log.Warning($"{message}");
+                    break;
+                case 0:
+                    Log.Information($"{message}");
+                    break;
+            }
+        }
+
+        public static void CloseLog()
+        {
+            Log.CloseAndFlush();
         }
     }
 }

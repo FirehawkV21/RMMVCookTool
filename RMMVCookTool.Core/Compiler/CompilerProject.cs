@@ -61,6 +61,7 @@ namespace RMMVCookTool.Core.Compiler
         [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
         public void CompileFile(int index)
         {
+            CompilerUtilities.RecordToLog("Setting up the compiler...", 3);
             //Removing the JavaScript extension. Needed to place our own File Extension.
             //Setting up the compiler by throwing in two arguments.
             //The first bit (the one with the file variable) is the source.
@@ -71,34 +72,14 @@ namespace RMMVCookTool.Core.Compiler
             CompilerInfo.Value.CreateNoWindow = true;
             CompilerInfo.Value.WindowStyle = ProcessWindowStyle.Hidden;
             //Run the compiler.
+            CompilerUtilities.RecordToLog($"nwjc processing the file {FileMap[index]}...", 3);
             Process.Start(CompilerInfo.Value)?.WaitForExit();
 
             //If the user asked to remove the JS files, delete them.
-            if (RemoveSourceCodeAfterCompiling) File.Delete(FileMap[index]);
-        }
-
-        //This method starts the nw.exe file.
-        /// <summary>
-        /// Starts the NW.js compiler.
-        /// </summary>
-        /// <param name="index">The index in the list.</param>
-        [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
-        public void CompileFile(string file)
-        {
-            //Removing the JavaScript extension. Needed to place our own File Extension.
-            //Setting up the compiler by throwing in two arguments.
-            //The first bit (the one with the file variable) is the source.
-            //The second bit (the one with the fileBuffer variable) makes the final file.
-            CompilerInfo.Value.Arguments = "\"" + file + "\" \"" +
-                                     file.Replace(".js", "." + FileExtension, StringComparison.Ordinal) + "\"";
-            //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.
-            CompilerInfo.Value.CreateNoWindow = true;
-            CompilerInfo.Value.WindowStyle = ProcessWindowStyle.Hidden;
-            //Run the compiler.
-            Process.Start(CompilerInfo.Value)?.WaitForExit();
-
-            //If the user asked to remove the JS files, delete them.
-            if (RemoveSourceCodeAfterCompiling) File.Delete(file);
+            if (RemoveSourceCodeAfterCompiling) {
+                CompilerUtilities.RecordToLog($"Removing the file {FileMap[index]}...", 3);
+                File.Delete(FileMap[index]); 
+            }
         }
 
         //This method starts the nw.exe file.
@@ -133,12 +114,15 @@ namespace RMMVCookTool.Core.Compiler
             //Temporary prepare a string for stripping.
             string stripPart = ProjectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
             //List all the files in the game's www folder.
+            CompilerUtilities.RecordToLog("Cataloging files...", 3);
             List<string> gameFiles =
                 CompilerUtilities.FileFinder(GameFilesLocation, "*");
+            CompilerUtilities.RecordToLog($"Found {gameFiles.Count}", 3);
             using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
             {
                 foreach (var file in gameFiles)
                 {
+                    CompilerUtilities.RecordToLog($"Compressing {file}...", 3);                    
                     //Start adding files.
                     switch (CompressionModeLevel)
                     {
