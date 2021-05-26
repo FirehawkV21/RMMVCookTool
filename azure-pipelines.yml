@@ -36,11 +36,14 @@ steps:
   inputs:
     command: 'build'
     projects: 'RMMVCookTool.CLI\RMMVCookTool.CLI.csproj'
+    arguments: '-f net5.0'
+
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: 'RMMVCookTool.GUI\RMMVCookTool.GUI.csproj'
+    arguments: '-f net5.0-windows'
 
 - task: VSTest@2
   inputs:
