@@ -12,7 +12,7 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
     public partial class JsonEditor : Window
     {
         private readonly string _projectLocation;
-        private ProjectMetadata projectMetadata { get; set; }
+        private ProjectMetadata ProjectMetadata { get; set; }
 
         public JsonEditor(string projectIn)
         {
@@ -24,9 +24,9 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
                     AllowTrailingCommas = true
                 };
                 var importFile = File.ReadAllText(Path.Combine(_projectLocation, "package.json"));
-                projectMetadata = JsonSerializer.Deserialize<ProjectMetadata>(importFile, setup);
+                ProjectMetadata = JsonSerializer.Deserialize<ProjectMetadata>(importFile, setup);
             }
-            else projectMetadata = new();
+            else ProjectMetadata = new();
             InitializeComponent();
         }
 
@@ -34,30 +34,30 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             #region Prepare UI
-            GameIdTextBox.Text = projectMetadata.GameName;
-            FileLocationTextBox.Text = projectMetadata.MainFile;
-            VersionTextBox.Text = projectMetadata.GameVersion;
-            EnableNodeJSCheckBox.IsChecked = projectMetadata.UseNodeJs;
-            ChromeFlagsTextBox.Text = projectMetadata.ChromiumFlags;
-            JsFlagsTextBox.Text = projectMetadata.JsFlags;
-            GameNameTextBox.Text = projectMetadata.GameName;
-            IconLocationTextBox.Text = projectMetadata.WindowProperties.WindowIcon;
-            WindowTitleTextBox.Text = projectMetadata.WindowProperties.WindowTitle;
-            WindowIdTextBox.Text = projectMetadata.WindowProperties.WindowId;
-            ResizableWindowCheckBox.IsChecked = projectMetadata.WindowProperties.IsResizable;
-            if (projectMetadata.WindowProperties.StartAtFullScreen) WindowModeList.SelectedIndex = 1;
-            else if (projectMetadata.WindowProperties.RunInKioskMode) WindowModeList.SelectedIndex = 2;
+            GameIdTextBox.Text = ProjectMetadata.GameName;
+            FileLocationTextBox.Text = ProjectMetadata.MainFile;
+            VersionTextBox.Text = ProjectMetadata.GameVersion;
+            EnableNodeJSCheckBox.IsChecked = ProjectMetadata.UseNodeJs;
+            ChromeFlagsTextBox.Text = ProjectMetadata.ChromiumFlags;
+            JsFlagsTextBox.Text = ProjectMetadata.JsFlags;
+            GameNameTextBox.Text = ProjectMetadata.GameName;
+            IconLocationTextBox.Text = ProjectMetadata.WindowProperties.WindowIcon;
+            WindowTitleTextBox.Text = ProjectMetadata.WindowProperties.WindowTitle;
+            WindowIdTextBox.Text = ProjectMetadata.WindowProperties.WindowId;
+            ResizableWindowCheckBox.IsChecked = ProjectMetadata.WindowProperties.IsResizable;
+            if (ProjectMetadata.WindowProperties.StartAtFullScreen) WindowModeList.SelectedIndex = 1;
+            else if (ProjectMetadata.WindowProperties.RunInKioskMode) WindowModeList.SelectedIndex = 2;
             else WindowModeList.SelectedIndex = 0;
-            WindowLocationList.SelectedIndex = (projectMetadata.WindowProperties.ScreenPosition) switch
+            WindowLocationList.SelectedIndex = (ProjectMetadata.WindowProperties.ScreenPosition) switch
             {
                 "mouse" => 2,
                 "center" => 1,
                 _ => 0,
             };
-            HeightNumber.Value = projectMetadata.WindowProperties.WindowHeight;
-            WidthNumber.Value = projectMetadata.WindowProperties.WindowWidth;
-            MinimumHeightNumber.Value = projectMetadata.WindowProperties.MinimumHeight;
-            MinimumWidthNumber.Value = projectMetadata.WindowProperties.MinimumWidth;
+            HeightNumber.Value = ProjectMetadata.WindowProperties.WindowHeight;
+            WidthNumber.Value = ProjectMetadata.WindowProperties.WindowWidth;
+            MinimumHeightNumber.Value = ProjectMetadata.WindowProperties.MinimumHeight;
+            MinimumWidthNumber.Value = ProjectMetadata.WindowProperties.MinimumWidth;
             #endregion
             #region Event Registration
             GameIdTextBox.TextChanged += GameIdTextBox_TextChanged;
@@ -84,17 +84,17 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
         #region Main Logic
         private void GameIdTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.GameName = GameIdTextBox.Text;
+            ProjectMetadata.GameName = GameIdTextBox.Text;
         }
 
         private void VersionTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.GameVersion = VersionTextBox.Text;
+            ProjectMetadata.GameVersion = VersionTextBox.Text;
         }
 
         private void FileLocationTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.MainFile = FileLocationTextBox.Text;
+            ProjectMetadata.MainFile = FileLocationTextBox.Text;
         }
 
         private void BrowseForHtmlFileButton_Click(object sender, RoutedEventArgs e)
@@ -124,27 +124,27 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
 
         private void EnableNodeJSCheckBox_CheckChanged(object sender, RoutedEventArgs e)
         {
-            projectMetadata.UseNodeJs = EnableNodeJSCheckBox.IsChecked == true;
+            ProjectMetadata.UseNodeJs = EnableNodeJSCheckBox.IsChecked == true;
         }
 
         private void ChromeFlagsTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.ChromiumFlags = ChromeFlagsTextBox.Text;
+            ProjectMetadata.ChromiumFlags = ChromeFlagsTextBox.Text;
         }
 
         private void JsFlagsTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.JsFlags = JsFlagsTextBox.Text;
+            ProjectMetadata.JsFlags = JsFlagsTextBox.Text;
         }
 
         private void GameNameTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.GameTitle = GameNameTextBox.Text;
+            ProjectMetadata.GameTitle = GameNameTextBox.Text;
         }
 
         private void IconLocationTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.WindowProperties.WindowIcon = IconLocationTextBox.Text;
+            ProjectMetadata.WindowProperties.WindowIcon = IconLocationTextBox.Text;
         }
 
         private void BrowseForIconButton_Click(object sender, RoutedEventArgs e)
@@ -163,7 +163,7 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
             {
                 var stringBuffer = iconFilePicker.FileName.Replace(_projectLocation + "\\", "");
                 stringBuffer = stringBuffer.Replace("\\", "/");
-                IconLocationTextBox.Text = projectMetadata.WindowProperties.WindowIcon = stringBuffer;
+                IconLocationTextBox.Text = ProjectMetadata.WindowProperties.WindowIcon = stringBuffer;
             }
             else
             {
@@ -173,17 +173,17 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
 
         private void WindowTitleTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.WindowProperties.WindowTitle = WindowTitleTextBox.Text;
+            ProjectMetadata.WindowProperties.WindowTitle = WindowTitleTextBox.Text;
         }
 
         private void WindowIdTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            projectMetadata.WindowProperties.WindowId = WindowIdTextBox.Text;
+            ProjectMetadata.WindowProperties.WindowId = WindowIdTextBox.Text;
         }
 
         private void ResizableWindowCheckBox_CheckChanged(object sender, RoutedEventArgs e)
         {
-            projectMetadata.WindowProperties.IsResizable = ResizableWindowCheckBox.IsChecked == true;
+            ProjectMetadata.WindowProperties.IsResizable = ResizableWindowCheckBox.IsChecked == true;
         }
 
         private void WindowModeList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -191,23 +191,23 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
             switch (WindowModeList.SelectedIndex)
             {
                 case 2:
-                    projectMetadata.WindowProperties.StartAtFullScreen = false;
-                    projectMetadata.WindowProperties.RunInKioskMode = true;
+                    ProjectMetadata.WindowProperties.StartAtFullScreen = false;
+                    ProjectMetadata.WindowProperties.RunInKioskMode = true;
                     break;
                 case 1:
-                    projectMetadata.WindowProperties.StartAtFullScreen = true;
-                    projectMetadata.WindowProperties.RunInKioskMode = false;
+                    ProjectMetadata.WindowProperties.StartAtFullScreen = true;
+                    ProjectMetadata.WindowProperties.RunInKioskMode = false;
                     break;
                 default:
-                    projectMetadata.WindowProperties.StartAtFullScreen = false;
-                    projectMetadata.WindowProperties.RunInKioskMode = false;
+                    ProjectMetadata.WindowProperties.StartAtFullScreen = false;
+                    ProjectMetadata.WindowProperties.RunInKioskMode = false;
                     break;
             }
         }
 
         private void WindowLocationList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            projectMetadata.WindowProperties.ScreenPosition = WindowLocationList.SelectedIndex switch
+            ProjectMetadata.WindowProperties.ScreenPosition = WindowLocationList.SelectedIndex switch
             {
                 2 => "mouse",
                 1 => "center",
@@ -217,22 +217,22 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
 
         private void HeightNumber_ValueChanged(object sender, RoutedPropertyChangedEventArgs<uint> e)
         {
-            projectMetadata.WindowProperties.WindowHeight = HeightNumber.Value;
+            ProjectMetadata.WindowProperties.WindowHeight = HeightNumber.Value;
         }
 
         private void MinimumHeightNumber_ValueChanged(object sender, RoutedPropertyChangedEventArgs<uint> e)
         {
-            projectMetadata.WindowProperties.MinimumHeight = MinimumHeightNumber.Value;
+            ProjectMetadata.WindowProperties.MinimumHeight = MinimumHeightNumber.Value;
         }
 
         private void WidthNumber_ValueChanged(object sender, RoutedPropertyChangedEventArgs<uint> e)
         {
-            projectMetadata.WindowProperties.WindowWidth = WidthNumber.Value;
+            ProjectMetadata.WindowProperties.WindowWidth = WidthNumber.Value;
         }
 
         private void MinimumWidthNumber_ValueChanged(object sender, RoutedPropertyChangedEventArgs<uint> e)
         {
-            projectMetadata.WindowProperties.MinimumWidth = MinimumWidthNumber.Value;
+            ProjectMetadata.WindowProperties.MinimumWidth = MinimumWidthNumber.Value;
         }
         #endregion
 
@@ -245,7 +245,7 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
                 {
                     WriteIndented = MinifyJsonFileCheckBox.IsChecked == false
                 };
-                string output = JsonSerializer.Serialize(projectMetadata, setup);
+                string output = JsonSerializer.Serialize(ProjectMetadata, setup);
                 File.WriteAllText(Path.Combine(_projectLocation, "package.json"), output);
                 MessageDialog.ThrowCompleteMessage(Properties.Resources.SaveCompleteText);
             }

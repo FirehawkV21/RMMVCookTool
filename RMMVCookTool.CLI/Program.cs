@@ -313,8 +313,8 @@ namespace RMMVCookTool.CLI
 
             #region Workload Code
             //Find the game folder.
-            Stopwatch timer = new Stopwatch();
-            Stopwatch totalTime = new Stopwatch();
+            Stopwatch timer = new();
+            Stopwatch totalTime = new();
             timer.Start();
             totalTime.Start();
             CompilerUtilities.RecordToLog("Attempting to read the package.json file.", 0);

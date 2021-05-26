@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>.net5.0-windows</TargetFramework>
+		<TargetFrameworks>net5.0-windows;net6.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<AssemblyVersion>3.0.3.21111</AssemblyVersion>
 		<FileVersion>3.0.3.21111</FileVersion>
@@ -46,10 +46,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Dirkster.NumericUpDownLib" Version="2.4.2.2" />
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 		<PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
 	</ItemGroup>
 

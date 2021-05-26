@@ -8,7 +8,7 @@ namespace RMMVCookTool.GUI
     {
         public static void ThrowErrorMessage(Exception e)
         {
-            using (TaskDialog errorDialog = new TaskDialog())
+            using (TaskDialog errorDialog = new())
             {
                 errorDialog.WindowTitle = Resources.ErrorText;
                 errorDialog.MainIcon = TaskDialogIcon.Error;
@@ -17,7 +17,7 @@ namespace RMMVCookTool.GUI
                 errorDialog.ExpandedInformation = Resources.StackTraceLine + e.StackTrace;
                 errorDialog.Footer = Resources.ErrorDetailsMessage;
                 errorDialog.FooterIcon = TaskDialogIcon.Information;
-                TaskDialogButton okButton = new TaskDialogButton(ButtonType.Ok);
+                TaskDialogButton okButton = new(ButtonType.Ok);
                 errorDialog.Buttons.Add(okButton);
                 errorDialog.ShowDialog();
 
@@ -26,7 +26,7 @@ namespace RMMVCookTool.GUI
 
         public static void ThrowErrorMessage(string title, string message)
         {
-            using (TaskDialog errorDialog = new TaskDialog())
+            using (TaskDialog errorDialog = new())
             {
                 errorDialog.WindowTitle = title;
                 errorDialog.MainIcon = TaskDialogIcon.Error;
@@ -34,7 +34,7 @@ namespace RMMVCookTool.GUI
                 errorDialog.Content = message;
                 errorDialog.Footer = Resources.ErrorDetailsMessage;
                 errorDialog.FooterIcon = TaskDialogIcon.Information;
-                TaskDialogButton okButton = new TaskDialogButton(ButtonType.Ok);
+                TaskDialogButton okButton = new(ButtonType.Ok);
                 errorDialog.Buttons.Add(okButton);
                 errorDialog.ShowDialog();
 
@@ -43,24 +43,24 @@ namespace RMMVCookTool.GUI
 
         public static void ThrowWarningMessage(string title, string message, string extramessage)
         {
-            using TaskDialog warningDialog = new TaskDialog();
+            using TaskDialog warningDialog = new();
             warningDialog.WindowTitle = title;
             warningDialog.MainInstruction = message;
             warningDialog.Content = extramessage;
             warningDialog.MainIcon = TaskDialogIcon.Warning;
-            TaskDialogButton confirmMessage = new TaskDialogButton(ButtonType.Ok);
+            TaskDialogButton confirmMessage = new(ButtonType.Ok);
             warningDialog.Buttons.Add(confirmMessage);
             warningDialog.ShowDialog();
         }
 
         public static void ThrowCompleteMessage(string message)
         {
-            using (TaskDialog completeDialog = new TaskDialog())
+            using (TaskDialog completeDialog = new())
             {
                 completeDialog.WindowTitle = Resources.CompleteText;
                 completeDialog.MainIcon = TaskDialogIcon.Information;
                 completeDialog.MainInstruction = message;
-                TaskDialogButton okButton = new TaskDialogButton(ButtonType.Ok);
+                TaskDialogButton okButton = new(ButtonType.Ok);
                 completeDialog.Buttons.Add(okButton);
                 completeDialog.ShowDialog();
             }
@@ -68,13 +68,13 @@ namespace RMMVCookTool.GUI
 
         public static void ThrowCompleteMessage(string message, string extramessage)
         {
-            using (TaskDialog completeDialog = new TaskDialog())
+            using (TaskDialog completeDialog = new())
             {
                 completeDialog.WindowTitle = Resources.CompleteText;
                 completeDialog.MainIcon = TaskDialogIcon.Information;
                 completeDialog.MainInstruction = message;
                 completeDialog.Content = extramessage;
-                TaskDialogButton okButton = new TaskDialogButton(ButtonType.Ok);
+                TaskDialogButton okButton = new(ButtonType.Ok);
                 completeDialog.Buttons.Add(okButton);
                 completeDialog.ShowDialog();
             }

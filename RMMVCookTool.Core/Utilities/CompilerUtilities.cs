@@ -145,7 +145,7 @@ namespace RMMVCookTool.Core.Utilities
 
         public static void StartEngineLogger (string CompilerName, bool needsConsoleForLog)
         {
-            Log.Logger = (needsConsoleForLog) ? new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Console().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log").CreateLogger() : new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now.ToString("yyyyMMdd-hhmm")}.log").CreateLogger();
+            Log.Logger = (needsConsoleForLog) ? new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Console().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log").CreateLogger() : new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log").CreateLogger();
         }
 
         public static void RecordToLog(Exception ex)
