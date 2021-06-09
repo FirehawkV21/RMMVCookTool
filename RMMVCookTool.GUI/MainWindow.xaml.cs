@@ -33,6 +33,8 @@ namespace RMMVCookTool.GUI
         public MainWindow()
         {
             InitializeComponent();
+            CompilerUtilities.StartEngineLogger("CompilerGUI", true);
+            CompilerUtilities.RecordToLog($"Cook Tool CLI, version {Assembly.GetExecutingAssembly().GetName().Version} started.", 0);
             SetupWorkers();
         }
         private readonly BackgroundWorker _compilerWorker = new();
@@ -280,7 +282,7 @@ namespace RMMVCookTool.GUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-             FolderList.ItemsSource = ProjectList;
+            FolderList.ItemsSource = ProjectList;
              var assembly = Assembly.GetExecutingAssembly();
              var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
              var version = fvi.FileVersion;

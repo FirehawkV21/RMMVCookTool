@@ -2,14 +2,14 @@
 
 	<PropertyGroup>
 	<OutputType>Exe</OutputType>
-	<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-	<AssemblyVersion>2.0.2.21111</AssemblyVersion>
-	<FileVersion>2.0.2.21111</FileVersion>
+	<TargetFrameworks>net5.0</TargetFrameworks>
+	<AssemblyVersion>2.0.2.21160</AssemblyVersion>
+	<FileVersion>2.0.2.21160</FileVersion>
 	<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
 	<StartupObject>RMMVCookTool.CLI.Program</StartupObject>
 	<AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
 	<PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-	<Version>2.0.2-20210419</Version>
+	<Version>2.0.2-20210526</Version>
 	<Authors>AceOfAces</Authors>
 	<Company>Studio ACE</Company>
 	<Product>RPG Maker MV Cook Tool</Product>
@@ -28,6 +28,10 @@
 	<Platforms>AnyCPU;x86;x64</Platforms>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
+  
+    <PropertyGroup Condition="$(TargetFramework)=='net6.0'">
+    <PublishReadyToRunComposite>true</PublishReadyToRunComposite>
+  </PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	<FileAlignment>4096</FileAlignment>
@@ -53,8 +57,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	<PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.2" />
-	<PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
+	<PackageReference Include="ConsoleTools" Version="0.5.4" />
+	<PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.0-preview.4.21253.7" />
+	<PackageReference Include="Microsoft.NETCore.Targets" Version="6.0.0-preview.4.21253.7" />
 	</ItemGroup>
 
 	<ItemGroup>

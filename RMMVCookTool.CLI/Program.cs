@@ -1,4 +1,5 @@
-﻿using RMMVCookTool.CLI.Properties;
+﻿using DustInTheWind.ConsoleTools.Spinners;
+using RMMVCookTool.CLI.Properties;
 using RMMVCookTool.Core.Compiler;
 using RMMVCookTool.Core.Utilities;
 using System;
@@ -7,6 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RMMVCookTool.CLI
 {
@@ -333,13 +336,18 @@ namespace RMMVCookTool.CLI
                 //Finding all the JS files.
                 CompilerUtilities.RecordToLog("Preparing project...", 0);
                 newProject.Value.FileMap ??= new List<string>(CompilerUtilities.FileFinder(Path.Combine(newProject.Value.ProjectLocation), "*.js"));
+
                 CompilerUtilities.RecordToLog($"Found {newProject.Value.FileMap.Count} JS files.",0);
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                Console.ResetColor();
-                Console.WriteLine(Resources.BinaryRemovalText);
-                CompilerUtilities.RemoveDebugFiles(newProject.Value.ProjectLocation);
-                CompilerUtilities.CleanupBin(newProject.Value.FileMap);
+                using (Spinner work1 = new Spinner())
+                {
+                    work1.Label = Resources.BinaryRemovalText;
+                    work1.DoneText = "\rRemoved binary files. Starting the compiler job...";
+                    work1.Display();
+                    CompilerUtilities.RemoveDebugFiles(newProject.Value.ProjectLocation);
+                    CompilerUtilities.CleanupBin(newProject.Value.FileMap);
+                    work1.Close();
+
+                }
                 //Preparing the compiler task.
                 newProject.Value.CompilerInfo.Value.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
                 timer.Stop();
@@ -347,24 +355,31 @@ namespace RMMVCookTool.CLI
                 timer.Reset();
                 try
                 {
-                    timer.Start();
-                    for (var i = 0; i < newProject.Value.FileMap.Count; i++)
+                    ProgressBar progress = new()
                     {
-                        //Print the status of the compiler. Show which thread is compiling what as well.
-                        CompilerUtilities.RecordToLog($"Compiling {newProject.Value.FileMap[i]}...", 0);
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                        Console.ResetColor();
-                        Console.WriteLine(Resources.CompilingWord2 + newProject.Value.FileMap[i] + @"...");
-                        //Call the compiler task.
-                        newProject.Value.CompileFile(i);
-                        CompilerUtilities.RecordToLog($"Compiled {newProject.Value.FileMap[i]}.", 0);
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        Console.WriteLine(Resources.FinishedCompilingText2 + newProject.Value.FileMap[i] + @".");
-                        Console.ResetColor();
-                    }
+                        UnitOfMeasurement = "/" + newProject.Value.FileMap.Count + " JS Files",
+                        MaxValue = newProject.Value.FileMap.Count,
+                        LabelText = "Compiling"
+                    };
+
+                    timer.Start();
+                    ManualResetEventSlim finishEvent = new ManualResetEventSlim();
+                    finishEvent.Reset();
+                    Task.Run<Task>(async () => {
+                        progress.Display();
+                        for (var i = 0; i < newProject.Value.FileMap.Count; i++)
+                        {
+                            CompilerUtilities.RecordToLog($"Compiling {newProject.Value.FileMap[i]}...", 0);
+                            progress.LabelText = Resources.CompilingWord2 + newProject.Value.FileMap[i] + @"...";
+                            progress.Value = i + 1;
+                            newProject.Value.CompileFile(i);
+                            CompilerUtilities.RecordToLog($"Compiled {newProject.Value.FileMap[i]}.", 0);
+                            await Task.Delay(10);
+                        }
+                        finishEvent.Set();
+                    });
+                    finishEvent.Wait();
+                    progress.Close();
                     timer.Stop();
                     CompilerUtilities.RecordToLog($"Completed the compilation. (Time elapsed:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}", 0);
                     timer.Reset();
@@ -381,26 +396,32 @@ namespace RMMVCookTool.CLI
                     else if (_compressProject < 3 && _checkDeletion == 2)
                     {
                         CompilerUtilities.RecordToLog("Packaging the game...", 0);
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                        Console.ResetColor();
-                        Console.WriteLine(Resources.FileCompressionText);
                         timer.Start();
-                        newProject.Value.CompressFiles();
+                        using (Spinner work2 = new Spinner())
+                        {
+                            work2.Label = Resources.FileCompressionText;
+                            work2.DoneText = "\rPackaged the game.";
+                            work2.Display();
+                            newProject.Value.CompressFiles();;
+                            work2.Close();
+                        }
                         timer.Stop();
-                        CompilerUtilities.RecordToLog($"Packaged the game. (Time to package:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}",0);
+                        CompilerUtilities.RecordToLog($"Packaged the game. (Time to package:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}", 0);
                         if (_compressProject == 1)
                         {
                             timer.Reset();
-                            CompilerUtilities.RecordToLog("Removing the original files...",0);
+                            CompilerUtilities.RecordToLog("Removing the original files...", 0);
                             timer.Start();
-                            Console.ForegroundColor = ConsoleColor.DarkCyan;
-                            Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                            Console.ResetColor();
-                            Console.WriteLine(Resources.SourceFileDeletionText);
-                            newProject.Value.DeleteFiles();
+                            using (Spinner work3 = new Spinner())
+                            {
+                                work3.Label = Resources.SourceFileDeletionText;
+                                work3.DoneText = "\rRemoved the source files.";
+                                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                Console.WriteLine(Resources.SourceFileDeletionText);
+                                newProject.Value.DeleteFiles();
+                            }
                             timer.Stop();
-                            CompilerUtilities.RecordToLog($"Removed the files. (Time to remove:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}",0);
+                            CompilerUtilities.RecordToLog($"Removed the files. (Time to remove:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}", 0);
                         }
                     }
                     totalTime.Stop();
@@ -423,8 +444,6 @@ namespace RMMVCookTool.CLI
 
                 }
             }
-
-
 
             //Ask the user to press Enter (or Return).
             if (_settingsSet) return;

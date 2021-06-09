@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-	<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-	<AssemblyVersion>2.0.2.21111</AssemblyVersion>
-	<FileVersion>2.0.2.21111</FileVersion>
+	<TargetFrameworks>net5.0</TargetFrameworks>
+	<AssemblyVersion>2.0.2.21160</AssemblyVersion>
+	<FileVersion>2.0.2.21160</FileVersion>
 	<Version>2.0.2-20210419</Version>
 	<Platforms>AnyCPU;x64;x86</Platforms>
 	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>
@@ -16,6 +16,10 @@
 	<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
 	<Description>The core library of the RPG Maker MV Cook Tool.</Description>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(TargetFramework)=='net6.0'">
+		<PublishReadyToRunComposite>true</PublishReadyToRunComposite>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
