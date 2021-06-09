@@ -337,8 +337,8 @@ namespace RMMVCookTool.CLI
                 CompilerUtilities.RecordToLog("Preparing project...", 0);
                 newProject.Value.FileMap ??= new List<string>(CompilerUtilities.FileFinder(Path.Combine(newProject.Value.ProjectLocation), "*.js"));
 
-                CompilerUtilities.RecordToLog($"Found {newProject.Value.FileMap.Count} JS files.",0);
-                using (Spinner work1 = new Spinner())
+                CompilerUtilities.RecordToLog($"Found {newProject.Value.FileMap.Count} JS files.", 0);
+                using (Spinner work1 = new())
                 {
                     work1.Label = Resources.BinaryRemovalText;
                     work1.DoneText = "\rRemoved binary files. Starting the compiler job...";
@@ -363,9 +363,10 @@ namespace RMMVCookTool.CLI
                     };
 
                     timer.Start();
-                    ManualResetEventSlim finishEvent = new ManualResetEventSlim();
+                    ManualResetEventSlim finishEvent = new();
                     finishEvent.Reset();
-                    Task.Run<Task>(async () => {
+                    Task.Run<Task>(async () =>
+                    {
                         progress.Display();
                         for (var i = 0; i < newProject.Value.FileMap.Count; i++)
                         {
@@ -377,7 +378,7 @@ namespace RMMVCookTool.CLI
                             await Task.Delay(10);
                         }
                         finishEvent.Set();
-                    });
+                    }).ConfigureAwait(false);
                     finishEvent.Wait();
                     progress.Close();
                     timer.Stop();
@@ -397,12 +398,12 @@ namespace RMMVCookTool.CLI
                     {
                         CompilerUtilities.RecordToLog("Packaging the game...", 0);
                         timer.Start();
-                        using (Spinner work2 = new Spinner())
+                        using (Spinner work2 = new())
                         {
                             work2.Label = Resources.FileCompressionText;
                             work2.DoneText = "\rPackaged the game.";
                             work2.Display();
-                            newProject.Value.CompressFiles();;
+                            newProject.Value.CompressFiles();
                             work2.Close();
                         }
                         timer.Stop();
@@ -412,7 +413,7 @@ namespace RMMVCookTool.CLI
                             timer.Reset();
                             CompilerUtilities.RecordToLog("Removing the original files...", 0);
                             timer.Start();
-                            using (Spinner work3 = new Spinner())
+                            using (Spinner work3 = new())
                             {
                                 work3.Label = Resources.SourceFileDeletionText;
                                 work3.DoneText = "\rRemoved the source files.";
@@ -425,7 +426,7 @@ namespace RMMVCookTool.CLI
                         }
                     }
                     totalTime.Stop();
-                    CompilerUtilities.RecordToLog($"Task completed in {totalTime.Elapsed}",0);
+                    CompilerUtilities.RecordToLog($"Task completed in {totalTime.Elapsed}", 0);
                     Console.WriteLine(Resources.TaskCompleteText);
 
                 }
@@ -446,10 +447,12 @@ namespace RMMVCookTool.CLI
             }
 
             //Ask the user to press Enter (or Return).
-            if (_settingsSet) return;
-            Console.WriteLine(Resources.PushEnterToExitText);
-            Console.ReadLine();
-            CompilerUtilities.CloseLog();
+            if (!_settingsSet)
+            {
+                Console.WriteLine(Resources.PushEnterToExitText);
+                Console.ReadLine();
+                CompilerUtilities.CloseLog();
+            }
         }
         #endregion
     }

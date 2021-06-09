@@ -58,8 +58,8 @@
 
 	<ItemGroup>
 	<PackageReference Include="ConsoleTools" Version="0.5.4" />
-	<PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.0-preview.4.21253.7" />
-	<PackageReference Include="Microsoft.NETCore.Targets" Version="6.0.0-preview.4.21253.7" />
+	<PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.2" />
+	<PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
