@@ -665,7 +665,7 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RPG Maker MV Cook Tool.
+        ///   Looks up a localized string similar to RPG Maker MV/MZ Cook Tool.
         /// </summary>
         public static string ProgramTitle {
             get {

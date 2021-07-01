@@ -305,10 +305,10 @@
     <value>Location of the NW.js SDK</value>
   </data>
   <data name="ProgramTitle" xml:space="preserve">
-    <value>RPG Maker MV Cook Tool</value>
+    <value>RPG Maker MV/MZ Cook Tool</value>
   </data>
   <data name="ProgramVersionLabelUiText" xml:space="preserve">
-    <value>Version R3.00</value>
+    <value>Version R3.01</value>
   </data>
   <data name="ProgressUiText" xml:space="preserve">
     <value>Progress</value>

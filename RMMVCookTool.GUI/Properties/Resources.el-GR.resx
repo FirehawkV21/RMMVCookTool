@@ -303,7 +303,7 @@
     <value>Θέση του NW.js SDK</value>
   </data>
   <data name="ProgramTitle" xml:space="preserve">
-    <value>RPG Maker MV Cook Tool</value>
+    <value>RPG Maker MV/MZ Cook Tool</value>
   </data>
   <data name="CompilerUiText" xml:space="preserve">
     <value>Μεταγλωττιστής</value>
@@ -339,7 +339,7 @@
     <value>Σχετικά...</value>
   </data>
   <data name="ProgramVersionLabelUiText" xml:space="preserve">
-    <value>Έκδοση R3.00</value>
+    <value>Έκδοση R3.01</value>
   </data>
   <data name="DeveloperCreditUiText" xml:space="preserve">
     <value>Αναπτύχθηκε από τον Studio ACE(AceOfAces). Άδεια χρήσης υπό το MIT License.</value>

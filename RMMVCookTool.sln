@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMMVCookTool.Core", "RMMVCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMMVCookTool.CLI", "RMMVCookTool.CLI\RMMVCookTool.CLI.csproj", "{C8C2F20F-2C20-49E4-80E0-3BC50A4A8B97}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GUI", "GUI", "{A09ACF94-E120-4738-93AC-C21532D9D8E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{84CEA489-95AB-4D85-B6B9-031AC2E9E830} = {A09ACF94-E120-4738-93AC-C21532D9D8E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3782327-0AE3-4E5B-A9DC-A43D2CF9618D}

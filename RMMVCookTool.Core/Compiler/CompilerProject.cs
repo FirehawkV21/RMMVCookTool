@@ -115,8 +115,9 @@ namespace RMMVCookTool.Core.Compiler
             string stripPart = ProjectLocation + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
             //List all the files in the game's www folder.
             CompilerUtilities.RecordToLog("Cataloging files...", 3);
-            List<string> gameFiles =
-                CompilerUtilities.FileFinder(GameFilesLocation, "*");
+            List<string> tempList = CompilerUtilities.FileFinder(GameFilesLocation, "*");
+            List<string> gameFiles = FilterFiles(tempList);
+
             CompilerUtilities.RecordToLog($"Found {gameFiles.Count}", 3);
             using (ZipArchive packageArchive = ZipFile.Open(packageOutput, ZipArchiveMode.Create))
             {
@@ -139,12 +140,39 @@ namespace RMMVCookTool.Core.Compiler
                                 CompressionLevel.Optimal);
                             break;
                     }
+                    if (RemoveFilesAfterCompression) File.Delete(file);
+
                 }
 
                 //Add the project.json files to finish the package.
-                packageArchive.CreateEntryFromFile(Path.Combine(ProjectLocation, "package.json"), "package.json");
+                if (File.Exists(Path.Combine(ProjectLocation, "package.json")) && ProjectLocation != GameFilesLocation)
+                {
+                    packageArchive.CreateEntryFromFile(Path.Combine(ProjectLocation, "package.json"), "package.json");
+                    if (RemoveFilesAfterCompression) File.Delete(Path.Combine(ProjectLocation, "package.json"));
+                }
             }
 
+        }
+
+        public List<string> FilterFiles (in List<string> originalList)
+        {
+            List<String> finalList = originalList;
+            bool notCleanedUp = true;
+            while (notCleanedUp)
+            {
+                notCleanedUp = false;
+                foreach (string file in finalList)
+                {
+                    if (file.Contains(".pak") || file.Contains(".pak.info") || file.Contains(".exe") || file.Contains(".nexe") || file.Contains(".dll") || file.Contains("swiftshader") || file.Contains("pnacl") || file.Contains("swiftshader") || file.Contains("credits.html") || file.Contains(".dat") || file.Contains("v8_context_snapshot.bin") || file.Contains("save"))
+                    {
+                        notCleanedUp = true;
+                        finalList.Remove(file);
+                        break;
+                    }
+                }
+            }
+
+            return finalList;
         }
 
         //This method deletes the projects files.

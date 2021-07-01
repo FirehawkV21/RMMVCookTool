@@ -4,18 +4,18 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFrameworks>net5.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
-		<AssemblyVersion>3.0.3.21160</AssemblyVersion>
-		<FileVersion>3.0.3.21160</FileVersion>
+		<AssemblyVersion>3.1.0.21182</AssemblyVersion>
+		<FileVersion>3.1.0.21182</FileVersion>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile></PackageLicenseFile>
 		<RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
-		<AssemblyTitle>RPG Maker MV Cook Tool (GUI Version)</AssemblyTitle>
+		<AssemblyTitle>RPG Maker MV/MZ Cook Tool (GUI Version)</AssemblyTitle>
 		<Authors>AceOfAces</Authors>
 		<Company>Studio ACE</Company>
 		<Product>RPG Maker MV Cook Tool</Product>
-		<Version>3.0.3-20210419</Version>
+		<Version>3.1.0-20210701</Version>
 		<PublishReadyToRun>true</PublishReadyToRun>
 		<TieredCompilation>false</TieredCompilation>
 		<TieredCompilationQuickJit>false</TieredCompilationQuickJit>

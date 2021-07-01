@@ -320,7 +320,7 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to = Version R2.00 ({0}).
+        ///   Looks up a localized string similar to = Version R2.01 ({0}).
         /// </summary>
         internal static string ProgramVersionString {
             get {

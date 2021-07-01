@@ -135,7 +135,11 @@ namespace RMMVCookTool.Core.Utilities
                                 tempString2 += dataPart[i] + ((RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? "\\" : "/");
                             }
                         }
-                        return Path.Combine(tempstring.GetString().Replace(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\package.json" : "/package.json", "", StringComparison.Ordinal), tempString2);
+                        else
+                        {
+                            if (tempString2.Contains(".html")) tempString2 = "";
+                        }
+                        return Path.Combine(projectLocation.Replace(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\package.json" : "/package.json", "", StringComparison.Ordinal), tempString2);
                     }
                     else return "Null";
                 }
