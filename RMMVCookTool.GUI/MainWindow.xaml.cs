@@ -103,13 +103,6 @@ namespace RMMVCookTool.GUI
                             _compilerWorker.ReportProgress(1);
                             ProjectList[currentProject].CompressFiles();
                         }
-
-                        if (ProjectList[currentProject].RemoveFilesAfterCompression)
-                        {
-                            _compilerStatusReport = 5;
-                            _compilerWorker.ReportProgress(1);
-                            ProjectList[currentProject].DeleteFiles();
-                        }
                         _compilerStatusReport = 6;
                         _compilerWorker.ReportProgress(currentProject + 1);
                     }
@@ -124,6 +117,7 @@ namespace RMMVCookTool.GUI
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
                     CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
                 });
+                CompilerUtilities.RecordToLog(exceptionOutput);
                 MessageDialog.ThrowErrorMessage(exceptionOutput);
             }
             catch (UnauthorizedAccessException exceptionOutput)
@@ -135,6 +129,7 @@ namespace RMMVCookTool.GUI
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
                     CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
                 });
+                CompilerUtilities.RecordToLog(exceptionOutput);
                 MessageDialog.ThrowErrorMessage(exceptionOutput);
             }
 
@@ -147,6 +142,7 @@ namespace RMMVCookTool.GUI
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
                     CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
                 });
+                CompilerUtilities.RecordToLog(exceptionOutput);
                 MessageDialog.ThrowErrorMessage(exceptionOutput);
             }
             catch (FileNotFoundException exceptionOutput)
@@ -158,6 +154,7 @@ namespace RMMVCookTool.GUI
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
                     CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
                 });
+                CompilerUtilities.RecordToLog(exceptionOutput);
                 MessageDialog.ThrowErrorMessage(exceptionOutput);
             }
             catch (DirectoryNotFoundException exceptionOutput)
@@ -169,6 +166,7 @@ namespace RMMVCookTool.GUI
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
                     CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
                 });
+                CompilerUtilities.RecordToLog(exceptionOutput);
                 MessageDialog.ThrowErrorMessage(exceptionOutput);
             }
             catch (IOException exceptionOutput)
@@ -180,6 +178,7 @@ namespace RMMVCookTool.GUI
                     CurrentWorkloadBar.Foreground = Brushes.DarkRed;
                     CurrentWorkloadLabel.Content = Properties.Resources.FailedText;
                 });
+                CompilerUtilities.RecordToLog(exceptionOutput);
                 MessageDialog.ThrowErrorMessage(exceptionOutput);
             }
         }
@@ -219,7 +218,7 @@ namespace RMMVCookTool.GUI
                     _stringBuffer.Clear();
                     break;
                 case 1:
-                    CurrentWorkloadBar.Maximum = ProjectList[currentProject].FileMap.Count +  ((ProjectList[currentProject].CompressFilesToPackage) ? ((ProjectList[currentProject].RemoveFilesAfterCompression) ? 2 : 1) : 0);
+                    CurrentWorkloadBar.Maximum = ProjectList[currentProject].FileMap.Count +  ((ProjectList[currentProject].CompressFilesToPackage) ? 1 : 0);
                     CurrentWorkloadLabel.Content =
                         Properties.Resources.BinRemovalStatusText + ProjectList[currentProject].ProjectLocation + "...";
                     break;

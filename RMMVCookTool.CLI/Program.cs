@@ -408,22 +408,6 @@ namespace RMMVCookTool.CLI
                         }
                         timer.Stop();
                         CompilerUtilities.RecordToLog($"Packaged the game. (Time to package:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}", 0);
-                        if (_compressProject == 1)
-                        {
-                            timer.Reset();
-                            CompilerUtilities.RecordToLog("Removing the original files...", 0);
-                            timer.Start();
-                            using (Spinner work3 = new())
-                            {
-                                work3.Label = Resources.SourceFileDeletionText;
-                                work3.DoneText = "\rRemoved the source files.";
-                                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                                Console.WriteLine(Resources.SourceFileDeletionText);
-                                newProject.Value.DeleteFiles();
-                            }
-                            timer.Stop();
-                            CompilerUtilities.RecordToLog($"Removed the files. (Time to remove:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}", 0);
-                        }
                     }
                     totalTime.Stop();
                     CompilerUtilities.RecordToLog($"Task completed in {totalTime.Elapsed}", 0);

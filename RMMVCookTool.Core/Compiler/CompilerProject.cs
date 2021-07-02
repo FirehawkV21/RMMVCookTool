@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using RMMVCookTool.Core.Utilities;
@@ -150,11 +151,17 @@ namespace RMMVCookTool.Core.Compiler
                     packageArchive.CreateEntryFromFile(Path.Combine(ProjectLocation, "package.json"), "package.json");
                     if (RemoveFilesAfterCompression) File.Delete(Path.Combine(ProjectLocation, "package.json"));
                 }
+                if (RemoveFilesAfterCompression) CleanupFolders();
             }
 
         }
 
-        public List<string> FilterFiles (in List<string> originalList)
+        /// <summary>
+        /// Filters the list from the files of nwjs.
+        /// </summary>
+        /// <param name="originalList">A list that needs cleaning.</param>
+        /// <returns>A list that has refrences of nwjs files removed.</returns>
+        public static List<string> FilterFiles (in List<string> originalList)
         {
             List<String> finalList = originalList;
             bool notCleanedUp = true;
@@ -175,15 +182,18 @@ namespace RMMVCookTool.Core.Compiler
             return finalList;
         }
 
-        //This method deletes the projects files.
-        /// <summary>
-        /// Deletes the project's files. Best used after compressing the project.
-        /// </summary>
-        public void DeleteFiles()
+        void CleanupFolders()
         {
-            if (Directory.Exists(Path.Combine(ProjectLocation, "www"))) Directory.Delete(Path.Combine(ProjectLocation, "www"), true);
-            if (File.Exists(Path.Combine(ProjectLocation, "package.json"))) File.Delete(Path.Combine(ProjectLocation, "package.json"));
-
+            List<string> AllFolders = Directory.EnumerateDirectories(ProjectLocation).ToList();
+            List<String> GameFolders = new List<string>();
+            foreach (string directory in AllFolders)
+            {
+                if (!directory.Contains("swiftshader") || !directory.Contains("locales") || !directory.Contains("pnacl")) GameFolders.Add(directory);
+            }
+            foreach (string folder in GameFolders)
+            {
+                if (Directory.Exists(folder)) Directory.Delete(folder, true);
+            }
         }
     }
 }
