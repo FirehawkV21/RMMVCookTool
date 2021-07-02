@@ -33,8 +33,6 @@ namespace RMMVCookTool.GUI
         public MainWindow()
         {
             InitializeComponent();
-            CompilerUtilities.StartEngineLogger("CompilerGUI", true);
-            CompilerUtilities.RecordToLog($"Cook Tool CLI, version {Assembly.GetExecutingAssembly().GetName().Version} started.", 0);
             SetupWorkers();
         }
         private readonly BackgroundWorker _compilerWorker = new();
@@ -59,6 +57,7 @@ namespace RMMVCookTool.GUI
         [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
         private void StartCompiler(object sender, DoWorkEventArgs e)
         {
+            CompilerUtilities.RecordToLog("Starting the session.", 0);
             try
             {
                 for (currentProject = 0; currentProject < ProjectList.Count; currentProject++)
@@ -74,6 +73,7 @@ namespace RMMVCookTool.GUI
                     ProjectList[currentProject].GameFilesLocation = CompilerUtilities.GetProjectFilesLocation(Path.Combine(ProjectList[currentProject].ProjectLocation, "package.json"));
                     if (ProjectList[currentProject].GameFilesLocation == "Null" || ProjectList[currentProject].GameFilesLocation == "Unknown")
                     {
+                        CompilerUtilities.RecordToLog("Missing info for the game files location. Aborting session.", 0);
                         MessageDialog.ThrowErrorMessage(Properties.Resources.CannotFindGameFolderTitle, Properties.Resources.CannotFindGameFolderMessage);
                     }
                     else
@@ -103,6 +103,7 @@ namespace RMMVCookTool.GUI
                             _compilerWorker.ReportProgress(1);
                             ProjectList[currentProject].CompressFiles();
                         }
+                        CompilerUtilities.RecordToLog("The project " + ProjectList[currentProject].ProjectLocation + "is ready.", 0);
                         _compilerStatusReport = 6;
                         _compilerWorker.ReportProgress(currentProject + 1);
                     }
@@ -201,30 +202,40 @@ namespace RMMVCookTool.GUI
                 case 4:
                     TaskbarInfoHolder.ProgressValue = CurrentWorkloadBar.Value / CurrentWorkloadBar.Maximum;
                     CurrentWorkloadLabel.Content = Properties.Resources.PackaginStatusText;
+                    CompilerUtilities.RecordToLog("Packaging project " + ProjectList[currentProject].ProjectLocation + "...", 0);
                     break;
                 case 3:
+                    CompilerUtilities.RecordToLog("Compiled " + ProjectList[currentProject].FileMap.ElementAt(currentFile), 0);
                     CurrentWorkloadBar.Value += 1;
                     TaskbarInfoHolder.ProgressValue = CurrentWorkloadBar.Value / CurrentWorkloadBar.Maximum;
                     if (currentFile < ProjectList[currentProject].FileMap.Count - 1)
                     {
                         _nextFile.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile + 1));
                         CurrentWorkloadLabel.Content = Properties.Resources.CompileText + _nextFile + "...";
+                        CompilerUtilities.RecordToLog("Compiling " + _nextFile + "...", 0);
+                    }
+                    else
+                    {
+                        CompilerUtilities.RecordToLog("Completed the compilation.", 0);
                     }
                     _stringBuffer.Clear();
                     _nextFile.Clear();
                     break;
                 case 2:
                     CurrentWorkloadLabel.Content = Properties.Resources.CompileText + _stringBuffer + "...";
+                    CompilerUtilities.RecordToLog("Compiling " + _stringBuffer + "...", 0);
                     _stringBuffer.Clear();
                     break;
                 case 1:
                     CurrentWorkloadBar.Maximum = ProjectList[currentProject].FileMap.Count +  ((ProjectList[currentProject].CompressFilesToPackage) ? 1 : 0);
                     CurrentWorkloadLabel.Content =
                         Properties.Resources.BinRemovalStatusText + ProjectList[currentProject].ProjectLocation + "...";
+                    CompilerUtilities.RecordToLog("Removing binary files...",0);
                     break;
                 case 0:
                     TotalProgressLabel.Content = Properties.Resources.CompileText1 + ProjectList[currentProject].ProjectLocation +
                                                  Properties.Resources.FolderText;
+                    CompilerUtilities.RecordToLog("Preparing for the project " + ProjectList[currentProject].ProjectLocation + "...", 0);
                     break;
 
             }
@@ -242,10 +253,12 @@ namespace RMMVCookTool.GUI
                 TaskbarInfoHolder.ProgressState = TaskbarItemProgressState.Paused;
                 CurrentWorkloadBar.Foreground = Brushes.YellowGreen;
                 TotalWorkProgressBar.Foreground = Brushes.YellowGreen;
+                CompilerUtilities.RecordToLog("Session cancelled.", 0);
                 MessageDialog.ThrowWarningMessage(Properties.Resources.AbortedText, Properties.Resources.TaskCancelledMessage, "");
             }
             else
             {
+                CompilerUtilities.RecordToLog("Session completed.", 0);
                 MessageDialog.ThrowCompleteMessage(Properties.Resources.CompilationCompleteText);
                 TotalProgressLabel.Content = Properties.Resources.DoneText;
                 CurrentWorkloadLabel.Content = Properties.Resources.DoneText;
@@ -281,6 +294,8 @@ namespace RMMVCookTool.GUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            CompilerUtilities.StartEngineLogger("CompilerGUI", true);
+            CompilerUtilities.RecordToLog($"Cook Tool CLI, version {Assembly.GetExecutingAssembly().GetName().Version} started.", 0);
             FolderList.ItemsSource = ProjectList;
              var assembly = Assembly.GetExecutingAssembly();
              var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
@@ -446,6 +461,11 @@ namespace RMMVCookTool.GUI
         private void CancelCompileButton_Click(object sender, RoutedEventArgs e)
         {
             _compilerWorker.CancelAsync();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            CompilerUtilities.CloseLog();
         }
     }
 }

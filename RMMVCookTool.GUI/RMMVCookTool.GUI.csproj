@@ -4,8 +4,8 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFrameworks>net5.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
-		<AssemblyVersion>3.1.0.21182</AssemblyVersion>
-		<FileVersion>3.1.0.21182</FileVersion>
+		<AssemblyVersion>3.1.0.21183</AssemblyVersion>
+		<FileVersion>3.1.0.21183</FileVersion>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
 		<NeutralLanguage>en</NeutralLanguage>

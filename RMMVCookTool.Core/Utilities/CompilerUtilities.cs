@@ -150,9 +150,9 @@ namespace RMMVCookTool.Core.Utilities
         public static void StartEngineLogger (string CompilerName, bool needsConsoleForLog)
         {
 #if DEBUG
-            Log.Logger = (needsConsoleForLog) ? new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Console().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log").CreateLogger() : new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log").CreateLogger();
+            Log.Logger = (needsConsoleForLog) ? new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Console().WriteTo.File(Path.Combine(Path.GetTempPath(), $"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log")).CreateLogger() : new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File(Path.Combine(Path.GetTempPath(), $"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log")).CreateLogger();
 #else
-            Log.Logger = (needsConsoleForLog) ? new LoggerConfiguration().MinimumLevel.Information().WriteTo.Console().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log").CreateLogger() : new LoggerConfiguration().MinimumLevel.Information().WriteTo.File($"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log").CreateLogger();
+            Log.Logger = (needsConsoleForLog) ? new LoggerConfiguration().MinimumLevel.Information().WriteTo.Console().WriteTo.File(Path.Combine(Path.GetTempPath(), $"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log")).CreateLogger() : new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(Path.GetTempPath(), $"CompilerSession-{CompilerName}-{DateTime.Now:yyyyMMdd-hhmm}.log")).CreateLogger();
 #endif
         }
 

@@ -170,7 +170,7 @@ namespace RMMVCookTool.Core.Compiler
                 notCleanedUp = false;
                 foreach (string file in finalList)
                 {
-                    if (file.Contains(".pak") || file.Contains(".pak.info") || file.Contains(".exe") || file.Contains(".nexe") || file.Contains(".dll") || file.Contains("swiftshader") || file.Contains("pnacl") || file.Contains("swiftshader") || file.Contains("credits.html") || file.Contains(".dat") || file.Contains("v8_context_snapshot.bin") || file.Contains("save"))
+                    if (file.Contains(".pak") || file.Contains(".pak.info") || file.Contains(".exe") || file.Contains(".nexe") || file.Contains(".dll") || file.Contains("pnacl") || file.Contains("swiftshader") || file.Contains("credits.html") || file.Contains(".dat") || file.Contains("v8_context_snapshot.bin") || file.Contains("save") || file.Contains(".nw"))
                     {
                         notCleanedUp = true;
                         finalList.Remove(file);
@@ -185,10 +185,10 @@ namespace RMMVCookTool.Core.Compiler
         void CleanupFolders()
         {
             List<string> AllFolders = Directory.EnumerateDirectories(ProjectLocation).ToList();
-            List<String> GameFolders = new List<string>();
+            List<String> GameFolders = new();
             foreach (string directory in AllFolders)
             {
-                if (!directory.Contains("swiftshader") || !directory.Contains("locales") || !directory.Contains("pnacl")) GameFolders.Add(directory);
+                if (!directory.Contains("swiftshader") && !directory.Contains("locales") && !directory.Contains("pnacl")) GameFolders.Add(directory);
             }
             foreach (string folder in GameFolders)
             {
