@@ -27,4 +27,5 @@ You will need Visual Studio 2019, along with the Microsoft .NET 5 SDK. Once you 
 ## Libraries Used
 -  [Dirkster.NumericUpDownLib](https://github.com/Dirkster99/NumericUpDownLib)
 -  [Ookii.Dialogs](https://github.com/ookii-dialogs/ookii-dialogs-wpf)
-- [ConsoleTools](https://github.com/lastunicorn/ConsoleTools)
+-  [ConsoleTools](https://github.com/lastunicorn/ConsoleTools)
+-  [Serilog](https://serilog.net/)
