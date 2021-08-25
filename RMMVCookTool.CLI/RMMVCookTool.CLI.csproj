@@ -2,9 +2,9 @@
 
 	<PropertyGroup>
 	<OutputType>Exe</OutputType>
-	<TargetFrameworks>net5.0</TargetFrameworks>
-	<AssemblyVersion>2.1.0.21183</AssemblyVersion>
-	<FileVersion>2.1.0.21183</FileVersion>
+	<TargetFramework>net6.0</TargetFramework>
+	<AssemblyVersion>2.2.0.21203</AssemblyVersion>
+	<FileVersion>2.2.0.21203</FileVersion>
 	<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
 	<StartupObject>RMMVCookTool.CLI.Program</StartupObject>
 	<AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
@@ -23,18 +23,27 @@
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	<PublishReadyToRun>true</PublishReadyToRun>
 	<PublishTrimmed>false</PublishTrimmed>
-	<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+	<RuntimeIdentifiers>win-x64;win-arm64;linux-x64;linux-arm64</RuntimeIdentifiers>
 	<NeutralLanguage>en</NeutralLanguage>
-	<Platforms>AnyCPU;x86;x64</Platforms>
+	<Platforms>AnyCPU;x64;ARM64</Platforms>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 	
 		<PropertyGroup Condition="$(TargetFramework)=='net6.0'">
-		<PublishReadyToRunComposite>true</PublishReadyToRunComposite>
+		<PublishReadyToRunComposite>false</PublishReadyToRunComposite>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	<FileAlignment>4096</FileAlignment>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+	  <FileAlignment>4096</FileAlignment>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM32'">
+	  <FileAlignment>4096</FileAlignment>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
