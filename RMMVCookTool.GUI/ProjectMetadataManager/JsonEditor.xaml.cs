@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using Ookii.Dialogs.Wpf;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace RMMVCookTool.GUI.ProjectMetadataManager
 {
