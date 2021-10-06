@@ -38,7 +38,7 @@ namespace RMMVCookTool.CLI
                 Rule argsTab = new();
                 argsTab.Title = "[orange1]Command line arguments[/]";
                 argsTab.Alignment = Justify.Left;
-                AnsiConsole.Render(argsTab);
+                AnsiConsole.Write(argsTab);
                 Table argsTable = new();
                 argsTable.AddColumn("Setting");
                 argsTable.AddColumn("Value");
@@ -240,7 +240,7 @@ namespace RMMVCookTool.CLI
             //Check if both the _projectLocation and _sdkLocation variables are not null.
             if (newProject.Value.ProjectLocation != null && _sdkLocation != null)
                 {
-                    AnsiConsole.Render(argsTable);
+                    AnsiConsole.Write(argsTable);
                     CompilerUtilities.RecordToLog("Settings set. Starting the job...", 0);
                     _settingsSet = true;
                 }
@@ -272,7 +272,7 @@ namespace RMMVCookTool.CLI
                 Rule setupTab = new();
                 setupTab.Title = "[orange1]Setup[/]";
                 setupTab.Alignment = Justify.Left;
-                AnsiConsole.Render(setupTab);
+                AnsiConsole.Write(setupTab);
                 do
                 {
                     //Ask the user where is the SDK. Check if the folder's there.
@@ -338,7 +338,7 @@ namespace RMMVCookTool.CLI
             Rule workTab = new();
             workTab.Title = "[orange1]Work[/]";
             workTab.Alignment = Justify.Left;
-            AnsiConsole.Render(workTab);
+            AnsiConsole.Write(workTab);
             //Find the game folder.
             Stopwatch timer = new();
             Stopwatch totalTime = new();
