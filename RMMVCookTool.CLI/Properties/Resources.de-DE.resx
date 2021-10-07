@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -124,7 +124,7 @@
     <value>= RPG Maker MV Cook Tool (.NET Core CLI Version)</value>
   </data>
   <data name="ProgramVersionString" xml:space="preserve">
-    <value>= Version R2.01 ({0})</value>
+    <value>= Version R2.02 ({0})</value>
     <comment>String ID: ProgramVersionString
 This is the command line app's version string.</comment>
   </data>
@@ -291,5 +291,68 @@ The task was completed.</value>
   </data>
   <data name="JsonReferenceError" xml:space="preserve">
     <value>No reference was found on the package.json (or the folder mentioned isn't there). Please check that the json file contains the "main" variable and the folder exists.</value>
+  </data>
+  <data name="CommandLineArgsTitle" xml:space="preserve">
+    <value>[orange1]Command line arguments[/]</value>
+  </data>
+  <data name="SetupTitle" xml:space="preserve">
+    <value>[orange1]Setup[/]</value>
+  </data>
+  <data name="WorkTitle" xml:space="preserve">
+    <value>[orange1]Work[/]</value>
+  </data>
+  <data name="SDKLocationEntry" xml:space="preserve">
+    <value>SDK Location</value>
+  </data>
+  <data name="ProjectLocationEntry" xml:space="preserve">
+    <value>Project Location</value>
+  </data>
+  <data name="FileExtensionEntry" xml:space="preserve">
+    <value>File Extension</value>
+  </data>
+  <data name="CompressionEntry" xml:space="preserve">
+    <value>Compression</value>
+  </data>
+  <data name="CompressionLevelEntry" xml:space="preserve">
+    <value>Compression Level</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>No compression</value>
+  </data>
+  <data name="FastestCompression" xml:space="preserve">
+    <value>Fastest</value>
+  </data>
+  <data name="OptimalCompression" xml:space="preserve">
+    <value>Optimal</value>
+  </data>
+  <data name="CompressAndRemoveEntry" xml:space="preserve">
+    <value>Compress and remove source files</value>
+  </data>
+  <data name="CompressOnlyEntry" xml:space="preserve">
+    <value>Compress only</value>
+  </data>
+  <data name="DarkcyanCompilingJSFilesText" xml:space="preserve">
+    <value>[darkcyan]Compiling JS files[/]</value>
+  </data>
+  <data name="PackagingGameText" xml:space="preserve">
+    <value>Packaging the game files...</value>
+  </data>
+  <data name="TestAfterCompilingEntry" xml:space="preserve">
+    <value>Test after compiling</value>
+  </data>
+  <data name="CommonWordYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="CommonWordNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="RemoveSourceFilesEntry" xml:space="preserve">
+    <value>Remove source JS files</value>
+  </data>
+  <data name="SettingTitle" xml:space="preserve">
+    <value>Setting</value>
+  </data>
+  <data name="ValueTitle" xml:space="preserve">
+    <value>Value</value>
   </data>
 </root>
