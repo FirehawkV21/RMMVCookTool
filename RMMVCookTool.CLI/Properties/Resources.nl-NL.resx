@@ -121,238 +121,238 @@
     <value>================================================</value>
   </data>
   <data name="ProgramNameText" xml:space="preserve">
-    <value>= RPG Maker MV Cook Tool (.NET Core CLI Version)</value>
+    <value>= RPG Maker MV Kook Gereedschap (.NET Core CLI versie)</value>
   </data>
   <data name="ProgramVersionString" xml:space="preserve">
-    <value>= Version R2.02 ({0})</value>
+    <value>= Versie R2.02 ({0})</value>
     <comment>String ID: ProgramVersionString
 This is the command line app's version string.</comment>
   </data>
   <data name="ProgramAuthorText" xml:space="preserve">
-    <value>= Developed by AceOfAces.</value>
+    <value>= Ontwikkeld door AteOfAces.</value>
   </data>
   <data name="ProgramLicenseText" xml:space="preserve">
-    <value>= Licensed under the MIT license.</value>
+    <value>= Gelicenseerd onder de MIT-licentie.</value>
   </data>
   <data name="ParallelModeActiveText" xml:space="preserve">
-    <value>Compiler is now running in parallel mode.</value>
+    <value>Compiler draait nu in parallelle modus.</value>
   </data>
   <data name="SDKLocationConfirmationText" xml:space="preserve">
-    <value>SDK Location OK.</value>
+    <value>SDK Locatie OK.</value>
   </data>
   <data name="PushEnterToExitText" xml:space="preserve">
-    <value>Push Enter/Return to exit.</value>
+    <value>Push Enter/Terug om af te sluiten.</value>
   </data>
   <data name="ProjectLocationConfirmationText" xml:space="preserve">
-    <value>Project Location OK.</value>
+    <value>Projectlocatie OK.</value>
   </data>
   <data name="FileExtensionSetText" xml:space="preserve">
-    <value>The file extension is set to </value>
+    <value>De bestandsextensie is ingesteld op </value>
   </data>
   <data name="CannotCompressAndTestErrorText" xml:space="preserve">
-    <value>You can't compress and test the project at the moment.</value>
+    <value>Je kunt het project op dit moment niet testen en comprimeren.</value>
   </data>
   <data name="JavascriptDeletionConfirmationTet" xml:space="preserve">
-    <value>The JavaScript files will be deleted after compilation.</value>
+    <value>De JavaScript-bestanden zullen worden verwijderd na de compilatie.</value>
   </data>
   <data name="NoCompressionConfirmationText" xml:space="preserve">
-    <value>No compression will be used for the archive.</value>
+    <value>Er wordt geen compressie gebruikt voor het archief.</value>
   </data>
   <data name="FastestCompressionConfirmationText" xml:space="preserve">
-    <value>The fastest compression will be used for the archive.</value>
+    <value>De snelste compressie zal gebruikt worden voor het archief.</value>
   </data>
   <data name="OptimalCompressionCOnfirmationText" xml:space="preserve">
-    <value>The optimal compression will be used for the archive (this is the default).</value>
+    <value>De optimale compressie zal worden gebruikt voor het archief (dit is de standaard).</value>
   </data>
   <data name="SDKLocationInexistantText" xml:space="preserve">
-    <value>The location of the SDK doesn't exist.</value>
+    <value>De locatie van de SDK bestaat niet.</value>
   </data>
   <data name="CompilerMissingErrorText" xml:space="preserve">
-    <value>The compiler isn't there. Please pick the folder that has the nwjc file.</value>
+    <value>De compilator is er niet. Kies de map die het nwjc-bestand bevat.</value>
   </data>
   <data name="ProjectLocationInexistantText" xml:space="preserve">
-    <value>The location of the project doesn't exist.</value>
+    <value>De locatie van het project bestaat niet.</value>
   </data>
   <data name="JsonFileMissingErrorText" xml:space="preserve">
-    <value>The package.json file doesn't exist.</value>
+    <value>Het package.json bestand bestaat niet.</value>
   </data>
   <data name="nwjsTestStartingText" xml:space="preserve">
-    <value>NW.js will start after compiling.</value>
+    <value>NW.js zal starten na het compileren.</value>
   </data>
   <data name="ProjectNotSetErrorText" xml:space="preserve">
-    <value>The Project location is not set. Please set it with the --ProjectLocation "&lt;project location&gt;".</value>
+    <value>De projectlocatie is niet ingesteld. Stel het in met de --ProjectLocation "&lt;project location&gt;".</value>
   </data>
   <data name="SDKLocationNotSetErrorText" xml:space="preserve">
-    <value>The SDK location is not set. Please set it with the --SDKLocation "&lt;project location&gt;".</value>
+    <value>De SDK locatie is niet ingesteld. Stel het in met de --SDKLocation "&lt;project location&gt;".</value>
   </data>
   <data name="SDKLocationQuestion" xml:space="preserve">
-    <value>Where's the SDK location? </value>
+    <value>Waar is de SDK locatie? </value>
   </data>
   <data name="SDKLocationIsNullText" xml:space="preserve">
-    <value>Please insert the path for the SDK.
+    <value>Vul het pad in voor de SDK.
 </value>
   </data>
   <data name="SDKDirectoryMissing" xml:space="preserve">
-    <value>The directory isn't there. Please select an existing folder.
+    <value>De map is er niet. Selecteer een bestaande map.
 </value>
   </data>
   <data name="ProjectLocationQuestion" xml:space="preserve">
     <value>
-Where's the project you want to compile? </value>
+Waar is het project dat je wilt compileren? </value>
   </data>
   <data name="ProjectLocationIsNullText" xml:space="preserve">
-    <value>Please specify the location of the folder.
+    <value>Geef de locatie van de map op.
 </value>
   </data>
   <data name="ProjetDirectoryMissingErrorText" xml:space="preserve">
-    <value>The folder you've selected isn't present.
+    <value>De map die je hebt geselecteerd is niet aanwezig.
 </value>
   </data>
   <data name="ProjectJsFolderMissing" xml:space="preserve">
-    <value>There is no js folder.
+    <value>Er is geen map voor js.
 </value>
   </data>
   <data name="FileExtensionQuestion" xml:space="preserve">
     <value>
-What Extension will your game use (leave empty for .bin)? </value>
+Welke extensie zal je spel gebruiken (leeg laten voor .bin)? </value>
   </data>
   <data name="WorkloadQuestion" xml:space="preserve">
     <value>
-Do you want to:
-1. Test that the binary files are loaded properly?
-2. Prepare for publishing?
-(Default is 1) </value>
+Wil je het:
+1. Test of de binaire bestanden goed geladen worden?
+2. Bereid voor om te publiceren?
+(Standaard is 1) </value>
   </data>
   <data name="CompressionQuestion" xml:space="preserve">
     <value>
-Would you like to compress the game's files to an archive?
-1.Yes (delete the files as well).
-2.Yes (but leave the files intact).
-3. No.
-(Default is 3)</value>
+Wil je de bestanden van het spel comprimeren naar een archief?
+1.Ja (verwijder ook de bestanden).
+2.Ja (maar laat de bestanden intact).
+3. Nr.
+(standaard is 3)</value>
   </data>
   <data name="TestProjectQuestion" xml:space="preserve">
     <value>
-Would you like to test the project after compiling? (Y/N, Default is N)
+Wilt u het project testen na het compileren? (Y/N, Default is N)
 </value>
   </data>
   <data name="BinaryRemovalText" xml:space="preserve">
-    <value>Removing binary files (if present)...</value>
+    <value>Verwijder binaire bestanden (indien aanwezig)...</value>
   </data>
   <data name="ThreadWord" xml:space="preserve">
     <value>]Thread #</value>
   </data>
   <data name="CompilingWord" xml:space="preserve">
-    <value> is compiling </value>
+    <value> compileert </value>
   </data>
   <data name="FinishedCompilingText" xml:space="preserve">
-    <value> finished compiling </value>
+    <value> klaar compileren </value>
   </data>
   <data name="CompilingWord2" xml:space="preserve">
-    <value>Compiling </value>
+    <value>Compileren </value>
   </data>
   <data name="FinishedCompilingText2" xml:space="preserve">
-    <value>Finished compiling </value>
+    <value>Klaar met compilen </value>
   </data>
   <data name="DateTimeFormatText" xml:space="preserve">
     <value>[{0}]</value>
   </data>
   <data name="CompilerTaskComplete" xml:space="preserve">
-    <value>Finished compiling files.</value>
+    <value>Samenstellen bestanden voltooid.</value>
   </data>
   <data name="NwjsStartingTestNotificationText" xml:space="preserve">
     <value>
-NW.js will now start. Give it a few seconds to start.</value>
+NW.js zal nu beginnen. Geef het een paar seconden om te beginnen.</value>
   </data>
   <data name="CopyingToTempLocationText" xml:space="preserve">
-    <value>Copying the game files to a temporary location...</value>
+    <value>De spelbestanden kopiëren naar een tijdelijke locatie...</value>
   </data>
   <data name="FileCompressionText" xml:space="preserve">
-    <value>Compressing files...</value>
+    <value>Bestanden comprimeren...</value>
   </data>
   <data name="SourceFileDeletionText" xml:space="preserve">
-    <value>Deleting source files...</value>
+    <value>Bronbestanden verwijderen...</value>
   </data>
   <data name="TaskCompleteText" xml:space="preserve">
     <value>
-The task was completed.</value>
+De taak is voltooid.</value>
   </data>
   <data name="ProjectFilesRemovalAfterCompressionText" xml:space="preserve">
-    <value>The project's files will be compressed (the files will be deleted after compressing).</value>
+    <value>De bestanden van het project zullen worden gecomprimeerd (de bestanden zullen worden verwijderd na de compressing).</value>
   </data>
   <data name="ProjectFilesCompressionConfirmText" xml:space="preserve">
-    <value>The Project's files will be compressed</value>
+    <value>De bestanden van het project worden gecomprimeerd</value>
   </data>
   <data name="CompressionSafeModeConfirmationText" xml:space="preserve">
-    <value>Safe mode for compression is now active.</value>
+    <value>Veilige modus voor compressie is nu actief.</value>
   </data>
   <data name="CompressionNotPermittedText" xml:space="preserve">
-    <value>Compression is not allowed if the "--PackageApp" command line argument is specified. Skipping this step.</value>
+    <value>Compressie is niet toegestaan als het opdrachtregelargument "--PackageApp" is opgegeven. Deze stap wordt overgeslagen.</value>
   </data>
   <data name="JsonReferenceError" xml:space="preserve">
-    <value>No reference was found on the package.json (or the folder mentioned isn't there). Please check that the json file contains the "main" variable and the folder exists.</value>
+    <value>Er is geen referentie gevonden op package.json (of de genoemde map is er niet). Controleer of het json bestand de "main" variabele bevat en dat de map bestaat.</value>
   </data>
   <data name="CommandLineArgsTitle" xml:space="preserve">
-    <value>[orange1]Command line arguments[/]</value>
+    <value>[orange1]Command line argumenten[/]</value>
   </data>
   <data name="SetupTitle" xml:space="preserve">
     <value>[orange1]Setup[/]</value>
   </data>
   <data name="WorkTitle" xml:space="preserve">
-    <value>[orange1]Work[/]</value>
+    <value>[orange1]Bewerken[/]</value>
   </data>
   <data name="SDKLocationEntry" xml:space="preserve">
-    <value>SDK Location</value>
+    <value>SDK Locatie</value>
   </data>
   <data name="ProjectLocationEntry" xml:space="preserve">
-    <value>Project Location</value>
+    <value>Project locatie</value>
   </data>
   <data name="FileExtensionEntry" xml:space="preserve">
-    <value>File Extension</value>
+    <value>Bestands extensie</value>
   </data>
   <data name="CompressionEntry" xml:space="preserve">
-    <value>Compression</value>
+    <value>Compressie</value>
   </data>
   <data name="CompressionLevelEntry" xml:space="preserve">
-    <value>Compression Level</value>
+    <value>Compressie niveau</value>
   </data>
   <data name="NoCompression" xml:space="preserve">
-    <value>No compression</value>
+    <value>Geen compressie</value>
   </data>
   <data name="FastestCompression" xml:space="preserve">
-    <value>Fastest</value>
+    <value>Snelste</value>
   </data>
   <data name="OptimalCompression" xml:space="preserve">
-    <value>Optimal</value>
+    <value>Optimaal</value>
   </data>
   <data name="CompressAndRemoveEntry" xml:space="preserve">
-    <value>Compress and remove source files</value>
+    <value>Comprimeren en verwijderen van bronbestanden</value>
   </data>
   <data name="CompressOnlyEntry" xml:space="preserve">
-    <value>Compress only</value>
+    <value>Alleen comprimeren</value>
   </data>
   <data name="DarkcyanCompilingJSFilesText" xml:space="preserve">
-    <value>[darkcyan]Compiling JS files[/]</value>
+    <value>[darkcyan]Compileren JS bestanden [/]</value>
   </data>
   <data name="PackagingGameText" xml:space="preserve">
-    <value>Packaging the game files...</value>
+    <value>Het spel bestanden pakken...</value>
   </data>
   <data name="TestAfterCompilingEntry" xml:space="preserve">
-    <value>Test after compiling</value>
+    <value>Test na compileren</value>
   </data>
   <data name="CommonWordYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>ja</value>
   </data>
   <data name="CommonWordNo" xml:space="preserve">
-    <value>No</value>
+    <value>Neen</value>
   </data>
   <data name="RemoveSourceFilesEntry" xml:space="preserve">
-    <value>Remove source JS files</value>
+    <value>Verwijder bronJS bestanden</value>
   </data>
   <data name="SettingTitle" xml:space="preserve">
-    <value>Setting</value>
+    <value>Instellingen</value>
   </data>
   <data name="ValueTitle" xml:space="preserve">
-    <value>Value</value>
+    <value>Waarde</value>
   </data>
 </root>
