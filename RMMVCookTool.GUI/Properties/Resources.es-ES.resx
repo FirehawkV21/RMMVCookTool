@@ -118,310 +118,310 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BrowseUiText" xml:space="preserve">
-    <value>Browse...</value>
+    <value>Navegar...</value>
   </data>
   <data name="ChromiumFlagsUiText" xml:space="preserve">
-    <value>Chromium Flags</value>
+    <value>Banderas de cromo</value>
   </data>
   <data name="CloseButtonText" xml:space="preserve">
-    <value>Close</value>
+    <value>Cerrar</value>
   </data>
   <data name="DoneText" xml:space="preserve">
-    <value>Done!</value>
+    <value>¡Listo!</value>
   </data>
   <data name="EnableNodeJSCheckBoxText" xml:space="preserve">
-    <value>Enable NodeJS?</value>
+    <value>¿Habilitar NodeJS?</value>
   </data>
   <data name="ErrorDetailsMessage" xml:space="preserve">
-    <value>Clicking on the "More Details" button will show the stack trace. Make sure to include this if you are filling a bug report, since it can help with diagnosing the bug.</value>
+    <value>Al hacer clic en el botón "Más Detalles" se mostrará el stack trace. Asegúrese de incluir esto si está rellenando un informe de error, ya que puede ayudar a diagnosticar el error.</value>
   </data>
   <data name="ErrorText" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="EssentialsGroupString" xml:space="preserve">
-    <value>Essentials</value>
+    <value>Esenciales</value>
   </data>
   <data name="FileOutsideOfProjectError" xml:space="preserve">
-    <value>You picked a file that is outside of the project's file. Please pick a file within the project.</value>
+    <value>Has elegido un archivo que está fuera del archivo del proyecto. Por favor, elige un archivo dentro del proyecto.</value>
   </data>
   <data name="GameIDUiString" xml:space="preserve">
-    <value>Game ID</value>
+    <value>ID del Juego</value>
   </data>
   <data name="GameInfoTabText" xml:space="preserve">
-    <value>Game Info</value>
+    <value>Información del juego</value>
   </data>
   <data name="GameNameUiText" xml:space="preserve">
-    <value>Game Name</value>
+    <value>Nombre del Juego</value>
   </data>
   <data name="GamePackageMetadataEditorTitleText" xml:space="preserve">
-    <value>Game Package Metadata Editor</value>
+    <value>Editor de metadatos de paquetes de juego</value>
   </data>
   <data name="GameVersionUiString" xml:space="preserve">
-    <value>Version</value>
+    <value>Versión</value>
   </data>
   <data name="HeightUiText" xml:space="preserve">
-    <value>Height</value>
+    <value>Altura</value>
   </data>
   <data name="HTMLFileLocationUiString" xml:space="preserve">
-    <value>HTML file location</value>
+    <value>Ubicación del archivo HTML</value>
   </data>
   <data name="HTMLFileText" xml:space="preserve">
-    <value>HTML File|*.html</value>
+    <value>Archivo HTML|*.html</value>
   </data>
   <data name="IconLocationUiText" xml:space="preserve">
-    <value>Icon Location</value>
+    <value>Ubicación del icono</value>
   </data>
   <data name="InFullScreenListItemText" xml:space="preserve">
-    <value>In Full Screen</value>
+    <value>En pantalla completa</value>
   </data>
   <data name="InKioskModeListItemText" xml:space="preserve">
-    <value>In Kiosk Mode</value>
+    <value>En modo Kiosk</value>
   </data>
   <data name="JavaScriptFlagsUiText" xml:space="preserve">
-    <value>JavaScript Flags</value>
+    <value>Banderas JavaScript</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="Manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\manual.rtf;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1253</value>
   </data>
   <data name="MinimumHeightUiText" xml:space="preserve">
-    <value>Minimum Height</value>
+    <value>Altura mínima</value>
   </data>
   <data name="MinimumWidthUiText" xml:space="preserve">
-    <value>Minimum Width</value>
+    <value>Ancho Mínimo</value>
   </data>
   <data name="MouseCursorListItemText" xml:space="preserve">
     <value>Mouse Cursor</value>
   </data>
   <data name="NoneListItemText" xml:space="preserve">
-    <value>None</value>
+    <value>Ninguna</value>
   </data>
   <data name="NWJsFeaturesGroupText" xml:space="preserve">
-    <value>NW.js features</value>
+    <value>Características NW.js</value>
   </data>
   <data name="PNGFileText" xml:space="preserve">
-    <value>PNG File|*.png</value>
+    <value>Archivo PNG|*.png</value>
   </data>
   <data name="ProjectPathTooLongErrorText" xml:space="preserve">
-    <value>The path to the project is too long. Please shorten the path.</value>
+    <value>La ruta al proyecto es demasiado larga. Por favor acorte la ruta.</value>
   </data>
   <data name="ProjectPickerText" xml:space="preserve">
-    <value>Please select the location of the project.</value>
+    <value>Por favor, seleccione la ubicación del proyecto.</value>
   </data>
   <data name="ResizableWindowUiText" xml:space="preserve">
-    <value>Resizable Window?</value>
+    <value>¿Ventana redimensionable?</value>
   </data>
   <data name="ResolutionUiText" xml:space="preserve">
-    <value>Resolution</value>
+    <value>Resolución</value>
   </data>
   <data name="SaveButtonText" xml:space="preserve">
-    <value>Save</value>
+    <value>Guardar</value>
   </data>
   <data name="SaveCompleteText" xml:space="preserve">
-    <value>The package metadata file was saved successfully.</value>
+    <value>El archivo metadata del paquete se guardó correctamente.</value>
   </data>
   <data name="ScreenCenterListItemText" xml:space="preserve">
-    <value>Screen Center</value>
+    <value>Centro de pantalla</value>
   </data>
   <data name="SDKPickerText" xml:space="preserve">
-    <value>Please select the location of the SDK folder.</value>
+    <value>Por favor, seleccione la ubicación de la carpeta SDK.</value>
   </data>
   <data name="SettingsUiText" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ajustes</value>
   </data>
   <data name="StackTraceLine" xml:space="preserve">
-    <value>--- The Stack Trace is below this line ---
+    <value>--- El rastro de pila está debajo de esta línea ---
 </value>
   </data>
   <data name="StartUiText" xml:space="preserve">
-    <value>Start:</value>
+    <value>Inicio:</value>
   </data>
   <data name="WidthUiText" xml:space="preserve">
     <value>Width</value>
   </data>
   <data name="WindowedListItemText" xml:space="preserve">
-    <value>Windowed</value>
+    <value>Ventana</value>
   </data>
   <data name="WindowGroupText" xml:space="preserve">
-    <value>Window</value>
+    <value>Ventana</value>
   </data>
   <data name="WindowPositionUiText" xml:space="preserve">
-    <value>Window Position</value>
+    <value>Posición de Ventana</value>
   </data>
   <data name="WindowSettingsUiText" xml:space="preserve">
-    <value>Window Settings</value>
+    <value>Configuración de Ventana</value>
   </data>
   <data name="WindowSizeGroupText" xml:space="preserve">
-    <value>Window Size</value>
+    <value>Tamaño de Ventana</value>
   </data>
   <data name="WindowTitleUiText" xml:space="preserve">
-    <value>Window Title</value>
+    <value>Título de ventana</value>
   </data>
   <data name="ErrorOccuredTitle" xml:space="preserve">
-    <value>Ack! An error has occurred.</value>
+    <value>¡Ack! Ha ocurrido un error.</value>
   </data>
   <data name="CompleteText" xml:space="preserve">
     <value>Complete</value>
   </data>
   <data name="WarningText" xml:space="preserve">
-    <value>Warning</value>
+    <value>Advertencia</value>
   </data>
   <data name="ProjectNotSelectedMessage" xml:space="preserve">
-    <value>A project was not selected.</value>
+    <value>Un proyecto no fue seleccionado.</value>
   </data>
   <data name="ProjectMessageNotSelected_Details" xml:space="preserve">
-    <value>Please select a project from the list. You may have to add it to the list (if you haven't done so).</value>
+    <value>Por favor, seleccione un proyecto de la lista. Puede que tenga que añadirlo a la lista (si no lo ha hecho).</value>
   </data>
   <data name="DefaultSettingsUpdatedText" xml:space="preserve">
-    <value>Your default settings have been updated.</value>
+    <value>La configuración por defecto ha sido actualizada.</value>
   </data>
   <data name="DefaultSettingsUpdatedMessage" xml:space="preserve">
-    <value>The settings will be used for new projects added from this point on.</value>
+    <value>Los ajustes se utilizarán para los nuevos proyectos añadidos a partir de este momento.</value>
   </data>
   <data name="SProjectSettingsUpdatedText" xml:space="preserve">
-    <value>The project's settings have been updated.</value>
+    <value>Los ajustes del proyecto han sido actualizados.</value>
   </data>
   <data name="FolderLocationText" xml:space="preserve">
-    <value>Location:</value>
+    <value>Ubicación:</value>
   </data>
   <data name="FileExtensionText" xml:space="preserve">
-    <value>File Extension:</value>
+    <value>Extensión de archivo:</value>
   </data>
   <data name="RemoveSourceFilesAfterCompiling" xml:space="preserve">
-    <value>Remove JS Files after Compiling:</value>
+    <value>Eliminar archivos JS después de compilar:</value>
   </data>
   <data name="CompressFilesText" xml:space="preserve">
-    <value>Compress Files:</value>
+    <value>Comprimir archivos:</value>
   </data>
   <data name="RemoveSourceFilesAfterCompressionText" xml:space="preserve">
-    <value>Remove Source Files after Compression:</value>
+    <value>Eliminar archivos de origen después de la compresión:</value>
   </data>
   <data name="CompressionModeUiText" xml:space="preserve">
-    <value>Compression Mode:</value>
+    <value>Modo de compresión:</value>
   </data>
   <data name="NwjsLZocationUiText" xml:space="preserve">
-    <value>Location of the NW.js SDK</value>
+    <value>Ubicación del SDK NW.js</value>
   </data>
   <data name="ProgramTitle" xml:space="preserve">
-    <value>RPG Maker MV/MZ Cook Tool</value>
+    <value>Herramienta de cocina MV/MZ MPG MV/MZ</value>
   </data>
   <data name="CompilerUiText" xml:space="preserve">
-    <value>Compiler</value>
+    <value>Compilador</value>
   </data>
   <data name="AddProjectUiText" xml:space="preserve">
-    <value>Add</value>
+    <value>Añadir</value>
   </data>
   <data name="RemoveProjectUiText" xml:space="preserve">
-    <value>Remove</value>
+    <value>Eliminar</value>
   </data>
   <data name="ProjectSettingsUiText" xml:space="preserve">
-    <value>Project Settings</value>
+    <value>Configuración del proyecto</value>
   </data>
   <data name="EditMetadataUiText" xml:space="preserve">
-    <value>Edit Metadata</value>
+    <value>Editar metadatos</value>
   </data>
   <data name="ProgressUiText" xml:space="preserve">
-    <value>Progress</value>
+    <value>Progreso</value>
   </data>
   <data name="TotalProgressBarUiText" xml:space="preserve">
-    <value>Total Progress:</value>
+    <value>Progreso total:</value>
   </data>
   <data name="CurrentProjectProgressBarUiText" xml:space="preserve">
-    <value>Current Project Progress:</value>
+    <value>Progreso actual del proyecto:</value>
   </data>
   <data name="CompileUiText" xml:space="preserve">
-    <value>Compile</value>
+    <value>Compilar</value>
   </data>
   <data name="CancelButtonUiText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="AboutTabUiText" xml:space="preserve">
-    <value>About...</value>
+    <value>Acerca de...</value>
   </data>
   <data name="ProgramVersionLabelUiText" xml:space="preserve">
-    <value>Version R3.02</value>
+    <value>Versión R3.02</value>
   </data>
   <data name="DeveloperCreditUiText" xml:space="preserve">
-    <value>Developed by Studio ACE(AceOfAces). Licensed under the MIT license.</value>
+    <value>Desarrollado por Studio ACE(AceOfAces). Licenciado bajo la licencia MIT.</value>
   </data>
   <data name="UserManualUiText" xml:space="preserve">
-    <value>User Manual</value>
+    <value>Manual del usuario</value>
   </data>
   <data name="CompressionLevelUiText" xml:space="preserve">
-    <value>Compression Level:</value>
+    <value>Nivel de compresión:</value>
   </data>
   <data name="RemoveFilesAfterCompressionUiText" xml:space="preserve">
-    <value>Remove the game files after packaging.</value>
+    <value>Elimina los archivos del juego después de empaquetar.</value>
   </data>
   <data name="CompressFilesToPackageUiText" xml:space="preserve">
-    <value>Compress the game files into package.nw.</value>
+    <value>Comprime los archivos del juego en package.nw.</value>
   </data>
   <data name="RemoveSourceCodeUiText" xml:space="preserve">
-    <value>Remove the source JS files after compiling.</value>
+    <value>Elimina los archivos JS de origen después de compilar.</value>
   </data>
   <data name="OptimalListItemText" xml:space="preserve">
-    <value>Optimal</value>
+    <value>Óptimo</value>
   </data>
   <data name="FastestListItemText" xml:space="preserve">
-    <value>Fastest</value>
+    <value>Más rápido</value>
   </data>
   <data name="NoCompressionListItemText" xml:space="preserve">
-    <value>No Compression</value>
+    <value>Sin compresión</value>
   </data>
   <data name="DefaultSettingsButtonUiText" xml:space="preserve">
-    <value>Default Settings...</value>
+    <value>Configuración predeterminada...</value>
   </data>
   <data name="DefaultProjectSettingsUiText" xml:space="preserve">
-    <value>Default Project Settings</value>
+    <value>Configuración predeterminada del proyecto</value>
   </data>
   <data name="AbortedText" xml:space="preserve">
-    <value>Aborted</value>
+    <value>Abortado</value>
   </data>
   <data name="BinRemovalStatusText" xml:space="preserve">
-    <value>Removing binary files from </value>
+    <value>Eliminando archivos binarios de </value>
   </data>
   <data name="CompilationCompleteText" xml:space="preserve">
-    <value>Compilation complete!</value>
+    <value>Compilación completada!</value>
   </data>
   <data name="CompileJsFolderProgressText" xml:space="preserve">
-    <value>Compiling scripts in the js folder...</value>
+    <value>Compilando scripts en la carpeta js...</value>
   </data>
   <data name="CompilerMissingText" xml:space="preserve">
-    <value>The nwjs Compiler is missing.</value>
+    <value>El compilador nwjs está ausente.</value>
   </data>
   <data name="CompileText" xml:space="preserve">
-    <value>Compiling </value>
+    <value>Compilando </value>
   </data>
   <data name="CompileText1" xml:space="preserve">
-    <value>Compiling scripts in the </value>
+    <value>Compilando scripts en el </value>
   </data>
   <data name="CompilingText" xml:space="preserve">
-    <value>Compiling </value>
+    <value>Compilando </value>
   </data>
   <data name="FailedText" xml:space="preserve">
-    <value>Failed!</value>
+    <value>¡Fallo!</value>
   </data>
   <data name="FolderText" xml:space="preserve">
-    <value> folder...</value>
+    <value> carpeta...</value>
   </data>
   <data name="NoJSFilesPresent" xml:space="preserve">
-    <value>Please add the folders you want the JavaScript files to be compiled.</value>
+    <value>Por favor, añada las carpetas que desea que los archivos JavaScript sean compilados.</value>
   </data>
   <data name="PackaginStatusText" xml:space="preserve">
-    <value>Packaging...</value>
+    <value>Empaquetando...</value>
   </data>
   <data name="TaskCancelledMessage" xml:space="preserve">
-    <value>The task was cancelled.</value>
+    <value>La tarea fue cancelada.</value>
   </data>
   <data name="CannotFindGameFolderTitle" xml:space="preserve">
-    <value>Could not find the folder specified in the JSON file.</value>
+    <value>No se pudo encontrar la carpeta especificada en el archivo JSON.</value>
     <comment>String ID: CannotFindGameFolderTitle
 This is the title of the message shown if the JSON file is missing an important detail.</comment>
   </data>
   <data name="CannotFindGameFolderMessage" xml:space="preserve">
-    <value>Double check that the "main" variable is filled or points to a existing folder. This folder will be skipped.</value>
+    <value>Comprueba que la variable "principal" esté llena o que apunte a una carpeta existente. Esta carpeta se omitirá.</value>
   </data>
   <data name="MinifyPackageFileUiText" xml:space="preserve">
-    <value>Minify the package.json file</value>
+    <value>Minificar el archivo package.json</value>
   </data>
 </root>
