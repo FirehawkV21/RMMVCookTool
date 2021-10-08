@@ -79,6 +79,33 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [orange1]Command line arguments[/].
+        /// </summary>
+        internal static string CommandLineArgsTitle {
+            get {
+                return ResourceManager.GetString("CommandLineArgsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string CommonWordNo {
+            get {
+                return ResourceManager.GetString("CommonWordNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string CommonWordYes {
+            get {
+                return ResourceManager.GetString("CommonWordYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The compiler isn&apos;t there. Please pick the folder that has the nwjc file..
         /// </summary>
         internal static string CompilerMissingErrorText {
@@ -115,6 +142,33 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compress and remove source files.
+        /// </summary>
+        internal static string CompressAndRemoveEntry {
+            get {
+                return ResourceManager.GetString("CompressAndRemoveEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compression.
+        /// </summary>
+        internal static string CompressionEntry {
+            get {
+                return ResourceManager.GetString("CompressionEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compression Level.
+        /// </summary>
+        internal static string CompressionLevelEntry {
+            get {
+                return ResourceManager.GetString("CompressionLevelEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compression is not allowed if the &quot;--PackageApp&quot; command line argument is specified. Skipping this step..
         /// </summary>
         internal static string CompressionNotPermittedText {
@@ -147,6 +201,15 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compress only.
+        /// </summary>
+        internal static string CompressOnlyEntry {
+            get {
+                return ResourceManager.GetString("CompressOnlyEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copying the game files to a temporary location....
         /// </summary>
         internal static string CopyingToTempLocationText {
@@ -156,11 +219,29 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [darkcyan]Compiling JS files[/].
+        /// </summary>
+        internal static string DarkcyanCompilingJSFilesText {
+            get {
+                return ResourceManager.GetString("DarkcyanCompilingJSFilesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [{0}].
         /// </summary>
         internal static string DateTimeFormatText {
             get {
                 return ResourceManager.GetString("DateTimeFormatText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fastest.
+        /// </summary>
+        internal static string FastestCompression {
+            get {
+                return ResourceManager.GetString("FastestCompression", resourceCulture);
             }
         }
         
@@ -179,6 +260,15 @@ namespace RMMVCookTool.CLI.Properties {
         internal static string FileCompressionText {
             get {
                 return ResourceManager.GetString("FileCompressionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Extension.
+        /// </summary>
+        internal static string FileExtensionEntry {
+            get {
+                return ResourceManager.GetString("FileExtensionEntry", resourceCulture);
             }
         }
         
@@ -247,6 +337,15 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No compression.
+        /// </summary>
+        internal static string NoCompression {
+            get {
+                return ResourceManager.GetString("NoCompression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No compression will be used for the archive..
         /// </summary>
         internal static string NoCompressionConfirmationText {
@@ -275,11 +374,29 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Optimal.
+        /// </summary>
+        internal static string OptimalCompression {
+            get {
+                return ResourceManager.GetString("OptimalCompression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The optimal compression will be used for the archive (this is the default)..
         /// </summary>
         internal static string OptimalCompressionCOnfirmationText {
             get {
                 return ResourceManager.GetString("OptimalCompressionCOnfirmationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Packaging the game files....
+        /// </summary>
+        internal static string PackagingGameText {
+            get {
+                return ResourceManager.GetString("PackagingGameText", resourceCulture);
             }
         }
         
@@ -320,7 +437,7 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to = Version R2.01 ({0}).
+        ///   Looks up a localized string similar to = Version R2.02 ({0}).
         /// </summary>
         internal static string ProgramVersionString {
             get {
@@ -362,6 +479,15 @@ namespace RMMVCookTool.CLI.Properties {
         internal static string ProjectLocationConfirmationText {
             get {
                 return ResourceManager.GetString("ProjectLocationConfirmationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Location.
+        /// </summary>
+        internal static string ProjectLocationEntry {
+            get {
+                return ResourceManager.GetString("ProjectLocationEntry", resourceCulture);
             }
         }
         
@@ -423,6 +549,15 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove source JS files.
+        /// </summary>
+        internal static string RemoveSourceFilesEntry {
+            get {
+                return ResourceManager.GetString("RemoveSourceFilesEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The directory isn&apos;t there. Please select an existing folder.
         ///.
         /// </summary>
@@ -438,6 +573,15 @@ namespace RMMVCookTool.CLI.Properties {
         internal static string SDKLocationConfirmationText {
             get {
                 return ResourceManager.GetString("SDKLocationConfirmationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SDK Location.
+        /// </summary>
+        internal static string SDKLocationEntry {
+            get {
+                return ResourceManager.GetString("SDKLocationEntry", resourceCulture);
             }
         }
         
@@ -479,6 +623,24 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        internal static string SettingTitle {
+            get {
+                return ResourceManager.GetString("SettingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [orange1]Setup[/].
+        /// </summary>
+        internal static string SetupTitle {
+            get {
+                return ResourceManager.GetString("SetupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleting source files....
         /// </summary>
         internal static string SourceFileDeletionText {
@@ -507,6 +669,15 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test after compiling.
+        /// </summary>
+        internal static string TestAfterCompilingEntry {
+            get {
+                return ResourceManager.GetString("TestAfterCompilingEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///Would you like to test the project after compiling? (Y/N, Default is N)
         ///.
@@ -527,6 +698,15 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        internal static string ValueTitle {
+            get {
+                return ResourceManager.GetString("ValueTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///Do you want to:
         ///1. Test that the binary files are loaded properly?
@@ -536,6 +716,15 @@ namespace RMMVCookTool.CLI.Properties {
         internal static string WorkloadQuestion {
             get {
                 return ResourceManager.GetString("WorkloadQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [orange1]Work[/].
+        /// </summary>
+        internal static string WorkTitle {
+            get {
+                return ResourceManager.GetString("WorkTitle", resourceCulture);
             }
         }
     }

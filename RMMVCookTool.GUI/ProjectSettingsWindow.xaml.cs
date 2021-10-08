@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows;
-
-namespace RMMVCookTool.GUI
+﻿namespace RMMVCookTool.GUI
 {
     /// <summary>
     /// Interaction logic for ProjectSettingsWindow.xaml

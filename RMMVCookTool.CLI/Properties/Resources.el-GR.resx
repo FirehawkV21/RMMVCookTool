@@ -124,7 +124,7 @@
     <value>= RPG Maker MV Cook Tool (Έκδοση .NET Core CLI)</value>
   </data>
   <data name="ProgramVersionString" xml:space="preserve">
-    <value>= Version R2.02 ({0})</value>
+    <value>= Έκδοση R2.02 ({0})</value>
     <comment>String ID: ProgramVersionString
 This is the command line app's version string.</comment>
   </data>
@@ -293,66 +293,66 @@ This is the command line app's version string.</comment>
     <value>Δεν υπάρχει αναφορά στον φάκελο παιχνιδιού στο αρχείο package.json (ή δεν υπάρχει ο φάκελος που αναφέρεται). Παρακαλώ, βεβαιωθείτε ότι το αρχείο έχει τη μεταβλητή "main" και ο φάκελος υπάρχει.</value>
   </data>
   <data name="CommandLineArgsTitle" xml:space="preserve">
-    <value>[orange1]Command line arguments[/]</value>
+    <value>[orange1]Ρυθμίσεις command line[/]</value>
   </data>
   <data name="SetupTitle" xml:space="preserve">
-    <value>[orange1]Setup[/]</value>
+    <value>[orange1]Ρύθμιση[/]</value>
   </data>
   <data name="WorkTitle" xml:space="preserve">
-    <value>[orange1]Work[/]</value>
+    <value>[orange1]Εργασία[/]</value>
   </data>
   <data name="SDKLocationEntry" xml:space="preserve">
-    <value>SDK Location</value>
+    <value>Θέση SDK</value>
   </data>
   <data name="ProjectLocationEntry" xml:space="preserve">
-    <value>Project Location</value>
+    <value>Θέση Project</value>
   </data>
   <data name="FileExtensionEntry" xml:space="preserve">
-    <value>File Extension</value>
-  </data>
-  <data name="CompressionEntry" xml:space="preserve">
-    <value>Compression</value>
+    <value>Επέκταση αρχείου</value>
   </data>
   <data name="CompressionLevelEntry" xml:space="preserve">
-    <value>Compression Level</value>
-  </data>
-  <data name="NoCompression" xml:space="preserve">
-    <value>No compression</value>
-  </data>
-  <data name="FastestCompression" xml:space="preserve">
-    <value>Fastest</value>
+    <value>Λειτουργία συμπίεσης</value>
   </data>
   <data name="OptimalCompression" xml:space="preserve">
-    <value>Optimal</value>
+    <value>Βέλτιστη</value>
+  </data>
+  <data name="FastestCompression" xml:space="preserve">
+    <value>Ταχύτατη</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>Χωρίς συμπίεση</value>
+  </data>
+  <data name="CompressionEntry" xml:space="preserve">
+    <value>Συμπίεση</value>
   </data>
   <data name="CompressAndRemoveEntry" xml:space="preserve">
-    <value>Compress and remove source files</value>
+    <value>Συμπίεση και αφαίρεση αρχικών αρχείων</value>
   </data>
   <data name="CompressOnlyEntry" xml:space="preserve">
-    <value>Compress only</value>
+    <value>Μόνο συμπίεση</value>
   </data>
   <data name="DarkcyanCompilingJSFilesText" xml:space="preserve">
-    <value>[darkcyan]Compiling JS files[/]</value>
+    <value>[darkcyan]Μετάφραση των αρχείων JS[/]</value>
   </data>
   <data name="PackagingGameText" xml:space="preserve">
-    <value>Packaging the game files...</value>
+    <value>Πακετάρισμα των αρχείων παιχνιδιού...</value>
   </data>
   <data name="TestAfterCompilingEntry" xml:space="preserve">
-    <value>Test after compiling</value>
+    <value>Δοκιμή μετά την μετάφραση</value>
   </data>
   <data name="CommonWordYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Ναί</value>
   </data>
   <data name="CommonWordNo" xml:space="preserve">
-    <value>No</value>
+    <value>Όχι</value>
   </data>
   <data name="RemoveSourceFilesEntry" xml:space="preserve">
-    <value>Remove source JS files</value>
+    <value>Αφαίρεση αρχικών αρχείων JS</value>
   </data>
   <data name="SettingTitle" xml:space="preserve">
-    <value>Setting</value>
+    <value>Ρύθμιση</value>
   </data>
   <data name="ValueTitle" xml:space="preserve">
-    <value>Value</value>
+    <value>Τιμή</value>
   </data>
 </root>

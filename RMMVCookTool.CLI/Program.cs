@@ -1,15 +1,13 @@
-﻿using DustInTheWind.ConsoleTools.Spinners;
-using RMMVCookTool.CLI.Properties;
+﻿using RMMVCookTool.CLI.Properties;
 using RMMVCookTool.Core.Compiler;
 using RMMVCookTool.Core.Utilities;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RMMVCookTool.CLI
 {
@@ -37,6 +35,14 @@ namespace RMMVCookTool.CLI
             #region Command line arguments
             if (args.Length >= 1)
             {
+                Rule argsTab = new();
+                argsTab.Title = Resources.CommandLineArgsTitle;
+                argsTab.Alignment = Justify.Left;
+                AnsiConsole.Write(argsTab);
+                Table argsTable = new();
+                argsTable.AddColumn(Resources.SettingTitle);
+                argsTable.AddColumn(Resources.ValueTitle);
+                argsTable.Border = TableBorder.Rounded;
                 CompilerUtilities.RecordToLog("Command Line Arguments loaded. Processing...", 0);
                 for (int argnum = 0; argnum < args.Length; argnum++)
                 {
@@ -52,8 +58,7 @@ namespace RMMVCookTool.CLI
                                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc")))
                             {
                                 CompilerUtilities.RecordToLog($"NW.js compiler found at {_sdkLocation}.", 0);
-                                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                Console.WriteLine(Resources.SDKLocationConfirmationText);
+                                argsTable.AddRow(Resources.SDKLocationEntry, _sdkLocation);
                                 Console.ResetColor();
                             }
                             else
@@ -77,8 +82,7 @@ namespace RMMVCookTool.CLI
                             if (argnum <= args.Length - 1 && (Directory.Exists(newProject.Value.ProjectLocation) && File.Exists(Path.Combine(newProject.Value.ProjectLocation, "package.json"))))
                             {
                                 CompilerUtilities.RecordToLog($"RPG Maker MV/MZ project found at {newProject.Value.ProjectLocation}.", 0);
-                                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                Console.WriteLine(Resources.ProjectLocationConfirmationText);
+                                argsTable.AddRow(Resources.ProjectLocationEntry, newProject.Value.ProjectLocation);
                                 Console.ResetColor();
                             }
                             else
@@ -101,8 +105,7 @@ namespace RMMVCookTool.CLI
                             {
                                 newProject.Value.FileExtension = args[argnum + 1];
                                 CompilerUtilities.RecordToLog($"File extension set to .{newProject.Value.FileExtension}.", 0);
-                                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                Console.WriteLine(Resources.FileExtensionSetText + newProject.Value.FileExtension);
+                                argsTable.AddRow(Resources.FileExtensionEntry, newProject.Value.FileExtension);
                                 Console.ResetColor();
                             }
                             break;
@@ -129,6 +132,7 @@ namespace RMMVCookTool.CLI
                                     if (argnum + 1 <= args.Length - 1)
                                     {
                                         _compressProject = args[argnum + 1] == "Final" ? 1 : 2;
+                                        argsTable.AddRow(Resources.CompressionEntry, ((argnum + 1 <= args.Length - 1) && args[argnum + 1] == "Final") ? Resources.CompressAndRemoveEntry : Resources.CompressOnlyEntry);
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                         Console.WriteLine((argnum + 1 <= args.Length - 1) && args[argnum + 1] == "Final" ?
                                             Resources.ProjectFilesRemovalAfterCompressionText :
@@ -139,6 +143,7 @@ namespace RMMVCookTool.CLI
                                     else
                                     {
                                         CompilerUtilities.RecordToLog($"Only compression will occur.", 0);
+                                        argsTable.AddRow(Resources.CompressionEntry, Resources.CompressOnlyEntry);
                                         _compressProject = 2;
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                         Console.WriteLine(Resources.ProjectFilesCompressionConfirmText);
@@ -160,8 +165,6 @@ namespace RMMVCookTool.CLI
                             _checkDeletion = 2;
                             CompilerUtilities.RecordToLog($"JS files will be removed.", 0);
                             newProject.Value.RemoveSourceCodeAfterCompiling = true;
-                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.WriteLine(Resources.JavascriptDeletionConfirmationTet);
                             Console.ResetColor();
                             break;
 
@@ -180,6 +183,7 @@ namespace RMMVCookTool.CLI
                             else
                             {
                                 CompilerUtilities.RecordToLog("Test mode is turned on.", 0);
+                                argsTable.AddRow(Resources.TestAfterCompilingEntry, Resources.CommonWordYes);
                                 _testProject = true;
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                                 Console.WriteLine(Resources.nwjsTestStartingText);
@@ -217,11 +221,26 @@ namespace RMMVCookTool.CLI
                             break;
                     }
                 }
-                #endregion
-                #region Workload Check
-                //Check if both the _projectLocation and _sdkLocation variables are not null.
-                if (newProject.Value.ProjectLocation != null && _sdkLocation != null)
+            if (_compressProject < 3) switch (newProject.Value.CompressionModeLevel)
+                    {
+                        case 2:
+                            argsTable.AddRow(Resources.CompressionLevelEntry, Resources.NoCompression);
+                            break;
+                        case 1:
+                            argsTable.AddRow(Resources.CompressionLevelEntry, Resources.FastestCompression);
+                            break;
+                        case 0:
+                            argsTable.AddRow(Resources.CompressionLevelEntry, Resources.OptimalCompression);
+                            break;
+                    }
+            if (_checkDeletion == 2) argsTable.AddRow(Resources.RemoveSourceFilesEntry, Resources.CommonWordYes);
+            else argsTable.AddRow(Resources.RemoveSourceFilesEntry, Resources.CommonWordNo);
+            #endregion
+            #region Workload Check
+            //Check if both the _projectLocation and _sdkLocation variables are not null.
+            if (newProject.Value.ProjectLocation != null && _sdkLocation != null)
                 {
+                    AnsiConsole.Write(argsTable);
                     CompilerUtilities.RecordToLog("Settings set. Starting the job...", 0);
                     _settingsSet = true;
                 }
@@ -250,11 +269,14 @@ namespace RMMVCookTool.CLI
 
             if (!_settingsSet)
             {
+                Rule setupTab = new();
+                setupTab.Title = RMMVCookTool.CLI.Properties.Resources.SetupTitle;
+                setupTab.Alignment = Justify.Left;
+                AnsiConsole.Write(setupTab);
                 do
                 {
                     //Ask the user where is the SDK. Check if the folder's there.
-                    Console.WriteLine(Resources.SDKLocationQuestion);
-                    _sdkLocation = Console.ReadLine();
+                    _sdkLocation = AnsiConsole.Prompt(new TextPrompt<string>(Resources.SDKLocationQuestion));
                     if (_sdkLocation == null) Console.WriteLine(Resources.SDKLocationIsNullText);
                     else if (!Directory.Exists(_sdkLocation)) Console.Write(Resources.SDKDirectoryMissing);
                 } while (_sdkLocation == null || !Directory.Exists(_sdkLocation));
@@ -264,9 +286,7 @@ namespace RMMVCookTool.CLI
                 do
                 {
                     //Ask the user what project to compile. Check if the folder is there and there's a js folder.
-                    Console.WriteLine(Resources.ProjectLocationQuestion);
-                    newProject.Value.ProjectLocation = Console.ReadLine();
-
+                    newProject.Value.ProjectLocation = AnsiConsole.Prompt(new TextPrompt<string>(Resources.ProjectLocationQuestion));
                     if (newProject.Value.ProjectLocation == null) Console.WriteLine(Resources.ProjectLocationIsNullText);
                     else if (!Directory.Exists(newProject.Value.ProjectLocation))
                         Console.WriteLine(Resources.ProjetDirectoryMissingErrorText);
@@ -278,43 +298,47 @@ namespace RMMVCookTool.CLI
                          !Directory.Exists(Path.Combine(newProject.Value.ProjectLocation, "www", "js")));
 
                 //Ask the user for the file extension.
-                Console.Write(Resources.FileExtensionQuestion);
-                newProject.Value.FileExtension = Console.ReadLine();
-                if (string.IsNullOrEmpty(newProject.Value.FileExtension)) newProject.Value.FileExtension = "bin";
+                newProject.Value.FileExtension = AnsiConsole.Prompt(new TextPrompt<string>(Resources.FileExtensionQuestion).DefaultValue(".bin").AllowEmpty());
                 //This is the check if the tool should delete the JS files.
-                Console.WriteLine(Resources.WorkloadQuestion);
-                string stringBuffer = Console.ReadLine();
-                int.TryParse(stringBuffer, out _checkDeletion);
+                _checkDeletion = AnsiConsole.Prompt(new TextPrompt<int>(Resources.WorkloadQuestion)
+                    .DefaultValue(1)
+                    .Validate(choice => {
+                    return choice switch
+                    {
+                        > 2 => ValidationResult.Error(),
+                        < 1 => ValidationResult.Error(),
+                        _ => ValidationResult.Success()
+                    };
+                }));
                 newProject.Value.RemoveSourceCodeAfterCompiling = _checkDeletion == 2;
 
-                char charBuffer;
                 if (_checkDeletion == 2)
                 {
-                    Console.WriteLine(
-                        Resources.CompressionQuestion);
-                    charBuffer = Console.ReadKey().KeyChar;
-                    _compressProject = !char.IsLetterOrDigit(charBuffer) ? Convert.ToInt32(charBuffer) : 3;
+                    _compressProject = AnsiConsole.Prompt(new TextPrompt<int>(Resources.CompressionQuestion)
+                    .DefaultValue(3)
+                    .Validate(choice => {
+                        return choice switch
+                        {
+                            > 3 => ValidationResult.Error(),
+                            < 1 => ValidationResult.Error(),
+                            _ => ValidationResult.Success()
+                        };
+                    }));
                 }
                 else
                 {
                     //Ask if the user would like to test with nwjs.
-                    Console.WriteLine(Resources.TestProjectQuestion);
-                    charBuffer = Console.ReadKey().KeyChar;
-                    if (char.IsLetterOrDigit(charBuffer))
-                    {
-                        _testProject = charBuffer switch
-                        {
-                            'Y' or 'y' or 'Ν' or 'ν' => true,
-                            _ => false,
-                        };
-                    }
-                    else _testProject = false;
+                    if (AnsiConsole.Confirm(Resources.TestProjectQuestion)) _testProject = true;
                 }
                 CompilerUtilities.RecordToLog($"Current setup of the job:\nCompiler Location:{_sdkLocation}\nProject Location:{newProject.Value.ProjectLocation}\nFile Extension:{newProject.Value.FileExtension}\nRemove Source Files? {newProject.Value.RemoveSourceCodeAfterCompiling}\nPackage game?:{newProject.Value.CompressFilesToPackage}\nRemove game files after packaging?:{newProject.Value.RemoveFilesAfterCompression}\nCompression Mode:{newProject.Value.CompressionModeLevel}", 0);
             }
             #endregion
 
             #region Workload Code
+            Rule workTab = new();
+            workTab.Title = Resources.WorkTitle;
+            workTab.Alignment = Justify.Left;
+            AnsiConsole.Write(workTab);
             //Find the game folder.
             Stopwatch timer = new();
             Stopwatch totalTime = new();
@@ -338,16 +362,12 @@ namespace RMMVCookTool.CLI
                 newProject.Value.FileMap ??= new List<string>(CompilerUtilities.FileFinder(Path.Combine(newProject.Value.ProjectLocation), "*.js"));
 
                 CompilerUtilities.RecordToLog($"Found {newProject.Value.FileMap.Count} JS files.", 0);
-                using (Spinner work1 = new())
-                {
-                    work1.Label = Resources.BinaryRemovalText;
-                    work1.DoneText = "\rRemoved binary files. Starting the compiler job...";
-                    work1.Display();
-                    CompilerUtilities.RemoveDebugFiles(newProject.Value.ProjectLocation);
-                    CompilerUtilities.CleanupBin(newProject.Value.FileMap);
-                    work1.Close();
-
-                }
+                AnsiConsole.Status()
+                    .Start("[darkcyan]" + Resources.BinaryRemovalText + "[/]", spinny =>
+                    {
+                        CompilerUtilities.RemoveDebugFiles(newProject.Value.ProjectLocation);
+                        CompilerUtilities.CleanupBin(newProject.Value.FileMap);
+                    });
                 //Preparing the compiler task.
                 newProject.Value.CompilerInfo.Value.FileName = Path.Combine(_sdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
                 timer.Stop();
@@ -355,40 +375,28 @@ namespace RMMVCookTool.CLI
                 timer.Reset();
                 try
                 {
-                    ProgressBar progress = new()
-                    {
-                        UnitOfMeasurement = "/" + newProject.Value.FileMap.Count + " JS Files",
-                        MaxValue = newProject.Value.FileMap.Count,
-                        LabelText = "Compiling"
-                    };
-
                     timer.Start();
-                    ManualResetEventSlim finishEvent = new();
-                    finishEvent.Reset();
-                    Task.Run<Task>(async () =>
-                    {
-                        progress.Display();
-                        for (var i = 0; i < newProject.Value.FileMap.Count; i++)
+                    AnsiConsole.Progress()
+                        .Start(progress =>
                         {
-                            CompilerUtilities.RecordToLog($"Compiling {newProject.Value.FileMap[i]}...", 0);
-                            progress.LabelText = Resources.CompilingWord2 + newProject.Value.FileMap[i] + @"...";
-                            progress.Value = i + 1;
-                            newProject.Value.CompileFile(i);
-                            CompilerUtilities.RecordToLog($"Compiled {newProject.Value.FileMap[i]}.", 0);
-                            await Task.Delay(10);
-                        }
-                        finishEvent.Set();
-                    }).ConfigureAwait(false);
-                    finishEvent.Wait();
-                    progress.Close();
+                            var compilerTask = progress.AddTask(RMMVCookTool.CLI.Properties.Resources.DarkcyanCompilingJSFilesText);
+                            compilerTask.MaxValue = 131;
+                            while (!progress.IsFinished)
+                            {
+                                for (var i = 0; i < newProject.Value.FileMap.Count; i++)
+                                {
+                                    CompilerUtilities.RecordToLog($"Compiling {newProject.Value.FileMap[i]}...", 0);
+                                    newProject.Value.CompileFile(i);
+                                    CompilerUtilities.RecordToLog($"Compiled {newProject.Value.FileMap[i]}.", 0);
+                                    compilerTask.Increment(1);
+                                }
+                                compilerTask.StopTask();
+                            }
+                        });
+
                     timer.Stop();
                     CompilerUtilities.RecordToLog($"Completed the compilation. (Time elapsed:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}", 0);
                     timer.Reset();
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.Write(Resources.DateTimeFormatText, DateTime.Now);
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine(Resources.CompilerTaskComplete);
-                    Console.ResetColor();
                     if (_testProject)
                     {
                         Console.WriteLine(Resources.NwjsStartingTestNotificationText);
@@ -396,16 +404,13 @@ namespace RMMVCookTool.CLI
                     }
                     else if (_compressProject < 3 && _checkDeletion == 2)
                     {
-                        CompilerUtilities.RecordToLog("Packaging the game...", 0);
+                        CompilerUtilities.RecordToLog(Resources.PackagingGameText, 0);
                         timer.Start();
-                        using (Spinner work2 = new())
-                        {
-                            work2.Label = Resources.FileCompressionText;
-                            work2.DoneText = "\rPackaged the game.";
-                            work2.Display();
-                            newProject.Value.CompressFiles();
-                            work2.Close();
-                        }
+                        AnsiConsole.Status()
+                            .Start(Resources.FileCompressionText, spin =>
+                            {
+                                newProject.Value.CompressFiles();
+                            });
                         timer.Stop();
                         CompilerUtilities.RecordToLog($"Packaged the game. (Time to package:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}", 0);
                     }
@@ -417,14 +422,14 @@ namespace RMMVCookTool.CLI
                 catch (ArgumentNullException e)
                 {
                     CompilerUtilities.RecordToLog(e);
-                    Console.WriteLine(e);
+                    AnsiConsole.WriteException(e);
                     throw;
                 }
                 catch (Exception e)
                 {
                     //TODO Improve the handling of the errors.
                     CompilerUtilities.RecordToLog(e);
-                    Console.WriteLine(e);
+                    AnsiConsole.WriteException(e);
                     throw;
 
                 }

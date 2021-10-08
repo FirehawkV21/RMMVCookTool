@@ -1,8 +1,4 @@
-﻿using System;
-using Ookii.Dialogs.Wpf;
-using RMMVCookTool.GUI.Properties;
-
-namespace RMMVCookTool.GUI
+﻿namespace RMMVCookTool.GUI
 {
     public static class MessageDialog
     {

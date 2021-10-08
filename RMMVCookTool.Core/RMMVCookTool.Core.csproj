@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-	<TargetFrameworks>net5.0</TargetFrameworks>
-	<AssemblyVersion>2.0.3.21183</AssemblyVersion>
-	<FileVersion>2.0.3.21183</FileVersion>
-	<Version>2.0.3-20210702</Version>
-	<Platforms>AnyCPU;x64;x86</Platforms>
+	<TargetFrameworks>net6.0</TargetFrameworks>
+	<AssemblyVersion>2.0.4.21279</AssemblyVersion>
+	<FileVersion>2.0.4.21279</FileVersion>
+	<Version>2.0.4-20211006</Version>
+	<Platforms>AnyCPU;x64;x86;ARM64</Platforms>
 	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>
 	<Authors>AceOfAces</Authors>
 	<Company>Studio ACE</Company>
@@ -16,6 +16,7 @@
 	<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
 	<Description>The core library of the RPG Maker MV Cook Tool.</Description>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(TargetFramework)=='net6.0'">
@@ -26,6 +27,10 @@
 		<FileAlignment>4096</FileAlignment>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+	  <FileAlignment>4096</FileAlignment>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
 		<FileAlignment>4096</FileAlignment>
 	</PropertyGroup>
@@ -34,9 +39,13 @@
 		<FileAlignment>4096</FileAlignment>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|ARM64'">
+	  <PlatformTarget>ARM64</PlatformTarget>
+	</PropertyGroup>
+
 	<ItemGroup>
 	<PackageReference Include="Serilog" Version="2.10.0" />
-	<PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+	<PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
 	<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
 

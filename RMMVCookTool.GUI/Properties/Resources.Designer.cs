@@ -548,7 +548,7 @@ namespace RMMVCookTool.GUI.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {\rtf1\ansi\deff3\adeflang1025
-        ///{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset161 Liberation Serif{\*\falt Times New Roman};}{\f4\fswiss\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f5\froman\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f6\froman\fprq2\fcharset161 Liberation Mono{\*\falt Courier New};}{\f7\froman\fprq2\fcharset161 Segoe UI;}{\f8\froman\fprq2\fcharset161 Lucida Console;}{\f9 [rest of string was truncated]&quot;;.
+        ///{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset161 Liberation Serif{\*\falt Times New Roman};}{\f4\froman\fprq2\fcharset161 Lucida Console;}{\f5\froman\fprq2\fcharset161 Segoe UI;}{\f6\fswiss\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f7\froman\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f8\froman\fprq2\fcharset161 Liberation Mono{\*\falt Courier New};}{\f9 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Manual {
             get {
@@ -674,7 +674,7 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version R3.00.
+        ///   Looks up a localized string similar to Version R3.01.
         /// </summary>
         public static string ProgramVersionLabelUiText {
             get {

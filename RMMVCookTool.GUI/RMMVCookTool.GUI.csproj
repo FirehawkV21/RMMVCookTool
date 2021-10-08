@@ -1,91 +1,92 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0-windows</TargetFramework>
-		<UseWPF>true</UseWPF>
-		<AssemblyVersion>3.1.0.21183</AssemblyVersion>
-		<FileVersion>3.1.0.21183</FileVersion>
-		<ApplicationManifest>app.manifest</ApplicationManifest>
-		<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
-		<NeutralLanguage>en</NeutralLanguage>
-		<PackageLicenseFile></PackageLicenseFile>
-		<RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
-		<AssemblyTitle>RPG Maker MV/MZ Cook Tool (GUI Version)</AssemblyTitle>
-		<Authors>AceOfAces</Authors>
-		<Company>Studio ACE</Company>
-		<Product>RPG Maker MV Cook Tool</Product>
-		<Version>3.1.0-20210702</Version>
-		<PublishReadyToRun>true</PublishReadyToRun>
-		<TieredCompilation>false</TieredCompilation>
-		<TieredCompilationQuickJit>false</TieredCompilationQuickJit>
-		<PublishTrimmed>false</PublishTrimmed>
-		<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-		<PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
-		<Description>GUI version of the RPG Maker MV Cook Tool.</Description>
-		<Platforms>AnyCPU;x64;x86</Platforms>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	</PropertyGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyVersion>3.2.0.21279</AssemblyVersion>
+    <FileVersion>3.2.0.21279</FileVersion>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageLicenseFile></PackageLicenseFile>
+    <AssemblyTitle>RPG Maker MV/MZ Cook Tool (GUI Version)</AssemblyTitle>
+    <Authors>AceOfAces</Authors>
+    <Company>Studio ACE</Company>
+    <Product>RPG Maker MV Cook Tool</Product>
+    <Version>3.2.0-20211006</Version>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+    <PublishTrimmed>false</PublishTrimmed>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
+    <Description>GUI version of the RPG Maker MV Cook Tool.</Description>
+    <Platforms>AnyCPU;x64;ARM64</Platforms>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <LangVersion>preview</LangVersion>
+    <GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|arm64'">
+     <FileAlignment>4096</FileAlignment>
+   </PropertyGroup>
 
-	<PropertyGroup Condition="$(TargetFramework)=='net6.0-windows'">
-		<PublishReadyToRunComposite>true</PublishReadyToRunComposite>
-	</PropertyGroup>
-	
-		<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	<FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-	<FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-	<FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
+  <ItemGroup>
+    <None Remove="Brick-02-WF.ico" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<None Remove="Brick-02-WF.ico" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dirkster.NumericUpDownLib" Version="2.4.2.2" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="4.0.0" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Dirkster.NumericUpDownLib" Version="2.4.2.2" />
-		<PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RMMVCookTool.Core\RMMVCookTool.Core.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\RMMVCookTool.Core\RMMVCookTool.Core.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <Resource Include="Brick-02-WF.ico" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Resource Include="Brick-02-WF.ico" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Update="AppSettings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppSettings.settings</DependentUpon>
+    </Compile>
+      <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
-	<ItemGroup>
-		<Compile Update="AppSettings.Designer.cs">
-			<DesignTimeSharedInput>True</DesignTimeSharedInput>
-			<AutoGen>True</AutoGen>
-			<DependentUpon>AppSettings.settings</DependentUpon>
-		</Compile>
-		<Compile Update="Properties\Resources.Designer.cs">
-			<DesignTime>True</DesignTime>
-			<AutoGen>True</AutoGen>
-			<DependentUpon>Resources.resx</DependentUpon>
-		</Compile>
-	</ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <StronglyTypedFileName>$(IntermediateOutputPath)\Resource.Designer.cs</StronglyTypedFileName>
+      <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+    </EmbeddedResource>
+  </ItemGroup>
 
-	<ItemGroup>
-		<EmbeddedResource Update="Properties\Resources.resx">
-			<Generator>PublicResXFileCodeGenerator</Generator>
-			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="AppSettings.settings">
-			<Generator>SettingsSingleFileGenerator</Generator>
-			<LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
-		</None>
-	</ItemGroup>
+  <ItemGroup>
+    <None Update="AppSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
 
 </Project>
