@@ -121,107 +121,107 @@
     <value>================================================</value>
   </data>
   <data name="ProgramNameText" xml:space="preserve">
-    <value>= RPG Maker MV Cook Tool (.NET Core CLI Version)</value>
+    <value>= RPG メーカー MV クックツール (.NET Core CLI バージョン)</value>
   </data>
   <data name="ProgramVersionString" xml:space="preserve">
-    <value>= Version R2.02 ({0})</value>
+    <value>= バージョン R2.02 ({0})</value>
     <comment>String ID: ProgramVersionString
 This is the command line app's version string.</comment>
   </data>
   <data name="ProgramAuthorText" xml:space="preserve">
-    <value>= Developed by AceOfAces.</value>
+    <value>= AceOfAces によって開発されました。</value>
   </data>
   <data name="ProgramLicenseText" xml:space="preserve">
-    <value>= Licensed under the MIT license.</value>
+    <value>= MIT ライセンスの下でライセンスされます。</value>
   </data>
   <data name="ParallelModeActiveText" xml:space="preserve">
-    <value>Compiler is now running in parallel mode.</value>
+    <value>コンパイラは並列モードで実行されています。</value>
   </data>
   <data name="SDKLocationConfirmationText" xml:space="preserve">
-    <value>SDK Location OK.</value>
+    <value>SDK Location OK</value>
   </data>
   <data name="PushEnterToExitText" xml:space="preserve">
-    <value>Push Enter/Return to exit.</value>
+    <value>Enter/Return を押して終了します。</value>
   </data>
   <data name="ProjectLocationConfirmationText" xml:space="preserve">
-    <value>Project Location OK.</value>
+    <value>プロジェクトの場所OKです。</value>
   </data>
   <data name="FileExtensionSetText" xml:space="preserve">
-    <value>The file extension is set to </value>
+    <value>ファイル拡張子は </value>
   </data>
   <data name="CannotCompressAndTestErrorText" xml:space="preserve">
-    <value>You can't compress and test the project at the moment.</value>
+    <value>現時点ではプロジェクトを圧縮してテストすることはできません。</value>
   </data>
   <data name="JavascriptDeletionConfirmationTet" xml:space="preserve">
-    <value>The JavaScript files will be deleted after compilation.</value>
+    <value>JavaScriptファイルはコンパイル後に削除されます。</value>
   </data>
   <data name="NoCompressionConfirmationText" xml:space="preserve">
-    <value>No compression will be used for the archive.</value>
+    <value>アーカイブには圧縮は使用されません。</value>
   </data>
   <data name="FastestCompressionConfirmationText" xml:space="preserve">
-    <value>The fastest compression will be used for the archive.</value>
+    <value>最速の圧縮がアーカイブに使用されます。</value>
   </data>
   <data name="OptimalCompressionCOnfirmationText" xml:space="preserve">
-    <value>The optimal compression will be used for the archive (this is the default).</value>
+    <value>最適な圧縮がアーカイブに使用されます (これはデフォルトです)。</value>
   </data>
   <data name="SDKLocationInexistantText" xml:space="preserve">
-    <value>The location of the SDK doesn't exist.</value>
+    <value>SDK の場所が存在しません。</value>
   </data>
   <data name="CompilerMissingErrorText" xml:space="preserve">
-    <value>The compiler isn't there. Please pick the folder that has the nwjc file.</value>
+    <value>コンパイラーが存在しません。nwjc ファイルがあるフォルダーを選択してください。</value>
   </data>
   <data name="ProjectLocationInexistantText" xml:space="preserve">
-    <value>The location of the project doesn't exist.</value>
+    <value>プロジェクトの場所が存在しません。</value>
   </data>
   <data name="JsonFileMissingErrorText" xml:space="preserve">
-    <value>The package.json file doesn't exist.</value>
+    <value>package.json ファイルが存在しません。</value>
   </data>
   <data name="nwjsTestStartingText" xml:space="preserve">
-    <value>NW.js will start after compiling.</value>
+    <value>コンパイル後にNW.jsが起動します。</value>
   </data>
   <data name="ProjectNotSetErrorText" xml:space="preserve">
-    <value>The Project location is not set. Please set it with the --ProjectLocation "&lt;project location&gt;".</value>
+    <value>プロジェクトの場所が設定されていません。--ProjectLocation "&lt;project location&gt; " で設定してください。</value>
   </data>
   <data name="SDKLocationNotSetErrorText" xml:space="preserve">
-    <value>The SDK location is not set. Please set it with the --SDKLocation "&lt;project location&gt;".</value>
+    <value>SDK の場所が設定されていません。--SDKLocation "&lt;project location&gt; " で設定してください。</value>
   </data>
   <data name="SDKLocationQuestion" xml:space="preserve">
-    <value>Where's the SDK location? </value>
+    <value>SDKはどこにありますか? </value>
   </data>
   <data name="SDKLocationIsNullText" xml:space="preserve">
-    <value>Please insert the path for the SDK.
+    <value>SDKのパスを挿入してください。
 </value>
   </data>
   <data name="SDKDirectoryMissing" xml:space="preserve">
-    <value>The directory isn't there. Please select an existing folder.
+    <value>ディレクトリがありません。既存のフォルダを選択してください。
 </value>
   </data>
   <data name="ProjectLocationQuestion" xml:space="preserve">
     <value>
-Where's the project you want to compile? </value>
+プロジェクトはどこでコンパイルしますか？ </value>
   </data>
   <data name="ProjectLocationIsNullText" xml:space="preserve">
-    <value>Please specify the location of the folder.
+    <value>フォルダの場所を指定してください。
 </value>
   </data>
   <data name="ProjetDirectoryMissingErrorText" xml:space="preserve">
-    <value>The folder you've selected isn't present.
+    <value>選択したフォルダは存在しません。
 </value>
   </data>
   <data name="ProjectJsFolderMissing" xml:space="preserve">
-    <value>There is no js folder.
+    <value>jsフォルダがありません。
 </value>
   </data>
   <data name="FileExtensionQuestion" xml:space="preserve">
     <value>
-What Extension will your game use (leave empty for .bin)? </value>
+ゲームの拡張機能は何を使用しますか（.binの場合は空のままにします）？ </value>
   </data>
   <data name="WorkloadQuestion" xml:space="preserve">
     <value>
-Do you want to:
-1. Test that the binary files are loaded properly?
-2. Prepare for publishing?
-(Default is 1) </value>
+以下を行いますか？
+1. バイナリファイルが正しく読み込まれていることをテストしますか？
+2. 公開の準備をしますか？
+(デフォルトは 1) </value>
   </data>
   <data name="CompressionQuestion" xml:space="preserve">
     <value>
@@ -233,126 +233,126 @@ Would you like to compress the game's files to an archive?
   </data>
   <data name="TestProjectQuestion" xml:space="preserve">
     <value>
-Would you like to test the project after compiling? (Y/N, Default is N)
+コンパイル後にプロジェクトをテストしますか? (Y/N, Default is N)
 </value>
   </data>
   <data name="BinaryRemovalText" xml:space="preserve">
-    <value>Removing binary files (if present)...</value>
+    <value>バイナリファイルを削除しています...</value>
   </data>
   <data name="ThreadWord" xml:space="preserve">
-    <value>]Thread #</value>
+    <value>]スレッド #</value>
   </data>
   <data name="CompilingWord" xml:space="preserve">
-    <value> is compiling </value>
+    <value> コンパイルしています </value>
   </data>
   <data name="FinishedCompilingText" xml:space="preserve">
-    <value> finished compiling </value>
+    <value> コンパイル完了 </value>
   </data>
   <data name="CompilingWord2" xml:space="preserve">
-    <value>Compiling </value>
+    <value>コンパイル </value>
   </data>
   <data name="FinishedCompilingText2" xml:space="preserve">
-    <value>Finished compiling </value>
+    <value>コンパイル完了 </value>
   </data>
   <data name="DateTimeFormatText" xml:space="preserve">
     <value>[{0}]</value>
   </data>
   <data name="CompilerTaskComplete" xml:space="preserve">
-    <value>Finished compiling files.</value>
+    <value>ファイルのコンパイルが完了しました</value>
   </data>
   <data name="NwjsStartingTestNotificationText" xml:space="preserve">
     <value>
-NW.js will now start. Give it a few seconds to start.</value>
+NW.js を開始します。数秒後に開始します。</value>
   </data>
   <data name="CopyingToTempLocationText" xml:space="preserve">
-    <value>Copying the game files to a temporary location...</value>
+    <value>ゲームファイルを一時的な場所にコピーしています...</value>
   </data>
   <data name="FileCompressionText" xml:space="preserve">
-    <value>Compressing files...</value>
+    <value>ファイルを圧縮しています...</value>
   </data>
   <data name="SourceFileDeletionText" xml:space="preserve">
-    <value>Deleting source files...</value>
+    <value>ソースファイルを削除しています...</value>
   </data>
   <data name="TaskCompleteText" xml:space="preserve">
     <value>
-The task was completed.</value>
+タスクは完了しました。</value>
   </data>
   <data name="ProjectFilesRemovalAfterCompressionText" xml:space="preserve">
-    <value>The project's files will be compressed (the files will be deleted after compressing).</value>
+    <value>プロジェクトのファイルは圧縮されます (ファイルは圧縮後に削除されます)。</value>
   </data>
   <data name="ProjectFilesCompressionConfirmText" xml:space="preserve">
-    <value>The Project's files will be compressed</value>
+    <value>プロジェクトのファイルは圧縮されます</value>
   </data>
   <data name="CompressionSafeModeConfirmationText" xml:space="preserve">
-    <value>Safe mode for compression is now active.</value>
+    <value>圧縮のためのセーフモードがアクティブになりました。</value>
   </data>
   <data name="CompressionNotPermittedText" xml:space="preserve">
-    <value>Compression is not allowed if the "--PackageApp" command line argument is specified. Skipping this step.</value>
+    <value>"--PackageApp" コマンドライン引数が指定されている場合、圧縮は許可されません。この手順をスキップします。</value>
   </data>
   <data name="JsonReferenceError" xml:space="preserve">
-    <value>No reference was found on the package.json (or the folder mentioned isn't there). Please check that the json file contains the "main" variable and the folder exists.</value>
+    <value>package.json に参照が見つかりませんでした(または、そこにないフォルダがありません)。 json ファイルに "main" 変数が含まれており、フォルダが存在することを確認してください。</value>
   </data>
   <data name="CommandLineArgsTitle" xml:space="preserve">
-    <value>[orange1]Command line arguments[/]</value>
+    <value>[orange1]コマンドライン引数[/]</value>
   </data>
   <data name="SetupTitle" xml:space="preserve">
     <value>[orange1]Setup[/]</value>
   </data>
   <data name="WorkTitle" xml:space="preserve">
-    <value>[orange1]Work[/]</value>
+    <value>[orange1]動作 [/]</value>
   </data>
   <data name="SDKLocationEntry" xml:space="preserve">
-    <value>SDK Location</value>
+    <value>SDKの場所</value>
   </data>
   <data name="ProjectLocationEntry" xml:space="preserve">
-    <value>Project Location</value>
+    <value>プロジェクトの場所</value>
   </data>
   <data name="FileExtensionEntry" xml:space="preserve">
-    <value>File Extension</value>
+    <value>ファイル拡張子</value>
   </data>
   <data name="CompressionEntry" xml:space="preserve">
-    <value>Compression</value>
+    <value>圧縮</value>
   </data>
   <data name="CompressionLevelEntry" xml:space="preserve">
-    <value>Compression Level</value>
+    <value>圧縮レベル</value>
   </data>
   <data name="NoCompression" xml:space="preserve">
-    <value>No compression</value>
+    <value>圧縮なし</value>
   </data>
   <data name="FastestCompression" xml:space="preserve">
-    <value>Fastest</value>
+    <value>最速です</value>
   </data>
   <data name="OptimalCompression" xml:space="preserve">
-    <value>Optimal</value>
+    <value>最適な</value>
   </data>
   <data name="CompressAndRemoveEntry" xml:space="preserve">
-    <value>Compress and remove source files</value>
+    <value>ソースファイルを圧縮して削除する</value>
   </data>
   <data name="CompressOnlyEntry" xml:space="preserve">
-    <value>Compress only</value>
+    <value>圧縮のみ</value>
   </data>
   <data name="DarkcyanCompilingJSFilesText" xml:space="preserve">
-    <value>[darkcyan]Compiling JS files[/]</value>
+    <value>[darkcyan]JS ファイルのコンパイル[/]</value>
   </data>
   <data name="PackagingGameText" xml:space="preserve">
-    <value>Packaging the game files...</value>
+    <value>ゲームファイルをパッケージ化しています...</value>
   </data>
   <data name="TestAfterCompilingEntry" xml:space="preserve">
-    <value>Test after compiling</value>
+    <value>コンパイル後のテスト</value>
   </data>
   <data name="CommonWordYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>はい</value>
   </data>
   <data name="CommonWordNo" xml:space="preserve">
-    <value>No</value>
+    <value>いいえ</value>
   </data>
   <data name="RemoveSourceFilesEntry" xml:space="preserve">
-    <value>Remove source JS files</value>
+    <value>ソース JS ファイルを削除</value>
   </data>
   <data name="SettingTitle" xml:space="preserve">
-    <value>Setting</value>
+    <value>設定</value>
   </data>
   <data name="ValueTitle" xml:space="preserve">
-    <value>Value</value>
+    <value>値</value>
   </data>
 </root>
