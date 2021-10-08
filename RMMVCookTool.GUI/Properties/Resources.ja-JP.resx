@@ -118,310 +118,310 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BrowseUiText" xml:space="preserve">
-    <value>Browse...</value>
+    <value>参照...</value>
   </data>
   <data name="ChromiumFlagsUiText" xml:space="preserve">
-    <value>Chromium Flags</value>
+    <value>Chromium フラグ</value>
   </data>
   <data name="CloseButtonText" xml:space="preserve">
-    <value>Close</value>
+    <value>閉じる</value>
   </data>
   <data name="DoneText" xml:space="preserve">
-    <value>Done!</value>
+    <value>完了！</value>
   </data>
   <data name="EnableNodeJSCheckBoxText" xml:space="preserve">
-    <value>Enable NodeJS?</value>
+    <value>NodeJSを有効にしますか？</value>
   </data>
   <data name="ErrorDetailsMessage" xml:space="preserve">
-    <value>Clicking on the "More Details" button will show the stack trace. Make sure to include this if you are filling a bug report, since it can help with diagnosing the bug.</value>
+    <value>"More Details" ボタンをクリックするとスタックトレースが表示されます。 バグの診断に役立つので、バグレポートを記入している場合は必ずこれを含めてください。</value>
   </data>
   <data name="ErrorText" xml:space="preserve">
-    <value>Error</value>
+    <value>エラー</value>
   </data>
   <data name="EssentialsGroupString" xml:space="preserve">
-    <value>Essentials</value>
+    <value>エッセンシャル</value>
   </data>
   <data name="FileOutsideOfProjectError" xml:space="preserve">
-    <value>You picked a file that is outside of the project's file. Please pick a file within the project.</value>
+    <value>プロジェクトのファイル外のファイルを選択しました。プロジェクト内のファイルを選択してください。</value>
   </data>
   <data name="GameIDUiString" xml:space="preserve">
-    <value>Game ID</value>
+    <value>ゲームID</value>
   </data>
   <data name="GameInfoTabText" xml:space="preserve">
-    <value>Game Info</value>
+    <value>ゲーム情報</value>
   </data>
   <data name="GameNameUiText" xml:space="preserve">
-    <value>Game Name</value>
+    <value>ゲーム名</value>
   </data>
   <data name="GamePackageMetadataEditorTitleText" xml:space="preserve">
-    <value>Game Package Metadata Editor</value>
+    <value>ゲームパッケージメタデータエディター</value>
   </data>
   <data name="GameVersionUiString" xml:space="preserve">
-    <value>Version</value>
+    <value>バージョン</value>
   </data>
   <data name="HeightUiText" xml:space="preserve">
-    <value>Height</value>
+    <value>高さ</value>
   </data>
   <data name="HTMLFileLocationUiString" xml:space="preserve">
-    <value>HTML file location</value>
+    <value>HTML ファイルの場所</value>
   </data>
   <data name="HTMLFileText" xml:space="preserve">
-    <value>HTML File|*.html</value>
+    <value>*.html</value>
   </data>
   <data name="IconLocationUiText" xml:space="preserve">
-    <value>Icon Location</value>
+    <value>アイコンの場所</value>
   </data>
   <data name="InFullScreenListItemText" xml:space="preserve">
-    <value>In Full Screen</value>
+    <value>全画面表示</value>
   </data>
   <data name="InKioskModeListItemText" xml:space="preserve">
-    <value>In Kiosk Mode</value>
+    <value>キオスクモード中</value>
   </data>
   <data name="JavaScriptFlagsUiText" xml:space="preserve">
-    <value>JavaScript Flags</value>
+    <value>JavaScript フラグ</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="Manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\manual.rtf;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1253</value>
   </data>
   <data name="MinimumHeightUiText" xml:space="preserve">
-    <value>Minimum Height</value>
+    <value>最小高さ</value>
   </data>
   <data name="MinimumWidthUiText" xml:space="preserve">
-    <value>Minimum Width</value>
+    <value>最小幅</value>
   </data>
   <data name="MouseCursorListItemText" xml:space="preserve">
-    <value>Mouse Cursor</value>
+    <value>マウスカーソル</value>
   </data>
   <data name="NoneListItemText" xml:space="preserve">
-    <value>None</value>
+    <value>なし</value>
   </data>
   <data name="NWJsFeaturesGroupText" xml:space="preserve">
-    <value>NW.js features</value>
+    <value>NW.js 機能</value>
   </data>
   <data name="PNGFileText" xml:space="preserve">
-    <value>PNG File|*.png</value>
+    <value>*.png</value>
   </data>
   <data name="ProjectPathTooLongErrorText" xml:space="preserve">
-    <value>The path to the project is too long. Please shorten the path.</value>
+    <value>プロジェクトのパスが長すぎます。パスを短くしてください。</value>
   </data>
   <data name="ProjectPickerText" xml:space="preserve">
-    <value>Please select the location of the project.</value>
+    <value>プロジェクトの場所を選択してください。</value>
   </data>
   <data name="ResizableWindowUiText" xml:space="preserve">
-    <value>Resizable Window?</value>
+    <value>サイズ変更可能なウィンドウですか？</value>
   </data>
   <data name="ResolutionUiText" xml:space="preserve">
-    <value>Resolution</value>
+    <value>解像度</value>
   </data>
   <data name="SaveButtonText" xml:space="preserve">
-    <value>Save</value>
+    <value>保存</value>
   </data>
   <data name="SaveCompleteText" xml:space="preserve">
-    <value>The package metadata file was saved successfully.</value>
+    <value>パッケージメタデータファイルは正常に保存されました。</value>
   </data>
   <data name="ScreenCenterListItemText" xml:space="preserve">
-    <value>Screen Center</value>
+    <value>画面中央揃え</value>
   </data>
   <data name="SDKPickerText" xml:space="preserve">
-    <value>Please select the location of the SDK folder.</value>
+    <value>SDKフォルダの場所を選択してください。</value>
   </data>
   <data name="SettingsUiText" xml:space="preserve">
-    <value>Settings</value>
+    <value>設定</value>
   </data>
   <data name="StackTraceLine" xml:space="preserve">
-    <value>--- The Stack Trace is below this line ---
+    <value>--- スタックトレースはこの行の下にあります ---
 </value>
   </data>
   <data name="StartUiText" xml:space="preserve">
-    <value>Start:</value>
+    <value>開始:</value>
   </data>
   <data name="WidthUiText" xml:space="preserve">
     <value>Width</value>
   </data>
   <data name="WindowedListItemText" xml:space="preserve">
-    <value>Windowed</value>
+    <value>ウィンドウ</value>
   </data>
   <data name="WindowGroupText" xml:space="preserve">
-    <value>Window</value>
+    <value>ウィンドウ</value>
   </data>
   <data name="WindowPositionUiText" xml:space="preserve">
-    <value>Window Position</value>
+    <value>ウィンドウの位置</value>
   </data>
   <data name="WindowSettingsUiText" xml:space="preserve">
-    <value>Window Settings</value>
+    <value>ウィンドウの設定</value>
   </data>
   <data name="WindowSizeGroupText" xml:space="preserve">
-    <value>Window Size</value>
+    <value>ウィンドウサイズ</value>
   </data>
   <data name="WindowTitleUiText" xml:space="preserve">
-    <value>Window Title</value>
+    <value>ウィンドウタイトル</value>
   </data>
   <data name="ErrorOccuredTitle" xml:space="preserve">
-    <value>Ack! An error has occurred.</value>
+    <value>Ack! エラーが発生しました。</value>
   </data>
   <data name="CompleteText" xml:space="preserve">
     <value>Complete</value>
   </data>
   <data name="WarningText" xml:space="preserve">
-    <value>Warning</value>
+    <value>警告</value>
   </data>
   <data name="ProjectNotSelectedMessage" xml:space="preserve">
-    <value>A project was not selected.</value>
+    <value>プロジェクトが選択されていません。</value>
   </data>
   <data name="ProjectMessageNotSelected_Details" xml:space="preserve">
-    <value>Please select a project from the list. You may have to add it to the list (if you haven't done so).</value>
+    <value>リストからプロジェクトを選択してください。リストに追加する必要があるかもしれません（まだ追加していない場合）。</value>
   </data>
   <data name="DefaultSettingsUpdatedText" xml:space="preserve">
-    <value>Your default settings have been updated.</value>
+    <value>既定の設定を更新しました。</value>
   </data>
   <data name="DefaultSettingsUpdatedMessage" xml:space="preserve">
-    <value>The settings will be used for new projects added from this point on.</value>
+    <value>この設定は、この時点から追加された新規プロジェクトに使用されます。</value>
   </data>
   <data name="SProjectSettingsUpdatedText" xml:space="preserve">
-    <value>The project's settings have been updated.</value>
+    <value>プロジェクトの設定が更新されました。</value>
   </data>
   <data name="FolderLocationText" xml:space="preserve">
-    <value>Location:</value>
+    <value>場所:</value>
   </data>
   <data name="FileExtensionText" xml:space="preserve">
-    <value>File Extension:</value>
+    <value>ファイルの拡張子:</value>
   </data>
   <data name="RemoveSourceFilesAfterCompiling" xml:space="preserve">
-    <value>Remove JS Files after Compiling:</value>
+    <value>コンパイル後にJSファイルを削除:</value>
   </data>
   <data name="CompressFilesText" xml:space="preserve">
-    <value>Compress Files:</value>
+    <value>ファイルを圧縮:</value>
   </data>
   <data name="RemoveSourceFilesAfterCompressionText" xml:space="preserve">
-    <value>Remove Source Files after Compression:</value>
+    <value>圧縮後にソースファイルを削除:</value>
   </data>
   <data name="CompressionModeUiText" xml:space="preserve">
-    <value>Compression Mode:</value>
+    <value>圧縮モード:</value>
   </data>
   <data name="NwjsLZocationUiText" xml:space="preserve">
-    <value>Location of the NW.js SDK</value>
+    <value>NW.js SDKの場所</value>
   </data>
   <data name="ProgramTitle" xml:space="preserve">
-    <value>RPG Maker MV/MZ Cook Tool</value>
+    <value>RPG メーカー MV/MZ クックツール</value>
   </data>
   <data name="CompilerUiText" xml:space="preserve">
     <value>Compiler</value>
   </data>
   <data name="AddProjectUiText" xml:space="preserve">
-    <value>Add</value>
+    <value>追加</value>
   </data>
   <data name="RemoveProjectUiText" xml:space="preserve">
-    <value>Remove</value>
+    <value>削除</value>
   </data>
   <data name="ProjectSettingsUiText" xml:space="preserve">
-    <value>Project Settings</value>
+    <value>プロジェクトの設定</value>
   </data>
   <data name="EditMetadataUiText" xml:space="preserve">
-    <value>Edit Metadata</value>
+    <value>メタデータを編集</value>
   </data>
   <data name="ProgressUiText" xml:space="preserve">
-    <value>Progress</value>
+    <value>進捗状況</value>
   </data>
   <data name="TotalProgressBarUiText" xml:space="preserve">
-    <value>Total Progress:</value>
+    <value>合計進行度:</value>
   </data>
   <data name="CurrentProjectProgressBarUiText" xml:space="preserve">
-    <value>Current Project Progress:</value>
+    <value>現在のプロジェクトの進行状況:</value>
   </data>
   <data name="CompileUiText" xml:space="preserve">
-    <value>Compile</value>
+    <value>コンパイル</value>
   </data>
   <data name="CancelButtonUiText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="AboutTabUiText" xml:space="preserve">
-    <value>About...</value>
+    <value>この機能について...</value>
   </data>
   <data name="ProgramVersionLabelUiText" xml:space="preserve">
-    <value>Version R3.02</value>
+    <value>バージョン R3.02</value>
   </data>
   <data name="DeveloperCreditUiText" xml:space="preserve">
-    <value>Developed by Studio ACE(AceOfAces). Licensed under the MIT license.</value>
+    <value>Studio ACE(AceOfAces)によって開発されました。MITライセンスの下でライセンスされています。</value>
   </data>
   <data name="UserManualUiText" xml:space="preserve">
-    <value>User Manual</value>
+    <value>ユーザーマニュアル</value>
   </data>
   <data name="CompressionLevelUiText" xml:space="preserve">
-    <value>Compression Level:</value>
+    <value>圧縮レベル:</value>
   </data>
   <data name="RemoveFilesAfterCompressionUiText" xml:space="preserve">
-    <value>Remove the game files after packaging.</value>
+    <value>パッケージ後にゲームファイルを削除します。</value>
   </data>
   <data name="CompressFilesToPackageUiText" xml:space="preserve">
-    <value>Compress the game files into package.nw.</value>
+    <value>ゲームファイルを package.nw に圧縮します。</value>
   </data>
   <data name="RemoveSourceCodeUiText" xml:space="preserve">
-    <value>Remove the source JS files after compiling.</value>
+    <value>コンパイル後にソース JS ファイルを削除します。</value>
   </data>
   <data name="OptimalListItemText" xml:space="preserve">
-    <value>Optimal</value>
+    <value>最適な</value>
   </data>
   <data name="FastestListItemText" xml:space="preserve">
-    <value>Fastest</value>
+    <value>最速です</value>
   </data>
   <data name="NoCompressionListItemText" xml:space="preserve">
-    <value>No Compression</value>
+    <value>圧縮なし</value>
   </data>
   <data name="DefaultSettingsButtonUiText" xml:space="preserve">
-    <value>Default Settings...</value>
+    <value>デフォルト設定...</value>
   </data>
   <data name="DefaultProjectSettingsUiText" xml:space="preserve">
-    <value>Default Project Settings</value>
+    <value>デフォルトのプロジェクト設定</value>
   </data>
   <data name="AbortedText" xml:space="preserve">
-    <value>Aborted</value>
+    <value>中止しました</value>
   </data>
   <data name="BinRemovalStatusText" xml:space="preserve">
-    <value>Removing binary files from </value>
+    <value>バイナリファイルを削除しています </value>
   </data>
   <data name="CompilationCompleteText" xml:space="preserve">
-    <value>Compilation complete!</value>
+    <value>コンパイル完了！</value>
   </data>
   <data name="CompileJsFolderProgressText" xml:space="preserve">
-    <value>Compiling scripts in the js folder...</value>
+    <value>jsフォルダ内のスクリプトをコンパイルしています...</value>
   </data>
   <data name="CompilerMissingText" xml:space="preserve">
-    <value>The nwjs Compiler is missing.</value>
+    <value>nwjs コンパイラがありません。</value>
   </data>
   <data name="CompileText" xml:space="preserve">
-    <value>Compiling </value>
+    <value>コンパイル </value>
   </data>
   <data name="CompileText1" xml:space="preserve">
-    <value>Compiling scripts in the </value>
+    <value>スクリプトのコンパイル </value>
   </data>
   <data name="CompilingText" xml:space="preserve">
-    <value>Compiling </value>
+    <value>コンパイル </value>
   </data>
   <data name="FailedText" xml:space="preserve">
-    <value>Failed!</value>
+    <value>失敗しました</value>
   </data>
   <data name="FolderText" xml:space="preserve">
-    <value> folder...</value>
+    <value> フォルダー...</value>
   </data>
   <data name="NoJSFilesPresent" xml:space="preserve">
-    <value>Please add the folders you want the JavaScript files to be compiled.</value>
+    <value>JavaScriptファイルをコンパイルするフォルダを追加してください。</value>
   </data>
   <data name="PackaginStatusText" xml:space="preserve">
-    <value>Packaging...</value>
+    <value>パッケージしています...</value>
   </data>
   <data name="TaskCancelledMessage" xml:space="preserve">
-    <value>The task was cancelled.</value>
+    <value>タスクはキャンセルされました。</value>
   </data>
   <data name="CannotFindGameFolderTitle" xml:space="preserve">
-    <value>Could not find the folder specified in the JSON file.</value>
+    <value>JSONファイルで指定されたフォルダが見つかりませんでした。</value>
     <comment>String ID: CannotFindGameFolderTitle
 This is the title of the message shown if the JSON file is missing an important detail.</comment>
   </data>
   <data name="CannotFindGameFolderMessage" xml:space="preserve">
-    <value>Double check that the "main" variable is filled or points to a existing folder. This folder will be skipped.</value>
+    <value>"main" 変数が入力されているか、既存のフォルダを指すことを再確認してください。このフォルダはスキップされます。</value>
   </data>
   <data name="MinifyPackageFileUiText" xml:space="preserve">
-    <value>Minify the package.json file</value>
+    <value>package.json ファイルを縮小する</value>
   </data>
 </root>
