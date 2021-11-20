@@ -74,7 +74,7 @@ namespace RMMVCookTool.Core.Utilities
                     //Run a check if the file in the array is actually a JavaScript file.
                     //If not, delete it.
                     if (fileToDelete != file){
-                        RecordToLog($"Thread #{Thread.CurrentThread.ManagedThreadId} is deleting {Path.GetFileName(fileToDelete)}...", 3);
+                        RecordToLog($"Thread #{Environment.CurrentManagedThreadId} is deleting {Path.GetFileName(fileToDelete)}...", 3);
                         File.Delete(fileToDelete);
                         }
                 });

@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace RMMVCookTool.GUI.ProjectMetadataManager
+namespace RMMVCookTool.Core.ProjectTemplate
 {
 
-    public class ProjectMetadata
+    public class ProjectMetadata 
     {
         [JsonPropertyName("name")]
         public string GameName { get; set; }

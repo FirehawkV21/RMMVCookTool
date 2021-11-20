@@ -27,7 +27,7 @@
 	<NeutralLanguage>en</NeutralLanguage>
 	<Platforms>AnyCPU;x64;ARM64</Platforms>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<LangVersion>preview</LangVersion>
+	<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 	
 		<PropertyGroup Condition="$(TargetFramework)=='net6.0'">

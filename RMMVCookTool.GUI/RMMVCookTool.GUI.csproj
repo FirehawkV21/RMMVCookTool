@@ -19,13 +19,13 @@
     <TieredCompilation>true</TieredCompilation>
     <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
     <PublishTrimmed>false</PublishTrimmed>
-    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
     <Description>GUI version of the RPG Maker MV Cook Tool.</Description>
     <Platforms>AnyCPU;x64;ARM64</Platforms>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>latest</LangVersion>
     <GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
   </PropertyGroup>
   
@@ -51,7 +51,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dirkster.NumericUpDownLib" Version="3.0.0" />
-    <PackageReference Include="Ookii.Dialogs.Wpf" Version="4.0.0" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

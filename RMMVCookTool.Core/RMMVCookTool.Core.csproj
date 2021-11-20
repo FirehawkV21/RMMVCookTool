@@ -16,7 +16,7 @@
 	<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
 	<Description>The core library of the RPG Maker MV Cook Tool.</Description>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<LangVersion>preview</LangVersion>
+	<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(TargetFramework)=='net6.0'">

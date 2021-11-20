@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using RMMVCookTool.Core.ProjectTemplate;
+using System.Text.Json;
 
 namespace RMMVCookTool.GUI.ProjectMetadataManager
 {
@@ -237,11 +238,7 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
         {
             try
             {
-                var setup = new JsonSerializerOptions
-                {
-                    WriteIndented = MinifyJsonFileCheckBox.IsChecked == false
-                };
-                string output = JsonSerializer.Serialize(ProjectMetadata, setup);
+                string output = JsonSerializer.Serialize(ProjectMetadata, ProjectMetadataSerializer.Default.ProjectMetadata);
                 File.WriteAllText(Path.Combine(_projectLocation, "package.json"), output);
                 MessageDialog.ThrowCompleteMessage(Properties.Resources.SaveCompleteText);
             }
