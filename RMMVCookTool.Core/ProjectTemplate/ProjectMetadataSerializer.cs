@@ -2,7 +2,7 @@
 
 namespace RMMVCookTool.Core.ProjectTemplate
 {
-    [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Serialization)]
+    [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Default)]
     [JsonSerializable(typeof(ProjectMetadata))]
     public partial class ProjectMetadataSerializer : JsonSerializerContext
     {

@@ -9,19 +9,15 @@ namespace RMMVCookTool.GUI.ProjectMetadataManager
     public partial class JsonEditor : Window
     {
         private readonly string _projectLocation;
-        private ProjectMetadata ProjectMetadata { get; set; }
+        internal ProjectMetadata ProjectMetadata { get; set; }
 
         public JsonEditor(string projectIn)
         {
             _projectLocation = projectIn;
             if (File.Exists(Path.Combine(_projectLocation, "package.json")))
             {
-                var setup = new JsonSerializerOptions
-                {
-                    AllowTrailingCommas = true
-                };
                 var importFile = File.ReadAllText(Path.Combine(_projectLocation, "package.json"));
-                ProjectMetadata = JsonSerializer.Deserialize<ProjectMetadata>(importFile, setup);
+                ProjectMetadata = JsonSerializer.Deserialize(importFile, ProjectMetadataSerializer.Default.ProjectMetadata);
             }
             else ProjectMetadata = new();
             InitializeComponent();
