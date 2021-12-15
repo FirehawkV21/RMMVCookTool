@@ -66,7 +66,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	<PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.0" />
+	<PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.1" />
 	<PackageReference Include="Microsoft.NETCore.Targets" Version="6.0.0-preview.4.21253.7" />
 	<PackageReference Include="Spectre.Console" Version="0.43.0" />
 	</ItemGroup>
