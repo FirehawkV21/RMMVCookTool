@@ -1,5 +1,4 @@
 ﻿using System.IO.Compression;
-using System.Runtime.CompilerServices;
 using RMMVCookTool.Core.Utilities;
 
 namespace RMMVCookTool.Core.Compiler
@@ -53,7 +52,6 @@ namespace RMMVCookTool.Core.Compiler
         /// Starts the NW.js compiler.
         /// </summary>
         /// <param name="index">The index in the list.</param>
-        [MethodImplAttribute(MethodImplOptions.AggressiveOptimization)]
         public void CompileFile(int index)
         {
             CompilerUtilities.RecordToLog("Setting up the compiler...", 3);

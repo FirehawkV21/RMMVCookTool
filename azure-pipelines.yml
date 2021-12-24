@@ -8,7 +8,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-2019'
+  vmImage: 'windows-2022'
 
 variables:
   solution: '**/*.sln'
@@ -19,20 +19,20 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '5.0.300'
+    version: '6.0.100'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: 'RMMVCookTool.CLI\RMMVCookTool.CLI.csproj'
-    arguments: '-f net5.0'
+    arguments: '-f net6.0'
 
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: 'RMMVCookTool.GUI\RMMVCookTool.GUI.csproj'
-    arguments: '-f net5.0-windows'
+    arguments: '-f net6.0-windows'
 
 - task: VSTest@2
   inputs:
