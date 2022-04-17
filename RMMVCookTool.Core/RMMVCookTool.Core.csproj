@@ -5,7 +5,7 @@
 	<AssemblyVersion>2.0.5.21358</AssemblyVersion>
 	<FileVersion>2.0.5.21279</FileVersion>
 	<Version>2.0.5-20211224</Version>
-	<Platforms>AnyCPU;x64;x86;ARM64</Platforms>
+	<Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
 	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>
 	<Authors>AceOfAces</Authors>
 	<Company>Studio ACE</Company>
@@ -25,6 +25,10 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<FileAlignment>4096</FileAlignment>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM32'">
+	  <FileAlignment>4096</FileAlignment>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">

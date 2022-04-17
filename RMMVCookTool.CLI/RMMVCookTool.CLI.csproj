@@ -25,7 +25,7 @@
 	<PublishTrimmed>false</PublishTrimmed>
 	<RuntimeIdentifiers>win-x64;win-arm64;linux-x64;linux-arm64</RuntimeIdentifiers>
 	<NeutralLanguage>en</NeutralLanguage>
-	<Platforms>AnyCPU;x64;ARM64</Platforms>
+    <Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<LangVersion>latest</LangVersion>
 	</PropertyGroup>
