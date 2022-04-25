@@ -55,7 +55,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dirkster.NumericUpDownLib" Version="3.0.0" />
-    <PackageReference Include="DryIoc.dll" Version="4.8.8" />
+    <PackageReference Include="DryIoc.dll" Version="5.0.1" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
