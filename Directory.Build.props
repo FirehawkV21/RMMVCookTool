@@ -1,0 +1,17 @@
+<Project>
+ <PropertyGroup>
+    <Authors>AceOfAces</Authors>
+    <Company>Studio ACE</Company>
+    <Product>RPG Maker MV Cook Tool</Product>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+    <Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <LangVersion>latest</LangVersion>
+    <FileAlignment>4096</FileAlignment>
+    <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+ </PropertyGroup>
+</Project>

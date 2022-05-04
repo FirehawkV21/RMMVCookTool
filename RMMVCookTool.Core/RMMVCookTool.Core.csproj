@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 	<TargetFrameworks>net6.0</TargetFrameworks>
-	<AssemblyVersion>2.0.5.21358</AssemblyVersion>
-	<FileVersion>2.0.5.21279</FileVersion>
+	<AssemblyVersion>2.0.5.22107</AssemblyVersion>
+	<FileVersion>2.0.5.22107</FileVersion>
 	<Version>2.0.5-20211224</Version>
 	<Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
 	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>
@@ -48,7 +48,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	<PackageReference Include="Serilog" Version="2.10.0" />
+	<PackageReference Include="Serilog" Version="2.11.0" />
 	<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
 	<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>

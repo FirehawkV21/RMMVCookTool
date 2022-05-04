@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RMMVCookTool.GUI"
+        xmlns:prism="http://prismlibrary.com/"
         xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties" d:DataContext="{d:DesignInstance Type=local:AppSettings}"
         mc:Ignorable="d"
         Title="{x:Static properties:Resources.ProgramTitle}" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640" Loaded="Window_Loaded" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType" Closing="Window_Closing">
@@ -38,70 +39,10 @@
 <Grid>
         <TabControl>
             <TabItem x:Name="TotalWorkProgress" Header="{x:Static properties:Resources.CompilerUiText}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="98"/>
-                        <RowDefinition Height="209*"/>
-                        <RowDefinition Height="147"/>
-                    </Grid.RowDefinitions>
-                    <GroupBox Header="{x:Static properties:Resources.SettingsUiText}">
-                        <Grid>
-                            <Label Content="{x:Static properties:Resources.NwjsLZocationUiText}" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
-                            <TextBox x:Name="NwjsLocation" Margin="5,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" Drop="NwjsLocation_Drop" MouseMove="NwjsLocation_MouseMove" DragEnter="NwjsLocation_DragEnter" DragLeave="NwjsLocation_DragLeave" DragOver="NwjsLocation_DragOver" AllowDrop="True" Text="{Binding SDKLocation, Mode=TwoWay, UpdateSourceTrigger=Explicit, Source={x:Static local:AppSettings.Default}}"/>
-                            <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Click="BrowseSDKButton_Click"/>
-                            <Button x:Name="DefaultProjectSettingsButton" Content="{x:Static properties:Resources.DefaultSettingsButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" Click="Button_Click"/>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Projects" Grid.Row="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="36"/>
-                            </Grid.RowDefinitions>
-
-                            <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}"/>
-
-                            <StackPanel Orientation="Horizontal" Grid.Row="1">
-                                <Button x:Name="AddProjectButton" Content="{x:Static properties:Resources.AddProjectUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" Click="AddProjectButton_Click"/>
-                                <Button x:Name="RemoveProjectButton" Content="{x:Static properties:Resources.RemoveProjectUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Click="RemoveProjectButton_Click"/>
-                                <Button x:Name="ProjectSettingsButton" Content="{x:Static properties:Resources.ProjectSettingsUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Click="ProjectSettingsButton_Click"/>
-                                <Button x:Name="EditMetadataButton" Content="{x:Static properties:Resources.EditMetadataUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0" Click="EditMetadataButton_Click"/>
-                            </StackPanel>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="{x:Static properties:Resources.ProgressUiText}" Grid.Row="2">
-                        <Grid>
-                            <Label x:Name="TotalProgressLabel" Content="{x:Static properties:Resources.TotalProgressBarUiText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <ProgressBar x:Name="TotalWorkProgressBar" Height="20" Margin="0,26,124,0" VerticalAlignment="Top"/>
-                            <Label x:Name="CurrentWorkloadLabel" Content="{x:Static properties:Resources.CurrentProjectProgressBarUiText}" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top"/>
-                            <ProgressBar x:Name="CurrentWorkloadBar" Height="20" Margin="0,77,124,0" VerticalAlignment="Top"/>
-                            <Button x:Name="CompileButton" Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1" Click="CompileButton_Click"/>
-                            <Button x:Name="CancelCompileButton" Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Visibility="Hidden" UseLayoutRounding="True" Height="20" Padding="2,1,2,1" Click="CancelCompileButton_Click"/>
-
-                        </Grid>
-                    </GroupBox>
-                </Grid>
+                <ItemsControl prism:RegionManager.RegionName="MainShell" SnapsToDevicePixels="True"/>
             </TabItem>
             <TabItem Header="{x:Static properties:Resources.AboutTabUiText}">
-                <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="108"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <GroupBox Header="About">
-                        <StackPanel Orientation="Vertical">
-                            <Label Content="{x:Static properties:Resources.ProgramTitle}" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0"/>
-                            <Label x:Name="ProgramVersionLabel" Content="{x:Static properties:Resources.ProgramVersionLabelUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
-                            <Label Content="{x:Static properties:Resources.DeveloperCreditUiText}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0"/>
-                            </StackPanel>
-                    </GroupBox>
-                    <GroupBox Header="{x:Static properties:Resources.UserManualUiText}" Grid.Row="1">
-                        <RichTextBox x:Name="UserManualBox" VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" IsReadOnly="True">
-
-                        </RichTextBox>
-                    </GroupBox>
-
-                </Grid>
+                <ItemsControl prism:RegionManager.RegionName="SecondaryShell" SnapsToDevicePixels="True"/>
             </TabItem>
         </TabControl>
 

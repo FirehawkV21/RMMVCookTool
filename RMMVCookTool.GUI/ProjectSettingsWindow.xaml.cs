@@ -29,11 +29,7 @@ public partial class ProjectSettingsWindow : Window
         }
         else
         {
-            RemoveSourceFilesAfterCompilingCheckbox.IsChecked = MainWindow.ProjectList[_pickedProject].RemoveSourceCodeAfterCompiling;
-            CompressFilesToPackageCheckbox.IsChecked = MainWindow.ProjectList[_pickedProject].CompressFilesToPackage;
-            RemoveFilesAfterPackagingCheckbox.IsChecked = MainWindow.ProjectList[_pickedProject].RemoveFilesAfterCompression;
-            CompressionLevelBox.SelectedIndex = MainWindow.ProjectList[_pickedProject].CompressionModeLevel;
-            FileExtensionTextBox.Text = MainWindow.ProjectList[_pickedProject].FileExtension;
+
         }
     }
 
@@ -51,12 +47,7 @@ public partial class ProjectSettingsWindow : Window
         }
         else
         {
-            MainWindow.ProjectList[_pickedProject].RemoveSourceCodeAfterCompiling = RemoveSourceFilesAfterCompilingCheckbox.IsChecked == true;
-            MainWindow.ProjectList[_pickedProject].CompressFilesToPackage = CompressFilesToPackageCheckbox.IsChecked == true;
-            MainWindow.ProjectList[_pickedProject].RemoveFilesAfterCompression = RemoveFilesAfterPackagingCheckbox.IsChecked == true;
-            MainWindow.ProjectList[_pickedProject].CompressionModeLevel = CompressionLevelBox.SelectedIndex;
-            MainWindow.ProjectList[_pickedProject].FileExtension = FileExtensionTextBox.Text;
-            MessageDialog.ThrowCompleteMessage(Properties.Resources.SProjectSettingsUpdatedText);
+
         }
         Close();
     }
