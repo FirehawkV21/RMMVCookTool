@@ -58,6 +58,7 @@ public class MainViewModel : BindableBase
     public DelegateCommand ConfigProjectCommand { get; private set; }
     public DelegateCommand EditProjectFileCommand { get; private set; }
     public DelegateCommand BrowseSDKCommand { get; private set; }
+    public DelegateCommand DefaultProjectSettingsCommand { get; private set; }
     #endregion
     #region Constructor Code
     public MainViewModel(IDialogService dialogService)
@@ -69,6 +70,7 @@ public class MainViewModel : BindableBase
         RemoveProjectCommand = new(RemoveSelectedProjects, CheckSettingsAccess);
         StartCompilerCommand = new(StartCompilerWorkload);
         CancelCompilerCommand = new(CancelCompilerWorkload);
+        DefaultProjectSettingsCommand = new(EditDefaultProjectSettings, CheckSettingsAccess);
         SettingsManager = new();
         SdkLocation = SettingsManager.Settings.NwjsLocation;
         dialogManager = dialogService;
@@ -332,5 +334,28 @@ public class MainViewModel : BindableBase
         return AreSettingsAccessible;
     }
     private void CancelCompilerWorkload() => _compilerWorker.CancelAsync();
+    
+    private void EditDefaultProjectSettings()
+    {
+        DialogParameters param = new();
+        param.Add("title", Resources.DefaultProjectSettingsUiText);
+        param.Add("fileExtension", SettingsManager.Settings.DefaultProjectSettings.FileExtension);
+        param.Add("removeSource", SettingsManager.Settings.DefaultProjectSettings.RemoveSourceFiles);
+        param.Add("compressFiles", SettingsManager.Settings.DefaultProjectSettings.CompressProjectFiles);
+        param.Add("removeAfterCompression", SettingsManager.Settings.DefaultProjectSettings.RemoveFilesAfterCompression);
+        param.Add("compressionLevel", SettingsManager.Settings.DefaultProjectSettings.CompressionLevel);
+
+        dialogManager.ShowDialog("ProjectSettings", param, r => {
+        if (r.Result == ButtonResult.OK){
+                SettingsManager.Settings.DefaultProjectSettings.FileExtension = r.Parameters.GetValue<string>("fileExtension");
+                SettingsManager.Settings.DefaultProjectSettings.RemoveSourceFiles = r.Parameters.GetValue<bool>("removeSource");
+                SettingsManager.Settings.DefaultProjectSettings.CompressProjectFiles = r.Parameters.GetValue<bool>("compressFiles");
+                SettingsManager.Settings.DefaultProjectSettings.RemoveFilesAfterCompression = r.Parameters.GetValue<bool>("removeAfterCompression");
+                SettingsManager.Settings.DefaultProjectSettings.CompressionLevel = r.Parameters.GetValue<int>("compressionLevel");
+                SettingsManager.SaveSettings();
+                MessageDialog.ThrowCompleteMessage(Resources.DefaultSettingsUpdatedText, Resources.DefaultSettingsUpdatedMessage);
+            }
+});
+    }
     #endregion
 }
