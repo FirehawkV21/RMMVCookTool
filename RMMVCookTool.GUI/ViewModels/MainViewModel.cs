@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using RMMVCookTool.Core;
 using RMMVCookTool.Core.Compiler;
 using RMMVCookTool.Core.CompilerSettings;
 using RMMVCookTool.Core.Utilities;
@@ -337,25 +338,46 @@ public class MainViewModel : BindableBase
     
     private void EditDefaultProjectSettings()
     {
+        ProjectSettings tempSettings = new();
+        bool update = EditProjectSettings(ref tempSettings, Resources.DefaultProjectSettingsUiText);
+        if (update)
+        {
+            SettingsManager.Settings.DefaultProjectSettings = tempSettings;
+            SettingsManager.SaveSettings();
+            MessageDialog.ThrowCompleteMessage(Resources.DefaultSettingsUpdatedText, Resources.DefaultSettingsUpdatedMessage);
+        }
+    }
+
+    private bool EditProjectSettings(ref ProjectSettings settings, in string TitleBarText)
+    {
+        ProjectSettings tempSettings = new();
+        bool isUpdated = false;
         DialogParameters param = new();
-        param.Add("title", Resources.DefaultProjectSettingsUiText);
-        param.Add("fileExtension", SettingsManager.Settings.DefaultProjectSettings.FileExtension);
-        param.Add("removeSource", SettingsManager.Settings.DefaultProjectSettings.RemoveSourceFiles);
-        param.Add("compressFiles", SettingsManager.Settings.DefaultProjectSettings.CompressProjectFiles);
-        param.Add("removeAfterCompression", SettingsManager.Settings.DefaultProjectSettings.RemoveFilesAfterCompression);
-        param.Add("compressionLevel", SettingsManager.Settings.DefaultProjectSettings.CompressionLevel);
+        param.Add("title", TitleBarText);
+        param.Add("fileExtension", settings.FileExtension);
+        param.Add("removeSource", settings.RemoveSourceFiles);
+        param.Add("compressFiles", settings.CompressProjectFiles);
+        param.Add("removeAfterCompression", settings.RemoveFilesAfterCompression);
+        param.Add("compressionLevel", settings.CompressionLevel);
 
         dialogManager.ShowDialog("ProjectSettings", param, r => {
-        if (r.Result == ButtonResult.OK){
-                SettingsManager.Settings.DefaultProjectSettings.FileExtension = r.Parameters.GetValue<string>("fileExtension");
-                SettingsManager.Settings.DefaultProjectSettings.RemoveSourceFiles = r.Parameters.GetValue<bool>("removeSource");
-                SettingsManager.Settings.DefaultProjectSettings.CompressProjectFiles = r.Parameters.GetValue<bool>("compressFiles");
-                SettingsManager.Settings.DefaultProjectSettings.RemoveFilesAfterCompression = r.Parameters.GetValue<bool>("removeAfterCompression");
-                SettingsManager.Settings.DefaultProjectSettings.CompressionLevel = r.Parameters.GetValue<int>("compressionLevel");
-                SettingsManager.SaveSettings();
-                MessageDialog.ThrowCompleteMessage(Resources.DefaultSettingsUpdatedText, Resources.DefaultSettingsUpdatedMessage);
+            if (r.Result == ButtonResult.OK)
+            {
+                WriteSettings(ref tempSettings, param);
+                isUpdated = true;
             }
-});
+        });
+        if (isUpdated) settings = tempSettings;
+        return isUpdated;
+    }
+
+    private void WriteSettings(ref ProjectSettings settings, in DialogParameters param)
+    {
+        settings.FileExtension = param.GetValue<string>("fileExtension");
+        settings.RemoveSourceFiles = param.GetValue<bool>("removeSource");
+        settings.CompressProjectFiles = param.GetValue<bool>("compressFiles");
+        settings.RemoveFilesAfterCompression = param.GetValue<bool>("removeAfterCompression");
+        settings.CompressionLevel = param.GetValue<int>("compressionLevel");
     }
     #endregion
 }
