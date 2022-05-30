@@ -70,8 +70,8 @@
                     <ProgressBar x:Name="TotalWorkProgressBar" Height="20" Margin="0,26,124,0" VerticalAlignment="Top"/>
                     <Label x:Name="CurrentWorkloadLabel" Content="{x:Static properties:Resources.CurrentProjectProgressBarUiText}" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top"/>
                     <ProgressBar x:Name="CurrentWorkloadBar" Height="20" Margin="0,77,124,0" VerticalAlignment="Top"/>
-                    <Button x:Name="CompileButton" Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1"/>
-                    <Button x:Name="CancelCompileButton" Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Visibility="Hidden" UseLayoutRounding="True" Height="20" Padding="2,1,2,1"/>
+                    <Button x:Name="CompileButton" Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1" Command="{Binding StartCompilerCommand}"/>
+                    <Button x:Name="CancelCompileButton" Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Visibility="Hidden" UseLayoutRounding="True" Height="20" Padding="2,1,2,1" Command="{Binding CancelCompilerCommand}"/>
 
                 </Grid>
             </GroupBox>

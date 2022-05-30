@@ -16,7 +16,7 @@ namespace RMMVCookTool.GUI.ViewModels
         #region Variables
         private readonly BackgroundWorker _compilerWorker = new();
         private int _compilerStatusReport;
-        private StringBuilder _stringBuffer = new();
+        private readonly StringBuilder _stringBuffer = new();
         private int currentFile;
         private int maxFiles;
         private int currentProject;
@@ -63,6 +63,8 @@ namespace RMMVCookTool.GUI.ViewModels
             BrowseSDKCommand = new(FindSdkFolder);
             AddProjectCommand = new(FindProjectFolder);
             RemoveProjectCommand = new(RemoveSelectedProjects);
+            StartCompilerCommand = new(StartCompilerWorkload);
+            CancelCompilerCommand = new(CancelCompilerWorkload);
             SetupWorkers();
         }
 
@@ -258,12 +260,12 @@ namespace RMMVCookTool.GUI.ViewModels
 
         private void FindSdkFolder()
         {
-            var pickSdkFolder = new VistaFolderBrowserDialog
+            VistaFolderBrowserDialog pickSdkFolder = new VistaFolderBrowserDialog
             {
-                Description = Properties.Resources.SDKPickerText,
+                Description = Resources.SDKPickerText,
                 UseDescriptionForTitle = true
             };
-            var pickerResult = pickSdkFolder.ShowDialog();
+            bool? pickerResult = pickSdkFolder.ShowDialog();
             if (pickerResult != true) return;
             AppSettings.Default.SDKLocation = pickSdkFolder.SelectedPath;
             SdkLocation = pickSdkFolder.SelectedPath;
@@ -289,11 +291,35 @@ namespace RMMVCookTool.GUI.ViewModels
 
         private void RemoveSelectedProjects()
         {
-            foreach(var project in SelectedProjectList)
+            foreach(CompilerProject project in SelectedProjectList)
             {
                 ProjectList.Remove(project);
             }
         }
+
+        private void StartCompilerWorkload()
+        {
+            if (!File.Exists(Path.Combine(SdkLocation, "nwjc.exe")))
+            {
+                MessageDialog.ThrowErrorMessage(Resources.ErrorText, Resources.CompilerMissingText);
+            }
+            else if (ProjectList.Count == 0)
+            {
+                MessageDialog.ThrowErrorMessage(Resources.ErrorText, Resources.NoJSFilesPresent);
+            }
+            else
+            {
+                IsCompilerButtonVisible = Visibility.Hidden;
+                IsCancelButtonVisible = Visibility.Visible;
+                AreSettingsAccessible = false;
+                CurrentProjectCounter = 0;
+                currentFile = 0;
+                MaxProjectCounter = ProjectList.Count;
+                _compilerWorker.RunWorkerAsync();
+            }
+        }
+
+        private void CancelCompilerWorkload() => _compilerWorker.CancelAsync();
         #endregion
     }
 }
