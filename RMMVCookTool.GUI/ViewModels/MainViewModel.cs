@@ -64,9 +64,9 @@ public class MainViewModel : BindableBase
     {
         projectList = new();
         selectedProjectList = new();
-        BrowseSDKCommand = new(FindSdkFolder);
-        AddProjectCommand = new(FindProjectFolder);
-        RemoveProjectCommand = new(RemoveSelectedProjects);
+        BrowseSDKCommand = new DelegateCommand(FindSdkFolder, CheckSettingsAccess);
+        AddProjectCommand = new(FindProjectFolder, CheckSettingsAccess);
+        RemoveProjectCommand = new(RemoveSelectedProjects, CheckSettingsAccess);
         StartCompilerCommand = new(StartCompilerWorkload);
         CancelCompilerCommand = new(CancelCompilerWorkload);
         SettingsManager = new();
@@ -327,6 +327,10 @@ public class MainViewModel : BindableBase
         }
     }
 
+    private bool CheckSettingsAccess()
+    {
+        return AreSettingsAccessible;
+    }
     private void CancelCompilerWorkload() => _compilerWorker.CancelAsync();
     #endregion
 }
