@@ -41,7 +41,7 @@ namespace RMMVCookTool.GUI.ViewModels
         public int CurrentProjectCounter { get => currentProject; set => SetProperty(ref maxProject, value); }
         public int MaxProjectCounter { get => maxProject; set => SetProperty(ref maxProject, value); }
         public SolidColorBrush CurrentStateBrush { get => currentBrush; set => SetProperty(ref currentBrush, value); }
-        public bool AreSettingsAccessible {get => settingsAccessible; set => SetProperty(ref settingsAccessible, value); }
+        public bool AreSettingsAccessible { get => settingsAccessible; set => SetProperty(ref settingsAccessible, value); }
         public string SdkLocation { get => sdkLocation; set => SetProperty(ref sdkLocation, value); }
         public Visibility IsCompilerButtonVisible { get => compilerButtonVisible; set => SetProperty(ref compilerButtonVisible, value); }
         public Visibility IsCancelButtonVisible { get => cancelButtonVisible; set => SetProperty(ref cancelButtonVisible, value); }
@@ -60,6 +60,9 @@ namespace RMMVCookTool.GUI.ViewModels
         {
             projectList = new();
             selectedProjectList = new();
+            BrowseSDKCommand = new(FindSdkFolder);
+            AddProjectCommand = new(FindProjectFolder);
+            RemoveProjectCommand = new(RemoveSelectedProjects);
             SetupWorkers();
         }
 
@@ -248,6 +251,48 @@ namespace RMMVCookTool.GUI.ViewModels
             CurrentProgressText = Resources.FailedText;
             CurrentProjectText = Resources.FailedText;
             CurrentStateBrush = Brushes.DarkRed;
+        }
+        #endregion
+
+        #region UI Code
+
+        private void FindSdkFolder()
+        {
+            var pickSdkFolder = new VistaFolderBrowserDialog
+            {
+                Description = Properties.Resources.SDKPickerText,
+                UseDescriptionForTitle = true
+            };
+            var pickerResult = pickSdkFolder.ShowDialog();
+            if (pickerResult != true) return;
+            AppSettings.Default.SDKLocation = pickSdkFolder.SelectedPath;
+            SdkLocation = pickSdkFolder.SelectedPath;
+        }
+
+        private void FindProjectFolder()
+        {
+            VistaFolderBrowserDialog pickJsFolder = new VistaFolderBrowserDialog
+            {
+                Description = Resources.ProjectPickerText,
+                UseDescriptionForTitle = true
+            };
+            bool? pickerResult = pickJsFolder.ShowDialog();
+            if (pickerResult != true) return;
+            if (pickJsFolder.SelectedPath != null)
+            {
+                ProjectList.Add(new CompilerProject(pickJsFolder.SelectedPath, AppSettings.Default.FileExtension,
+                    AppSettings.Default.DeleteSourceCode, AppSettings.Default.PackageCode,
+                    AppSettings.Default.RemoveFilesAfterPackaging, AppSettings.Default.CompressionMode));
+
+            }
+        }
+
+        private void RemoveSelectedProjects()
+        {
+            foreach(var project in SelectedProjectList)
+            {
+                ProjectList.Remove(project);
+            }
         }
         #endregion
     }

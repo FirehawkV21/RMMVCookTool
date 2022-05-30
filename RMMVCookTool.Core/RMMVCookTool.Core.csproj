@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 	<TargetFrameworks>net6.0</TargetFrameworks>
-	<AssemblyVersion>2.0.5.22107</AssemblyVersion>
-	<FileVersion>2.0.5.22107</FileVersion>
+	<AssemblyVersion>2.0.5.22150</AssemblyVersion>
+	<FileVersion>2.0.5.22150</FileVersion>
 	<Version>2.0.5-20211224</Version>
 	<Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
 	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>

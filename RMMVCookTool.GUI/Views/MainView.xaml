@@ -43,21 +43,21 @@
                 <Grid>
                     <Label Content="{x:Static properties:Resources.NwjsLZocationUiText}" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
                     <TextBox x:Name="NwjsLocation" Margin="5,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top"  AllowDrop="True" />
-                    <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50"/>
+                    <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" Command="{Binding BrowseSDKCommand}" Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50"/>
                     <Button x:Name="DefaultProjectSettingsButton" Content="{x:Static properties:Resources.DefaultSettingsButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" />
                 </Grid>
             </GroupBox>
             <GroupBox Header="Projects" Grid.Row="1">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
+                        <RowDefinition Height="194"/>
                         <RowDefinition Height="36"/>
                     </Grid.RowDefinitions>
 
-                    <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}" ItemsSource="{Binding ProjectList}" SelectedItem="{Binding SelectedProjectList}"/>
+                    <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}" ItemsSource="{Binding ProjectList}" SelectedItem="{Binding SelectedProjectList}"  />
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button x:Name="AddProjectButton" Content="{x:Static properties:Resources.AddProjectUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" />
+                        <Button x:Name="AddProjectButton" Content="{x:Static properties:Resources.AddProjectUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" Command="{Binding AddProjectCommand}" />
                         <Button x:Name="RemoveProjectButton" Content="{x:Static properties:Resources.RemoveProjectUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0"/>
                         <Button x:Name="ProjectSettingsButton" Content="{x:Static properties:Resources.ProjectSettingsUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0"/>
                         <Button x:Name="EditMetadataButton" Content="{x:Static properties:Resources.EditMetadataUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0" />
