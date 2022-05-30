@@ -4,9 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
-             xmlns:local="clr-namespace:RMMVCookTool.GUI.Views" xmlns:cntrl="clr-namespace:NumericUpDownLib;assembly=NumericUpDownLib"
+             xmlns:local="clr-namespace:RMMVCookTool.GUI.Views" xmlns:cntrl="clr-namespace:NumericUpDownLib;assembly=NumericUpDownLib" xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d"
              d:DesignHeight="434" d:DesignWidth="466" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+            <Setter Property="WindowStyle" Value="ToolWindow"/>
+        </Style>
+    </prism:Dialog.WindowStyle>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -27,7 +35,7 @@
                             <TextBox x:Name="FileLocationTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,60,61,0"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,83,0,0"><Run Text="{x:Static properties:Resources.GameVersionUiString}"/></TextBlock>
                             <TextBox x:Name="VersionTextBox" TextWrapping="Wrap" Margin="5,99,5,0" Height="23" VerticalAlignment="Top"/>
-                            <Button x:Name="BrowseForHtmlFileButton" Content="{x:Static properties:Resources.BrowseUiText}" VerticalAlignment="Top" Margin="0,60,5,0" Height="23" Click="BrowseForHtmlFileButton_Click" HorizontalAlignment="Right"/>
+                            <Button x:Name="BrowseForHtmlFileButton" Content="{x:Static properties:Resources.BrowseUiText}" VerticalAlignment="Top" Margin="0,60,5,0" Height="23" HorizontalAlignment="Right"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="{x:Static properties:Resources.NWJsFeaturesGroupText}" Grid.Row="1">
@@ -58,7 +66,7 @@
                             <TextBox x:Name="WindowTitleTextBox" TextWrapping="Wrap" Margin="5,55,5,0" Height="23" VerticalAlignment="Top"/>
                             <TextBox x:Name="WindowIdTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,93,5,0"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Window ID" VerticalAlignment="Top" Margin="5,78,0,0"/>
-                            <Button x:Name="BrowseForIconButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="341,16,5,0" Height="23" Click="BrowseForIconButton_Click"/>
+                            <Button x:Name="BrowseForIconButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="341,16,5,0" Height="23"/>
 
                         </Grid>
                     </GroupBox>
@@ -115,8 +123,8 @@
         </TabControl>
         <WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <CheckBox x:Name="MinifyJsonFileCheckBox" Content="{x:Static properties:Resources.MinifyPackageFileUiText}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Padding="5,0,5,0"/>
-            <Button x:Name="SaveJsonButton" Content="{x:Static properties:Resources.SaveButtonText}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="SaveJsonButton_Click" Height="26" Grid.Row="1" Margin="0,5,0,0"/>
-            <Button x:Name="CloseButton" Content="{x:Static properties:Resources.CloseButtonText}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Click="CloseButton_Click" Height="26" Grid.Row="1" Margin="5,5,5,0"/>
+            <Button x:Name="SaveJsonButton" Content="{x:Static properties:Resources.SaveButtonText}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Height="26" Grid.Row="1" Margin="0,5,0,0"/>
+            <Button x:Name="CloseButton" Content="{x:Static properties:Resources.CloseButtonText}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Height="26" Grid.Row="1" Margin="5,5,5,0"/>
         </WrapPanel>
 
     </Grid>

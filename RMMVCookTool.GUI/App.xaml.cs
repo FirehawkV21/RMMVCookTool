@@ -23,6 +23,8 @@ public partial class App : PrismApplication
     }
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
+        containerRegistry.RegisterDialog<Views.ProjectSettingsView, ViewModels.ProjectSettingsViewModel>("ProjectSettings");
+        containerRegistry.RegisterDialog<Views.MetadataEditorView, ViewModels.MetadataEditorViewModel>("MetadataEditor");
         // register other needed services here
     }
 

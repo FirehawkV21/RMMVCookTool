@@ -2,11 +2,11 @@
 
 namespace RMMVCookTool.GUI.Views;
 /// <summary>
-/// Interaction logic for MetadataEditorView.xaml
+/// Interaction logic for ProjectSettingsView.xaml
 /// </summary>
-public partial class MetadataEditorView : UserControl
+public partial class ProjectSettingsView : UserControl
 {
-    public MetadataEditorView()
+    public ProjectSettingsView()
     {
         InitializeComponent();
     }
