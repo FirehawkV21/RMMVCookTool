@@ -6,7 +6,7 @@
              xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
              xmlns:local="clr-namespace:RMMVCookTool.GUI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="498" d:DesignWidth="640">
     <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="108"/>

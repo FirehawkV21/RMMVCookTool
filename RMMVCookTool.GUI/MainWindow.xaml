@@ -7,7 +7,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties" d:DataContext="{d:DesignInstance Type=local:AppSettings}"
         mc:Ignorable="d"
-        Title="{x:Static properties:Resources.ProgramTitle}" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="498" MinWidth="640" Loaded="Window_Loaded" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType" Closing="Window_Closing" SizeToContent="WidthAndHeight">
+        Title="{x:Static properties:Resources.ProgramTitle}" Height="498" Width="640" WindowStartupLocation="CenterScreen" MinHeight="520" MinWidth="640" Loaded="Window_Loaded" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType" Closing="Window_Closing" SizeToContent="Height">
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo x:Name="TaskbarInfoHolder"/>
     </Window.TaskbarItemInfo>
