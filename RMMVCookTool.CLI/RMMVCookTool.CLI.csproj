@@ -2,56 +2,16 @@
 
 	<PropertyGroup>
 	<OutputType>Exe</OutputType>
-	<TargetFramework>net6.0</TargetFramework>
 	<AssemblyVersion>2.2.0.22107</AssemblyVersion>
 	<FileVersion>2.2.0.22107</FileVersion>
 	<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
 	<StartupObject>RMMVCookTool.CLI.Program</StartupObject>
 	<AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
 	<PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-	<Version>2.2.0-20211224</Version>
-	<Authors>AceOfAces</Authors>
-	<Company>Studio ACE</Company>
-	<Product>RPG Maker MV Cook Tool</Product>
+	<Version>2.2.0-20220530</Version>
 	<Description>Command-line version of the RPG Maker MV Cook Tool.</Description>
-	<PackageLicenseUrl></PackageLicenseUrl>
-	<PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
-	<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
-	<TieredCompilation>true</TieredCompilation>
-	<TieredCompilationQuickJit>true</TieredCompilationQuickJit>
-	<Copyright>Copyright © 2019 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
-	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-	<PublishReadyToRun>true</PublishReadyToRun>
 	<PublishTrimmed>false</PublishTrimmed>
 	<RuntimeIdentifiers>win-x64;win-arm64;linux-x64;linux-arm64</RuntimeIdentifiers>
-	<NeutralLanguage>en</NeutralLanguage>
-    <Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-	
-		<PropertyGroup Condition="$(TargetFramework)=='net6.0'">
-		<PublishReadyToRunComposite>false</PublishReadyToRunComposite>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	<FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-	  <FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM32'">
-	  <FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-	<FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-	<FileAlignment>4096</FileAlignment>
 	</PropertyGroup>
 
 	<ItemGroup>

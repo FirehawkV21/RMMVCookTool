@@ -1,50 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-	<TargetFrameworks>net6.0</TargetFrameworks>
-	<AssemblyVersion>2.0.5.22150</AssemblyVersion>
-	<FileVersion>2.0.5.22150</FileVersion>
-	<Version>2.0.5-20211224</Version>
-	<Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
+	<AssemblyVersion>2.0.6.22150</AssemblyVersion>
+	<FileVersion>2.0.6.22150</FileVersion>
+	<Version>2.0.6-20220530</Version>
 	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>
-	<Authors>AceOfAces</Authors>
-	<Company>Studio ACE</Company>
-	<Product>RPG Maker MV Cook Tool</Product>
-	<TieredCompilation>true</TieredCompilation>
-	<TieredCompilationQuickJit>true</TieredCompilationQuickJit>
-	<PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
-	<RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
 	<Description>The core library of the RPG Maker MV Cook Tool.</Description>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$(TargetFramework)=='net6.0'">
-		<PublishReadyToRunComposite>true</PublishReadyToRunComposite>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM32'">
-	  <FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-	  <FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-		<FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-		<FileAlignment>4096</FileAlignment>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|ARM64'">
-	  <PlatformTarget>ARM64</PlatformTarget>
 	</PropertyGroup>
 
 	<ItemGroup>

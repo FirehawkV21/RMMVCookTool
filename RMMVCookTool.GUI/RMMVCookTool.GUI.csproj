@@ -8,17 +8,12 @@
     <FileVersion>4.0.0.22150</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
-    <PackageLicenseFile></PackageLicenseFile>
     <AssemblyTitle>RPG Maker MV/MZ Cook Tool (GUI Version)</AssemblyTitle>
     <Version>4.0.0-20220417</Version>
     <PublishTrimmed>false</PublishTrimmed>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <Description>GUI version of the RPG Maker MV Cook Tool.</Description>
     <GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
