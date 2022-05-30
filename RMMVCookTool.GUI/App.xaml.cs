@@ -5,6 +5,7 @@ global using Ookii.Dialogs.Wpf;
 global using System.IO;
 using Prism.DryIoc;
 using Prism.Ioc;
+using System.Runtime;
 
 namespace RMMVCookTool.GUI;
 
@@ -13,6 +14,13 @@ namespace RMMVCookTool.GUI;
 /// </summary>
 public partial class App : PrismApplication
 {
+    public App()
+    {
+        string ProfilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RMMVCookTool", "JITProfile");
+        if (!Directory.Exists(ProfilePath)) Directory.CreateDirectory(ProfilePath);
+        ProfileOptimization.SetProfileRoot(ProfilePath);
+        ProfileOptimization.StartProfile("MVCookToolUI.Profile");
+    }
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
         // register other needed services here
@@ -20,7 +28,7 @@ public partial class App : PrismApplication
 
     protected override Window CreateShell()
     {
-        var w = Container.Resolve<MainWindow>();
+        MainWindow w = Container.Resolve<MainWindow>();
         return w;
     }
 }

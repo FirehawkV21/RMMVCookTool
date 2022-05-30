@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace RMMVCookTool.CLI;
 
-class Program
+internal class Program
 {
     private static readonly Lazy<CompilerProject> newProject = new(() => new CompilerProject(), true);
     private static bool _testProject;
@@ -35,9 +35,11 @@ class Program
         #region Command line arguments
         if (args.Length >= 1)
         {
-            Rule argsTab = new();
-            argsTab.Title = Resources.CommandLineArgsTitle;
-            argsTab.Alignment = Justify.Left;
+            Rule argsTab = new()
+            {
+                Title = Resources.CommandLineArgsTitle,
+                Alignment = Justify.Left
+            };
             AnsiConsole.Write(argsTab);
             Table argsTable = new();
             argsTable.AddColumn(Resources.SettingTitle);
@@ -269,9 +271,11 @@ class Program
 
         if (!_settingsSet)
         {
-            Rule setupTab = new();
-            setupTab.Title = RMMVCookTool.CLI.Properties.Resources.SetupTitle;
-            setupTab.Alignment = Justify.Left;
+            Rule setupTab = new()
+            {
+                Title = Resources.SetupTitle,
+                Alignment = Justify.Left
+            };
             AnsiConsole.Write(setupTab);
             do
             {
@@ -331,9 +335,11 @@ class Program
         #endregion
 
         #region Workload Code
-        Rule workTab = new();
-        workTab.Title = Resources.WorkTitle;
-        workTab.Alignment = Justify.Left;
+        Rule workTab = new()
+        {
+            Title = Resources.WorkTitle,
+            Alignment = Justify.Left
+        };
         AnsiConsole.Write(workTab);
         //Find the game folder.
         Stopwatch timer = new();
@@ -375,11 +381,11 @@ class Program
                 AnsiConsole.Progress()
                     .Start(progress =>
                     {
-                        var compilerTask = progress.AddTask(RMMVCookTool.CLI.Properties.Resources.DarkcyanCompilingJSFilesText);
+                        ProgressTask compilerTask = progress.AddTask(Resources.DarkcyanCompilingJSFilesText);
                         compilerTask.MaxValue = 131;
                         while (!progress.IsFinished)
                         {
-                            for (var i = 0; i < newProject.Value.FileMap.Count; i++)
+                            for (int i = 0; i < newProject.Value.FileMap.Count; i++)
                             {
                                 CompilerUtilities.RecordToLog($"Compiling {newProject.Value.FileMap[i]}...", 0);
                                 newProject.Value.CompileFile(i);
