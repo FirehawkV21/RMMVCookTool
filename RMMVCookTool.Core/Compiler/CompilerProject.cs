@@ -8,30 +8,20 @@ public class CompilerProject : CompilerProjectBase
 {
     public string ProjectLocation { get; set; }
     public List<string> FileMap { get; set; }
-
-    public string FileExtension { get; set; }
-
     public string GameFilesLocation { get; set; }
-
-    public bool RemoveSourceCodeAfterCompiling { get; set; }
-
-    public bool CompressFilesToPackage { get; set; }
-
-    public bool RemoveFilesAfterCompression { get; set; }
-
-    public int CompressionModeLevel { get; set; }
+    public ProjectSettings Setup { get; set; }
 
     public CompilerProject()
     {
-        FileExtension = ".bin";
-        CompressionModeLevel = 0;
+        Setup.FileExtension = ".bin";
+        Setup.CompressionLevel = 0;
     }
 
     public CompilerProject(string project)
     {
         ProjectLocation = project;
-        FileExtension = ".bin";
-        CompressionModeLevel = 0;
+        Setup.FileExtension = ".bin";
+        Setup.CompressionLevel = 0;
         FileMap = new List<string>();
         FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }
@@ -39,11 +29,11 @@ public class CompilerProject : CompilerProjectBase
     public CompilerProject(string project, string fileExtension, bool removeAfterCompile, bool compressToPackage, bool removeAfterCompression, int compressionLevel)
     {
         ProjectLocation = project;
-        RemoveSourceCodeAfterCompiling = removeAfterCompile;
-        FileExtension = fileExtension;
-        CompressFilesToPackage = compressToPackage;
-        RemoveFilesAfterCompression = removeAfterCompression;
-        CompressionModeLevel = compressionLevel;
+        Setup.RemoveSourceFiles = removeAfterCompile;
+        Setup.FileExtension = fileExtension;
+        Setup.CompressProjectFiles = compressToPackage;
+        Setup.RemoveFilesAfterCompression = removeAfterCompression;
+        Setup.CompressionLevel = compressionLevel;
         FileMap = new List<string>();
         FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }
@@ -61,7 +51,7 @@ public class CompilerProject : CompilerProjectBase
         //The first bit (the one with the file variable) is the source.
         //The second bit (the one with the fileBuffer variable) makes the final file.
         CompilerInfo.Value.Arguments = "\"" + FileMap[index] + "\" \"" +
-                                 FileMap[index].Replace(".js", "." + FileExtension, StringComparison.Ordinal) + "\"";
+                                 FileMap[index].Replace(".js", "." + Setup.FileExtension, StringComparison.Ordinal) + "\"";
         //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.
         CompilerInfo.Value.CreateNoWindow = true;
         CompilerInfo.Value.WindowStyle = ProcessWindowStyle.Hidden;
@@ -70,7 +60,7 @@ public class CompilerProject : CompilerProjectBase
         Process.Start(CompilerInfo.Value)?.WaitForExit();
 
         //If the user asked to remove the JS files, delete them.
-        if (RemoveSourceCodeAfterCompiling) {
+        if (Setup.RemoveSourceFiles) {
             CompilerUtilities.RecordToLog($"Removing the file {FileMap[index]}...", 3);
             File.Delete(FileMap[index]); 
         }
@@ -119,7 +109,7 @@ public class CompilerProject : CompilerProjectBase
             {
                 CompilerUtilities.RecordToLog($"Compressing {file}...", 3);                    
                 //Start adding files.
-                switch (CompressionModeLevel)
+                switch (Setup.CompressionLevel)
                 {
                     case 2:
                         packageArchive.CreateEntryFromFile(file, file.Replace(stripPart, "", StringComparison.Ordinal),
@@ -134,7 +124,7 @@ public class CompilerProject : CompilerProjectBase
                             CompressionLevel.Optimal);
                         break;
                 }
-                if (RemoveFilesAfterCompression) File.Delete(file);
+                if (Setup.RemoveFilesAfterCompression) File.Delete(file);
 
             }
 
@@ -142,9 +132,9 @@ public class CompilerProject : CompilerProjectBase
             if (File.Exists(Path.Combine(ProjectLocation, "package.json")) && ProjectLocation != GameFilesLocation)
             {
                 packageArchive.CreateEntryFromFile(Path.Combine(ProjectLocation, "package.json"), "package.json");
-                if (RemoveFilesAfterCompression) File.Delete(Path.Combine(ProjectLocation, "package.json"));
+                if (Setup.RemoveFilesAfterCompression) File.Delete(Path.Combine(ProjectLocation, "package.json"));
             }
-            if (RemoveFilesAfterCompression) CleanupFolders();
+            if (Setup.RemoveFilesAfterCompression) CleanupFolders();
         }
 
     }

@@ -105,9 +105,9 @@ internal class Program
                         if (argnum >= args.Length - 1 && args[argnum].Contains("--")) CompilerUtilities.RecordToLog($"File extension not set. Keeping the extension to .bin.", 1);
                         else
                         {
-                            newProject.Value.FileExtension = args[argnum + 1];
-                            CompilerUtilities.RecordToLog($"File extension set to .{newProject.Value.FileExtension}.", 0);
-                            argsTable.AddRow(Resources.FileExtensionEntry, newProject.Value.FileExtension);
+                            newProject.Value.Setup.FileExtension = args[argnum + 1];
+                            CompilerUtilities.RecordToLog($"File extension set to .{newProject.Value.Setup.FileExtension}.", 0);
+                            argsTable.AddRow(Resources.FileExtensionEntry, newProject.Value.Setup.FileExtension);
                             Console.ResetColor();
                         }
                         break;
@@ -166,7 +166,7 @@ internal class Program
                     case "--ReleaseMode":
                         _checkDeletion = 2;
                         CompilerUtilities.RecordToLog($"JS files will be removed.", 0);
-                        newProject.Value.RemoveSourceCodeAfterCompiling = true;
+                        newProject.Value.Setup.RemoveSourceFiles = true;
                         Console.ResetColor();
                         break;
 
@@ -199,21 +199,21 @@ internal class Program
                             {
                                 case 2:
                                     CompilerUtilities.RecordToLog($"Compression is set to No Compression.", 0);
-                                    newProject.Value.CompressionModeLevel = 2;
+                                    newProject.Value.Setup.CompressionLevel = 2;
                                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                                     Console.WriteLine(Resources.NoCompressionConfirmationText);
                                     Console.ResetColor();
                                     break;
                                 case 1:
                                     CompilerUtilities.RecordToLog($"Compression is set to Fastest.", 0);
-                                    newProject.Value.CompressionModeLevel = 1;
+                                    newProject.Value.Setup.CompressionLevel = 1;
                                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                                     Console.WriteLine(Resources.FastestCompressionConfirmationText);
                                     Console.ResetColor();
                                     break;
                                 default:
                                     CompilerUtilities.RecordToLog($"Compression is set to Optimal.", 0);
-                                    newProject.Value.CompressionModeLevel = 0;
+                                    newProject.Value.Setup.CompressionLevel = 0;
                                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                                     Console.WriteLine(Resources.OptimalCompressionCOnfirmationText);
                                     Console.ResetColor();
@@ -223,7 +223,7 @@ internal class Program
                         break;
                 }
             }
-        if (_compressProject < 3) switch (newProject.Value.CompressionModeLevel)
+        if (_compressProject < 3) switch (newProject.Value.Setup.CompressionLevel)
                 {
                     case 2:
                         argsTable.AddRow(Resources.CompressionLevelEntry, Resources.NoCompression);
@@ -302,7 +302,7 @@ internal class Program
                      !Directory.Exists(Path.Combine(newProject.Value.ProjectLocation, "www", "js")));
 
             //Ask the user for the file extension.
-            newProject.Value.FileExtension = AnsiConsole.Prompt(new TextPrompt<string>(Resources.FileExtensionQuestion).DefaultValue(".bin").AllowEmpty());
+            newProject.Value.Setup.FileExtension = AnsiConsole.Prompt(new TextPrompt<string>(Resources.FileExtensionQuestion).DefaultValue(".bin").AllowEmpty());
             //This is the check if the tool should delete the JS files.
             _checkDeletion = AnsiConsole.Prompt(new TextPrompt<int>(Resources.WorkloadQuestion)
                 .DefaultValue(1)
@@ -312,7 +312,7 @@ internal class Program
                     < 1 => ValidationResult.Error(),
                     _ => ValidationResult.Success()
                 }));
-            newProject.Value.RemoveSourceCodeAfterCompiling = _checkDeletion == 2;
+            newProject.Value.Setup.RemoveSourceFiles = _checkDeletion == 2;
 
             if (_checkDeletion == 2)
             {
@@ -330,7 +330,7 @@ internal class Program
                 //Ask if the user would like to test with nwjs.
                 if (AnsiConsole.Confirm(Resources.TestProjectQuestion)) _testProject = true;
             }
-            CompilerUtilities.RecordToLog($"Current setup of the job:\nCompiler Location:{_sdkLocation}\nProject Location:{newProject.Value.ProjectLocation}\nFile Extension:{newProject.Value.FileExtension}\nRemove Source Files? {newProject.Value.RemoveSourceCodeAfterCompiling}\nPackage game?:{newProject.Value.CompressFilesToPackage}\nRemove game files after packaging?:{newProject.Value.RemoveFilesAfterCompression}\nCompression Mode:{newProject.Value.CompressionModeLevel}", 0);
+            CompilerUtilities.RecordToLog($"Current setup of the job:\nCompiler Location:{_sdkLocation}\nProject Location:{newProject.Value.ProjectLocation}\nFile Extension:{newProject.Value.Setup.FileExtension}\nRemove Source Files? {newProject.Value.Setup.RemoveSourceFiles}\nPackage game?:{newProject.Value.Setup.CompressProjectFiles}\nRemove game files after packaging?:{newProject.Value.Setup.RemoveFilesAfterCompression}\nCompression Mode:{newProject.Value.Setup.CompressionLevel}", 0);
         }
         #endregion
 

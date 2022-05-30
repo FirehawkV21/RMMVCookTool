@@ -129,7 +129,7 @@ public class MainViewModel : BindableBase
                         ProjectList[currentProject].CompileFile(currentFile);
                     }
                     if (e.Cancel) break;
-                    if (ProjectList[currentProject].CompressFilesToPackage)
+                    if (ProjectList[currentProject].Setup.CompressProjectFiles)
                     {
                         _compilerStatusReport = 4;
                         _compilerWorker.ReportProgress(1);
@@ -193,7 +193,7 @@ public class MainViewModel : BindableBase
                 CurrentFileCounter += 1;
                 break;
             case 4:
-                CurrentProgressText = Properties.Resources.PackaginStatusText;
+                CurrentProgressText = Resources.PackaginStatusText;
                 CompilerUtilities.RecordToLog("Packaging project " + ProjectList[currentProject].ProjectLocation + "...", 0);
                 break;
             case 3:
@@ -202,7 +202,7 @@ public class MainViewModel : BindableBase
                 if (currentFile < ProjectList[currentProject].FileMap.Count - 1)
                 {
                     _nextFile.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile + 1));
-                    CurrentProgressText = Properties.Resources.CompileText + _nextFile + "...";
+                    CurrentProgressText = Resources.CompileText + _nextFile + "...";
                     CompilerUtilities.RecordToLog("Compiling " + _nextFile + "...", 0);
                 }
                 else
@@ -218,7 +218,7 @@ public class MainViewModel : BindableBase
                 _stringBuffer.Clear();
                 break;
             case 1:
-                MaxFileCounter = ProjectList[currentProject].FileMap.Count + ((ProjectList[currentProject].CompressFilesToPackage) ? 1 : 0);
+                MaxFileCounter = ProjectList[currentProject].FileMap.Count + ((ProjectList[currentProject].Setup.CompressProjectFiles) ? 1 : 0);
                 CurrentProgressText =
                     Resources.BinRemovalStatusText + ProjectList[currentProject].ProjectLocation + "...";
                 CompilerUtilities.RecordToLog("Removing binary files...", 0);
@@ -238,7 +238,7 @@ public class MainViewModel : BindableBase
         {
             CurrentStateBrush = Brushes.YellowGreen;
             CompilerUtilities.RecordToLog("Session cancelled.", 0);
-            MessageDialog.ThrowWarningMessage(Properties.Resources.AbortedText, Properties.Resources.TaskCancelledMessage, "");
+            MessageDialog.ThrowWarningMessage(Resources.AbortedText, Resources.TaskCancelledMessage, "");
         }
         else
         {
