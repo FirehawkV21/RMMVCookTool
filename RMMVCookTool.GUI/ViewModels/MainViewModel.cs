@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using RMMVCookTool.Core.Compiler;
+using RMMVCookTool.Core.CompilerSettings;
 using RMMVCookTool.Core.Utilities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -31,6 +32,7 @@ namespace RMMVCookTool.GUI.ViewModels
         private string sdkLocation;
         private Visibility compilerButtonVisible = Visibility.Visible;
         private Visibility cancelButtonVisible = Visibility.Hidden;
+        private CompilerSettingsManager SettingsManager;
 
         public string CurrentProgressText { get => currentProgressText; set => SetProperty(ref currentProgressText, value); }
         public string CurrentProjectText { get => currentProjectText; set => SetProperty(ref currentProjectText, value); }
@@ -65,6 +67,8 @@ namespace RMMVCookTool.GUI.ViewModels
             RemoveProjectCommand = new(RemoveSelectedProjects);
             StartCompilerCommand = new(StartCompilerWorkload);
             CancelCompilerCommand = new(CancelCompilerWorkload);
+            SettingsManager = new();
+            SdkLocation = SettingsManager.Settings.NwjsLocation;
             SetupWorkers();
         }
 
@@ -267,8 +271,8 @@ namespace RMMVCookTool.GUI.ViewModels
             };
             bool? pickerResult = pickSdkFolder.ShowDialog();
             if (pickerResult != true) return;
-            AppSettings.Default.SDKLocation = pickSdkFolder.SelectedPath;
-            SdkLocation = pickSdkFolder.SelectedPath;
+            SettingsManager.Settings.NwjsLocation = SdkLocation = pickSdkFolder.SelectedPath;
+            SettingsManager.SaveSettings();
         }
 
         private void FindProjectFolder()
@@ -282,9 +286,10 @@ namespace RMMVCookTool.GUI.ViewModels
             if (pickerResult != true) return;
             if (pickJsFolder.SelectedPath != null)
             {
-                ProjectList.Add(new CompilerProject(pickJsFolder.SelectedPath, AppSettings.Default.FileExtension,
-                    AppSettings.Default.DeleteSourceCode, AppSettings.Default.PackageCode,
-                    AppSettings.Default.RemoveFilesAfterPackaging, AppSettings.Default.CompressionMode));
+                ProjectList.Add(new CompilerProject(pickJsFolder.SelectedPath, SettingsManager.Settings.DefaultProjectSettings.FileExtension,
+                    SettingsManager.Settings.DefaultProjectSettings.RemoveSourceFiles,
+                    SettingsManager.Settings.DefaultProjectSettings.CompressProjectFiles,
+                    SettingsManager.Settings.DefaultProjectSettings.RemoveFilesAfterCompression, SettingsManager.Settings.DefaultProjectSettings.CompressionLevel));
 
             }
         }
