@@ -11,7 +11,6 @@
         <Style TargetType="Window">
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
             <Setter Property="ResizeMode" Value="NoResize"/>
-            <Setter Property="SizeToContent" Value="Height"/>
             <Setter Property="WindowStyle" Value="ToolWindow"/>
         </Style>
     </prism:Dialog.WindowStyle>
@@ -35,7 +34,7 @@
                             <TextBox x:Name="FileLocationTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,60,61,0" Text="{Binding IndexFileLocation}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,83,0,0"><Run Text="{x:Static properties:Resources.GameVersionUiString}"/></TextBlock>
                             <TextBox x:Name="VersionTextBox" TextWrapping="Wrap" Margin="5,99,5,0" Height="23" VerticalAlignment="Top" Text="{Binding GameVersion}"/>
-                            <Button x:Name="BrowseForHtmlFileButton" Content="{x:Static properties:Resources.BrowseUiText}" VerticalAlignment="Top" Margin="0,60,5,0" Height="23" HorizontalAlignment="Right"/>
+                            <Button x:Name="BrowseForHtmlFileButton" Content="{x:Static properties:Resources.BrowseUiText}" VerticalAlignment="Top" Margin="0,60,5,0" Height="23" HorizontalAlignment="Right" Command="{Binding FindHtmlFileCommand}"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="{x:Static properties:Resources.NWJsFeaturesGroupText}" Grid.Row="1">
@@ -66,7 +65,7 @@
                             <TextBox x:Name="WindowTitleTextBox" TextWrapping="Wrap" Margin="5,55,5,0" Height="23" VerticalAlignment="Top" Text="{Binding WindowTitle}"/>
                             <TextBox x:Name="WindowIdTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,93,5,0" Text="{Binding WindowId}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Window ID" VerticalAlignment="Top" Margin="5,78,0,0"/>
-                            <Button x:Name="BrowseForIconButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="341,16,5,0" Height="23"/>
+                            <Button x:Name="BrowseForIconButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="341,16,5,0" Height="23" Command="{Binding FindIconFileCommand}"/>
 
                         </Grid>
                     </GroupBox>
@@ -106,10 +105,10 @@
                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.MinimumWidthUiText}" VerticalAlignment="Top" Margin="5,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Grid.Column="1">
-                                        <cntrl:UIntegerUpDown x:Name="HeightNumber"  VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Value="{Binding WindowHeight}"/>
-                                        <cntrl:UIntegerUpDown x:Name="MinimumHeightNumber"  HorizontalAlignment="Left" VerticalAlignment="Top" Value="{Binding MinHeight}"/>
-                                        <cntrl:UIntegerUpDown x:Name="WidthNumber" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="5,5,0,0" Value="{Binding WindowWidth}"/>
-                                        <cntrl:UIntegerUpDown x:Name="MinimumWidthNumber" VerticalAlignment="Top" HorizontalAlignment="Left" Value="{Binding MinWidth}"/>
+                                        <cntrl:UIntegerUpDown x:Name="HeightNumber"  VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Value="{Binding WindowHeight, Mode=TwoWay}"/>
+                                        <cntrl:UIntegerUpDown x:Name="MinimumHeightNumber"  HorizontalAlignment="Left" VerticalAlignment="Top" Value="{Binding MinHeight, Mode=TwoWay}"/>
+                                        <cntrl:UIntegerUpDown x:Name="WidthNumber" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="5,5,0,0" Value="{Binding WindowWidth, Mode=TwoWay}"/>
+                                        <cntrl:UIntegerUpDown x:Name="MinimumWidthNumber" VerticalAlignment="Top" HorizontalAlignment="Left" Value="{Binding MinWidth, Mode=TwoWay}"/>
                                     </StackPanel>
                                 </Grid>
 

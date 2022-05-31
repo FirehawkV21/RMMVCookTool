@@ -26,61 +26,82 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
     private bool isWindowResizable;
     private int windowModeIndex;
     private int windowStartLocation;
-    private int windowHeight;
-    private int windowWidth;
-    private int minHeight;
-    private int minWidth;
+    private uint windowHeight;
+    private uint windowWidth;
+    private uint minHeight;
+    private uint minWidth;
     #endregion
 
     #region Properties
     internal ProjectMetadata ProjectMetadata { get; set; }
-    public string GameId { get => gameId; set {
+    public string GameId {
+        get => gameId; set {
             ProjectMetadata.GameName = value;
             SetProperty(ref gameId, value);
-        } }
-    public string IndexFileLocation { get => indexFileLocation; set {
+        }
+    }
+    public string IndexFileLocation {
+        get => indexFileLocation; set {
             ProjectMetadata.MainFile = value;
             SetProperty(ref indexFileLocation, value);
-        } }
-    public string GameVersion { get => gameVersion; set {
+        }
+    }
+    public string GameVersion {
+        get => gameVersion; set {
             ProjectMetadata.GameVersion = value;
             SetProperty(ref gameVersion, value);
-        } }
-    public bool EnableNodeJs { get => enableNodeJs; set {
+        }
+    }
+    public bool EnableNodeJs {
+        get => enableNodeJs; set {
             ProjectMetadata.UseNodeJs = value;
             SetProperty(ref enableNodeJs, value);
-        } }
-    public string ChromiumFlags { get => chromiumFlags; set {
+        }
+    }
+    public string ChromiumFlags {
+        get => chromiumFlags; set {
             ProjectMetadata.ChromiumFlags = value;
             SetProperty(ref chromiumFlags, value);
-        } }
-    public string JsFlags { get => jsFlags; set {
+        }
+    }
+    public string JsFlags {
+        get => jsFlags; set {
             ProjectMetadata.JsFlags = value;
             SetProperty(ref jsFlags, value);
-        } }
-    public string GameName { get => gameName; set {
+        }
+    }
+    public string GameName {
+        get => gameName; set {
             ProjectMetadata.GameTitle = value;
             SetProperty(ref gameName, value);
-        } }
-    public string GameIconLocation { get => gameIconLocation; set {
+        }
+    }
+    public string GameIconLocation {
+        get => gameIconLocation; set {
             ProjectMetadata.WindowProperties.WindowIcon = value;
             SetProperty(ref gameIconLocation, value);
-        } }
-    public string WindowTitle { get => windowTitle; set {
+        }
+    }
+    public string WindowTitle {
+        get => windowTitle; set {
             ProjectMetadata.WindowProperties.WindowTitle = value;
             SetProperty(ref windowTitle, value);
-        } }
+        }
+    }
     public string WindowId {
         get => windowId; set {
             ProjectMetadata.WindowProperties.WindowId = value;
             SetProperty(ref windowId, value);
         }
     }
-    public bool IsWindowResizable { get => isWindowResizable; set {
+    public bool IsWindowResizable {
+        get => isWindowResizable; set {
             ProjectMetadata.WindowProperties.IsResizable = value;
             SetProperty(ref isWindowResizable, value);
-        } }
-    public int WindowModeIndex { get => windowModeIndex; set {
+        }
+    }
+    public int WindowModeIndex {
+        get => windowModeIndex; set {
             switch (value)
             {
                 case 2:
@@ -97,8 +118,10 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
                     break;
             }
             SetProperty(ref windowModeIndex, value);
-        } }
-    public int WindowStartLocation { get => windowStartLocation; set {
+        }
+    }
+    public int WindowStartLocation {
+        get => windowStartLocation; set {
             ProjectMetadata.WindowProperties.ScreenPosition = value switch
             {
                 2 => "mouse",
@@ -106,26 +129,37 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
                 _ => "none",
             };
             SetProperty(ref windowStartLocation, value);
-        } }
-    public int WindowHeight { get => windowHeight; set {
-            ProjectMetadata.WindowProperties.WindowHeight = (uint)value;
+        }
+    }
+    public uint WindowHeight {
+        get => windowHeight; set {
             SetProperty(ref windowHeight, value);
-        } }
-    public int WindowWidth { get => windowWidth; set {
-            ProjectMetadata.WindowProperties.WindowWidth = (uint)value;
+            ProjectMetadata.WindowProperties.WindowHeight = value;
+        }
+    }
+    public uint WindowWidth {
+        get => windowWidth; set {
             SetProperty(ref windowWidth, value);
-        } }
-    public int MinHeight { get => minHeight; set {
-            ProjectMetadata.WindowProperties.MinimumHeight = (uint)value;
+            ProjectMetadata.WindowProperties.WindowWidth = value;
+        }
+    }
+    public uint MinHeight {
+        get => minHeight; set {
             SetProperty(ref minHeight, value);
-        } }
-    public int MinWidth { get => minWidth; set {
-            ProjectMetadata.WindowProperties.MinimumWidth = (uint)value;
+            ProjectMetadata.WindowProperties.MinimumHeight = value;
+        }
+    }
+    public uint MinWidth {
+        get => minWidth; set {
             SetProperty(ref minWidth, value);
-        } }
+            ProjectMetadata.WindowProperties.MinimumWidth = value;
+        }
+    }
     #endregion
 
     #region Commands
+    public DelegateCommand FindHtmlFileCommand { get; private set; }
+    public DelegateCommand FindIconFileCommand { get; private set; }
     public DelegateCommand SaveCommand { get; private set; }
     public DelegateCommand CloseCommand { get; private set; }
     #endregion
@@ -134,6 +168,8 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
     {
         SaveCommand = new DelegateCommand(SaveJsonFile);
         CloseCommand = new DelegateCommand(CloseDialog);
+        FindHtmlFileCommand = new DelegateCommand(FindHtmlFile);
+        FindIconFileCommand = new DelegateCommand(FindIconFile);
     }
 
     public bool CanCloseDialog() => true;
@@ -141,7 +177,7 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
     {
         //Method intentionally left blank
     }
-    public void OnDialogOpened(IDialogParameters parameters) 
+    public void OnDialogOpened(IDialogParameters parameters)
     {
         projectLocation = parameters.GetValue<string>("location");
         if (File.Exists(Path.Combine(projectLocation, "package.json")))
@@ -151,7 +187,7 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
         }
         else ProjectMetadata = new();
         ConvertValues();
-        
+
     }
 
     public void SaveJsonFile()
@@ -208,9 +244,56 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
             "center" => 1,
             _ => 0,
         };
-        WindowHeight = (int)ProjectMetadata.WindowProperties.WindowHeight;
-        WindowWidth = (int)ProjectMetadata.WindowProperties.WindowWidth;
-        MinHeight = (int)ProjectMetadata.WindowProperties.MinimumHeight;
-        MinWidth = (int)ProjectMetadata.WindowProperties.MinimumWidth;
+        WindowHeight = ProjectMetadata.WindowProperties.WindowHeight;
+        WindowWidth = ProjectMetadata.WindowProperties.WindowWidth;
+        MinHeight = ProjectMetadata.WindowProperties.MinimumHeight;
+        MinWidth = ProjectMetadata.WindowProperties.MinimumWidth;
+    }
+
+    private void FindHtmlFile()
+    {
+        VistaOpenFileDialog htmlFilePicker = new()
+        {
+            Title = Resources.ProjectPickerText,
+            Filter = Resources.HTMLFileText,
+            InitialDirectory = projectLocation,
+            Multiselect = false
+        };
+        bool? pickerResult = htmlFilePicker.ShowDialog();
+        if (pickerResult != true) return;
+        if (htmlFilePicker.FileName.Contains(projectLocation))
+        {
+            string stringBuffer = htmlFilePicker.FileName.Replace(projectLocation + "\\", "");
+            stringBuffer = stringBuffer.Replace("\\", "/");
+            IndexFileLocation = stringBuffer;
+
+        }
+        else
+        {
+            MessageDialog.ThrowErrorMessage(Resources.ErrorText, Resources.FileOutsideOfProjectError);
+        }
+    }
+
+    private void FindIconFile()
+    {
+        VistaOpenFileDialog iconFilePicker = new()
+        {
+            Title = Resources.ProjectPickerText,
+            Filter = Resources.PNGFileText,
+            InitialDirectory = projectLocation,
+            Multiselect = false
+        };
+        bool? pickerResult = iconFilePicker.ShowDialog();
+        if (pickerResult != true) return;
+        if (iconFilePicker.FileName.Contains(projectLocation))
+        {
+            string stringBuffer = iconFilePicker.FileName.Replace(projectLocation + "\\", "");
+            stringBuffer = stringBuffer.Replace("\\", "/");
+            GameIconLocation = ProjectMetadata.WindowProperties.WindowIcon = stringBuffer;
+        }
+        else
+        {
+            MessageDialog.ThrowErrorMessage(Resources.ErrorText, Resources.FileOutsideOfProjectError);
+        }
     }
 }
