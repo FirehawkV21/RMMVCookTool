@@ -30,7 +30,7 @@ public class MainViewModel : BindableBase
     private ObservableCollection<CompilerProject> projectList;
     private int selectedProjectIndex;
     private readonly StringBuilder _nextFile = new();
-    private SolidColorBrush currentBrush;
+    private SolidColorBrush currentBrush = Brushes.ForestGreen;
     private bool settingsAccessible = true;
     private string sdkLocation;
     private Visibility compilerButtonVisible = Visibility.Visible;
@@ -79,6 +79,10 @@ public class MainViewModel : BindableBase
         EditMetadataCommand = new DelegateCommand(EditProjectMetadata, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
         IsCancelButtonVisible = Visibility.Hidden;
         SettingsManager = new();
+        CurrentFileCounter = 0;
+        MaxFileCounter = 1;
+        CurrentProjectCounter = 0;
+        MaxProjectCounter = 1;
         SdkLocation = SettingsManager.Settings.NwjsLocation;
         dialogManager = dialogService;
         SetupWorkers();
@@ -99,18 +103,19 @@ public class MainViewModel : BindableBase
         CompilerUtilities.RecordToLog("Starting the session.", 0);
         try
         {
-            for (currentProject = 0; currentProject < ProjectList.Count; currentProject++)
+            foreach (var project in ProjectList)
             {
                 if (_compilerWorker.CancellationPending)
                 {
                     e.Cancel = true;
                     break;
                 }
-                _compilerStatusReport = 0;
-                _compilerWorker.ReportProgress(currentProject + 1);
-                ProjectList[currentProject].CompilerInfo.Value.FileName = Path.Combine(SdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
-                ProjectList[currentProject].GameFilesLocation = CompilerUtilities.GetProjectFilesLocation(Path.Combine(ProjectList[currentProject].ProjectLocation, "package.json"));
-                if (ProjectList[currentProject].GameFilesLocation is "Null" or "Unknown")
+                CurrentProjectText = Resources.CompileText1 + project.ProjectLocation +
+                             Resources.FolderText;
+                CompilerUtilities.RecordToLog("Preparing for the project " + project.ProjectLocation + "...", 0);
+                project.CompilerInfo.Value.FileName = Path.Combine(SdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
+                project.GameFilesLocation = CompilerUtilities.GetProjectFilesLocation(Path.Combine(project.ProjectLocation, "package.json"));
+                if (project.GameFilesLocation is "Null" or "Unknown")
                 {
                     CompilerUtilities.RecordToLog("Missing info for the game files location. Aborting session.", 0);
                     MessageDialog.ThrowErrorMessage(Resources.CannotFindGameFolderTitle, Resources.CannotFindGameFolderMessage);
@@ -119,32 +124,33 @@ public class MainViewModel : BindableBase
                 {
 
                     _compilerStatusReport = 1;
-                    _compilerWorker.ReportProgress(currentProject + 1);
-                    CompilerUtilities.CleanupBin(ProjectList[currentProject].FileMap);
-                    CompilerUtilities.RemoveDebugFiles(ProjectList[currentProject].GameFilesLocation);
+                    _compilerWorker.ReportProgress(CurrentProjectCounter + 1);
+                    CompilerUtilities.CleanupBin(project.FileMap);
+                    CompilerUtilities.RemoveDebugFiles(project.GameFilesLocation);
                     _compilerStatusReport = 2;
                     _compilerWorker.ReportProgress(1);
                     _compilerStatusReport = 3;
-                    for (currentFile = 0; currentFile < ProjectList[currentProject].FileMap.Count; currentFile++)
+                    for (CurrentFileCounter = 0; CurrentFileCounter < project.FileMap.Count; CurrentFileCounter++)
                     {
                         if (_compilerWorker.CancellationPending)
                         {
                             e.Cancel = true;
                             break;
                         }
-                        _compilerWorker.ReportProgress(currentProject + 1);
-                        ProjectList[currentProject].CompileFile(currentFile);
+                        _compilerWorker.ReportProgress(CurrentProjectCounter + 1);
+                        project.CompileFile(CurrentFileCounter);
                     }
                     if (e.Cancel) break;
-                    if (ProjectList[currentProject].Setup.CompressProjectFiles)
+                    if (project.Setup.CompressProjectFiles)
                     {
                         _compilerStatusReport = 4;
                         _compilerWorker.ReportProgress(1);
-                        ProjectList[currentProject].CompressFiles();
+                        project.CompressFiles();
                     }
-                    CompilerUtilities.RecordToLog("The project " + ProjectList[currentProject].ProjectLocation + "is ready.", 0);
                     _compilerStatusReport = 6;
-                    _compilerWorker.ReportProgress(currentProject + 1);
+                    _compilerWorker.ReportProgress(CurrentProjectCounter + 1);
+                    CompilerUtilities.RecordToLog("The project " + project.ProjectLocation + "is ready.", 0);
+                    CurrentProjectCounter += 1;
                 }
             }
         }
@@ -189,26 +195,24 @@ public class MainViewModel : BindableBase
 
     private void CompilerReport(object sender, ProgressChangedEventArgs e)
     {
-        if ((_compilerStatusReport > 0 && _compilerStatusReport < 3) && currentFile > ProjectList[currentProject].FileMap.Count) _stringBuffer.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile));
+        if ((_compilerStatusReport > 0 && _compilerStatusReport < 3) && CurrentFileCounter > ProjectList[CurrentProjectCounter].FileMap.Count) _stringBuffer.Insert(0, ProjectList[CurrentProjectCounter].FileMap.ElementAt(CurrentFileCounter));
         switch (_compilerStatusReport)
         {
             case 6:
                 CurrentFileCounter = 0;
-                CurrentProjectCounter += 1;
                 break;
             case 5:
                 CurrentFileCounter += 1;
                 break;
             case 4:
                 CurrentProgressText = Resources.PackaginStatusText;
-                CompilerUtilities.RecordToLog("Packaging project " + ProjectList[currentProject].ProjectLocation + "...", 0);
+                CompilerUtilities.RecordToLog("Packaging project " + ProjectList[CurrentProjectCounter].ProjectLocation + "...", 0);
                 break;
             case 3:
-                CompilerUtilities.RecordToLog("Compiled " + ProjectList[currentProject].FileMap.ElementAt(currentFile), 0);
-                CurrentFileCounter += 1;
-                if (currentFile < ProjectList[currentProject].FileMap.Count - 1)
+                CompilerUtilities.RecordToLog("Compiled " + ProjectList[CurrentProjectCounter].FileMap.ElementAt(CurrentFileCounter), 0);
+                if (CurrentFileCounter < ProjectList[CurrentProjectCounter].FileMap.Count - 1)
                 {
-                    _nextFile.Insert(0, ProjectList[currentProject].FileMap.ElementAt(currentFile + 1));
+                    _nextFile.Insert(0, ProjectList[CurrentProjectCounter].FileMap.ElementAt(CurrentFileCounter + 1));
                     CurrentProgressText = Resources.CompileText + _nextFile + "...";
                     CompilerUtilities.RecordToLog("Compiling " + _nextFile + "...", 0);
                 }
@@ -225,15 +229,10 @@ public class MainViewModel : BindableBase
                 _stringBuffer.Clear();
                 break;
             case 1:
-                MaxFileCounter = ProjectList[currentProject].FileMap.Count + ((ProjectList[currentProject].Setup.CompressProjectFiles) ? 1 : 0);
+                MaxFileCounter = ProjectList[CurrentProjectCounter].FileMap.Count + ((ProjectList[CurrentProjectCounter].Setup.CompressProjectFiles) ? 1 : 0);
                 CurrentProgressText =
-                    Resources.BinRemovalStatusText + ProjectList[currentProject].ProjectLocation + "...";
+                    Resources.BinRemovalStatusText + ProjectList[CurrentProjectCounter].ProjectLocation + "...";
                 CompilerUtilities.RecordToLog("Removing binary files...", 0);
-                break;
-            case 0:
-                CurrentProjectText = Resources.CompileText1 + ProjectList[currentProject].ProjectLocation +
-                                             Resources.FolderText;
-                CompilerUtilities.RecordToLog("Preparing for the project " + ProjectList[currentProject].ProjectLocation + "...", 0);
                 break;
 
         }
@@ -257,10 +256,6 @@ public class MainViewModel : BindableBase
         IsCompilerButtonVisible = Visibility.Visible;
         IsCancelButtonVisible = Visibility.Hidden;
         AreSettingsAccessible = true;
-        CurrentProjectCounter = 0;
-        MaxProjectCounter = 0;
-        CurrentFileCounter = 0;
-        MaxFileCounter = 0;
         CurrentStateBrush = Brushes.ForestGreen;
     }
 
@@ -319,8 +314,6 @@ public class MainViewModel : BindableBase
             IsCompilerButtonVisible = Visibility.Hidden;
             IsCancelButtonVisible = Visibility.Visible;
             AreSettingsAccessible = false;
-            CurrentProjectCounter = 0;
-            currentFile = 0;
             MaxProjectCounter = ProjectList.Count;
             _compilerWorker.RunWorkerAsync();
         }

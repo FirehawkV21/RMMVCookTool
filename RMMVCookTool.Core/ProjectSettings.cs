@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RMMVCookTool.Core;
+﻿namespace RMMVCookTool.Core;
 public record ProjectSettings
 {
     public string FileExtension { get; set; } = "bin";

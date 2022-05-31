@@ -67,9 +67,9 @@
             <GroupBox Header="{x:Static properties:Resources.ProgressUiText}" Grid.Row="2">
                 <Grid>
                     <Label x:Name="TotalProgressLabel" Content="{Binding CurrentProjectText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ProgressBar x:Name="TotalWorkProgressBar" Height="20" Margin="0,26,124,0" VerticalAlignment="Top" Value="{Binding CurrentProjectCounter, Mode=OneWay}" Maximum="{Binding MaxProjectCounter, Mode=OneWay}" Foreground="{Binding CurrentStateBrush}"/>
+                    <ProgressBar x:Name="TotalWorkProgressBar" Height="20" Margin="0,26,124,0" VerticalAlignment="Top" Value="{Binding CurrentProjectCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxProjectCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding CurrentStateBrush}"/>
                     <Label x:Name="CurrentWorkloadLabel" Content="{Binding CurrentProgressText}" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top" />
-                    <ProgressBar x:Name="CurrentWorkloadBar" Height="20" Margin="0,77,124,0" VerticalAlignment="Top" Value="{Binding CurrentFileCounter, Mode=OneWay}" Maximum="{Binding MaxFileCounter, Mode=OneWay}" Foreground="{Binding CurrentStateBrush}"/>
+                    <ProgressBar x:Name="CurrentWorkloadBar" Height="20" Margin="0,77,124,0" VerticalAlignment="Top" Value="{Binding CurrentFileCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxFileCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding CurrentStateBrush}"/>
                     <Button x:Name="CompileButton" Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1" Command="{Binding StartCompilerCommand}" Visibility="{Binding IsCompilerButtonVisible}"/>
                     <Button x:Name="CancelCompileButton" Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" UseLayoutRounding="True" Height="20" Padding="2,1,2,1" Command="{Binding CancelCompilerCommand}" Visibility="{Binding IsCancelButtonVisible}"/>
 
