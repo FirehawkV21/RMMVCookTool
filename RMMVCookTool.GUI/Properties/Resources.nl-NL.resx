@@ -180,10 +180,6 @@
   <data name="JavaScriptFlagsUiText" xml:space="preserve">
     <value>JavaScript markeringen</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="Manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\manual.rtf;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1253</value>
-  </data>
   <data name="MinimumHeightUiText" xml:space="preserve">
     <value>Minimale hoogte</value>
   </data>
@@ -339,7 +335,7 @@
     <value>Over...</value>
   </data>
   <data name="ProgramVersionLabelUiText" xml:space="preserve">
-    <value>Versie R3.02</value>
+    <value>Version R4.00</value>
   </data>
   <data name="DeveloperCreditUiText" xml:space="preserve">
     <value>Ontwikkeld door Studio ACE(AceOfAces). Gelicenseerd onder de MIT licentie.</value>
