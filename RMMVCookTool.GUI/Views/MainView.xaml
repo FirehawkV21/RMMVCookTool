@@ -17,9 +17,9 @@
                 </DockPanel>
                 <DockPanel>
                     <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.FileExtensionText}" DockPanel.Dock="Left" Margin="5,0,5,0" />
-                    <TextBlock Text="{Binding FileExtension}" />
+                    <TextBlock Text="{Binding Setup.FileExtension}" />
                     <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.RemoveSourceFilesAfterCompiling}" Margin="5,0,5,0"/>
-                    <TextBlock Text="{Binding RemoveSourceCodeAfterCompiling}"/>
+                    <TextBlock Text="{Binding Setup.RemoveSource}"/>
                 </DockPanel>
                 <DockPanel>
                     <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.CompressFilesText}" Margin="5,0,5,0"/>
@@ -42,7 +42,7 @@
             <GroupBox Header="{x:Static properties:Resources.SettingsUiText}">
                 <Grid>
                     <Label Content="{x:Static properties:Resources.NwjsLZocationUiText}" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
-                    <TextBox x:Name="NwjsLocation" Margin="5,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top"  AllowDrop="True" />
+                    <TextBox x:Name="NwjsLocation" Margin="5,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top"  AllowDrop="True" Text="{Binding SdkLocation}" />
                     <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" Command="{Binding BrowseSDKCommand}" Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" IsEnabled="{Binding AreSettingsAccessible}"/>
                     <Button x:Name="DefaultProjectSettingsButton" Content="{x:Static properties:Resources.DefaultSettingsButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" Command="{Binding DefaultProjectSettingsCommand}" IsEnabled="{Binding AreSettingsAccessible}" />
                 </Grid>

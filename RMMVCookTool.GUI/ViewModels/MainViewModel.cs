@@ -60,6 +60,8 @@ public class MainViewModel : BindableBase
     public DelegateCommand EditProjectFileCommand { get; private set; }
     public DelegateCommand BrowseSDKCommand { get; private set; }
     public DelegateCommand DefaultProjectSettingsCommand { get; private set; }
+    public DelegateCommand ProjectSettingsCommand { get; private set; }
+    public DelegateCommand EditMetadataCommand { get; private set; }
     #endregion
     #region Constructor Code
     public MainViewModel(IDialogService dialogService)
@@ -72,6 +74,8 @@ public class MainViewModel : BindableBase
         StartCompilerCommand = new(StartCompilerWorkload);
         CancelCompilerCommand = new(CancelCompilerWorkload);
         DefaultProjectSettingsCommand = new(EditDefaultProjectSettings, CheckSettingsAccess);
+        ProjectSettingsCommand = new(EditProjectSettings, CheckSettingsAccess);
+        EditMetadataCommand = new(EditProjectMetadata, CheckSettingsAccess);
         SettingsManager = new();
         SdkLocation = SettingsManager.Settings.NwjsLocation;
         dialogManager = dialogService;
@@ -290,14 +294,7 @@ public class MainViewModel : BindableBase
         };
         bool? pickerResult = pickJsFolder.ShowDialog();
         if (pickerResult != true) return;
-        if (pickJsFolder.SelectedPath != null)
-        {
-            ProjectList.Add(new CompilerProject(pickJsFolder.SelectedPath, SettingsManager.Settings.DefaultProjectSettings.FileExtension,
-                SettingsManager.Settings.DefaultProjectSettings.RemoveSourceFiles,
-                SettingsManager.Settings.DefaultProjectSettings.CompressProjectFiles,
-                SettingsManager.Settings.DefaultProjectSettings.RemoveFilesAfterCompression, SettingsManager.Settings.DefaultProjectSettings.CompressionLevel));
-
-        }
+        if (pickJsFolder.SelectedPath != null) ProjectList.Add(new CompilerProject(pickJsFolder.SelectedPath, SettingsManager.Settings.DefaultProjectSettings));
     }
 
     private void RemoveSelectedProjects()
@@ -330,21 +327,37 @@ public class MainViewModel : BindableBase
         }
     }
 
-    private bool CheckSettingsAccess()
-    {
-        return AreSettingsAccessible;
-    }
+    private bool CheckSettingsAccess() => AreSettingsAccessible;
     private void CancelCompilerWorkload() => _compilerWorker.CancelAsync();
     
     private void EditDefaultProjectSettings()
     {
-        ProjectSettings tempSettings = new();
+        ProjectSettings tempSettings = SettingsManager.Settings.DefaultProjectSettings;
         bool update = EditProjectSettings(ref tempSettings, Resources.DefaultProjectSettingsUiText);
         if (update)
         {
             SettingsManager.Settings.DefaultProjectSettings = tempSettings;
             SettingsManager.SaveSettings();
             MessageDialog.ThrowCompleteMessage(Resources.DefaultSettingsUpdatedText, Resources.DefaultSettingsUpdatedMessage);
+        }
+    }
+
+    private void EditProjectSettings()
+    {
+        if (SelectedProjectList.Count == 0)
+        {
+            MessageDialog.ThrowWarningMessage(Resources.WarningText, Resources.ProjectNotSelectedMessage,
+                Resources.ProjectMessageNotSelected_Details);
+        }
+        else
+        {
+            ProjectSettings tempSettings = SelectedProjectList[0].Setup;
+            bool update = EditProjectSettings(ref tempSettings, Resources.ProjectSettingsUiText);
+            if (update)
+            {
+                SelectedProjectList[0].Setup = tempSettings;
+                MessageDialog.ThrowCompleteMessage(Resources.SProjectSettingsUpdatedText);
+            }
         }
     }
 
@@ -378,6 +391,25 @@ public class MainViewModel : BindableBase
         settings.CompressProjectFiles = param.GetValue<bool>("compressFiles");
         settings.RemoveFilesAfterCompression = param.GetValue<bool>("removeAfterCompression");
         settings.CompressionLevel = param.GetValue<int>("compressionLevel");
+    }
+
+    private void EditProjectMetadata()
+    {
+        if (SelectedProjectList.Count == 0)
+        {
+            MessageDialog.ThrowWarningMessage(Resources.WarningText, Resources.ProjectNotSelectedMessage,
+                Resources.ProjectMessageNotSelected_Details);
+        }
+        else
+        {
+            dialogManager.ShowDialog("ProjectMetadata", new DialogParameters($"fileLocation={SelectedProjectList[0].ProjectLocation}"), r =>
+            {
+                if (r.Result == ButtonResult.OK)
+                {
+                   //Left intentionally blank.
+                }
+            });
+        }
     }
     #endregion
 }

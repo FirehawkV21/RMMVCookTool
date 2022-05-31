@@ -14,7 +14,7 @@ internal class ProjectSettingsViewModel : BindableBase, IDialogAware
     public string Title { get; private set; }
     public string FileExtension { get => fileExtension; set => SetProperty(ref fileExtension, value); }
     public bool RemoveSource { get => removeSource; set => SetProperty(ref removeSource, value); }
-    public bool CompressFiles { get => compressFiles; set => compressFiles = SetProperty(ref compressFiles, value); }
+    public bool CompressFiles { get => compressFiles; set => SetProperty(ref compressFiles, value); }
     public bool RemoveAfterCompression { get => removeAfterCompression; set => SetProperty(ref removeAfterCompression, value); }
     public int CompressionLevel { get => compressionLevel; set => SetProperty(ref compressionLevel, value); }
 

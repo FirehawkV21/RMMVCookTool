@@ -37,6 +37,14 @@ public class CompilerProject : CompilerProjectBase
         FileMap = new List<string>();
         FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }
+    
+    public CompilerProject(string project, in ProjectSettings settings)
+    {
+        ProjectLocation = project;
+        Setup = settings;
+        FileMap = new List<string>();
+        FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
+    }
 
     //This method starts the nw.exe file.
     /// <summary>
