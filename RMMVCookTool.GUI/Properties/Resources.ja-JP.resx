@@ -180,10 +180,6 @@
   <data name="JavaScriptFlagsUiText" xml:space="preserve">
     <value>JavaScript フラグ</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="Manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\manual.rtf;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1253</value>
-  </data>
   <data name="MinimumHeightUiText" xml:space="preserve">
     <value>最小高さ</value>
   </data>
@@ -339,7 +335,7 @@
     <value>この機能について...</value>
   </data>
   <data name="ProgramVersionLabelUiText" xml:space="preserve">
-    <value>バージョン R3.02</value>
+    <value>Version R4.00</value>
   </data>
   <data name="DeveloperCreditUiText" xml:space="preserve">
     <value>Studio ACE(AceOfAces)によって開発されました。MITライセンスの下でライセンスされています。</value>
