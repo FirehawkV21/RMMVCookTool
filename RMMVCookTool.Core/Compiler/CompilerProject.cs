@@ -10,20 +10,12 @@ public class CompilerProject : CompilerProjectBase
     public string GameFilesLocation { get; set; }
     public ProjectSettings Setup { get; set; }
 
-    public CompilerProject() => Setup = new()
-    {
-        FileExtension = ".bin",
-        CompressionLevel = 0
-    };
+    public CompilerProject() => Setup = new();
 
     public CompilerProject(string project)
     { 
         ProjectLocation = project;
-        Setup = new()
-        {
-            FileExtension = ".bin",
-            CompressionLevel = 0
-        };
+        Setup = new();
         FileMap = new List<string>();
         FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }

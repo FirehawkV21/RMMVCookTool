@@ -46,7 +46,7 @@ internal class ProjectSettingsViewModel : BindableBase, IDialogAware
     private void SaveSettings()
     {
         ButtonResult button = ButtonResult.OK;
-        var result = new DialogResult(button);
+        DialogResult result = new DialogResult(button);
         result.Parameters.Add("fileExtension", FileExtension);
         result.Parameters.Add("removeSource", RemoveSource);
         result.Parameters.Add("compressFiles", CompressFiles);

@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace RMMVCookTool.GUI.ViewModels;
@@ -50,6 +51,7 @@ public class MainViewModel : BindableBase
     public string SdkLocation { get => sdkLocation; set => SetProperty(ref sdkLocation, value); }
     public Visibility IsCompilerButtonVisible { get => compilerButtonVisible; set => SetProperty(ref compilerButtonVisible, value); }
     public Visibility IsCancelButtonVisible { get => cancelButtonVisible; set => SetProperty(ref cancelButtonVisible, value); }
+    
     #endregion
     #region Commands
     public DelegateCommand StartCompilerCommand { get; private set; }
@@ -106,7 +108,7 @@ public class MainViewModel : BindableBase
                 }
                 _compilerStatusReport = 0;
                 _compilerWorker.ReportProgress(currentProject + 1);
-                ProjectList[currentProject].CompilerInfo.Value.FileName = Path.Combine(AppSettings.Default.SDKLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
+                ProjectList[currentProject].CompilerInfo.Value.FileName = Path.Combine(SdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
                 ProjectList[currentProject].GameFilesLocation = CompilerUtilities.GetProjectFilesLocation(Path.Combine(ProjectList[currentProject].ProjectLocation, "package.json"));
                 if (ProjectList[currentProject].GameFilesLocation is "Null" or "Unknown")
                 {
@@ -354,6 +356,11 @@ public class MainViewModel : BindableBase
             {
                 ProjectList[SelectedProjectIndex].Setup = tempSettings;
                 MessageDialog.ThrowCompleteMessage(Resources.SProjectSettingsUpdatedText);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(ProjectList);
+                    view.Refresh();
+                });
             }
         }
     }
@@ -375,7 +382,7 @@ public class MainViewModel : BindableBase
         dialogManager.ShowDialog("ProjectSettings", param, r => {
             if (r.Result == ButtonResult.OK)
             {
-                WriteSettings(ref tempSettings, param);
+                WriteSettings(ref tempSettings, r.Parameters);
                 isUpdated = true;
             }
         });
@@ -383,7 +390,7 @@ public class MainViewModel : BindableBase
         return isUpdated;
     }
 
-    private static void WriteSettings(ref ProjectSettings settings, in DialogParameters param)
+    private static void WriteSettings(ref ProjectSettings settings, in IDialogParameters param)
     {
         settings.FileExtension = param.GetValue<string>("fileExtension");
         settings.RemoveSourceFiles = param.GetValue<bool>("removeSource");
