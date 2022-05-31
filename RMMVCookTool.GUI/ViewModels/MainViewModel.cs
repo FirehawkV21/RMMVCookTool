@@ -27,20 +27,20 @@ public class MainViewModel : BindableBase
     private string currentProjectText;
     private string currentProgressText;
     private ObservableCollection<CompilerProject> projectList;
-    private ObservableCollection<CompilerProject> selectedProjectList;
+    private int selectedProjectIndex;
     private readonly StringBuilder _nextFile = new();
     private SolidColorBrush currentBrush;
     private bool settingsAccessible = true;
     private string sdkLocation;
     private Visibility compilerButtonVisible = Visibility.Visible;
     private Visibility cancelButtonVisible = Visibility.Hidden;
-    private CompilerSettingsManager SettingsManager;
-    private IDialogService dialogManager;
+    private readonly CompilerSettingsManager SettingsManager;
+    private readonly IDialogService dialogManager;
 
     public string CurrentProgressText { get => currentProgressText; set => SetProperty(ref currentProgressText, value); }
     public string CurrentProjectText { get => currentProjectText; set => SetProperty(ref currentProjectText, value); }
     public ObservableCollection<CompilerProject> ProjectList { get => projectList; set => SetProperty(ref projectList, value); }
-    public ObservableCollection<CompilerProject> SelectedProjectList { get => selectedProjectList; set => SetProperty(ref selectedProjectList, value); }
+    public int SelectedProjectIndex { get => selectedProjectIndex; set => SetProperty(ref selectedProjectIndex, value); }
     public int CurrentFileCounter { get => currentFile; set => SetProperty(ref currentFile, value); }
     public int MaxFileCounter { get => maxFiles; set => SetProperty(ref maxFiles, value); }
     public int CurrentProjectCounter { get => currentProject; set => SetProperty(ref maxProject, value); }
@@ -67,15 +67,15 @@ public class MainViewModel : BindableBase
     public MainViewModel(IDialogService dialogService)
     {
         projectList = new();
-        selectedProjectList = new();
-        BrowseSDKCommand = new DelegateCommand(FindSdkFolder, CheckSettingsAccess);
-        AddProjectCommand = new(FindProjectFolder, CheckSettingsAccess);
-        RemoveProjectCommand = new(RemoveSelectedProjects, CheckSettingsAccess);
-        StartCompilerCommand = new(StartCompilerWorkload);
-        CancelCompilerCommand = new(CancelCompilerWorkload);
-        DefaultProjectSettingsCommand = new(EditDefaultProjectSettings, CheckSettingsAccess);
-        ProjectSettingsCommand = new(EditProjectSettings, CheckSettingsAccess);
-        EditMetadataCommand = new(EditProjectMetadata, CheckSettingsAccess);
+        BrowseSDKCommand = new DelegateCommand(FindSdkFolder, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
+        AddProjectCommand = new DelegateCommand(FindProjectFolder, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
+        RemoveProjectCommand = new DelegateCommand(RemoveSelectedProjects, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
+        StartCompilerCommand = new DelegateCommand(StartCompilerWorkload);
+        CancelCompilerCommand = new DelegateCommand(CancelCompilerWorkload);
+        DefaultProjectSettingsCommand = new DelegateCommand(EditDefaultProjectSettings, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
+        ProjectSettingsCommand = new DelegateCommand(EditProjectSettings, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
+        EditMetadataCommand = new DelegateCommand(EditProjectMetadata, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
+        IsCancelButtonVisible = Visibility.Hidden;
         SettingsManager = new();
         SdkLocation = SettingsManager.Settings.NwjsLocation;
         dialogManager = dialogService;
@@ -299,10 +299,7 @@ public class MainViewModel : BindableBase
 
     private void RemoveSelectedProjects()
     {
-        foreach(CompilerProject project in SelectedProjectList)
-        {
-            ProjectList.Remove(project);
-        }
+           if (SelectedProjectIndex >= -1) ProjectList.RemoveAt(SelectedProjectIndex);
     }
 
     private void StartCompilerWorkload()
@@ -344,18 +341,18 @@ public class MainViewModel : BindableBase
 
     private void EditProjectSettings()
     {
-        if (SelectedProjectList.Count == 0)
+        if (SelectedProjectIndex == -1)
         {
             MessageDialog.ThrowWarningMessage(Resources.WarningText, Resources.ProjectNotSelectedMessage,
                 Resources.ProjectMessageNotSelected_Details);
         }
         else
         {
-            ProjectSettings tempSettings = SelectedProjectList[0].Setup;
+            ProjectSettings tempSettings = ProjectList[SelectedProjectIndex].Setup;
             bool update = EditProjectSettings(ref tempSettings, Resources.ProjectSettingsUiText);
             if (update)
             {
-                SelectedProjectList[0].Setup = tempSettings;
+                ProjectList[SelectedProjectIndex].Setup = tempSettings;
                 MessageDialog.ThrowCompleteMessage(Resources.SProjectSettingsUpdatedText);
             }
         }
@@ -365,13 +362,15 @@ public class MainViewModel : BindableBase
     {
         ProjectSettings tempSettings = new();
         bool isUpdated = false;
-        DialogParameters param = new();
-        param.Add("title", TitleBarText);
-        param.Add("fileExtension", settings.FileExtension);
-        param.Add("removeSource", settings.RemoveSourceFiles);
-        param.Add("compressFiles", settings.CompressProjectFiles);
-        param.Add("removeAfterCompression", settings.RemoveFilesAfterCompression);
-        param.Add("compressionLevel", settings.CompressionLevel);
+        DialogParameters param = new()
+        {
+            { "title", TitleBarText },
+            { "fileExtension", settings.FileExtension },
+            { "removeSource", settings.RemoveSourceFiles },
+            { "compressFiles", settings.CompressProjectFiles },
+            { "removeAfterCompression", settings.RemoveFilesAfterCompression },
+            { "compressionLevel", settings.CompressionLevel }
+        };
 
         dialogManager.ShowDialog("ProjectSettings", param, r => {
             if (r.Result == ButtonResult.OK)
@@ -384,7 +383,7 @@ public class MainViewModel : BindableBase
         return isUpdated;
     }
 
-    private void WriteSettings(ref ProjectSettings settings, in DialogParameters param)
+    private static void WriteSettings(ref ProjectSettings settings, in DialogParameters param)
     {
         settings.FileExtension = param.GetValue<string>("fileExtension");
         settings.RemoveSourceFiles = param.GetValue<bool>("removeSource");
@@ -395,14 +394,14 @@ public class MainViewModel : BindableBase
 
     private void EditProjectMetadata()
     {
-        if (SelectedProjectList.Count == 0)
+        if (SelectedProjectIndex == -1)
         {
             MessageDialog.ThrowWarningMessage(Resources.WarningText, Resources.ProjectNotSelectedMessage,
                 Resources.ProjectMessageNotSelected_Details);
         }
         else
         {
-            dialogManager.ShowDialog("ProjectMetadata", new DialogParameters($"fileLocation={SelectedProjectList[0].ProjectLocation}"), r =>
+            dialogManager.ShowDialog("MetadataEditor", new DialogParameters($"location={ProjectList[SelectedProjectIndex].ProjectLocation}"), r =>
             {
                 if (r.Result == ButtonResult.OK)
                 {
