@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using RMMVCookTool.Core.ProjectTemplate;
 using System.Text.Json;
@@ -21,6 +22,7 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
     private string gameName;
     private string gameIconLocation;
     private string windowTitle;
+    private string windowId;
     private bool isWindowResizable;
     private int windowModeIndex;
     private int windowStartLocation;
@@ -68,6 +70,12 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
             ProjectMetadata.WindowProperties.WindowTitle = value;
             SetProperty(ref windowTitle, value);
         } }
+    public string WindowId {
+        get => windowId; set {
+            ProjectMetadata.WindowProperties.WindowId = value;
+            SetProperty(ref windowId, value);
+        }
+    }
     public bool IsWindowResizable { get => isWindowResizable; set {
             ProjectMetadata.WindowProperties.IsResizable = value;
             SetProperty(ref isWindowResizable, value);
@@ -117,6 +125,17 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
         } }
     #endregion
 
+    #region Commands
+    public DelegateCommand SaveCommand { get; private set; }
+    public DelegateCommand CloseCommand { get; private set; }
+    #endregion
+
+    public MetadataEditorViewModel()
+    {
+        SaveCommand = new DelegateCommand(SaveJsonFile);
+        CloseCommand = new DelegateCommand(CloseDialog);
+    }
+
     public bool CanCloseDialog() => true;
     public void OnDialogClosed()
     {
@@ -131,6 +150,8 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
             ProjectMetadata = JsonSerializer.Deserialize(importFile, ProjectMetadataSerializer.Default.ProjectMetadata);
         }
         else ProjectMetadata = new();
+        ConvertValues();
+        
     }
 
     public void SaveJsonFile()
@@ -163,5 +184,33 @@ public class MetadataEditorViewModel : BindableBase, IDialogAware
     {
         ButtonResult result = ButtonResult.OK;
         RequestClose.Invoke(new DialogResult(result));
+    }
+
+    private void ConvertValues()
+    {
+        GameId = ProjectMetadata.GameName;
+        IndexFileLocation = ProjectMetadata.MainFile;
+        GameVersion = ProjectMetadata.GameVersion;
+        EnableNodeJs = ProjectMetadata.UseNodeJs;
+        ChromiumFlags = ProjectMetadata.ChromiumFlags;
+        JsFlags = ProjectMetadata.JsFlags;
+        GameName = ProjectMetadata.GameTitle;
+        GameIconLocation = ProjectMetadata.WindowProperties.WindowIcon;
+        WindowTitle = ProjectMetadata.WindowProperties.WindowTitle;
+        WindowId = ProjectMetadata.WindowProperties.WindowId;
+        IsWindowResizable = ProjectMetadata.WindowProperties.IsResizable;
+        if (ProjectMetadata.WindowProperties.StartAtFullScreen) WindowModeIndex = 1;
+        else if (ProjectMetadata.WindowProperties.RunInKioskMode) WindowModeIndex = 2;
+        else WindowModeIndex = 0;
+        WindowStartLocation = (ProjectMetadata.WindowProperties.ScreenPosition) switch
+        {
+            "mouse" => 2,
+            "center" => 1,
+            _ => 0,
+        };
+        WindowHeight = (int)ProjectMetadata.WindowProperties.WindowHeight;
+        WindowWidth = (int)ProjectMetadata.WindowProperties.WindowWidth;
+        MinHeight = (int)ProjectMetadata.WindowProperties.MinimumHeight;
+        MinWidth = (int)ProjectMetadata.WindowProperties.MinimumWidth;
     }
 }

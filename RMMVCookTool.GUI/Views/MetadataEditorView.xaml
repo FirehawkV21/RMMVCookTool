@@ -11,7 +11,7 @@
         <Style TargetType="Window">
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
             <Setter Property="ResizeMode" Value="NoResize"/>
-            <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+            <Setter Property="SizeToContent" Value="Height"/>
             <Setter Property="WindowStyle" Value="ToolWindow"/>
         </Style>
     </prism:Dialog.WindowStyle>
@@ -30,23 +30,23 @@
                     <GroupBox Header="{x:Static properties:Resources.EssentialsGroupString}">
                         <Grid>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.GameIDUiString}" VerticalAlignment="Top" Margin="5,5,0,0"/>
-                            <TextBox x:Name="GameIdTextBox" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,21,5,0"/>
+                            <TextBox x:Name="GameIdTextBox" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,21,5,0" Text="{Binding GameId}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.HTMLFileLocationUiString}" VerticalAlignment="Top" Margin="5,44,0,0"/>
-                            <TextBox x:Name="FileLocationTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,60,61,0"/>
+                            <TextBox x:Name="FileLocationTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,60,61,0" Text="{Binding IndexFileLocation}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,83,0,0"><Run Text="{x:Static properties:Resources.GameVersionUiString}"/></TextBlock>
-                            <TextBox x:Name="VersionTextBox" TextWrapping="Wrap" Margin="5,99,5,0" Height="23" VerticalAlignment="Top"/>
+                            <TextBox x:Name="VersionTextBox" TextWrapping="Wrap" Margin="5,99,5,0" Height="23" VerticalAlignment="Top" Text="{Binding GameVersion}"/>
                             <Button x:Name="BrowseForHtmlFileButton" Content="{x:Static properties:Resources.BrowseUiText}" VerticalAlignment="Top" Margin="0,60,5,0" Height="23" HorizontalAlignment="Right"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="{x:Static properties:Resources.NWJsFeaturesGroupText}" Grid.Row="1">
                         <StackPanel>
-                            <CheckBox x:Name="EnableNodeJSCheckBox" Content="{x:Static properties:Resources.EnableNodeJSCheckBoxText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0"/>
+                            <CheckBox x:Name="EnableNodeJSCheckBox" Content="{x:Static properties:Resources.EnableNodeJSCheckBoxText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" IsChecked="{Binding EnableNodeJs}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,0,0,0" Text="{x:Static properties:Resources.ChromiumFlagsUiText}"/>
-                            <TextBox x:Name="ChromeFlagsTextBox" TextWrapping="Wrap" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                            <TextBox x:Name="ChromeFlagsTextBox" TextWrapping="Wrap" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Stretch" Text="{Binding ChromiumFlags}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,0,0,0"><Run Text="{x:Static properties:Resources.JavaScriptFlagsUiText}"/></TextBlock>
-                            <TextBox x:Name="JsFlagsTextBox" TextWrapping="Wrap" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                            <TextBox x:Name="JsFlagsTextBox" TextWrapping="Wrap" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Stretch" Text="{Binding JsFlags}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="{x:Static properties:Resources.GameNameUiText}" Margin="5,0,0,0"/>
-                            <TextBox x:Name="GameNameTextBox" TextWrapping="Wrap" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                            <TextBox x:Name="GameNameTextBox" TextWrapping="Wrap" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Stretch" Text="{Binding GameName}"/>
 
                         </StackPanel>
                     </GroupBox>
@@ -61,10 +61,10 @@
                     <GroupBox Header="{x:Static properties:Resources.WindowGroupText}" Grid.ColumnSpan="2">
                         <Grid>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,0,0,0"><Run Text="{x:Static properties:Resources.IconLocationUiText}"/></TextBlock>
-                            <TextBox x:Name="IconLocationTextBox" TextWrapping="Wrap" Margin="5,16,85,0" Height="23" VerticalAlignment="Top"/>
+                            <TextBox x:Name="IconLocationTextBox" TextWrapping="Wrap" Margin="5,16,85,0" Height="23" VerticalAlignment="Top" Text="{Binding GameIconLocation}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,39,0,0"><Run Text="{x:Static properties:Resources.WindowTitleUiText}"/></TextBlock>
-                            <TextBox x:Name="WindowTitleTextBox" TextWrapping="Wrap" Margin="5,55,5,0" Height="23" VerticalAlignment="Top"/>
-                            <TextBox x:Name="WindowIdTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,93,5,0"/>
+                            <TextBox x:Name="WindowTitleTextBox" TextWrapping="Wrap" Margin="5,55,5,0" Height="23" VerticalAlignment="Top" Text="{Binding WindowTitle}"/>
+                            <TextBox x:Name="WindowIdTextBox" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,93,5,0" Text="{Binding WindowId}"/>
                             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Window ID" VerticalAlignment="Top" Margin="5,78,0,0"/>
                             <Button x:Name="BrowseForIconButton" Content="{x:Static properties:Resources.BrowseUiText}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="341,16,5,0" Height="23"/>
 
@@ -78,15 +78,15 @@
                             </Grid.ColumnDefinitions>
                             <GroupBox Header="{x:Static properties:Resources.SettingsUiText}" Margin="0,0,1,0">
                                 <StackPanel>
-                                    <CheckBox x:Name="ResizableWindowCheckBox" Content="{x:Static properties:Resources.ResizableWindowUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0"/>
+                                    <CheckBox x:Name="ResizableWindowCheckBox" Content="{x:Static properties:Resources.ResizableWindowUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" IsChecked="{Binding IsWindowResizable}"/>
                                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="5,0,0,0"><Run Text="{x:Static properties:Resources.StartUiText}"/></TextBlock>
-                                    <ComboBox x:Name="WindowModeList" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" SelectedIndex="0">
+                                    <ComboBox x:Name="WindowModeList" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" SelectedIndex="{Binding WindowModeIndex}">
                                         <ComboBoxItem Content="{x:Static properties:Resources.WindowedListItemText}"/>
                                         <ComboBoxItem Content="{x:Static properties:Resources.InFullScreenListItemText}"/>
                                         <ComboBoxItem Content="{x:Static properties:Resources.InKioskModeListItemText}"/>
                                     </ComboBox>
                                     <Label Content="{x:Static properties:Resources.WindowPositionUiText}" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Padding="0,0,0,0"/>
-                                    <ComboBox x:Name="WindowLocationList" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" SelectedIndex="0">
+                                    <ComboBox x:Name="WindowLocationList" Margin="5,0,5,0" Height="23" VerticalAlignment="Top" SelectedIndex="{Binding WindowStartLocation}">
                                         <ComboBoxItem Content="{x:Static properties:Resources.NoneListItemText}"/>
                                         <ComboBoxItem Content="{x:Static properties:Resources.ScreenCenterListItemText}"/>
                                         <ComboBoxItem Content="{x:Static properties:Resources.MouseCursorListItemText}"/>
@@ -106,10 +106,10 @@
                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.MinimumWidthUiText}" VerticalAlignment="Top" Margin="5,0,0,0"/>
                                     </StackPanel>
                                     <StackPanel Grid.Column="1">
-                                        <cntrl:UIntegerUpDown x:Name="HeightNumber"  VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" />
-                                        <cntrl:UIntegerUpDown x:Name="MinimumHeightNumber"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                        <cntrl:UIntegerUpDown x:Name="WidthNumber" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="5,5,0,0" />
-                                        <cntrl:UIntegerUpDown x:Name="MinimumWidthNumber" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                        <cntrl:UIntegerUpDown x:Name="HeightNumber"  VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Value="{Binding WindowHeight}"/>
+                                        <cntrl:UIntegerUpDown x:Name="MinimumHeightNumber"  HorizontalAlignment="Left" VerticalAlignment="Top" Value="{Binding MinHeight}"/>
+                                        <cntrl:UIntegerUpDown x:Name="WidthNumber" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="5,5,0,0" Value="{Binding WindowWidth}"/>
+                                        <cntrl:UIntegerUpDown x:Name="MinimumWidthNumber" VerticalAlignment="Top" HorizontalAlignment="Left" Value="{Binding MinWidth}"/>
                                     </StackPanel>
                                 </Grid>
 
@@ -122,9 +122,8 @@
             </TabItem>
         </TabControl>
         <WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <CheckBox x:Name="MinifyJsonFileCheckBox" Content="{x:Static properties:Resources.MinifyPackageFileUiText}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Padding="5,0,5,0"/>
-            <Button x:Name="SaveJsonButton" Content="{x:Static properties:Resources.SaveButtonText}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Height="26" Grid.Row="1" Margin="0,5,0,0"/>
-            <Button x:Name="CloseButton" Content="{x:Static properties:Resources.CloseButtonText}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Height="26" Grid.Row="1" Margin="5,5,5,0"/>
+            <Button x:Name="SaveJsonButton" Content="{x:Static properties:Resources.SaveButtonText}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Height="26" Grid.Row="1" Margin="0,5,0,0" Command="{Binding SaveCommand}"/>
+            <Button x:Name="CloseButton" Content="{x:Static properties:Resources.CloseButtonText}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Height="26" Grid.Row="1" Margin="5,5,5,0" Command="{Binding CloseCommand}"/>
         </WrapPanel>
 
     </Grid>

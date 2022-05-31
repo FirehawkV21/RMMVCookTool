@@ -1,6 +1,5 @@
 ﻿using System.IO.Compression;
 using RMMVCookTool.Core.Utilities;
-using System.Linq;
 
 namespace RMMVCookTool.Core.Compiler;
 
@@ -11,17 +10,20 @@ public class CompilerProject : CompilerProjectBase
     public string GameFilesLocation { get; set; }
     public ProjectSettings Setup { get; set; }
 
-    public CompilerProject()
+    public CompilerProject() => Setup = new()
     {
-        Setup.FileExtension = ".bin";
-        Setup.CompressionLevel = 0;
-    }
+        FileExtension = ".bin",
+        CompressionLevel = 0
+    };
 
     public CompilerProject(string project)
-    {
+    { 
         ProjectLocation = project;
-        Setup.FileExtension = ".bin";
-        Setup.CompressionLevel = 0;
+        Setup = new()
+        {
+            FileExtension = ".bin",
+            CompressionLevel = 0
+        };
         FileMap = new List<string>();
         FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }
@@ -29,11 +31,14 @@ public class CompilerProject : CompilerProjectBase
     public CompilerProject(string project, string fileExtension, bool removeAfterCompile, bool compressToPackage, bool removeAfterCompression, int compressionLevel)
     {
         ProjectLocation = project;
-        Setup.RemoveSourceFiles = removeAfterCompile;
-        Setup.FileExtension = fileExtension;
-        Setup.CompressProjectFiles = compressToPackage;
-        Setup.RemoveFilesAfterCompression = removeAfterCompression;
-        Setup.CompressionLevel = compressionLevel;
+        Setup = new()
+        {
+            RemoveSourceFiles = removeAfterCompile,
+            FileExtension = fileExtension,
+            CompressProjectFiles = compressToPackage,
+            RemoveFilesAfterCompression = removeAfterCompression,
+            CompressionLevel = compressionLevel
+        };
         FileMap = new List<string>();
         FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }

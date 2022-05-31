@@ -27,12 +27,12 @@ public class CompilerSettingsManager
         if (File.Exists(SettingsFileLocation))
         {
             string inputFile = File.ReadAllText(SettingsFileLocation);
-            Settings = JsonSerializer.Deserialize<SettingsMetadata>(inputFile);
+            Settings = JsonSerializer.Deserialize(inputFile, SettingsMetadataSerializer.Default.SettingsMetadata);
         }
     }
     public void SaveSettings()
     {
-        string output = JsonSerializer.Serialize(Settings);
+        string output = JsonSerializer.Serialize(Settings, SettingsMetadataSerializer.Default.SettingsMetadata);
         File.WriteAllText(SettingsFileLocation, output);
     }
 
