@@ -124,7 +124,7 @@
     <value>= RPG Maker MV Cook Tool (Έκδοση .NET Core CLI)</value>
   </data>
   <data name="ProgramVersionString" xml:space="preserve">
-    <value>= Version R2.02 ({0})</value>
+    <value>= Έκδοση R2.02 ({0})</value>
     <comment>String ID: ProgramVersionString
 This is the command line app's version string.</comment>
   </data>
@@ -299,7 +299,7 @@ This is the command line app's version string.</comment>
     <value>[orange1]Setup[/]</value>
   </data>
   <data name="WorkTitle" xml:space="preserve">
-    <value>[orange1]Work[/]</value>
+    <value>[orange1]Εργασία[/]</value>
   </data>
   <data name="SDKLocationEntry" xml:space="preserve">
     <value>SDK Location</value>
@@ -311,25 +311,25 @@ This is the command line app's version string.</comment>
     <value>File Extension</value>
   </data>
   <data name="CompressionEntry" xml:space="preserve">
-    <value>Compression</value>
+    <value>Συμπίεση</value>
   </data>
   <data name="CompressionLevelEntry" xml:space="preserve">
-    <value>Compression Level</value>
+    <value>Επίπεδο συμπίεσης</value>
   </data>
   <data name="NoCompression" xml:space="preserve">
-    <value>No compression</value>
+    <value>Χωρίς συμπίεση</value>
   </data>
   <data name="FastestCompression" xml:space="preserve">
-    <value>Fastest</value>
+    <value>Ταχύτατη</value>
   </data>
   <data name="OptimalCompression" xml:space="preserve">
-    <value>Optimal</value>
+    <value>Βέλτιστη</value>
   </data>
   <data name="CompressAndRemoveEntry" xml:space="preserve">
     <value>Compress and remove source files</value>
   </data>
   <data name="CompressOnlyEntry" xml:space="preserve">
-    <value>Compress only</value>
+    <value>Μόνο συμπίεση</value>
   </data>
   <data name="DarkcyanCompilingJSFilesText" xml:space="preserve">
     <value>[darkcyan]Compiling JS files[/]</value>
@@ -341,18 +341,18 @@ This is the command line app's version string.</comment>
     <value>Test after compiling</value>
   </data>
   <data name="CommonWordYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Ναί</value>
   </data>
   <data name="CommonWordNo" xml:space="preserve">
-    <value>No</value>
+    <value>Όχι</value>
   </data>
   <data name="RemoveSourceFilesEntry" xml:space="preserve">
     <value>Remove source JS files</value>
   </data>
   <data name="SettingTitle" xml:space="preserve">
-    <value>Setting</value>
+    <value> Ρύθμιση</value>
   </data>
   <data name="ValueTitle" xml:space="preserve">
-    <value>Value</value>
+    <value>Τιμή</value>
   </data>
 </root>
