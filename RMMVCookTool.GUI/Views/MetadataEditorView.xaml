@@ -6,14 +6,18 @@
              xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
              xmlns:local="clr-namespace:RMMVCookTool.GUI.Views" xmlns:cntrl="clr-namespace:NumericUpDownLib;assembly=NumericUpDownLib" xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d"
-             d:DesignHeight="434" d:DesignWidth="466" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
+             d:DesignHeight="434" d:DesignWidth="466" d:MaxHeight="434" d:MaxWidth="466" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
             <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="SizeToContent" Value="Height"/>
+            <Setter Property="MaxHeight" Value="434"/>
+            <Setter Property="MaxWidth" Value="466"/>
             <Setter Property="WindowStyle" Value="ToolWindow"/>
         </Style>
     </prism:Dialog.WindowStyle>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
