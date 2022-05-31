@@ -4,49 +4,16 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.2.1.21358</AssemblyVersion>
-    <FileVersion>3.2.1.21358</FileVersion>
+    <AssemblyVersion>4.0.0.22151</AssemblyVersion>
+    <FileVersion>4.0.0.22151</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
-    <NeutralLanguage>en</NeutralLanguage>
-    <PackageLicenseFile></PackageLicenseFile>
     <AssemblyTitle>RPG Maker MV/MZ Cook Tool (GUI Version)</AssemblyTitle>
-    <Authors>AceOfAces</Authors>
-    <Company>Studio ACE</Company>
-    <Product>RPG Maker MV Cook Tool</Product>
-    <Version>3.2.1-20211224</Version>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    <TieredCompilation>true</TieredCompilation>
-    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+    <Version>4.0.0-20220417</Version>
     <PublishTrimmed>false</PublishTrimmed>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-    <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
     <Description>GUI version of the RPG Maker MV Cook Tool.</Description>
-    <Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <LangVersion>latest</LangVersion>
     <GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <FileAlignment>4096</FileAlignment>
-  </PropertyGroup>
-  
-   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|arm64'">
-     <FileAlignment>4096</FileAlignment>
-   </PropertyGroup>
-  
-   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM32'">
-     <FileAlignment>4096</FileAlignment>
-   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-  <FileAlignment>4096</FileAlignment>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>

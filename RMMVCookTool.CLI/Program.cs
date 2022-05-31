@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace RMMVCookTool.CLI;
 
-class Program
+internal class Program
 {
     private static readonly Lazy<CompilerProject> newProject = new(() => new CompilerProject(), true);
     private static bool _testProject;
@@ -35,9 +35,11 @@ class Program
         #region Command line arguments
         if (args.Length >= 1)
         {
-            Rule argsTab = new();
-            argsTab.Title = Resources.CommandLineArgsTitle;
-            argsTab.Alignment = Justify.Left;
+            Rule argsTab = new()
+            {
+                Title = Resources.CommandLineArgsTitle,
+                Alignment = Justify.Left
+            };
             AnsiConsole.Write(argsTab);
             Table argsTable = new();
             argsTable.AddColumn(Resources.SettingTitle);
@@ -103,9 +105,9 @@ class Program
                         if (argnum >= args.Length - 1 && args[argnum].Contains("--")) CompilerUtilities.RecordToLog($"File extension not set. Keeping the extension to .bin.", 1);
                         else
                         {
-                            newProject.Value.FileExtension = args[argnum + 1];
-                            CompilerUtilities.RecordToLog($"File extension set to .{newProject.Value.FileExtension}.", 0);
-                            argsTable.AddRow(Resources.FileExtensionEntry, newProject.Value.FileExtension);
+                            newProject.Value.Setup.FileExtension = args[argnum + 1];
+                            CompilerUtilities.RecordToLog($"File extension set to .{newProject.Value.Setup.FileExtension}.", 0);
+                            argsTable.AddRow(Resources.FileExtensionEntry, newProject.Value.Setup.FileExtension);
                             Console.ResetColor();
                         }
                         break;
@@ -164,7 +166,7 @@ class Program
                     case "--ReleaseMode":
                         _checkDeletion = 2;
                         CompilerUtilities.RecordToLog($"JS files will be removed.", 0);
-                        newProject.Value.RemoveSourceCodeAfterCompiling = true;
+                        newProject.Value.Setup.RemoveSourceFiles = true;
                         Console.ResetColor();
                         break;
 
@@ -197,21 +199,21 @@ class Program
                             {
                                 case 2:
                                     CompilerUtilities.RecordToLog($"Compression is set to No Compression.", 0);
-                                    newProject.Value.CompressionModeLevel = 2;
+                                    newProject.Value.Setup.CompressionLevel = 2;
                                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                                     Console.WriteLine(Resources.NoCompressionConfirmationText);
                                     Console.ResetColor();
                                     break;
                                 case 1:
                                     CompilerUtilities.RecordToLog($"Compression is set to Fastest.", 0);
-                                    newProject.Value.CompressionModeLevel = 1;
+                                    newProject.Value.Setup.CompressionLevel = 1;
                                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                                     Console.WriteLine(Resources.FastestCompressionConfirmationText);
                                     Console.ResetColor();
                                     break;
                                 default:
                                     CompilerUtilities.RecordToLog($"Compression is set to Optimal.", 0);
-                                    newProject.Value.CompressionModeLevel = 0;
+                                    newProject.Value.Setup.CompressionLevel = 0;
                                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                                     Console.WriteLine(Resources.OptimalCompressionCOnfirmationText);
                                     Console.ResetColor();
@@ -221,7 +223,7 @@ class Program
                         break;
                 }
             }
-        if (_compressProject < 3) switch (newProject.Value.CompressionModeLevel)
+        if (_compressProject < 3) switch (newProject.Value.Setup.CompressionLevel)
                 {
                     case 2:
                         argsTable.AddRow(Resources.CompressionLevelEntry, Resources.NoCompression);
@@ -269,9 +271,11 @@ class Program
 
         if (!_settingsSet)
         {
-            Rule setupTab = new();
-            setupTab.Title = RMMVCookTool.CLI.Properties.Resources.SetupTitle;
-            setupTab.Alignment = Justify.Left;
+            Rule setupTab = new()
+            {
+                Title = Resources.SetupTitle,
+                Alignment = Justify.Left
+            };
             AnsiConsole.Write(setupTab);
             do
             {
@@ -298,7 +302,7 @@ class Program
                      !Directory.Exists(Path.Combine(newProject.Value.ProjectLocation, "www", "js")));
 
             //Ask the user for the file extension.
-            newProject.Value.FileExtension = AnsiConsole.Prompt(new TextPrompt<string>(Resources.FileExtensionQuestion).DefaultValue(".bin").AllowEmpty());
+            newProject.Value.Setup.FileExtension = AnsiConsole.Prompt(new TextPrompt<string>(Resources.FileExtensionQuestion).DefaultValue(".bin").AllowEmpty());
             //This is the check if the tool should delete the JS files.
             _checkDeletion = AnsiConsole.Prompt(new TextPrompt<int>(Resources.WorkloadQuestion)
                 .DefaultValue(1)
@@ -308,7 +312,7 @@ class Program
                     < 1 => ValidationResult.Error(),
                     _ => ValidationResult.Success()
                 }));
-            newProject.Value.RemoveSourceCodeAfterCompiling = _checkDeletion == 2;
+            newProject.Value.Setup.RemoveSourceFiles = _checkDeletion == 2;
 
             if (_checkDeletion == 2)
             {
@@ -326,14 +330,16 @@ class Program
                 //Ask if the user would like to test with nwjs.
                 if (AnsiConsole.Confirm(Resources.TestProjectQuestion)) _testProject = true;
             }
-            CompilerUtilities.RecordToLog($"Current setup of the job:\nCompiler Location:{_sdkLocation}\nProject Location:{newProject.Value.ProjectLocation}\nFile Extension:{newProject.Value.FileExtension}\nRemove Source Files? {newProject.Value.RemoveSourceCodeAfterCompiling}\nPackage game?:{newProject.Value.CompressFilesToPackage}\nRemove game files after packaging?:{newProject.Value.RemoveFilesAfterCompression}\nCompression Mode:{newProject.Value.CompressionModeLevel}", 0);
+            CompilerUtilities.RecordToLog($"Current setup of the job:\nCompiler Location:{_sdkLocation}\nProject Location:{newProject.Value.ProjectLocation}\nFile Extension:{newProject.Value.Setup.FileExtension}\nRemove Source Files? {newProject.Value.Setup.RemoveSourceFiles}\nPackage game?:{newProject.Value.Setup.CompressProjectFiles}\nRemove game files after packaging?:{newProject.Value.Setup.RemoveFilesAfterCompression}\nCompression Mode:{newProject.Value.Setup.CompressionLevel}", 0);
         }
         #endregion
 
         #region Workload Code
-        Rule workTab = new();
-        workTab.Title = Resources.WorkTitle;
-        workTab.Alignment = Justify.Left;
+        Rule workTab = new()
+        {
+            Title = Resources.WorkTitle,
+            Alignment = Justify.Left
+        };
         AnsiConsole.Write(workTab);
         //Find the game folder.
         Stopwatch timer = new();
@@ -375,11 +381,11 @@ class Program
                 AnsiConsole.Progress()
                     .Start(progress =>
                     {
-                        var compilerTask = progress.AddTask(RMMVCookTool.CLI.Properties.Resources.DarkcyanCompilingJSFilesText);
+                        ProgressTask compilerTask = progress.AddTask(Resources.DarkcyanCompilingJSFilesText);
                         compilerTask.MaxValue = 131;
                         while (!progress.IsFinished)
                         {
-                            for (var i = 0; i < newProject.Value.FileMap.Count; i++)
+                            for (int i = 0; i < newProject.Value.FileMap.Count; i++)
                             {
                                 CompilerUtilities.RecordToLog($"Compiling {newProject.Value.FileMap[i]}...", 0);
                                 newProject.Value.CompileFile(i);
