@@ -44,7 +44,7 @@ public class MainViewModel : BindableBase
     public int SelectedProjectIndex { get => selectedProjectIndex; set => SetProperty(ref selectedProjectIndex, value); }
     public int CurrentFileCounter { get => currentFile; set => SetProperty(ref currentFile, value); }
     public int MaxFileCounter { get => maxFiles; set => SetProperty(ref maxFiles, value); }
-    public int CurrentProjectCounter { get => currentProject; set => SetProperty(ref maxProject, value); }
+    public int CurrentProjectCounter { get => currentProject; set => SetProperty(ref currentProject, value); }
     public int MaxProjectCounter { get => maxProject; set => SetProperty(ref maxProject, value); }
     public SolidColorBrush CurrentStateBrush { get => currentBrush; set => SetProperty(ref currentBrush, value); }
     public bool AreSettingsAccessible { get => settingsAccessible; set => SetProperty(ref settingsAccessible, value); }
@@ -255,6 +255,8 @@ public class MainViewModel : BindableBase
         }
         IsCompilerButtonVisible = Visibility.Visible;
         IsCancelButtonVisible = Visibility.Hidden;
+        CurrentProjectCounter = 0;
+        MaxProjectCounter = 0;
         AreSettingsAccessible = true;
         CurrentStateBrush = Brushes.ForestGreen;
     }
