@@ -37,7 +37,7 @@ public class AboutViewModel : BindableBase
     }
 
     private void OpenReadme() {
-        using Process fileopener = new Process();
+        using Process fileopener = new();
         fileopener.StartInfo.FileName = "explorer";
         fileopener.StartInfo.Arguments = "\"" + Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "Docs") + "\"";
         fileopener.Start();
