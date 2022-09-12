@@ -5,7 +5,7 @@ using RMMVCookTool.Core.ProjectTemplate;
 using System.Text.Json;
 
 namespace RMMVCookTool.GUI.ViewModels;
-public class MetadataEditorViewModel : BindableBase, IDialogAware
+public sealed class MetadataEditorViewModel : BindableBase, IDialogAware
 {
     #region Variables
     public string Title => Resources.GamePackageMetadataEditorTitleText;

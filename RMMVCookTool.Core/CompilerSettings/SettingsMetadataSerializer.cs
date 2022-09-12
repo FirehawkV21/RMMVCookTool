@@ -4,6 +4,6 @@ namespace RMMVCookTool.Core.CompilerSettings;
 
 [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Default)]
 [JsonSerializable(typeof(SettingsMetadata))]
-public partial class SettingsMetadataSerializer : JsonSerializerContext
+public sealed partial class SettingsMetadataSerializer : JsonSerializerContext
 {
 }

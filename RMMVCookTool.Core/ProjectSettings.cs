@@ -1,5 +1,5 @@
 ﻿namespace RMMVCookTool.Core;
-public record ProjectSettings
+public sealed record ProjectSettings
 {
     public string FileExtension { get; set; } = "bin";
     public int CompressionLevel { get; set; } = 0;

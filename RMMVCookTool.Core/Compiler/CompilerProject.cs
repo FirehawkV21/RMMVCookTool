@@ -3,7 +3,7 @@ using RMMVCookTool.Core.Utilities;
 
 namespace RMMVCookTool.Core.Compiler;
 
-public class CompilerProject : CompilerProjectBase
+public sealed class CompilerProject : CompilerProjectBase
 {
     public string ProjectLocation { get; set; }
     public List<string> FileMap { get; set; }

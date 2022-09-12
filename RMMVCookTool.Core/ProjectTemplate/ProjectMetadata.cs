@@ -2,7 +2,7 @@
 
 namespace RMMVCookTool.Core.ProjectTemplate;
 
-public class ProjectMetadata 
+public sealed class ProjectMetadata 
 {
     [JsonPropertyName("name")]
     public string GameName { get; set; }

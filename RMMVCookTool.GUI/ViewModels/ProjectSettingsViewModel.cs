@@ -3,7 +3,7 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
 namespace RMMVCookTool.GUI.ViewModels;
-internal class ProjectSettingsViewModel : BindableBase, IDialogAware
+internal sealed class ProjectSettingsViewModel : BindableBase, IDialogAware
 {
     private string fileExtension;
     private bool removeSource;
@@ -58,7 +58,7 @@ internal class ProjectSettingsViewModel : BindableBase, IDialogAware
     private void CancelSettings()
     {
         ButtonResult button = ButtonResult.Cancel;
-        var result = new DialogResult(button);
+        DialogResult result = new DialogResult(button);
         RequestClose?.Invoke(result);
     }
 }

@@ -6,7 +6,7 @@ using System;
 using System.IO;
 
 namespace RMMVCookTool.CLI;
-public class SetupMenu
+public sealed class SetupMenu
 {
     public bool TestProject { get; set; }
     public int CheckDeletion { get; set; } = 1;

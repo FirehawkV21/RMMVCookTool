@@ -17,7 +17,7 @@
                 <Label Content="{x:Static properties:Resources.ProgramTitle}" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Padding="0,0,0,0"/>
                 <Label x:Name="ProgramVersionLabel" Content="{Binding ProgramVersionText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
                 <Label Content="{x:Static properties:Resources.DeveloperCreditUiText}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0"/>
-                <Button Content="User Manual" IsEnabled="{Binding AreDocsAvailable}" Command="{Binding OpenDocsCommand}"/>
+                <Button Content="{x:Static properties:Resources.UserManualUiText}" IsEnabled="{Binding AreDocsAvailable}" Command="{Binding OpenDocsCommand}"/>
             </StackPanel>
         </GroupBox>
 

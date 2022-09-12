@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace RMMVCookTool.GUI.ViewModels;
 
-public class MainViewModel : BindableBase
+public sealed class MainViewModel : BindableBase
 {
     #region Variables
     private readonly BackgroundWorker _compilerWorker = new();
@@ -103,7 +103,7 @@ public class MainViewModel : BindableBase
         CompilerUtilities.RecordToLog("Starting the session.", 0);
         try
         {
-            foreach (var project in ProjectList)
+            foreach (CompilerProject project in ProjectList)
             {
                 if (_compilerWorker.CancellationPending)
                 {

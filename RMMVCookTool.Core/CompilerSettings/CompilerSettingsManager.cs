@@ -2,7 +2,7 @@
 
 namespace RMMVCookTool.Core.CompilerSettings;
 
-public class CompilerSettingsManager
+public sealed class CompilerSettingsManager
 {
     public SettingsMetadata Settings { get; set; }
     private static string SettingsFolderLocation { get {

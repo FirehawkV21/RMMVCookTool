@@ -12,7 +12,7 @@ namespace RMMVCookTool.GUI;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : PrismApplication
+public sealed partial class App : PrismApplication
 {
     public App()
     {
