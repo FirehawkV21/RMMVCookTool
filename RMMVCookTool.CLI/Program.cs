@@ -21,8 +21,9 @@ internal sealed class Program
         Console.WriteLine(Resources.SpilterText);
         CompilerUtilities.RecordToLog($"Cook Tool CLI, version {Assembly.GetExecutingAssembly().GetName().Version} started.", 0);
         #endregion
-        engine.ProcessCommandLineArguments(args);
+        if (args.Length >= 1) engine.ProcessCommandLineArguments(args);
+        else engine.StartSetup();
         engine.StartWorker();
-        
+
     }
 }

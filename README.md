@@ -17,12 +17,12 @@ The standalone, cross-platform console app. Used for compiling a project quickly
 
 ## System Requirements
 -  Windows 7 Service Pack 1 and newer.
--  Microsoft .NET 5.
+-  Microsoft .NET 7.
 -  NW.js SDK. Any version you want.
 
 ## Compiling
 
-You will need Visual Studio 2019, along with the Microsoft .NET 5 SDK. Once you do have both, open the solution file.
+You will need Visual Studio 2022, along with the Microsoft .NET 7 SDK. Once you do have both, open the solution file.
 
 ## Libraries Used
 -  [Dirkster.NumericUpDownLib](https://github.com/Dirkster99/NumericUpDownLib)

@@ -3,7 +3,7 @@
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <PublishReadyToRun>true</PublishReadyToRun>
     <TieredCompilation>true</TieredCompilation>
     <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
