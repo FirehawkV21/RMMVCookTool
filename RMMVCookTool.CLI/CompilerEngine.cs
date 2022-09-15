@@ -109,12 +109,14 @@ public sealed class CompilerEngine
                     //Else, either just compress or compress and delete the files.
                     else
                     {
-                        CompilerUtilities.RecordToLog($"The project will be compressed after compiling.", 0);
-                        if (setupTool.CompressProject == 2)
+                        if (newProject.Setup.RemoveSourceFiles)
                         {
+                            CompilerUtilities.RecordToLog($"The project will be compressed after compiling.", 0);
+                            newProject.Setup.CompressProjectFiles = true;
                             if (argnum + 1 <= args.Length - 1)
                             {
                                 setupTool.CompressProject = args[argnum + 1] == "Final" ? 1 : 2;
+                                newProject.Setup.RemoveFilesAfterCompression = setupTool.CompressProject == 1;
                                 argsTable.AddRow(Resources.CompressionEntry, ((argnum + 1 <= args.Length - 1) && args[argnum + 1] == "Final") ? Resources.CompressAndRemoveEntry : Resources.CompressOnlyEntry);
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                                 Console.WriteLine((argnum + 1 <= args.Length - 1) && args[argnum + 1] == "Final" ?
@@ -145,7 +147,6 @@ public sealed class CompilerEngine
 
                 //This command line argument deletes the JavaScript files after compiling.
                 case "--ReleaseMode":
-                    setupTool.CompressProject = 2;
                     CompilerUtilities.RecordToLog($"JS files will be removed.", 0);
                     newProject.Setup.RemoveSourceFiles = true;
                     Console.ResetColor();
@@ -294,7 +295,7 @@ public sealed class CompilerEngine
                     Console.WriteLine(Resources.NwjsStartingTestNotificationText);
                     newProject.RunTest(setupTool.SdkLocation);
                 }
-                else if (setupTool.CompressProject is < 3 and 2)
+                else if (setupTool.CompressProject is < 3)
                 {
                     CompilerUtilities.RecordToLog(Resources.PackagingGameText, 0);
                     timer.Start();
@@ -332,8 +333,5 @@ public sealed class CompilerEngine
         }
     }
 
-    public void StartSetup()
-    {
-        setupTool.SetupWorkload(newProject);
-    }
+    public void StartSetup() => setupTool.SetupWorkload(newProject);
 }
