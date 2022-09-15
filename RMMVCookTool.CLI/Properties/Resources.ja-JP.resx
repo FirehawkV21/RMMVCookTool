@@ -124,7 +124,7 @@
     <value>= RPG メーカー MV クックツール (.NET Core CLI バージョン)</value>
   </data>
   <data name="ProgramVersionString" xml:space="preserve">
-    <value>= バージョン R2.02 ({0})</value>
+    <value>= Version R2.03 ({0})</value>
     <comment>String ID: ProgramVersionString
 This is the command line app's version string.</comment>
   </data>
