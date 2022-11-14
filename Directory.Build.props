@@ -6,6 +6,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <PublishReadyToRun>true</PublishReadyToRun>
     <TieredCompilation>true</TieredCompilation>
+    <TieredPGO>true</TieredPGO>
     <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
     <Platforms>AnyCPU;x64;x86;ARM64;ARM32</Platforms>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
