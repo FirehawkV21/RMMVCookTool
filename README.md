@@ -41,7 +41,7 @@ dotnet cake --publishCli # Publishes a native version of the CLI.
 dotnet cake --publishUiOnArm # Publishes the Windows On Arm version of the UI.
 dotnet cake --publishCliOnArm # Publishes the native Arm version of the CLI (requires the Arm64 C++ compiler).
 ```
-Note: This will use Cake build to compile the project. It will be downloaded automatically when you run it for the first time.
+Note: This will use Cake build to compile the project. Run `dotnet tool restore` in the terminal before running the above commands.
 
 See this documentation to set up the C++ compiler needed for NativeAOT (CLI for now): https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/
 
