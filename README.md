@@ -26,20 +26,20 @@ You will need Visual Studio 2022, along with the Microsoft .NET 7 SDK. Once you 
 
 ### Cleaning
 ```powershell
-dotnet cake -rebuild #Include -rebuild to clean the solution before compiling.
+dotnet cake --rebuild #Include -rebuild to clean the solution before compiling.
 ```
 ### Building:
 ```powershell
-dotnet cake -buildUi # Builds the UI
-dotnet cake -buildCli # Builds the CLI
+dotnet cake --buildUi # Builds the UI
+dotnet cake --buildCli # Builds the CLI
 ```
 
 ### Publishing
 ```powershell
-dotnet cake -publishUi # Publishes a standalone version of the UI.
-dotnet cake -publishCli # Publishes a native version of the CLI.
-dotnet cake -publishUiOnArm # Publishes the Windows On Arm version of the UI.
-dotnet cake -publishCliOnArm # Publishes the native Arm version of the CLI (requires the Arm64 C++ compiler).
+dotnet cake --publishUi # Publishes a standalone version of the UI.
+dotnet cake --publishCli # Publishes a native version of the CLI.
+dotnet cake --publishUiOnArm # Publishes the Windows On Arm version of the UI.
+dotnet cake --publishCliOnArm # Publishes the native Arm version of the CLI (requires the Arm64 C++ compiler).
 ```
 Note: This will use Cake build to compile the project. It will be downloaded automatically when you run it for the first time.
 

@@ -1,4 +1,4 @@
-var target = Argument("target", "Test");
+var target = Argument("target", "Cleanup");
 var configuration = Argument("configuration", "Release");
 
 //////////////////////////////////////////////////////////////////////
@@ -25,7 +25,6 @@ Task("BuildUI")
     DotNetBuild("./RMMVCookTool.GUI", new DotNetBuildSettings
     {
         Configuration = configuration,
-        Architecture = "x64"
     });
 });
 
@@ -55,10 +54,10 @@ Task("PublishUI")
 
 Task("PublishCLI")
     .IsDependentOn("Clean")
-    .WithCriteria(c => HasArgument("buildCli"))
+    .WithCriteria(c => HasArgument("publishCli"))
     .Does(() =>
 {
-    DotNetBuild("./RMMVCookTool.CLI", new DotNetBuildSettings
+    DotNetPublish("./RMMVCookTool.CLI", new DotNetPublishSettings
     {
         Configuration = configuration,
         SelfContained = true,
@@ -68,7 +67,7 @@ Task("PublishCLI")
 
 Task("PublishUIOnArm")
     .IsDependentOn("Clean")
-    .WithCriteria(c => HasArgument("publishUi"))
+    .WithCriteria(c => HasArgument("publishUiOnArm"))
     .Does(() =>
 {
     DotNetPublish("./RMMVCookTool.GUI", new DotNetPublishSettings
@@ -81,16 +80,25 @@ Task("PublishUIOnArm")
 
 Task("PublishCLIOnArm")
     .IsDependentOn("Clean")
-    .WithCriteria(c => HasArgument("buildCli"))
+    .WithCriteria(c => HasArgument("publishCliOnArm"))
     .Does(() =>
 {
-    DotNetBuild("./RMMVCookTool.CLI", new DotNetBuildSettings
+    DotNetPublish("./RMMVCookTool.CLI", new DotNetPublishSettings
     {
         Configuration = configuration,
         SelfContained = true,
         ArgumentCustomization = args => args.Append("-a arm64")
     });
 });
+
+Task("Cleanup")
+    .IsDependentOn("Clean")
+    .IsDependentOn("BuildUI")
+    .IsDependentOn("BuildCLI")
+    .IsDependentOn("PublishUI")
+    .IsDependentOn("PublishCLI")
+    .IsDependentOn("PublishUIOnArm")
+    .IsDependentOn("PublishCLIOnArm");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
