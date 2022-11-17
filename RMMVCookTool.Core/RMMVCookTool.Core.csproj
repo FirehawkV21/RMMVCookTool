@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-	<AssemblyVersion>2.0.7.22258</AssemblyVersion>
-	<FileVersion>2.0.7.22258</FileVersion>
+	<AssemblyVersion>2.0.7.22321</AssemblyVersion>
+	<FileVersion>2.0.7.22321</FileVersion>
 	<Version>2.0.7-20220914</Version>
 	<AssemblyTitle>RPG Maker MV Cook Tool Core</AssemblyTitle>
 	<Description>The core library of the RPG Maker MV Cook Tool.</Description>
