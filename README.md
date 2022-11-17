@@ -22,10 +22,31 @@ The standalone, cross-platform console app. Used for compiling a project quickly
 
 ## Compiling
 
-You will need Visual Studio 2022, along with the Microsoft .NET 7 SDK. Once you do have both, open the solution file.
+You will need Visual Studio 2022, along with the Microsoft .NET 7 SDK. Once you do have both, open the solution file. Alternatively, run the following in a terminal (assuming that you have the .NET 7 SDK installed):
+
+### Cleaning
+```powershell
+dotnet cake -rebuild #Include -rebuild to clean the solution before compiling.
+```
+### Building:
+```powershell
+dotnet cake -buildUi # Builds the UI
+dotnet cake -buildCli # Builds the CLI
+```
+
+### Publishing
+```powershell
+dotnet cake -publishUi # Publishes a standalone version of the UI.
+dotnet cake -publishCli # Publishes a native version of the CLI.
+dotnet cake -publishUiOnArm # Publishes the Windows On Arm version of the UI.
+dotnet cake -publishCliOnArm # Publishes the native Arm version of the CLI (requires the Arm64 C++ compiler).
+```
+Note: This will use Cake build to compile the project. It will be downloaded automatically when you run it for the first time.
+
+See this documentation to set up the C++ compiler needed for NativeAOT (CLI for now): https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/
 
 ## Libraries Used
 -  [Dirkster.NumericUpDownLib](https://github.com/Dirkster99/NumericUpDownLib)
 -  [Ookii.Dialogs](https://github.com/ookii-dialogs/ookii-dialogs-wpf)
--  [ConsoleTools](https://github.com/lastunicorn/ConsoleTools)
+-  [Spectre.Console](https://spectreconsole.net/)
 -  [Serilog](https://serilog.net/)
