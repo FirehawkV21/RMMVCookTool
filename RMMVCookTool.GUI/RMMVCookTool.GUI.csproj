@@ -4,8 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>4.0.1.22321</AssemblyVersion>
-    <FileVersion>4.0.1.22321</FileVersion>
+    <AssemblyVersion>4.0.1.22339</AssemblyVersion>
+    <FileVersion>4.0.1.22339</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <AssemblyTitle>RPG Maker MV/MZ Cook Tool (GUI Version)</AssemblyTitle>

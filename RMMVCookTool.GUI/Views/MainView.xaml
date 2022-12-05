@@ -58,7 +58,7 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Button x:Name="AddProjectButton" Content="{x:Static properties:Resources.AddProjectUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" Command="{Binding AddProjectCommand}" IsEnabled="{Binding AreSettingsAccessible}" />
-                        <Button x:Name="RemoveProjectButton" Content="{x:Static properties:Resources.RemoveProjectUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" IsEnabled="{Binding AreSettingsAccessible}"/>
+                        <Button x:Name="RemoveProjectButton" Content="{x:Static properties:Resources.RemoveProjectUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" IsEnabled="{Binding AreSettingsAccessible}" Command="{Binding RemoveProjectCommand}"/>
                         <Button x:Name="ProjectSettingsButton" Content="{x:Static properties:Resources.ProjectSettingsUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Command="{Binding ProjectSettingsCommand}" IsEnabled="{Binding AreSettingsAccessible}"/>
                         <Button x:Name="EditMetadataButton" Content="{x:Static properties:Resources.EditMetadataUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0" Command="{Binding EditMetadataCommand}" IsEnabled="{Binding AreSettingsAccessible}" />
                     </StackPanel>
