@@ -48,9 +48,9 @@ public sealed class SetupMenu
     {
         Rule setupTab = new()
         {
-            Title = Resources.SetupTitle,
-            Alignment = Justify.Left
+            Title = Resources.SetupTitle
         };
+        setupTab.LeftJustified();
         AnsiConsole.Write(setupTab);
         do
         {

@@ -18,9 +18,9 @@ public sealed class CompilerEngine
     {
         Rule argsTab = new()
         {
-            Title = Resources.CommandLineArgsTitle,
-            Alignment = Justify.Left
+            Title = Resources.CommandLineArgsTitle
         };
+        argsTab.LeftJustified();
         AnsiConsole.Write(argsTab);
         Table argsTable = new();
         argsTable.AddColumn(Resources.SettingTitle);
@@ -229,8 +229,8 @@ public sealed class CompilerEngine
         Rule workTab = new()
         {
             Title = Resources.WorkTitle,
-            Alignment = Justify.Left
         };
+        workTab.LeftJustified();
         AnsiConsole.Write(workTab);
         //Find the game folder.
         Stopwatch timer = new();

@@ -175,7 +175,7 @@ public sealed class CompilerProject : CompilerProjectBase
         List<string> AllFolders = Directory.EnumerateDirectories(ProjectLocation).ToList();
         List<string> GameFolders = new();
         GameFolders.AddRange(from string directory in AllFolders
-                             where !directory.Contains("swiftshader") && !directory.Contains("locales") && !directory.Contains("pnacl")
+                             where !directory.Contains("swiftshader") && !directory.Contains("locales") && !directory.Contains("pnacl") && !directory.contains("lib")
                              select directory);
         foreach (string folder in from string folder in GameFolders
                                where Directory.Exists(folder)
