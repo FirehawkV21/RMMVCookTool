@@ -217,7 +217,7 @@ public sealed class CompilerEngine
                     argsTable.AddRow(Resources.CompressionLevelEntry, Resources.OptimalCompression);
                     break;
             }
-        if (setupTool.CheckDeletion == 2) argsTable.AddRow(Resources.RemoveSourceFilesEntry, Resources.CommonWordYes);
+        if (newProject.Setup.RemoveSourceFiles) argsTable.AddRow(Resources.RemoveSourceFilesEntry, Resources.CommonWordYes);
         else argsTable.AddRow(Resources.RemoveSourceFilesEntry, Resources.CommonWordNo);
         setupTool.CheckSettings(newProject);
         if (setupTool.SettingsSet) AnsiConsole.Write(argsTable);
