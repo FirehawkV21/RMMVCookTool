@@ -329,6 +329,8 @@ public sealed class MainViewModel : BindableBase
             IsCompilerButtonVisible = Visibility.Hidden;
             IsCancelButtonVisible = Visibility.Visible;
             AreSettingsAccessible = false;
+            SelectedProjectIndex = -1;
+            IsProjectSelected = false;
             MaxProjectCounter = ProjectList.Count;
             _compilerWorker.RunWorkerAsync();
         }

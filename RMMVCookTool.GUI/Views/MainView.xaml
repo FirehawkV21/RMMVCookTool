@@ -54,7 +54,7 @@
                         <RowDefinition Height="36"/>
                     </Grid.RowDefinitions>
 
-                    <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}" ItemsSource="{Binding ProjectList}" SelectedIndex="{Binding SelectedProjectIndex}" AutomationProperties.Name="ProjectsInWorkload" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}" ItemsSource="{Binding ProjectList}" SelectedIndex="{Binding SelectedProjectIndex}" AutomationProperties.Name="ProjectsInWorkload" d:ItemsSource="{d:SampleData ItemCount=5}" IsEnabled="{Binding AreSettingsAccessible}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectProjectCheck}"/>
