@@ -37,6 +37,7 @@ public sealed class MainViewModel : BindableBase
     private Visibility cancelButtonVisible = Visibility.Hidden;
     private readonly CompilerSettingsManager SettingsManager;
     private readonly IDialogService dialogManager;
+    private bool isProjectSelected;
 
     public string CurrentProgressText { get => currentProgressText; set => SetProperty(ref currentProgressText, value); }
     public string CurrentProjectText { get => currentProjectText; set => SetProperty(ref currentProjectText, value); }
@@ -51,6 +52,7 @@ public sealed class MainViewModel : BindableBase
     public string SdkLocation { get => sdkLocation; set => SetProperty(ref sdkLocation, value); }
     public Visibility IsCompilerButtonVisible { get => compilerButtonVisible; set => SetProperty(ref compilerButtonVisible, value); }
     public Visibility IsCancelButtonVisible { get => cancelButtonVisible; set => SetProperty(ref cancelButtonVisible, value); }
+    public bool IsProjectSelected { get => isProjectSelected; set => SetProperty(ref isProjectSelected, value); }
     
     #endregion
     #region Commands
@@ -64,6 +66,7 @@ public sealed class MainViewModel : BindableBase
     public DelegateCommand DefaultProjectSettingsCommand { get; private set; }
     public DelegateCommand ProjectSettingsCommand { get; private set; }
     public DelegateCommand EditMetadataCommand { get; private set; }
+    public DelegateCommand SelectProjectCheck { get; private set; }
     #endregion
     #region Constructor Code
     public MainViewModel(IDialogService dialogService)
@@ -77,6 +80,7 @@ public sealed class MainViewModel : BindableBase
         DefaultProjectSettingsCommand = new DelegateCommand(EditDefaultProjectSettings, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
         ProjectSettingsCommand = new DelegateCommand(EditProjectSettings, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
         EditMetadataCommand = new DelegateCommand(EditProjectMetadata, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
+        SelectProjectCheck = new DelegateCommand(CheckSelection, CheckSettingsAccess).ObservesProperty(() => AreSettingsAccessible);
         IsCancelButtonVisible = Visibility.Hidden;
         SettingsManager = new();
         CurrentFileCounter = 0;
@@ -114,7 +118,10 @@ public sealed class MainViewModel : BindableBase
                              Resources.FolderText;
                 CompilerUtilities.RecordToLog("Preparing for the project " + project.ProjectLocation + "...", 0);
                 project.CompilerInfo.Value.FileName = Path.Combine(SdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
+                CurrentProgressText = "Preparing...";
+                project.PullSourceFiles();
                 project.GameFilesLocation = CompilerUtilities.GetProjectFilesLocation(Path.Combine(project.ProjectLocation, "package.json"));
+
                 if (project.GameFilesLocation is "Null" or "Unknown")
                 {
                     CompilerUtilities.RecordToLog("Missing info for the game files location. Aborting session.", 0);
@@ -282,6 +289,12 @@ public sealed class MainViewModel : BindableBase
         if (pickerResult != true) return;
         SettingsManager.Settings.NwjsLocation = SdkLocation = pickSdkFolder.SelectedPath;
         SettingsManager.SaveSettings();
+    }
+
+    private void CheckSelection()
+    {
+        if (AreSettingsAccessible)
+            IsProjectSelected = SelectedProjectIndex > -1;
     }
 
     private void FindProjectFolder()

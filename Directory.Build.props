@@ -17,5 +17,6 @@
     <Copyright>Copyright © 2022 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
     <NeutralLanguage>en</NeutralLanguage>
    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+   <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
  </PropertyGroup>
 </Project>

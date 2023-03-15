@@ -17,7 +17,6 @@ public sealed class CompilerProject : CompilerProjectBase
         ProjectLocation = project;
         Setup = new();
         FileMap = new List<string>();
-        FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }
 
     public CompilerProject(string project, string fileExtension, bool removeAfterCompile, bool compressToPackage, bool removeAfterCompression, int compressionLevel)
@@ -32,7 +31,6 @@ public sealed class CompilerProject : CompilerProjectBase
             CompressionLevel = compressionLevel
         };
         FileMap = new List<string>();
-        FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }
     
     public CompilerProject(string project, in ProjectSettings settings)
@@ -40,8 +38,9 @@ public sealed class CompilerProject : CompilerProjectBase
         ProjectLocation = project;
         Setup = settings;
         FileMap = new List<string>();
-        FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
     }
+
+    public void PullSourceFiles() => FileMap = CompilerUtilities.FileFinder(ProjectLocation, "*.js");
 
     //This method starts the nw.exe file.
     /// <summary>

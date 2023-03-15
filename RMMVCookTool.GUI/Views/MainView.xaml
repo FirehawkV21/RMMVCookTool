@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:properties="clr-namespace:RMMVCookTool.GUI.Properties"
-             xmlns:local="clr-namespace:RMMVCookTool.GUI.Views"
+             xmlns:local="clr-namespace:RMMVCookTool.GUI.Views" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="498" d:DesignWidth="640" TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType">
     <UserControl.Resources>
@@ -41,8 +41,8 @@
             </Grid.RowDefinitions>
             <GroupBox Header="{x:Static properties:Resources.SettingsUiText}">
                 <Grid>
-                    <Label Content="{x:Static properties:Resources.NwjsLZocationUiText}" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0"/>
-                    <TextBox x:Name="NwjsLocation" Margin="5,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top"  AllowDrop="True" Text="{Binding SdkLocation}" IsEnabled="{Binding AreSettingsAccessible}" />
+                    <Label Content="{x:Static properties:Resources.NwjsLZocationUiText}" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,0,0,0" />
+                    <TextBox x:Name="NwjsLocation" Margin="5,22,65,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top"  AllowDrop="True" Text="{Binding SdkLocation}" IsEnabled="{Binding AreSettingsAccessible}" AutomationProperties.Name="NwjsLocation" />
                     <Button x:Name="BrowseSdkButton" Content="{x:Static properties:Resources.BrowseUiText}" Command="{Binding BrowseSDKCommand}" Margin="0,22,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" IsEnabled="{Binding AreSettingsAccessible}"/>
                     <Button x:Name="DefaultProjectSettingsButton" Content="{x:Static properties:Resources.DefaultSettingsButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,8" VerticalAlignment="Bottom" Command="{Binding DefaultProjectSettingsCommand}" IsEnabled="{Binding AreSettingsAccessible}" />
                 </Grid>
@@ -54,22 +54,28 @@
                         <RowDefinition Height="36"/>
                     </Grid.RowDefinitions>
 
-                    <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}" ItemsSource="{Binding ProjectList}" SelectedIndex="{Binding SelectedProjectIndex}"   />
+                    <ListBox x:Name="FolderList" AllowDrop="True" ScrollViewer.CanContentScroll="False" ItemTemplate="{StaticResource listBoxTemplate}" ItemsSource="{Binding ProjectList}" SelectedIndex="{Binding SelectedProjectIndex}" AutomationProperties.Name="ProjectsInWorkload" d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectProjectCheck}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <Button x:Name="AddProjectButton" Content="{x:Static properties:Resources.AddProjectUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="5,5,5,0" Command="{Binding AddProjectCommand}" IsEnabled="{Binding AreSettingsAccessible}" />
-                        <Button x:Name="RemoveProjectButton" Content="{x:Static properties:Resources.RemoveProjectUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" IsEnabled="{Binding AreSettingsAccessible}" Command="{Binding RemoveProjectCommand}"/>
-                        <Button x:Name="ProjectSettingsButton" Content="{x:Static properties:Resources.ProjectSettingsUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Command="{Binding ProjectSettingsCommand}" IsEnabled="{Binding AreSettingsAccessible}"/>
-                        <Button x:Name="EditMetadataButton" Content="{x:Static properties:Resources.EditMetadataUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0" Command="{Binding EditMetadataCommand}" IsEnabled="{Binding AreSettingsAccessible}" />
+                        <Button x:Name="RemoveProjectButton" Content="{x:Static properties:Resources.RemoveProjectUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" IsEnabled="{Binding IsProjectSelected}" Command="{Binding RemoveProjectCommand}" />
+                        <Button x:Name="ProjectSettingsButton" Content="{x:Static properties:Resources.ProjectSettingsUiText}" VerticalAlignment="Top" Padding="2,1,2,1" HorizontalAlignment="Left" Margin="0,5,5,0" Command="{Binding ProjectSettingsCommand}" IsEnabled="{Binding IsProjectSelected}"/>
+                        <Button x:Name="EditMetadataButton" Content="{x:Static properties:Resources.EditMetadataUiText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="2,1,2,1" Margin="0,5,5,0" Command="{Binding EditMetadataCommand}" IsEnabled="{Binding IsProjectSelected}" />
                     </StackPanel>
                 </Grid>
             </GroupBox>
             <GroupBox Header="{x:Static properties:Resources.ProgressUiText}" Grid.Row="2">
                 <Grid>
                     <Label x:Name="TotalProgressLabel" Content="{Binding CurrentProjectText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ProgressBar x:Name="TotalWorkProgressBar" Height="20" Margin="0,26,124,0" VerticalAlignment="Top" Value="{Binding CurrentProjectCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxProjectCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding CurrentStateBrush}"/>
+                    <ProgressBar x:Name="TotalWorkProgressBar" Height="20" Margin="0,26,124,0" VerticalAlignment="Top" Value="{Binding CurrentProjectCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxProjectCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding CurrentStateBrush}" AutomationProperties.Name="TotalProgress"/>
                     <Label x:Name="CurrentWorkloadLabel" Content="{Binding CurrentProgressText}" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top" />
-                    <ProgressBar x:Name="CurrentWorkloadBar" Height="20" Margin="0,77,124,0" VerticalAlignment="Top" Value="{Binding CurrentFileCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxFileCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding CurrentStateBrush}"/>
+                    <ProgressBar x:Name="CurrentWorkloadBar" Height="20" Margin="0,77,124,0" VerticalAlignment="Top" Value="{Binding CurrentFileCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxFileCounter, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding CurrentStateBrush}" AutomationProperties.Name="CurrentProjectProgress"/>
                     <Button x:Name="CompileButton" Content="{x:Static properties:Resources.CompileUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" Height="20" UseLayoutRounding="True" Padding="2,1,2,1" Command="{Binding StartCompilerCommand}" Visibility="{Binding IsCompilerButtonVisible}"/>
                     <Button x:Name="CancelCompileButton" Content="{x:Static properties:Resources.CancelButtonUiText}" HorizontalAlignment="Right" Margin="0,0,10,27" VerticalAlignment="Bottom" UseLayoutRounding="True" Height="20" Padding="2,1,2,1" Command="{Binding CancelCompilerCommand}" Visibility="{Binding IsCancelButtonVisible}"/>
 

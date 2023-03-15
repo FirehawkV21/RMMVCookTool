@@ -252,7 +252,7 @@ public sealed class CompilerEngine
         {
             //Finding all the JS files.
             CompilerUtilities.RecordToLog("Preparing project...", 0);
-            newProject.FileMap ??= new List<string>(CompilerUtilities.FileFinder(Path.Combine(newProject.ProjectLocation), "*.js"));
+            newProject.PullSourceFiles();
 
             CompilerUtilities.RecordToLog($"Found {newProject.FileMap.Count} JS files.", 0);
             AnsiConsole.Status()
