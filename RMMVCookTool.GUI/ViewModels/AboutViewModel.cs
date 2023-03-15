@@ -23,9 +23,7 @@ public sealed class AboutViewModel : BindableBase
     public AboutViewModel()
     {
         OpenDocsCommand = new DelegateCommand(OpenReadme, CheckFile).ObservesProperty(() => AreDocsAvailable);
-        Assembly assembly = Assembly.GetExecutingAssembly();
-        FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-        string version = fvi.FileVersion;
+        string version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
         ProgramVersionText = Resources.ProgramVersionLabelUiText + @" (" + version + @")";
         string docsFile = (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "el-GR") ? GreekReadme : ReadmeFile;
         if (!File.Exists(docsFile)) AreDocsAvailable = false;

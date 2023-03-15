@@ -4,12 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows10.0.18362.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>4.0.1.23074</AssemblyVersion>
-    <FileVersion>4.0.1.23074</FileVersion>
+    <AssemblyVersion>4.0.2.23074</AssemblyVersion>
+    <FileVersion>4.0.2.23074</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <AssemblyTitle>RPG Maker MV/MZ Cook Tool (GUI Version)</AssemblyTitle>
-    <Version>4.0.1-20230130</Version>
+    <Version>4.0.2-20230315</Version>
     <PublishTrimmed>false</PublishTrimmed>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <Description>GUI version of the RPG Maker MV Cook Tool.</Description>
@@ -54,6 +54,8 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <StronglyTypedFileName>$(IntermediateOutputPath)\Resource.Designer.cs</StronglyTypedFileName>
       <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

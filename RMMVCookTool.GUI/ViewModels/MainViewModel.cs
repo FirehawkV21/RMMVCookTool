@@ -118,7 +118,7 @@ public sealed class MainViewModel : BindableBase
                              Resources.FolderText;
                 CompilerUtilities.RecordToLog("Preparing for the project " + project.ProjectLocation + "...", 0);
                 project.CompilerInfo.Value.FileName = Path.Combine(SdkLocation, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "nwjc.exe" : "nwjc");
-                CurrentProgressText = "Preparing...";
+                CurrentProgressText = Resources.CompilerPreparationText;
                 project.PullSourceFiles();
                 project.GameFilesLocation = CompilerUtilities.GetProjectFilesLocation(Path.Combine(project.ProjectLocation, "package.json"));
 

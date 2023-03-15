@@ -15,7 +15,7 @@ internal sealed class Program
         CompilerUtilities.StartEngineLogger("CompilerCLI", false);
         Console.WriteLine(Resources.SpilterText);
         Console.WriteLine(Resources.ProgramNameText);
-        Console.WriteLine(Resources.ProgramVersionString, Assembly.GetExecutingAssembly().GetName().Version);
+        Console.WriteLine(Resources.ProgramVersionString, Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion);
         Console.WriteLine(Resources.ProgramAuthorText);
         Console.WriteLine(Resources.ProgramLicenseText);
         Console.WriteLine(Resources.SpilterText);

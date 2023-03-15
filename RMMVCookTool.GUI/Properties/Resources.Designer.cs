@@ -19,7 +19,7 @@ namespace RMMVCookTool.GUI.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -174,6 +174,15 @@ namespace RMMVCookTool.GUI.Properties {
         public static string CompilerMissingText {
             get {
                 return ResourceManager.GetString("CompilerMissingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing....
+        /// </summary>
+        public static string CompilerPreparationText {
+            get {
+                return ResourceManager.GetString("CompilerPreparationText", resourceCulture);
             }
         }
         
@@ -547,16 +556,6 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {\rtf1\ansi\deff3\adeflang1025
-        ///{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fswiss\fprq2\fcharset0 Arial;}{\f3\froman\fprq2\fcharset161 Liberation Serif{\*\falt Times New Roman};}{\f4\froman\fprq2\fcharset161 Lucida Console;}{\f5\froman\fprq2\fcharset161 Segoe UI;}{\f6\fswiss\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f7\froman\fprq2\fcharset161 Liberation Sans{\*\falt Arial};}{\f8\froman\fprq2\fcharset161 Liberation Mono{\*\falt Courier New};}{\f9 [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Manual {
-            get {
-                return ResourceManager.GetString("Manual", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Minify the package.json file.
         /// </summary>
         public static string MinifyPackageFileUiText {
@@ -674,7 +673,7 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version R3.01.
+        ///   Looks up a localized string similar to Version R4.00 Update 1.
         /// </summary>
         public static string ProgramVersionLabelUiText {
             get {

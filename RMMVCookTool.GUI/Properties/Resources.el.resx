@@ -420,4 +420,7 @@ This is the title of the message shown if the JSON file is missing an important 
   <data name="MinifyPackageFileUiText" xml:space="preserve">
     <value>Σμίκρυνση του αρχείου package.json</value>
   </data>
+  <data name="CompilerPreparationText" xml:space="preserve">
+    <value>Προετοιμασία...</value>
+  </data>
 </root>
