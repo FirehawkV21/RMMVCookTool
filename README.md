@@ -50,3 +50,4 @@ See this documentation to set up the C++ compiler needed for NativeAOT (CLI for 
 -  [Ookii.Dialogs](https://github.com/ookii-dialogs/ookii-dialogs-wpf)
 -  [Spectre.Console](https://spectreconsole.net/)
 -  [Serilog](https://serilog.net/)
+-  [Prism](https://prismlibrary.com)

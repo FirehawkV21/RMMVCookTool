@@ -19,20 +19,19 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '6.0.100'
+    version: '7.0.202'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: 'RMMVCookTool.CLI\RMMVCookTool.CLI.csproj'
-    arguments: '-f net6.0'
+
 
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: 'RMMVCookTool.GUI\RMMVCookTool.GUI.csproj'
-    arguments: '-f net6.0-windows'
 
 - task: VSTest@2
   inputs:
