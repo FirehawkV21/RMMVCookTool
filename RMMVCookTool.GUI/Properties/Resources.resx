@@ -423,4 +423,11 @@ This is the title of the message shown if the JSON file is missing an important 
   <data name="CompilerPreparationText" xml:space="preserve">
     <value>Preparing...</value>
   </data>
+  <data name="CompilerErrorTitle" xml:space="preserve">
+    <value>Compiler error</value>
+  </data>
+  <data name="CompilerErrorMessage" xml:space="preserve">
+    <value>The compiler job is aborted due to an error in the nwjs compiler. Please check the file and try again.
+</value>
+  </data>
 </root>

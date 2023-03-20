@@ -47,7 +47,7 @@ public sealed class CompilerProject : CompilerProjectBase
     /// Starts the NW.js compiler.
     /// </summary>
     /// <param name="index">The index in the list.</param>
-    public void CompileFile(int index)
+    public CompilerErrorReport CompileFile(int index)
     {
         CompilerUtilities.RecordToLog("Setting up the compiler...", 3);
         //Removing the JavaScript extension. Needed to place our own File Extension.
@@ -58,16 +58,35 @@ public sealed class CompilerProject : CompilerProjectBase
                                  FileMap[index].Replace(".js", "." + Setup.FileExtension, StringComparison.Ordinal) + "\"";
         //Making sure not to show the nwjc window. That program doesn't show anything of usefulness.
         CompilerInfo.Value.CreateNoWindow = true;
+        CompilerInfo.Value.RedirectStandardOutput = true;
+        CompilerInfo.Value.RedirectStandardError = true;
         CompilerInfo.Value.WindowStyle = ProcessWindowStyle.Hidden;
+        CompilerErrorReport report = new();
         //Run the compiler.
         CompilerUtilities.RecordToLog($"nwjc processing the file {FileMap[index]}...", 3);
-        Process.Start(CompilerInfo.Value)?.WaitForExit();
-
-        //If the user asked to remove the JS files, delete them.
-        if (Setup.RemoveSourceFiles) {
-            CompilerUtilities.RecordToLog($"Removing the file {FileMap[index]}...", 3);
-            File.Delete(FileMap[index]); 
+        Process compilerProcess = Process.Start(CompilerInfo.Value);
+        report.ErrorMessage = compilerProcess.StandardError.ReadToEnd();
+        compilerProcess.WaitForExit();
+        if(compilerProcess.ExitCode != 0)
+        {
+            report.ErrorCode = compilerProcess.ExitCode;
+            CompilerUtilities.RecordToLog($"nwjc hit an error and exited with code {compilerProcess.ExitCode}. Check file.", 2);
+            CompilerUtilities.RecordToLog($"Retrieved information from the compiler:{report.ErrorMessage}", 2);
+            return report;
         }
+        else
+        {
+            //If the user asked to remove the JS files, delete them.
+            if (Setup.RemoveSourceFiles)
+            {
+                CompilerUtilities.RecordToLog($"Removing the file {FileMap[index]}...", 3);
+                File.Delete(FileMap[index]);
+            }
+            return report;
+        }
+        
+
+
     }
 
     //This method starts the nw.exe file.

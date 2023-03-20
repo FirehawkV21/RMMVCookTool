@@ -423,4 +423,11 @@ This is the title of the message shown if the JSON file is missing an important 
   <data name="CompilerPreparationText" xml:space="preserve">
     <value>Προετοιμασία...</value>
   </data>
+  <data name="CompilerErrorTitle" xml:space="preserve">
+    <value>Σφάλμα μεταφραστή</value>
+  </data>
+  <data name="CompilerErrorMessage" xml:space="preserve">
+    <value>Η δουλεία μετάφρασης ακυρώνεται λόγω προβλήματος με τον μεταφραστή του nwjs. Ελέγξτε το αρχείο και δοκιμάστε ξανά.
+</value>
+  </data>
 </root>

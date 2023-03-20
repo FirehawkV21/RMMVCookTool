@@ -13,6 +13,8 @@ public sealed class CompilerEngine
 {
     private readonly CompilerProject newProject = new();
     private readonly SetupMenu setupTool = new();
+    private bool errorBreak = false;
+    private string message;
 
     public void ProcessCommandLineArguments(in string[] args)
     {
@@ -273,21 +275,42 @@ public sealed class CompilerEngine
                     .Start(progress =>
                     {
                         ProgressTask compilerTask = progress.AddTask(Resources.DarkcyanCompilingJSFilesText);
-                        compilerTask.MaxValue = 131;
+                        compilerTask.MaxValue = newProject.FileMap.Count;
                         while (!progress.IsFinished)
                         {
                             for (int i = 0; i < newProject.FileMap.Count; i++)
                             {
                                 CompilerUtilities.RecordToLog($"Compiling {newProject.FileMap[i]}...", 0);
-                                newProject.CompileFile(i);
-                                CompilerUtilities.RecordToLog($"Compiled {newProject.FileMap[i]}.", 0);
-                                compilerTask.Increment(1);
+                                CompilerErrorReport errorCheck = newProject.CompileFile(i);
+                                if (errorCheck.ErrorCode > 0)
+                                {
+                                    errorBreak = true;
+                                    message = errorCheck.ErrorMessage;
+                                    break;
+                                }
+                                else
+                                {
+                                    CompilerUtilities.RecordToLog($"Compiled {newProject.FileMap[i]}.", 0);
+                                    compilerTask.Increment(1);
+                                }
                             }
                             compilerTask.StopTask();
                         }
                     });
 
                 timer.Stop();
+                if (errorBreak)
+                {
+                    Console.WriteLine(Resources.CompilerErrorText + message);
+                    //Ask the user to press Enter (or Return).
+                    if (!setupTool.SettingsSet)
+                    {
+                        Console.WriteLine(Resources.PushEnterToExitText);
+                        Console.ReadLine();
+                    }
+                    CompilerUtilities.CloseLog();
+                    Environment.Exit(2);
+                }
                 CompilerUtilities.RecordToLog($"Completed the compilation. (Time elapsed:{timer.Elapsed}/Total Time (so far):{totalTime.Elapsed}", 0);
                 timer.Reset();
                 if (setupTool.TestProject)
@@ -329,8 +352,8 @@ public sealed class CompilerEngine
         {
             Console.WriteLine(Resources.PushEnterToExitText);
             Console.ReadLine();
-            CompilerUtilities.CloseLog();
         }
+        CompilerUtilities.CloseLog();
     }
 
     public void StartSetup() => setupTool.SetupWorkload(newProject);

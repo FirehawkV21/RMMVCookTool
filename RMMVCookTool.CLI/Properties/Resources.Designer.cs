@@ -106,6 +106,16 @@ namespace RMMVCookTool.CLI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The job is aborted due to an issue with the nwjs compiler. Please check the file and try again.
+        ///.
+        /// </summary>
+        internal static string CompilerErrorText {
+            get {
+                return ResourceManager.GetString("CompilerErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The compiler isn&apos;t there. Please pick the folder that has the nwjc file..
         /// </summary>
         internal static string CompilerMissingErrorText {

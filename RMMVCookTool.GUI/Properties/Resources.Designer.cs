@@ -169,6 +169,24 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The compiler job is aborted due to an error in the nwjs compiler. Please check the file and try again..
+        /// </summary>
+        public static string CompilerErrorMessage {
+            get {
+                return ResourceManager.GetString("CompilerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compiler error.
+        /// </summary>
+        public static string CompilerErrorTitle {
+            get {
+                return ResourceManager.GetString("CompilerErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The nwjs Compiler is missing..
         /// </summary>
         public static string CompilerMissingText {
@@ -673,7 +691,7 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version R4.00 Update 1.
+        ///   Looks up a localized string similar to Version R4.00 Update 2.
         /// </summary>
         public static string ProgramVersionLabelUiText {
             get {

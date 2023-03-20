@@ -144,8 +144,14 @@ public sealed class MainViewModel : BindableBase
                             e.Cancel = true;
                             break;
                         }
+                        CompilerErrorReport errorCode = project.CompileFile(CurrentFileCounter);
+                        if (errorCode.ErrorCode > 0)
+                        {
+                            MessageDialog.ThrowErrorMessage(Resources.CompilerErrorTitle, Resources.CompilerErrorMessage + errorCode.ErrorMessage);
+                            e.Cancel = true;
+                            _compilerWorker.CancelAsync();
+                        }
                         _compilerWorker.ReportProgress(CurrentProjectCounter + 1);
-                        project.CompileFile(CurrentFileCounter);
                     }
                     if (e.Cancel) break;
                     if (project.Setup.CompressProjectFiles)

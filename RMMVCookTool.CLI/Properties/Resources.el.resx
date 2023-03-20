@@ -353,4 +353,8 @@
   <data name="ValueTitle" xml:space="preserve">
     <value>Τιμή</value>
   </data>
+  <data name="CompilerErrorText" xml:space="preserve">
+    <value>Η δουλεία μετάφρασης ακυρώνεται λόγω προβλήματος με τον μεταφραστή του nwjs. Ελέγξτε το αρχείο και δοκιμάστε ξανά.
+</value>
+  </data>
 </root>

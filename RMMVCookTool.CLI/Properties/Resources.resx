@@ -355,4 +355,8 @@ The task was completed.</value>
   <data name="ValueTitle" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="CompilerErrorText" xml:space="preserve">
+    <value>The job is aborted due to an issue with the nwjs compiler. Please check the file and try again.
+</value>
+  </data>
 </root>

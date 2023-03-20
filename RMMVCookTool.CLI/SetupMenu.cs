@@ -74,7 +74,7 @@ public sealed class SetupMenu
                  !Directory.Exists(Path.Combine(newProject.ProjectLocation, "www", "js")));
 
         //Ask the user for the file extension.
-        newProject.Setup.FileExtension = AnsiConsole.Prompt(new TextPrompt<string>(Resources.FileExtensionQuestion).DefaultValue(".bin").AllowEmpty());
+        newProject.Setup.FileExtension = AnsiConsole.Prompt(new TextPrompt<string>(Resources.FileExtensionQuestion).DefaultValue("bin").AllowEmpty());
         //This is the check if the tool should delete the JS files.
         CheckDeletion = AnsiConsole.Prompt(new TextPrompt<int>(Resources.WorkloadQuestion)
             .DefaultValue(1)
