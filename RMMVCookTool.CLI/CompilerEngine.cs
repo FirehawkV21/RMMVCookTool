@@ -13,7 +13,7 @@ public sealed class CompilerEngine
 {
     private readonly CompilerProject newProject = new();
     private readonly SetupMenu setupTool = new();
-    private bool errorBreak = false;
+    private bool errorBreak;
     private string message;
 
     public void ProcessCommandLineArguments(in string[] args)
