@@ -169,7 +169,8 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The compiler job is aborted due to an error in the nwjs compiler. Please check the file and try again..
+        ///   Looks up a localized string similar to The compiler job is aborted due to an error in the nwjs compiler. Please check the file and try again.
+        ///.
         /// </summary>
         public static string CompilerErrorMessage {
             get {
@@ -691,7 +692,7 @@ namespace RMMVCookTool.GUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version R4.00 Update 2.
+        ///   Looks up a localized string similar to Version R4.00 Update 4.
         /// </summary>
         public static string ProgramVersionLabelUiText {
             get {

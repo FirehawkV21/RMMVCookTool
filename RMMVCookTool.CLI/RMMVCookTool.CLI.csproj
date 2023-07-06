@@ -2,18 +2,18 @@
 
 	<PropertyGroup>
 	<OutputType>Exe</OutputType>
-	<AssemblyVersion>2.3.2.23079</AssemblyVersion>
-	<FileVersion>2.3.2.23079</FileVersion>
+	<AssemblyVersion>2.3.3.23187</AssemblyVersion>
+	<FileVersion>2.3.3.23187</FileVersion>
 	<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
 	<StartupObject>RMMVCookTool.CLI.Program</StartupObject>
 	<AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>
 	<PackageId>StudioACE.RMMVCookTool.CLI</PackageId>
-	<Version>2.3.2-20230320</Version>
+	<Version>2.3.3-20230706</Version>
 	<Description>Command-line version of the RPG Maker MV Cook Tool.</Description>
 	<RuntimeIdentifiers>win-x64;win-arm64;linux-x64;linux-arm64</RuntimeIdentifiers>
 	<PublishAot>true</PublishAot>
 	<StripSymbols>true</StripSymbols>
-   <GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
+	 <GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
 	</PropertyGroup>
 
 	<ItemGroup>

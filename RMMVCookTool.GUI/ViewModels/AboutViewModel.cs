@@ -15,10 +15,10 @@ public sealed class AboutViewModel : BindableBase
     public bool AreDocsAvailable { get => docsAvailable; set => SetProperty(ref docsAvailable, value); }
     public DelegateCommand OpenDocsCommand { get; private set; }
     private static readonly string ReadmeFile =
-    Directory.GetParent(Assembly.GetExecutingAssembly().Location) + "\\Docs\\Manual.pdf";
+    Path.Combine(AppContext.BaseDirectory, "Docs", "Manual.pdf");
 
     private static readonly string GreekReadme =
-        Directory.GetParent(Assembly.GetExecutingAssembly().Location) + "\\Docs\\Manual.el.pdf";
+        Path.Combine(AppContext.BaseDirectory, "Docs", "Manual.el.pdf");
 
     public AboutViewModel()
     {

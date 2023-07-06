@@ -176,7 +176,7 @@ public sealed class CompilerProject : CompilerProjectBase
             notCleanedUp = false;
             foreach (string file in finalList)
             {
-                if (file.Contains(".pak") || file.Contains(".pak.info") || file.Contains(".exe") || file.Contains(".nexe") || file.Contains(".dll") || file.Contains("pnacl") || file.Contains("swiftshader") || file.Contains("credits.html") || file.Contains(".dat") || file.Contains("v8_context_snapshot.bin") || file.Contains("save") || file.Contains(".nw"))
+                if (file.Contains(".pak") || file.Contains(".pak.info") || file.Contains(".exe") || file.Contains(".nexe") || file.Contains(".dll") || file.Contains("pnacl") || file.Contains("swiftshader") || file.Contains("credits.html") || file.Contains(".dat") || file.Contains("v8_context_snapshot.bin") || file.Contains("save") || file.Contains(".nw") || file.Contains(".log"))
                 {
                     notCleanedUp = true;
                     finalList.Remove(file);

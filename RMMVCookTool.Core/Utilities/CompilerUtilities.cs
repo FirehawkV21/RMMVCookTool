@@ -111,7 +111,7 @@ public static class CompilerUtilities
     {
         if (File.Exists(projectLocation))
         {
-            var input = File.ReadAllText(projectLocation);
+            string input = File.ReadAllText(projectLocation);
             using (JsonDocument inputJson = JsonDocument.Parse(input))
             {
                 var tempstring = inputJson.RootElement.GetProperty("main");
