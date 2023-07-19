@@ -1,5 +1,5 @@
 <Project>
- <PropertyGroup>
+  <PropertyGroup>
     <Authors>AceOfAces</Authors>
     <Company>Studio ACE</Company>
     <Product>RPG Maker MV Cook Tool</Product>
@@ -14,9 +14,9 @@
     <FileAlignment>4096</FileAlignment>
     <PackageProjectUrl>https://studioace.wordpress.com/projects/rpg-maker-mv-cook-tool/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/acemod13/RMMVCookTool</RepositoryUrl>
-    <Copyright>Copyright Â© 2022 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
+    <Copyright>Copyright © 2022 Studio ACE. RPG Maker MV: KADOKAWA/YOJI OJIMA</Copyright>
     <NeutralLanguage>en</NeutralLanguage>
    <PackageLicenseExpression>MIT</PackageLicenseExpression>
    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
- </PropertyGroup>
+  </PropertyGroup>
 </Project>

@@ -372,11 +372,8 @@ public sealed class MainViewModel : BindableBase
             {
                 ProjectList[SelectedProjectIndex].Setup = tempSettings;
                 MessageDialog.ThrowCompleteMessage(Resources.SProjectSettingsUpdatedText);
-                Application.Current.Dispatcher.Invoke(() =>
-                {
                     ICollectionView view = CollectionViewSource.GetDefaultView(ProjectList);
                     view.Refresh();
-                });
             }
         }
     }
