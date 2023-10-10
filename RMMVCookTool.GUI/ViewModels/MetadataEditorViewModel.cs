@@ -1,6 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Services.Dialogs;
+using Prism.Dialogs;
 using RMMVCookTool.Core.ProjectTemplate;
 using System.Text.Json;
 
@@ -9,9 +9,6 @@ public sealed class MetadataEditorViewModel : BindableBase, IDialogAware
 {
     #region Variables
     public string Title => Resources.GamePackageMetadataEditorTitleText;
-
-    public event Action<IDialogResult> RequestClose;
-
     private string projectLocation;
     private string gameId;
     private string indexFileLocation;
@@ -162,6 +159,8 @@ public sealed class MetadataEditorViewModel : BindableBase, IDialogAware
     public DelegateCommand FindIconFileCommand { get; private set; }
     public DelegateCommand SaveCommand { get; private set; }
     public DelegateCommand CloseCommand { get; private set; }
+
+    public DialogCloseListener RequestClose { get; }
     #endregion
 
     public MetadataEditorViewModel()

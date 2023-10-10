@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
-using Prism.Regions;
+using Prism;
+using Prism.Navigation.Regions;
 using RMMVCookTool.Core.Utilities;
 
 namespace RMMVCookTool.GUI;

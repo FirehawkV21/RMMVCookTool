@@ -1,6 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Services.Dialogs;
+using Prism.Dialogs;
 
 namespace RMMVCookTool.GUI.ViewModels;
 internal sealed class ProjectSettingsViewModel : BindableBase, IDialogAware
@@ -17,11 +17,11 @@ internal sealed class ProjectSettingsViewModel : BindableBase, IDialogAware
     public bool CompressFiles { get => compressFiles; set => SetProperty(ref compressFiles, value); }
     public bool RemoveAfterCompression { get => removeAfterCompression; set => SetProperty(ref removeAfterCompression, value); }
     public int CompressionLevel { get => compressionLevel; set => SetProperty(ref compressionLevel, value); }
-
-    public event Action<IDialogResult> RequestClose;
     
     public DelegateCommand SaveCommand { get; private set; }
     public DelegateCommand CancelCommand { get; private set; }
+
+    public DialogCloseListener RequestClose { get; }
 
     public bool CanCloseDialog() => true;
 
@@ -52,13 +52,13 @@ internal sealed class ProjectSettingsViewModel : BindableBase, IDialogAware
         result.Parameters.Add("compressFiles", CompressFiles);
         result.Parameters.Add("removeAfterCompression", RemoveAfterCompression);
         result.Parameters.Add("compressionLevel", CompressionLevel);
-        RequestClose?.Invoke(result);
+        RequestClose.Invoke(result);
     }
 
     private void CancelSettings()
     {
         ButtonResult button = ButtonResult.Cancel;
         DialogResult result = new DialogResult(button);
-        RequestClose?.Invoke(result);
+        RequestClose.Invoke(result);
     }
 }

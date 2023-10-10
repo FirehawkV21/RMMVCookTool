@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>4.0.4.23200</AssemblyVersion>
-    <FileVersion>4.0.4.23200</FileVersion>
+    <AssemblyVersion>4.1.0.23283</AssemblyVersion>
+    <FileVersion>4.1.4.23283</FileVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
     <AssemblyTitle>RPG Maker MV/MZ Cook Tool (GUI Version)</AssemblyTitle>
-    <Version>4.0.4-20230706</Version>
+    <Version>4.1.0-20231010</Version>
     <PublishTrimmed>false</PublishTrimmed>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <Description>GUI version of the RPG Maker MV Cook Tool.</Description>
@@ -22,10 +22,10 @@
 
   <ItemGroup>
     <PackageReference Include="Dirkster.NumericUpDownLib" Version="3.4.0" />
-    <PackageReference Include="DryIoc.dll" Version="4.8.8" />
+    <PackageReference Include="DryIoc.dll" Version="5.4.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
-    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+    <PackageReference Include="Prism.DryIoc" Version="9.0.271-pre" />
   </ItemGroup>
 
   <ItemGroup>

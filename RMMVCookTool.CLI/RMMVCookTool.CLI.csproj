@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 	<OutputType>Exe</OutputType>
-	<AssemblyVersion>2.3.3.23187</AssemblyVersion>
-	<FileVersion>2.3.3.23187</FileVersion>
+	<AssemblyVersion>2.3.3.23283</AssemblyVersion>
+	<FileVersion>2.3.3.23283</FileVersion>
 	<ApplicationIcon>Brick-02-WF.ico</ApplicationIcon>
 	<StartupObject>RMMVCookTool.CLI.Program</StartupObject>
 	<AssemblyTitle>RPG Maker MV Cook Tool (CLI Version)</AssemblyTitle>

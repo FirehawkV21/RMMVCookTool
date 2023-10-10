@@ -1,6 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Services.Dialogs;
+using Prism.Dialogs;
 using RMMVCookTool.Core;
 using RMMVCookTool.Core.Compiler;
 using RMMVCookTool.Core.CompilerSettings;
