@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dirkster.NumericUpDownLib" Version="3.4.0" />
-    <PackageReference Include="DryIoc.dll" Version="5.4.2" />
+    <PackageReference Include="DryIoc.dll" Version="5.4.3" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
     <PackageReference Include="Prism.DryIoc" Version="9.0.271-pre" />
